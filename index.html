@@ -1,0 +1,116 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephen Thibault</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Karla:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #f5f2ed;
+    --ink: #1a1814;
+    --muted: #8a8478;
+    --accent: #c8a96e;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Karla', sans-serif;
+    font-weight: 300;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeIn 0.8s ease 0.1s forwards;
+  }
+
+  .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: slideUp 0.9s ease 0.3s forwards;
+  }
+
+  .headline em {
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .rule {
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 32px;
+    opacity: 0;
+    animation: fadeIn 0.8s ease 0.5s forwards;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: slideUp 0.9s ease 0.6s forwards;
+  }
+
+  .links a {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .links a:hover { color: var(--accent); }
+
+  .tagline {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeIn 0.8s ease 0.8s forwards;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="name">Stephen Thibault</div>
+  <div class="headline">Let's work<br><em>together.</em></div>
+  <div class="rule"></div>
+  <div class="links">
+    <a href="mailto:Steve@stevethibault.com">Steve@stevethibault.com</a>
+    <a href="tel:9494631612">(949) 463-1612</a>
+    <a href="https://linkedin.com/in/stephenthibault" target="_blank">LinkedIn</a>
+  </div>
+  <div class="tagline">Business Operations &amp; Marketplace Analytics &nbsp;·&nbsp; Santa Monica, CA</div>
+</body>
+</html>
