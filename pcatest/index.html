@@ -1,1 +1,835 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCA &amp; HIPAA Test — Careco Homecare</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-900:#0a1628;--blue-800:#0f2246;--blue-700:#163568;--blue-600:#1d4ed8;--blue-500:#2563eb;--blue-400:#3b82f6;--blue-300:#93c5fd;--blue-100:#dbeafe;--blue-50:#eff6ff;
+  --grey-900:#111827;--grey-700:#374151;--grey-600:#4b5563;--grey-500:#6b7280;--grey-400:#9ca3af;--grey-300:#d1d5db;--grey-200:#e5e7eb;--grey-100:#f3f4f6;--grey-50:#f9fafb;
+  --white:#fff;--green:#16a34a;--green-bg:#f0fdf4;--red:#dc2626;--red-bg:#fef2f2;--radius:8px;--radius-lg:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--grey-100);color:var(--grey-900);min-height:100vh;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none;}
+input,textarea{user-select:text;-webkit-user-select:text;}
+header{position:sticky;top:0;z-index:100;background:var(--blue-900);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:0 2px 20px rgba(0,0,0,.35);}
+.header-inner{max-width:920px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;gap:14px;}
+.hbadge{background:var(--blue-700);color:var(--white);font-size:10px;font-weight:700;letter-spacing:.12em;padding:4px 10px;border-radius:5px;white-space:nowrap;display:flex;align-items:center;}
+.hbadge img{height:32px;display:block;}
+.hdiv{width:1px;height:24px;background:rgba(255,255,255,.12);}
+.htitle{color:var(--white);font-size:14.5px;font-weight:600;letter-spacing:-.01em;}
+.hsub{color:var(--blue-300);font-size:12px;margin-top:1px;}
+.hprog{margin-left:auto;display:flex;align-items:center;gap:11px;}
+.hprog-label{color:var(--blue-300);font-size:11.5px;font-weight:500;white-space:nowrap;}
+.hprog-track{width:130px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
+.hprog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue-500),var(--blue-300));border-radius:2px;}
+main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
+.email-card{background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-lg);padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.email-icon{width:36px;height:36px;background:var(--blue-50);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.email-icon svg{width:17px;height:17px;stroke:var(--blue-500);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.email-label{font-size:12.5px;font-weight:600;color:var(--grey-700);display:flex;align-items:center;gap:7px;white-space:nowrap;}
+.req-chip{font-size:10px;font-weight:600;color:var(--blue-600);background:var(--blue-50);border:1px solid var(--blue-100);border-radius:4px;padding:1px 7px;letter-spacing:.03em;}
+.field-group{display:flex;flex-direction:column;gap:6px;flex:1;min-width:160px;}
+.email-input-wrap{flex:1;max-width:360px;}
+.email-input{width:100%;background:var(--grey-50);border:1.5px solid var(--grey-200);border-radius:7px;padding:9px 13px;font-family:'Inter',sans-serif;font-size:13.5px;color:var(--grey-900);outline:none;}
+.email-input:focus{border-color:var(--blue-500);box-shadow:0 0 0 3px rgba(37,99,235,.1);background:var(--white);}
+.email-input.error{border-color:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.08);}
+.email-err,.name-err{display:none;margin-top:5px;font-size:11.5px;color:var(--red);font-weight:500;}
+.field-group.has-error .email-label::after{content:' *';color:var(--red);font-weight:700;}
+
+.section-block{margin-top:10px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--grey-200);box-shadow:0 1px 4px rgba(0,0,0,.05);}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  background:#0f2557;
+  color:white;
+
+  padding:12px 16px;
+  border-radius:12px 12px 0 0;
+
+  font-weight:700;
+  font-size:16px;
+}
+
+
+.section-progress{
+  margin-left:auto;
+  font-size:13px;
+  font-weight:700;
+  color:#86efac;
+  white-space:nowrap;
+}
+
+.section-title-left{display:flex;align-items:center;gap:10px;}
+.s-dot{width:5px;height:5px;border-radius:50%;background:var(--blue-400);flex-shrink:0;}
+.section-sub{background:var(--blue-50);border-bottom:1px solid var(--blue-100);padding:4px 16px;font-size:16px;font-weight:600;color:var(--blue-700);letter-spacing:.01em;}
+.qrow{background:var(--white);border-bottom:1px solid var(--grey-100);padding:3px 18px;display:flex;align-items:center;gap:10px;}
+.qrow:last-child{border-bottom:none;}
+.qrow:hover{background:var(--grey-50);}
+.qrow.unanswered{background:#fff8f8;border-left:3px solid var(--red);padding-left:15px;}
+.qnum{font-size:11px;font-weight:700;color:var(--grey-400);width:24px;text-align:right;flex-shrink:0;}
+.qtext{flex:1;font-size:13px;line-height:1.15;color:var(--grey-900);}
+.radio-pair{display:flex;gap:7px;flex-shrink:0;}
+.rpill{display:flex;align-items:center;gap:5px;padding:5px 13px;border-radius:15px;border:1px solid var(--grey-200);background:var(--grey-50);cursor:pointer;font-size:12px;font-weight:600;color:var(--grey-500);user-select:none;white-space:nowrap;}
+.rpill input[type="radio"]{display:none;}
+.rpill:hover{border-color:var(--blue-400);color:var(--blue-600);background:var(--blue-50);}
+.rpill.true-pill.selected{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.rpill.false-pill.selected{border-color:var(--red);background:var(--red-bg);color:var(--red);}
+.mc-options{display:flex;flex-direction:column;gap:6px;min-width:260px;}
+.mc-pill{display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:10px;border:1px solid var(--grey-200);background:var(--grey-50);cursor:pointer;font-size:12px;font-weight:600;color:var(--grey-600);}
+.mc-pill input[type="radio"]{display:none;}
+.mc-pill:hover{border-color:var(--blue-400);background:var(--blue-50);color:var(--blue-700);}
+.mc-pill.selected{border-color:var(--blue-500);background:var(--blue-50);color:var(--blue-700);}
+.submit-area{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:9px;}
+.submit-btn{background:var(--blue-600);color:var(--white);border:none;padding:13px 44px;border-radius:8px;font-family:'Inter',sans-serif;font-size:14.5px;font-weight:600;letter-spacing:-.01em;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.35);}
+.submit-btn:hover:not(:disabled){background:var(--blue-500);box-shadow:0 6px 20px rgba(37,99,235,.45);}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;}
+.submit-hint{font-size:11.5px;color:var(--grey-400);font-weight:500;}
+
+/* Results overlay */
+#overlay{display:none;position:fixed;inset:0;background:rgba(10,22,40,.78);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px;}
+#overlay.open{display:flex;}
+.rpanel{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:620px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.2);border-top:4px solid var(--blue-600);}
+.rhead{padding:26px 28px 18px;border-bottom:1px solid var(--grey-100);}
+.rhead h2{font-size:18px;font-weight:700;color:var(--grey-900);letter-spacing:-.02em;margin-bottom:3px;display:flex;align-items:center;gap:9px;}
+.rbadge{font-size:10px;font-weight:700;letter-spacing:.08em;padding:3px 9px;border-radius:20px;}
+.rbadge.pass{background:var(--green-bg);color:var(--green);border:1px solid #86efac;}
+.rbadge.fail{background:var(--red-bg);color:var(--red);border:1px solid #fca5a5;}
+.score-row{display:flex;align-items:flex-end;gap:12px;margin:14px 0 10px;}
+.score-big{font-size:44px;font-weight:700;color:var(--blue-600);letter-spacing:-.04em;line-height:1;}
+.score-denom{font-size:18px;color:var(--grey-400);font-weight:400;margin-bottom:4px;}
+.score-pct{font-size:14px;font-weight:600;color:var(--grey-500);margin-bottom:5px;}
+.sbar{height:5px;background:var(--grey-100);border-radius:3px;overflow:hidden;margin-bottom:10px;}
+.sbar-fill{height:100%;border-radius:3px;width:0;}
+.score-note{font-size:12.5px;color:var(--grey-500);}
+.wsection{padding:18px 28px 8px;}
+.wsection h3{font-size:11.5px;font-weight:700;color:var(--grey-700);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:7px;}
+.wbadge{background:var(--red-bg);color:var(--red);border-radius:20px;padding:1px 8px;font-size:11px;font-weight:700;}
+.witem{border:1px solid var(--grey-200);border-radius:var(--radius);padding:11px 14px;margin-bottom:8px;background:var(--grey-50);}
+.wnum{font-size:10px;font-weight:700;color:var(--grey-400);letter-spacing:.05em;margin-bottom:3px;}
+.wcategory{font-size:12px;font-weight:600;color:var(--blue-700);margin-bottom:6px;}
+.wtext{font-size:12.5px;color:var(--grey-900);line-height:1.45;margin-bottom:7px;}
+.answer-row{display:flex;gap:10px;font-size:11.5px;font-weight:600;flex-wrap:wrap;}
+.ans-y{color:var(--red);background:var(--red-bg);padding:2px 8px;border-radius:4px;}
+.ans-c{color:var(--green);background:var(--green-bg);padding:2px 8px;border-radius:4px;}
+.estatus{margin:14px 28px;padding:10px 14px;border-radius:7px;font-size:12.5px;font-weight:600;display:none;}
+.estatus.sending{background:var(--blue-50);color:var(--blue-700);border:1px solid var(--blue-100);}
+.estatus.success{background:var(--green-bg);color:var(--green);border:1px solid #86efac;}
+.estatus.fail{background:var(--red-bg);color:var(--red);border:1px solid #fca5a5;}
+.rfooter{padding:14px 28px 26px;display:flex;gap:9px;}
+.btn-close{flex:1;padding:10px;border-radius:7px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;border:1.5px solid var(--grey-200);background:var(--white);color:var(--grey-700);}
+.btn-close:hover{background:var(--grey-50);}
+.btn-print{background:var(--blue-600);color:var(--white);border:none;padding:10px 22px;border-radius:7px;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;}
+.btn-print:hover{background:var(--blue-500);}
+.btn-print svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+@media(max-width:600px){.hprog{display:none;}.email-card{flex-direction:column;align-items:stretch;gap:10px;}.email-input-wrap{max-width:100%;}}
+
+/* ===== Enhanced UX Features ===== */
+
+.unanswered-chip{position:fixed;right:18px;bottom:18px;z-index:150;background:#dc2626;color:white;border-radius:999px;padding:10px 16px;font-size:13px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.18);cursor:pointer;}
+.unanswered-chip.hidden{opacity:0;pointer-events:none;}
+
+.confirm-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+
+.confirm-overlay.open{
+  display:flex;
+}
+
+
+.confirm-box{
+  background:#fff;
+  width:100%;
+  max-width:460px;
+  border-radius:12px;
+  padding:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+
+.confirm-box h3{
+  font-size:20px;
+  margin-bottom:10px;
+}
+.confirm-box p{
+  font-size:14px;
+  color:#4b5563;
+  line-height:1.5;
+  margin-bottom:18px;
+}
+.confirm-actions{
+  display:flex;
+  gap:10px;
+}
+.confirm-actions button{
+  flex:1;
+  padding:11px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  border:none;
+}
+.confirm-cancel{background:#f3f4f6;}
+.confirm-submit{background:#2563eb;color:white;}
+
+/* ===== Stability Fixes ===== */
+html{scroll-behavior:smooth;}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+
+<header>
+  <div class="header-inner">
+    <div class="hbadge">
+      <img src="https://stevethibault.com/careco-logo100.png" alt="Careco Homecare">
+    </div>
+    <div class="hdiv"></div>
+    <div>
+      <div class="htitle">PCA &amp; HIPAA Test</div>
+      <div class="hsub" id="header-sub"></div>
+    </div>
+    <div class="hprog">
+      <div class="hprog-label" id="prog-label">0 of 0</div>
+      <div class="hprog-track"><div class="hprog-fill" id="prog-fill"></div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="email-card">
+    <div class="email-icon">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+    </div>
+    <div class="field-group">
+      <label class="email-label" for="taker-email">Email Address <span class="req-chip">Required</span></label>
+      <div class="email-input-wrap">
+        <input type="email" id="taker-email" class="email-input" placeholder="yourname@example.com" autocomplete="email"/>
+        <div class="email-err" id="email-err">Please enter a valid email address.</div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="email-label" for="first-name">First Name</label>
+      <div class="email-input-wrap">
+        <input type="text" id="first-name" class="email-input" placeholder="First name" autocomplete="given-name"/>
+        <div class="name-err" id="first-name-err">Please enter your first name.</div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="email-label" for="last-name">Last Name</label>
+      <div class="email-input-wrap">
+        <input type="text" id="last-name" class="email-input" placeholder="Last name" autocomplete="family-name"/>
+        <div class="name-err" id="last-name-err">Please enter your last name.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="test-form"></div>
+
+  <div class="submit-area">
+    <button class="submit-btn" id="submit-btn" >Submit Test</button>
+    <div class="submit-hint">Results are emailed automatically to you and your supervisors.</div>
+  </div>
+
+<div class="unanswered-chip hidden" id="unanswered-chip">0 unanswered</div>
+</main>
+
+<div class="confirm-overlay" id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Ready to submit?</h3>
+    <p id="confirm-text"></p>
+    <div class="confirm-actions">
+      <button class="confirm-cancel" id="confirm-cancel">Review Answers</button>
+      <button class="confirm-submit" id="confirm-submit">Submit Test</button>
+    </div>
+  </div>
+</div>
+
+<div id="overlay">
+  <div class="rpanel">
+    <div class="rhead">
+      <h2>Test Results <span class="rbadge" id="rbadge"></span></h2>
+      <div class="score-row">
+        <div class="score-big" id="s-correct"></div>
+        <div>
+          <div class="score-denom" id="s-denom"></div>
+          <div class="score-pct" id="s-pct"></div>
+        </div>
+      </div>
+      <div class="sbar"><div class="sbar-fill" id="sbar-fill"></div></div>
+      <div class="score-note" id="s-note"></div>
+    </div>
+    <div class="wsection" id="wsection"></div>
+    <div class="estatus" id="estatus"></div>
+    <div class="rfooter">
+      <button class="btn-close" id="btn-close">← Close &amp; Review</button>
+      <button class="btn-print" id="btn-print">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print Results
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  document.addEventListener('contextmenu',function(e){e.preventDefault();return false;});
+  document.addEventListener('keydown',function(e){
+    if(e.keyCode===123){e.preventDefault();return false;}
+    if(e.ctrlKey||e.metaKey){
+      if(['u','s','a'].includes((e.key||'').toLowerCase())){e.preventDefault();return false;}
+      if(e.shiftKey&&['i','j','c'].includes((e.key||'').toLowerCase())){e.preventDefault();return false;}
+    }
+  });
+  document.addEventListener('dragstart',function(e){e.preventDefault();return false;});
+})();
+
+const EMAILJS_PUBLIC_KEY  = 'LxSaEqReKmQP3k0Ai';
+const EMAILJS_SERVICE_ID  = 'service_aue3uyw';
+const EMAILJS_TEMPLATE_ID = 'template_l1whiq3';
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+const Q = [
+  {n:1,s:"1. Preventing Emergency Situations",b:"You should call 911 when the individual:",t:"Falls",a:true},
+  {n:2,s:"1. Preventing Emergency Situations",b:"You should call 911 when the individual:",t:"Is complaining of chest pain.",a:true},
+  {n:3,s:"1. Preventing Emergency Situations",b:"You should call 911 when the individual:",t:"Is choking",a:true},
+  {n:4,s:"1. Preventing Emergency Situations",b:"You should call 911 when the individual:",t:"Complains about a family member",a:false},
+  {n:5,s:"1. Preventing Emergency Situations",b:"You should call 911 when the individual:",t:"Loses consciousness",a:true},
+  {n:6,s:"1. Preventing Emergency Situations",b:"You should call 911 when the individual:",t:"Is having trouble breathing",a:true},
+  {n:7,s:"1. Preventing Emergency Situations",b:"Emergency Procedures — Where there is an emergency you should:",t:"Take the individual to the hospital in your own car.",a:false},
+  {n:8,s:"1. Preventing Emergency Situations",b:"Emergency Procedures — Where there is an emergency you should:",t:"Lift an individual up to a chair after a fall.",a:false},
+  {n:9,s:"1. Preventing Emergency Situations",b:"Emergency Procedures — Where there is an emergency you should:",t:"Immediately report the incident to your supervisor and the individual's care manager",a:true},
+  {n:10,s:"1. Preventing Emergency Situations",b:"Emergency Procedures — Where there is an emergency you should:",t:"Never let an individual smoke near oxygen.",a:true},
+  {n:11,s:"1. Preventing Emergency Situations",b:"Emergency Procedures — Where there is an emergency you should:",t:"Look for all accessible exits in case there is a fire.",a:true},
+  {n:12,s:"1. Preventing Emergency Situations",b:"Emergency Procedures — Where there is an emergency you should:",t:"Wait in the emergency room with individuals who have dementia or Alzheimer's disease so you can assist hospital staff. Clear this with your agency.",a:true},
+  {n:13,s:"1. Preventing Emergency Situations",b:"Emergency Procedures — Where there is an emergency you should:",t:"Encourage the individual to use his/her walker or cane to prevent falls.",a:true},
+  {n:14,s:"1. Preventing Emergency Situations",b:"Emergency Procedures — Where there is an emergency you should:",t:"Let the individual turn the lights down low when she/he is walking.",a:false},
+  {n:15,s:"1. Preventing Emergency Situations",b:"Emergency Procedures — Where there is an emergency you should:",t:"Let the individual try to get up on her/his own after falling. You do not need to report falls when the individual seems to be okay.",a:false},
+  {n:16,s:"2. Universal Precautions",b:"Gloves — When you are caring for the individual, you should always wear gloves when:",t:"You touch urine or stool",a:true},
+  {n:17,s:"2. Universal Precautions",b:"Gloves — When you are caring for the individual, you should always wear gloves when:",t:"An individual is toileting",a:true},
+  {n:18,s:"2. Universal Precautions",b:"Gloves — When you are caring for the individual, you should always wear gloves when:",t:"Handling laundry",a:true},
+  {n:19,s:"2. Universal Precautions",b:"Gloves — When you are caring for the individual, you should always wear gloves when:",t:"It's cold outside",a:false},
+  {n:20,s:"2. Universal Precautions",b:"Gloves — When you are caring for the individual, you should always wear gloves when:",t:"Taking out the garbage",a:true},
+  {n:21,s:"2. Universal Precautions",b:"Hand Washing — When should you wash your hands?",t:"After cleaning an individual's Depends",a:true},
+  {n:22,s:"2. Universal Precautions",b:"Hand Washing — When should you wash your hands?",t:"After toileting the individual",a:true},
+  {n:23,s:"2. Universal Precautions",b:"Hand Washing — When should you wash your hands?",t:"After you have used your phone",a:false},
+  {n:24,s:"2. Universal Precautions",b:"Hand Washing — When should you wash your hands?",t:"After taking out the garbage",a:true},
+  {n:25,s:"2. Universal Precautions",b:"Hand Washing — When should you wash your hands?",t:"After cleaning and disinfecting surfaces",a:true},
+  {n:26,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"Allow the individual to tell you what he/she needs or wants.",a:true},
+  {n:27,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"Tell the individual your life story and your problems.",a:false},
+  {n:28,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"Ask questions if you don't understand.",a:true},
+  {n:29,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"Pay attention to the individual's body language such as facial expressions, tone of voice or body posture.",a:true},
+  {n:30,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"Spend time on your cell phone.",a:false},
+  {n:31,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"With individuals who have dementia or Alzheimer's disease, don't use too many words or long explanations because this may be confusing",a:true},
+  {n:32,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"Some individuals may not be able to speak so just smile and go about your work",a:false},
+  {n:33,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"Contact your supervisor and the care manager if you notice a difference in the individual's ability to move, gesture, or pained facial expressions.",a:true},
+  {n:34,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"Interrupt the individual if they are talking too long to tell you what they need and tell him/her to get to the point.",a:false},
+  {n:35,s:"3. Communication",b:"To communicate well with the individual, you should:",t:"You should let the individual know how you feel about politics and religion.",a:false},
+  {n:36,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"You should report changes in condition immediately to your supervisor and the individual's care manager. Do not leave a voice mail. Speak to a live individual.",a:true},
+  {n:37,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"If you see red spots on the individual's skin, it is okay to wait to report it until it gets worse.",a:false},
+  {n:38,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"A sudden change of appetite should be reported immediately to your supervisor and the care manager.",a:true},
+  {n:39,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"If the individual has difficulty urinating, constipation or frequent diarrhea, you can wait to see if it will get better",a:false},
+  {n:40,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"If the individual starts yelling, saying mean things and is angry all the time, you should report this to your supervisor and the care manager.",a:true},
+  {n:41,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"You notice that the individual is starting to sleep a lot more. You don't need to report this to your supervisor. Since the individual is tired, you put the individual in bed for naps more often",a:false},
+  {n:42,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"Individuals who cannot change position in bed or in a chair should be repositioned every two hours.",a:true},
+  {n:43,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"A loss of appetite may be due to dentures that don't fit right which make it hard for the individual to chew food",a:true},
+  {n:44,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"It is important for an individual to drink enough fluids to prevent dehydration unless there is a fluid restriction in the individual's care plan.",a:true},
+  {n:45,s:"4. Change in an Individual's Condition",b:"Where there are changes in the individual's condition:",t:"Older people's skin tears very easily and it is important to prevent bumps and scrapes.",a:true},
+  {n:46,s:"5. Positioning",b:"Why is Proper Positioning Important?",t:"To relieve the pressure on various body parts.",a:true},
+  {n:47,s:"5. Positioning",b:"Why is Proper Positioning Important?",t:"To help the individual see the television.",a:false},
+  {n:48,s:"5. Positioning",b:"Why is Proper Positioning Important?",t:"To help the individual be comfortable.",a:true},
+  {n:49,s:"5. Positioning",b:"Why is Proper Positioning Important?",t:"To prevent health problems from being in bed a long time.",a:true},
+  {n:50,s:"5. Positioning",b:"What are the procedures for proper positioning?",t:"Have all necessary assistive equipment ready.",a:true},
+  {n:51,s:"5. Positioning",b:"What are the procedures for proper positioning?",t:"Make sure the individual is safe and comfortable.",a:true},
+  {n:52,s:"5. Positioning",b:"What are the procedures for proper positioning?",t:"Pull the individual across the bed.",a:false},
+  {n:53,s:"5. Positioning",b:"What are the procedures for proper positioning?",t:"Reposition the individual every two hours unless the individual is sleeping.",a:true},
+  {n:54,s:"5. Positioning",b:"What are the procedures for proper positioning?",t:"Take note of redness or irritation on the skin so you can report it if it gets worse.",a:true},
+  {n:55,s:"5. Positioning",b:"What are the procedures for proper positioning?",t:"Get assistance if the individual is too heavy.",a:true},
+  {n:56,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"Bend over, grab the individual under the arms and lift",a:false},
+  {n:57,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"Stand close to the individual",a:true},
+  {n:58,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"Use as many muscle groups as possible for moving the individual to reduce the strain",a:true},
+  {n:59,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"Squat and stand to lift a heavy individual",a:true},
+  {n:60,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"Figure out on your own how to use a Hoyer lift to lift a heavy individual",a:false},
+  {n:61,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"Coordinate your movements with the individual's movements",a:true},
+  {n:62,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"To change the direction of the individual's movement, twist your body, bend over and lower the individual",a:false},
+  {n:63,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"Keep your back straight, knees and hips flexed, with weight distributed on both feet",a:true},
+  {n:64,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"When you are lifting, you should hold the individual about 12 inches away from you.",a:false},
+  {n:65,s:"6. Lifting",b:"What are the Proper Procedures for Lifting?",t:"Do not attempt to lift an individual who is too heavy for you.",a:true},
+  {n:66,s:"7. Transfers",b:"How do you transfer an individual safely?",t:"The individual should be wearing shoes or slippers.",a:true},
+  {n:67,s:"7. Transfers",b:"How do you transfer an individual safely?",t:"The position of the wheelchair is not important as long as the wheels are locked.",a:false},
+  {n:68,s:"7. Transfers",b:"How do you transfer an individual safely?",t:"The individual's commode should be next to the bed so the individual can be transferred easier",a:true},
+  {n:69,s:"7. Transfers",b:"How do you transfer an individual safely?",t:"When toileting the individual, you should assist the individual to a standing position, help the individual pull down her/his pants, and safely place the individual on the toilet.",a:true},
+  {n:70,s:"7. Transfers",b:"How do you transfer an individual safely?",t:"If the individual appears to be steady, you can allow the individual to transfer himself/herself.",a:false},
+  {n:71,s:"8. Medication",b:"What are the proper procedures for helping an individual to take medication?",t:"The PCA may take the pills out of the containers and give them to the individual.",a:false},
+  {n:72,s:"8. Medication",b:"What are the proper procedures for helping an individual to take medication?",t:"The PCA never gives the individual injections.",a:true},
+  {n:73,s:"8. Medication",b:"What are the proper procedures for helping an individual to take medication?",t:"The PCA may assist the individual with opening the pill bottle and remind the individual to take the medication as prescribed.",a:true},
+  {n:74,s:"8. Medication",b:"What are the proper procedures for helping an individual to take medication?",t:"The PCA may take some of the individual's pills.",a:false},
+  {n:75,s:"8. Medication",b:"What are the proper procedures for helping an individual to take medication?",t:"The PCA may give the individual medications even though the pills have fallen on the floor.",a:false},
+  {n:76,s:"8. Medication",b:"What are the proper procedures for helping an individual to take medication?",t:"If you drop the med box, do not give the individual the pills and contact your supervisor",a:true},
+  {n:77,s:"8. Medication",b:"What are the proper procedures for helping an individual to take medication?",t:"It is okay for the PCA to crush medicine and put it in applesauce or pudding if the individual doesn't want to take their pills.",a:false},
+  {n:78,s:"8. Medication",b:"What are the proper procedures for helping an individual to take medication?",t:"If the medications look different or messed up, you should notify your supervisor before giving the medication to the individual",a:true},
+  {n:79,s:"9. Caregiver Boundaries",b:"Which of these are considered good boundaries?",t:"You and the individual give each other gifts for holidays, birthdays and other occasions",a:false},
+  {n:80,s:"9. Caregiver Boundaries",b:"Which of these are considered good boundaries?",t:"You should always get a receipt when using the individual's money to buy things",a:true},
+  {n:81,s:"9. Caregiver Boundaries",b:"Which of these are considered good boundaries?",t:"You ask your friend to deliver food for you at the individual's home",a:false},
+  {n:82,s:"9. Caregiver Boundaries",b:"Which of these are considered good boundaries?",t:"You are an employee in the individual's home",a:true},
+  {n:83,s:"9. Caregiver Boundaries",b:"Which of these are considered good boundaries?",t:"If the individual goes to a nursing home, you should visit the individual while you are off duty",a:false},
+  {n:84,s:"9. Caregiver Boundaries",b:"Which of these are considered good boundaries?",t:"If you can't find a babysitter and there is no one to replace you, it is okay to bring your children to the individual's home while you are working.",a:false},
+  {n:85,s:"9. Caregiver Boundaries",b:"Which of these are considered good boundaries?",t:"You can tell the individual when you are having problems like not having enough money, problems with your boyfriend/girlfriend or your children",a:false},
+  {n:86,s:"9. Caregiver Boundaries",b:"Which of these are considered good boundaries?",t:"If you don't have a car and don't want to take the bus, you can have your boyfriend/girlfriend take you to work at the individual's home",a:false},
+  {n:87,s:"9. Caregiver Boundaries",b:"Which of these are considered good boundaries?",t:"You should never friend the individual on Facebook and never post anything about her/him such as pictures or comments, good or bad",a:true},
+  {n:88,s:"10. Individuals with Acquired Brain Injury",b:"An individual with an acquired brain injury might:",t:"Might not understand what you say",a:true},
+  {n:89,s:"10. Individuals with Acquired Brain Injury",b:"An individual with an acquired brain injury might:",t:"Always understand exactly what you say with no difficulty",a:false},
+  {n:90,s:"10. Individuals with Acquired Brain Injury",b:"An individual with an acquired brain injury might:",t:"Not be able to say what they want to say",a:true},
+  {n:91,s:"10. Individuals with Acquired Brain Injury",b:"An individual with an acquired brain injury might:",t:"Be very focused and totally concentrate on things",a:false},
+  {n:92,s:"10. Individuals with Acquired Brain Injury",b:"If an individual becomes angry, you should:",t:"Tell the individual he/she needs to calm down and stop talking",a:false},
+  {n:93,s:"10. Individuals with Acquired Brain Injury",b:"If an individual becomes angry, you should:",t:"Move fast and stand close to the individual",a:false},
+  {n:94,s:"10. Individuals with Acquired Brain Injury",b:"If an individual becomes angry, you should:",t:"Remain calm and speak softly.",a:true},
+  {n:95,s:"10. Individuals with Acquired Brain Injury",b:"If an individual becomes angry, you should:",t:"Threaten the individual with negative consequences if he/she doesn't calm down",a:false},
+  {n:96,s:"10. Individuals with Acquired Brain Injury",b:"If an individual becomes angry, you should:",t:"Put the individual in a corner of the room and limit where he/she can move",a:false},
+  {n:97,s:"10. Individuals with Acquired Brain Injury",b:"Causes of Agitation and Aggression in Individuals with Dementia or Alzheimer's:",t:"Individuals usually get angry for a reason so it is helpful if you can figure out the reason the individual is angry.",a:true},
+  {n:98,s:"10. Individuals with Acquired Brain Injury",b:"Causes of Agitation and Aggression in Individuals with Dementia or Alzheimer's:",t:"If the individual starts getting stressed and frustrated, try to help before she/he gets upset.",a:true},
+  {n:99,s:"10. Individuals with Acquired Brain Injury",b:"Causes of Agitation and Aggression in Individuals with Dementia or Alzheimer's:",t:"Individuals who need PCA services are usually lonely so you should encourage a lot of people to come over and have a lot of loud music in the home to cheer her/him up",a:false},
+  {n:100,s:"10. Individuals with Acquired Brain Injury",b:"Causes of Agitation and Aggression in Individuals with Dementia or Alzheimer's:",t:"If you are a new PCA meeting the individual for the first time, and she/he gets upset and says mean things to you, it's just because the individual is unfriendly and grouchy",a:false},
+  {n:101,s:"10. Individuals with Acquired Brain Injury",b:"Causes of Agitation and Aggression in Individuals with Dementia or Alzheimer's:",t:"The individual may not be able to tell you that he/she is sitting on a wet Depends, has to go to the bathroom and start getting upset and angry",a:true},
+  {n:102,s:"11. Reporting Abuse, Neglect, Exploitation and Abandonment",b:"",t:"For individuals who are aged 65 and older, you and your agency are legally required to report abuse, neglect, exploitation and abandonment to Protective Services for the Elderly",a:true},
+  {n:103,s:"11. Reporting Abuse, Neglect, Exploitation and Abandonment",b:"",t:"You should contact your supervisor and the care manager immediately if you see or suspect abuse",a:true},
+  {n:104,s:"11. Reporting Abuse, Neglect, Exploitation and Abandonment",b:"",t:"You arrive for your shift in the morning and discover that no one has been with the individual since the evening before. Since the individual is fine, there is no need to report this",a:false},
+  {n:105,s:"11. Reporting Abuse, Neglect, Exploitation and Abandonment",b:"",t:"The individual tells you that a relative has been taking money out of his/her bank account, using the individual's EBT card to buy their own groceries and using the individual's credit card to shop. This is an example of neglect",a:false},
+  {n:106,s:"11. Reporting Abuse, Neglect, Exploitation and Abandonment",b:"",t:"When you arrive for your shift, you see the individual's neighbor yelling, threatening to hit the individual, and shove him/her. This is an example of abuse",a:true},
+  {n:107,s:"12. Bathing",b:"",t:"Safety in the bathroom is very important",a:true},
+  {n:108,s:"12. Bathing",b:"",t:"It is okay to leave the individual alone in the bathtub or shower if you have to answer the phone.",a:false},
+  {n:109,s:"12. Bathing",b:"",t:"Never let the individual step into the bathtub or shower until you check the water temperature.",a:true},
+  {n:110,s:"12. Bathing",b:"",t:"You should wash the genital area from back to front",a:false},
+  {n:111,s:"12. Bathing",b:"",t:"Do not cut fingernails or toenails.",a:true},
+  {n:112,s:"12. Bathing",b:"Bathing Individuals with Dementia, Alzheimer's Disease or Cognitive Deficits:",t:"You should give them a bath or shower at a different time every day because they get bored with the same daily routine",a:false},
+  {n:113,s:"12. Bathing",b:"Bathing Individuals with Dementia, Alzheimer's Disease or Cognitive Deficits:",t:"Many older people don't like bathing because they are afraid of being too hot.",a:false},
+  {n:114,s:"12. Bathing",b:"Bathing Individuals with Dementia, Alzheimer's Disease or Cognitive Deficits:",t:"If the individual does not want to bathe, don't argue. Instead, use a calm, soothing tone of voice.",a:true},
+  {n:115,s:"12. Bathing",b:"Bathing Individuals with Dementia, Alzheimer's Disease or Cognitive Deficits:",t:"If the individual does not want to bathe, talk about something the individual likes or something positive and they may change their mind.",a:true},
+  {n:116,s:"12. Bathing",b:"Bathing Individuals with Dementia, Alzheimer's Disease or Cognitive Deficits:",t:"Tell the individual what you are doing to keep her/him calm",a:true},
+  {n:117,s:"12. Bathing",b:"How to Give a Bed Bath:",t:"You do not need to check water temperature since the water is in a basin and it will cool off",a:false},
+  {n:118,s:"12. Bathing",b:"How to Give a Bed Bath:",t:"Make sure the individual cannot fall out of bed.",a:true},
+  {n:119,s:"12. Bathing",b:"How to Give a Bed Bath:",t:"Report any sores or redness to your supervisor",a:true},
+  {n:120,s:"12. Bathing",b:"How to Give a Bed Bath:",t:"You should wash the soap off of the individual",a:true},
+  {n:121,s:"12. Bathing",b:"How to Give a Bed Bath:",t:"Wash the genital area first",a:false},
+  {n:122,s:"13. Washing Hair",b:"",t:"Ask if they want to wash their hair first. The individual can wash their own hair if they are able to do it.",a:true},
+  {n:123,s:"13. Washing Hair",b:"",t:"If the individual doesn't ever want their hair washed they don't have to. This is easier than trying to convince the individual to wash their hair and stressing over it",a:false},
+  {n:124,s:"13. Washing Hair",b:"",t:"You should report any redness, a lot of dandruff or concerns over lice to your supervisor",a:true},
+  {n:125,s:"13. Washing Hair",b:"",t:"Many people don't like water in their face so you should face the individual away from direct water to the face",a:true},
+  {n:126,s:"13. Washing Hair",b:"",t:"If the individual seems steady in the shower, it is okay to leave and put the dirty clothes in the laundry and fold the clothes from the dryer",a:false},
+  {n:127,s:"13. Washing Hair",b:"How to Wash Hair in Bed:",t:"Make sure you have all of the supplies you need before you get started",a:true},
+  {n:128,s:"13. Washing Hair",b:"How to Wash Hair in Bed:",t:"You should start pouring water on the individual's head. Don't worry about the pillows getting wet",a:false},
+  {n:129,s:"13. Washing Hair",b:"How to Wash Hair in Bed:",t:"Try to keep the floor dry by putting a bucket or large bowl on the floor and put a sheet or towel underneath",a:true},
+  {n:130,s:"13. Washing Hair",b:"How to Wash Hair in Bed:",t:"If the individual has short hair, instead of pouring water to wet the hair; you can rub a wet washcloth over the hair",a:true},
+  {n:131,s:"13. Washing Hair",b:"How to Wash Hair in Bed:",t:"Make sure the room temperature is warm and check the water temperature before starting",a:true},
+  {n:132,s:"14. Mouth Care",b:"",t:"Good mouth care is important for general health, to prevent gum disease, cavities, toothaches, pain and other health problems",a:true},
+  {n:133,s:"14. Mouth Care",b:"",t:"Wearing gloves isn't necessary because you won't be touching the individual's mouth",a:false},
+  {n:134,s:"14. Mouth Care",b:"",t:"Brush the teeth really hard to make sure they get clean",a:false},
+  {n:135,s:"14. Mouth Care",b:"",t:"Start brushing at the top and move downward because it moves plaque away from the gums",a:true},
+  {n:136,s:"14. Mouth Care",b:"",t:"Report any redness, bleeding or sores to your supervisor",a:true},
+  {n:137,s:"14. Mouth Care",b:"Mouth Care for Individuals with Dementia, Alzheimer's Disease or Cognitive Impairment:",t:"Smile, ask the individual if they want to have their teeth brushed",a:true},
+  {n:138,s:"14. Mouth Care",b:"Mouth Care for Individuals with Dementia, Alzheimer's Disease or Cognitive Impairment:",t:"Tell the individual their teeth are dirty so you have to brush their teeth",a:false},
+  {n:139,s:"14. Mouth Care",b:"Mouth Care for Individuals with Dementia, Alzheimer's Disease or Cognitive Impairment:",t:"If the individual gets upset, ask what is upsetting her/him",a:true},
+  {n:140,s:"14. Mouth Care",b:"Mouth Care for Individuals with Dementia, Alzheimer's Disease or Cognitive Impairment:",t:"Tell your supervisor if you see redness, sores, bleeding or broken teeth",a:true},
+  {n:141,s:"14. Mouth Care",b:"Mouth Care for Individuals with Dementia, Alzheimer's Disease or Cognitive Impairment:",t:"If the individual refuses, tell her/him all of the good things about brushing their teeth. If this doesn't work, try again at another time",a:true},
+  {n:142,s:"15. Dressing",b:"",t:"Wash your hands before you begin dressing the individual.",a:true},
+  {n:143,s:"15. Dressing",b:"",t:"You should set out a lot of different clothes with a variety of shirts, pants, skirts, dresses, suits, and ties.",a:false},
+  {n:144,s:"15. Dressing",b:"",t:"If the clothes won't come off, you can push and pull them off.",a:false},
+  {n:145,s:"15. Dressing",b:"",t:"Make sure the individual does not get too tired or dizzy. Help her/him to sit",a:true},
+  {n:146,s:"15. Dressing",b:"",t:"It is easiest to use simple elastic clothing or clothes with Velcro fasteners",a:true},
+  {n:147,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"Back injuries are the most common work-related medical problems in the U.S.",a:true},
+  {n:148,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"There is nothing anyone can do to prevent back injuries.",a:false},
+  {n:149,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"Which of the following might be considered a contributing factor for back injuries?",type:"mc",options:["a. Poor physical condition","b. Poor body mechanics","c. Poor posture","d. All of the above"],a:"d. All of the above"},
+  {n:150,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"Sitting in one position for long periods of time does not place any stress on the back.",a:false},
+  {n:151,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"Which is one way to keep the amount of strain on your back as low as possible?",type:"mc",options:["a. Hold a heavy item with your arms stretched out","b. Bending at the waist","c. Twisting at your waist while holding a heavy load","d. Keeping load close to your body"],a:"d. Keeping load close to your body"},
+  {n:152,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"Keeping your feet close together shows good body mechanics.",a:false},
+  {n:153,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"It is better for your back if you allow your legs to do the work by bending at the knees while lifting.",a:true},
+  {n:154,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"It is best to avoid twisting at the waist when carrying or lifting a heavy load.",a:true},
+  {n:155,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"When carrying a heavy load, you want the heaviest part of the load to be the furthest from your body.",a:false},
+  {n:156,s:"16. Lifting & Your Back: Preventing Injury",b:"",t:"Taking frequent breaks can be beneficial to your back when sitting for long periods of time.",a:true},
+];
+
+/* ── render ── */
+(function renderQuestions(){
+  document.getElementById('header-sub').textContent=`${Q.length} questions · True / False`;
+  document.getElementById('prog-label').textContent=`0 of ${Q.length}`;
+  const container=document.getElementById('test-form');
+  let curS=null,curB=null,curBlock=null;
+  Q.forEach(function(q){
+    if(q.s!==curS){curS=q.s;curB=null;curBlock=document.createElement('div');curBlock.className='section-block';
+const safeId='sp-'+q.s.replace(/[^a-zA-Z0-9]/g,'');
+
+curBlock.innerHTML=`
+  <div class="section-title">
+
+    <div class="section-title-left">
+      <span class="s-dot"></span>
+      <span>${q.s}</span>
+    </div>
+
+    <span class="section-progress" id="${safeId}">
+      0/?
+    </span>
+
+  </div>
+`;
+container.appendChild(curBlock);}
+    if(q.b&&q.b!==curB){curB=q.b;const sub=document.createElement('div');sub.className='section-sub';sub.textContent=q.b;curBlock.appendChild(sub);}
+    const row=document.createElement('div');row.className='qrow';row.id=`r${q.n}`;
+    if(q.type==='mc'){
+      const optH=q.options.map((o,i)=>`<label class="mc-pill" id="mc${q.n}_${i}"><input type="radio" name="q${q.n}" value="${o}"> ${o}</label>`).join('');
+      row.innerHTML=`<div class="qnum">${q.n}</div><div class="qtext">${q.t}</div><div class="mc-options">${optH}</div>`;
+    }else{
+      row.innerHTML=`<div class="qnum">${q.n}</div><div class="qtext">${q.t}</div><div class="radio-pair"><label class="rpill true-pill" id="pt${q.n}"><input type="radio" name="q${q.n}" value="true"> True</label><label class="rpill false-pill" id="pf${q.n}"><input type="radio" name="q${q.n}" value="false"> False</label></div>`;
+    }
+    curBlock.appendChild(row);
+    row.querySelectorAll('input[type="radio"]').forEach(function(inp){
+      inp.addEventListener('change',function(){
+        if(q.type==='mc'){row.querySelectorAll('.mc-pill').forEach(p=>p.classList.remove('selected'));inp.parentElement.classList.add('selected');}
+        else{document.getElementById(`pt${q.n}`).classList.toggle('selected',inp.value==='true');document.getElementById(`pf${q.n}`).classList.toggle('selected',inp.value==='false');}
+        updateProgress();
+      });
+    });
+  });
+  // Initialize section counters with correct totals
+  const sectionTotals={};
+  Q.forEach(q=>{sectionTotals[q.s]=(sectionTotals[q.s]||0)+1;});
+  Object.entries(sectionTotals).forEach(([name,total])=>{
+    const el=document.getElementById('sp-'+name.replace(/[^a-zA-Z0-9]/g,''));
+    if(el) el.textContent=`0/${total}`;
+  });
+})();
+
+/* ── Enhanced Features ── */
+function enhancedProgressUpdate(answered){
+  const unanswered=Q.length-answered;
+  const chip=document.getElementById('unanswered-chip');
+  if(chip){
+    if(unanswered>0){chip.classList.remove('hidden');chip.textContent=`${unanswered} unanswered`;}
+    else{chip.classList.add('hidden');}
+  }
+  const sections={};
+  Q.forEach(q=>{
+    if(!sections[q.s]) sections[q.s]={total:0,answered:0};
+    sections[q.s].total++;
+    if(document.querySelector(`input[name="q${q.n}"]:checked`)) sections[q.s].answered++;
+  });
+  Object.entries(sections).forEach(([name,data])=>{
+    const el=document.getElementById('sp-'+name.replace(/[^a-zA-Z0-9]/g,''));
+    if(!el) return;
+    if(data.answered===data.total){el.textContent='✓ Complete';el.style.color='#86efac';}
+    else{el.textContent=`${data.answered}/${data.total}`;el.style.color='#93c5fd';}
+  });
+}
+
+function updateProgress(){
+  const answered=Q.filter(q=>document.querySelector(`input[name="q${q.n}"]:checked`)).length;
+  document.getElementById('prog-label').textContent=`${answered} of ${Q.length}`;
+  document.getElementById('prog-fill').style.width=`${(answered/Q.length)*100}%`;
+  enhancedProgressUpdate(answered);
+}
+
+/* ── VALIDATION ── */
+function validateEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+function showFieldError(id,eid){const el=document.getElementById(id);el.classList.add('error');el.closest('.field-group').classList.add('has-error');document.getElementById(eid).style.display='block';}
+function clearFieldError(id,eid){const el=document.getElementById(id);el.classList.remove('error');el.closest('.field-group').classList.remove('has-error');document.getElementById(eid).style.display='none';}
+['first-name','last-name','taker-email'].forEach(function(id){
+  document.getElementById(id).addEventListener('input',function(){
+    this.classList.remove('error');
+    const eid=id==='taker-email'?'email-err':id+'-err';
+    const e=document.getElementById(eid);if(e)e.style.display='none';
+  });
+});
+
+/* ── PRINT RESULTS ── */
+let _printData=null;
+document.getElementById('btn-print').addEventListener('click',function(){
+  if(!_printData) return;
+  const {firstName,lastName,email,correct,total,pct,passed,wrong,dateStr}=_printData;
+  const barColor=passed?'#16a34a':'#dc2626';
+  let wrongHTML='';
+  if(wrong.length===0){
+    wrongHTML=`<div class="pp-perfect">🎉 Perfect score — all ${total} answers correct!</div>`;
+  }else{
+    const rows=wrong.map(w=>{
+      const ya=w.userAnswer===null?'Not answered':(typeof w.userAnswer==='boolean'?(w.userAnswer?'True':'False'):w.userAnswer);
+      const ca=typeof w.a==='boolean'?(w.a?'True':'False'):w.a;
+      return `<tr><td style="width:28pt;text-align:center;font-weight:600;color:#6b7280;">Q${w.n}</td><td style="width:100pt;font-size:8pt;color:#374151;">${w.s}${w.b?`<br><span style="color:#6b7280;font-style:italic;">${w.b}</span>`:''}</td><td>${w.t}</td><td class="pp-ans-wrong">${ya}</td><td class="pp-ans-right">${ca}</td></tr>`;
+    }).join('');
+    wrongHTML=`<table class="pp-wrong-table"><thead><tr><th style="width:28pt">#</th><th style="width:100pt">Section</th><th>Question</th><th>Your Answer</th><th>Correct Answer</th></tr></thead><tbody>${rows}</tbody></table>`;
+  }
+
+  const html=`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PCA &amp; HIPAA Test Result — ${firstName} ${lastName}</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',Arial,sans-serif;font-size:10pt;color:#111;background:#fff;padding:0.5in 0.6in;}
+.pp-header{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:2.5pt solid #0f2246;padding-bottom:10pt;margin-bottom:10pt;}
+.pp-logo-area{display:flex;flex-direction:column;gap:3pt;}
+.pp-company{font-size:14pt;font-weight:700;color:#0f2246;letter-spacing:-0.02em;}
+.pp-subtitle{font-size:9pt;color:#4b5563;font-weight:500;letter-spacing:0.08em;}
+.pp-doc-info{text-align:right;font-size:8.5pt;color:#4b5563;}
+.pp-doc-info strong{color:#111;}
+.pp-candidate{background:#eff6ff;border:1pt solid #bfdbfe;border-radius:6pt;padding:9pt 12pt;margin-bottom:10pt;display:flex;justify-content:space-between;align-items:center;}
+.pp-cand-name{font-size:13pt;font-weight:700;color:#0f2246;margin-bottom:2pt;}
+.pp-cand-email{font-size:8.5pt;color:#4b5563;}
+.pp-result-badge{font-size:11pt;font-weight:700;padding:6pt 16pt;border-radius:20pt;letter-spacing:0.05em;}
+.pp-result-badge.pass{background:#f0fdf4;color:#16a34a;border:1.5pt solid #86efac;}
+.pp-result-badge.fail{background:#fef2f2;color:#dc2626;border:1.5pt solid #fca5a5;}
+.pp-scores{display:flex;gap:10pt;margin-bottom:10pt;}
+.pp-score-box{flex:1;border:1pt solid #e5e7eb;border-radius:6pt;padding:8pt 10pt;text-align:center;}
+.pp-score-label{font-size:7.5pt;font-weight:600;color:#6b7280;letter-spacing:0.07em;margin-bottom:3pt;}
+.pp-score-val{font-size:18pt;font-weight:700;color:#1d4ed8;line-height:1;}
+.pp-score-sub{font-size:8pt;color:#6b7280;margin-top:2pt;}
+.pp-bar-row{margin-bottom:10pt;}
+.pp-bar-label{font-size:8pt;color:#6b7280;margin-bottom:3pt;display:flex;justify-content:space-between;}
+.pp-bar-track{height:8pt;background:#e5e7eb;border-radius:4pt;overflow:hidden;}
+.pp-bar-fill{height:100%;border-radius:4pt;}
+.pp-section-title{font-size:8.5pt;font-weight:700;color:#374151;letter-spacing:0.08em;border-bottom:1pt solid #e5e7eb;padding-bottom:4pt;margin-bottom:6pt;margin-top:10pt;}
+.pp-wrong-table{width:100%;border-collapse:collapse;font-size:8.5pt;}
+.pp-wrong-table th{background:#f3f4f6;padding:4pt 6pt;text-align:left;font-weight:600;color:#374151;border:0.5pt solid #e5e7eb;font-size:7.5pt;letter-spacing:0.05em;}
+.pp-wrong-table td{padding:4pt 6pt;border:0.5pt solid #e5e7eb;vertical-align:top;line-height:1.35;}
+.pp-wrong-table tr:nth-child(even) td{background:#f9fafb;}
+.pp-ans-wrong{color:#dc2626;font-weight:600;}
+.pp-ans-right{color:#16a34a;font-weight:600;}
+.pp-footer{margin-top:12pt;border-top:1pt solid #e5e7eb;padding-top:7pt;display:flex;justify-content:space-between;font-size:7.5pt;color:#9ca3af;}
+.pp-perfect{text-align:center;padding:14pt;background:#f0fdf4;border:1pt solid #86efac;border-radius:6pt;color:#16a34a;font-weight:600;font-size:10pt;}
+@media print{body{padding:0.4in 0.5in;}}
+
+</style>
+</head>
+<body>
+<div class="pp-header">
+  <div class="pp-logo-area">
+    <div class="pp-company">Careco Homecare</div>
+    <div class="pp-subtitle">PCA &amp; HIPAA Competency Test — Official Result</div>
+  </div>
+  <div class="pp-doc-info">
+    <div><strong>Date:</strong> ${dateStr}</div>
+    <div><strong>Test version:</strong> ${total}-question assessment</div>
+    <div><strong>Passing threshold:</strong> 70%</div>
+  </div>
+</div>
+<div class="pp-candidate">
+  <div>
+    <div class="pp-cand-name">${firstName} ${lastName}</div>
+    <div class="pp-cand-email">${email}</div>
+  </div>
+  <div class="pp-result-badge ${passed?'pass':'fail'}">${passed?'PASSED':'FAILED'}</div>
+</div>
+<div class="pp-scores">
+  <div class="pp-score-box">
+    <div class="pp-score-label">Score</div>
+    <div class="pp-score-val">${correct}/${total}</div>
+    <div class="pp-score-sub">Questions correct</div>
+  </div>
+  <div class="pp-score-box">
+    <div class="pp-score-label">Percentage</div>
+    <div class="pp-score-val" style="color:${barColor}">${pct}%</div>
+    <div class="pp-score-sub">${passed?'Above passing threshold':'Below passing threshold'}</div>
+  </div>
+  <div class="pp-score-box">
+    <div class="pp-score-label">Incorrect</div>
+    <div class="pp-score-val" style="color:${wrong.length>0?'#dc2626':'#16a34a'}">${wrong.length}</div>
+    <div class="pp-score-sub">${wrong.length===0?'No errors':'Questions to review'}</div>
+  </div>
+  <div class="pp-score-box">
+    <div class="pp-score-label">Status</div>
+    <div class="pp-score-val" style="font-size:12pt;line-height:1.3;padding-top:4pt;color:${barColor}">${passed?'Competency Verified':'Retake Required'}</div>
+    <div class="pp-score-sub">Score ${pct}% (passing: 70%)</div>
+  </div>
+</div>
+<div class="pp-bar-row">
+  <div class="pp-bar-label"><span>Score</span><span>${pct}% (passing: 70%)</span></div>
+  <div class="pp-bar-track"><div class="pp-bar-fill" style="width:${pct}%;background:${barColor}"></div></div>
+</div>
+${wrong.length>0?`<div class="pp-section-title">Incorrect Answers (${wrong.length})</div>`:'<div class="pp-section-title">Incorrect Answers</div>'}
+${wrongHTML}
+<div class="pp-footer">
+  <div>Careco Homecare · york@carecohomecare.com</div>
+  <div>This document was generated automatically upon test submission.</div>
+  <div>Printed: ${new Date().toLocaleString()}</div>
+</div>
+<script>window.onload=function(){window.print();}<\/script>
+
+</body>
+</html>`;
+
+  const win=window.open('','_blank','width=900,height=700');
+  if(!win||win.closed||typeof win.closed==='undefined'){
+    alert('Pop-up blocked! Please allow pop-ups for this site to print results, then click Print Results again.');
+    return;
+  }
+  win.document.open();
+  win.document.write(html);
+  win.document.close();
+});
+
+/* ── SUBMIT ── */
+document.getElementById('btn-close').addEventListener('click',function(){document.getElementById('overlay').classList.remove('open');});
+
+function submitTest(){
+  const fn=document.getElementById('first-name').value.trim();
+  const ln=document.getElementById('last-name').value.trim();
+  const em=document.getElementById('taker-email').value.trim();
+  let err=false;
+  if(!fn){showFieldError('first-name','first-name-err');err=true;}else{clearFieldError('first-name','first-name-err');}
+  if(!ln){showFieldError('last-name','last-name-err');err=true;}else{clearFieldError('last-name','last-name-err');}
+  if(!validateEmail(em)){showFieldError('taker-email','email-err');err=true;}else{clearFieldError('taker-email','email-err');}
+  if(err){document.querySelector('.email-input.error').scrollIntoView({behavior:'smooth',block:'center'});return;}
+
+  const unanswered=Q.filter(q=>!document.querySelector(`input[name="q${q.n}"]:checked`));
+  Q.forEach(q=>document.getElementById(`r${q.n}`).classList.remove('unanswered'));
+  unanswered.forEach(q=>document.getElementById(`r${q.n}`).classList.add('unanswered'));
+
+
+  let correct=0;const wrong=[];
+  Q.forEach(function(q){
+    const sel=document.querySelector(`input[name="q${q.n}"]:checked`);
+    const ua=sel?(q.type==='mc'?sel.value:sel.value==='true'):null;
+    if(ua===q.a)correct++;else wrong.push(Object.assign({},q,{userAnswer:ua}));
+  });
+
+  const total=Q.length,pct=Math.round(correct/total*100),passed=pct>=70;
+  const dateStr=new Date().toLocaleString();
+
+  // Store for print
+  _printData={firstName:fn,lastName:ln,email:em,correct,total,pct,passed,wrong,dateStr};
+
+  document.getElementById('s-correct').textContent=correct;
+  document.getElementById('s-denom').textContent=`/ ${total}`;
+  document.getElementById('s-pct').textContent=`${pct}%`;
+  document.getElementById('rbadge').textContent=passed?'Passed':'Failed';
+  document.getElementById('rbadge').className=`rbadge ${passed?'pass':'fail'}`;
+  document.getElementById('s-note').textContent=passed?'Congratulations! A passing score of 70% or higher was achieved.':'A score of 70% or higher is required to pass. Please review and retake.';
+  const fillEl=document.getElementById('sbar-fill');
+  fillEl.style.background=passed?'var(--green)':'var(--red)';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{fillEl.style.width=`${pct}%`;}));
+
+  const wsEl=document.getElementById('wsection');
+  if(wrong.length===0){
+    wsEl.innerHTML='<p style="color:var(--green);font-size:13px;font-weight:600;padding-bottom:16px">Perfect score — all answers correct!</p>';
+  }else{
+    wsEl.innerHTML=`<h3>Incorrect Answers <span class="wbadge">${wrong.length}</span></h3>`+wrong.map(w=>{
+      const ya=w.userAnswer===null?'Not answered':(typeof w.userAnswer==='boolean'?(w.userAnswer?'True':'False'):w.userAnswer);
+      const ca=typeof w.a==='boolean'?(w.a?'True':'False'):w.a;
+      return `<div class="witem"><div class="wnum">Q${w.n} · ${w.s}</div>${w.b?`<div class="wcategory">${w.b}</div>`:''}<div class="wtext">${w.t}</div><div class="answer-row"><span class="ans-y">Your answer: ${ya}</span><span class="ans-c">Correct: ${ca}</span></div></div>`;
+    }).join('');
+  }
+
+  document.getElementById('overlay').classList.add('open');
+  const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='Submitted';
+
+  const statusEl=document.getElementById('estatus');
+  if(typeof emailjs!=='undefined'){
+    statusEl.style.display='block';statusEl.className='estatus sending';statusEl.textContent='Sending results…';
+    const EMAIL_CAP=50;
+    const wrongCapped=wrong.slice(0,EMAIL_CAP);
+    const overflowNote=wrong.length>EMAIL_CAP
+      ?`<p style="font-family:Arial,sans-serif;font-size:11px;color:#6b7280;margin:10px 0 0;font-style:italic;">Showing ${EMAIL_CAP} of ${wrong.length} incorrect answers. See printed results for the full list.</p>`
+      :'';
+    const wrongHtml=wrong.length===0
+      ?'<p style="font-family:Arial,sans-serif;font-size:13px;color:#16a34a;font-weight:600;">🎉 Perfect score — all answers correct!</p>'
+      :`<table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:12px;">
+  <thead>
+    <tr style="background:#f3f4f6;">
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:32px;">#</th>
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:130px;">Section</th>
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;">Question</th>
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:70px;">Your Answer</th>
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:70px;">Correct</th>
+    </tr>
+  </thead>
+  <tbody>${wrongCapped.map((w,i)=>{
+    const ya=w.userAnswer===null?'Not answered':(typeof w.userAnswer==='boolean'?(w.userAnswer?'True':'False'):w.userAnswer);
+    const ca=typeof w.a==='boolean'?(w.a?'True':'False'):w.a;
+    const bg=i%2===0?'#ffffff':'#f9fafb';
+    return `<tr style="background:${bg};">
+      <td style="padding:6px 8px;border:1px solid #e5e7eb;font-weight:700;color:#6b7280;vertical-align:top;">Q${w.n}</td>
+      <td style="padding:6px 8px;border:1px solid #e5e7eb;color:#374151;vertical-align:top;font-size:11px;">${w.s}${w.b?`<br><span style="color:#6b7280;font-style:italic;">${w.b}</span>`:''}</td>
+      <td style="padding:6px 8px;border:1px solid #e5e7eb;color:#111827;vertical-align:top;">${w.t}</td>
+      <td style="padding:6px 8px;border:1px solid #e5e7eb;color:#dc2626;font-weight:600;vertical-align:top;">${ya}</td>
+      <td style="padding:6px 8px;border:1px solid #e5e7eb;color:#16a34a;font-weight:600;vertical-align:top;">${ca}</td>
+    </tr>`;
+  }).join('')}</tbody>
+</table>${overflowNote}`;
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      taker_name:`${fn} ${ln}`,taker_email:em,score:`${correct}/${total}`,pct:`${pct}%`,result:passed?'PASSED':'FAILED',
+      result_bg:passed?'#f0fdf4':'#fef2f2',result_color:passed?'#16a34a':'#dc2626',result_border:passed?'#86efac':'#fca5a5',
+      status_label:passed?'Pass':'Retake Required',status_color:passed?'#16a34a':'#dc2626',status_sub:`Score ${pct}% (passing: 70%)`,
+      wrong_count:wrong.length,wrong_answers:wrongHtml,date:dateStr
+    }).then(()=>{statusEl.className='estatus success';statusEl.textContent=`Results emailed to ${em}, york@carecohomecare.com, and steven.thibault@gmail.com`;})
+      .catch(e=>{statusEl.className='estatus fail';statusEl.textContent=`Email failed. (${JSON.stringify(e)})`;});
+  }
+}
+
+
+// Unanswered chip click
+document.getElementById('unanswered-chip')?.addEventListener('click',function(){
+  const next=Q.find(q=>!document.querySelector(`input[name="q${q.n}"]:checked`));
+  if(next) document.getElementById(`r${next.n}`).scrollIntoView({behavior:'smooth',block:'center'});
+});
+
+
+// Confirm modal — shown when user clicks Submit Test
+document.getElementById('submit-btn').addEventListener('click',function(e){
+  e.stopPropagation();
+  const answered=Q.filter(q=>document.querySelector(`input[name="q${q.n}"]:checked`)).length;
+  const unanswered=Q.length-answered;
+  const confirmText=document.getElementById('confirm-text');
+  if(confirmText){
+    confirmText.innerHTML=`You answered <strong>${answered}</strong> out of <strong>${Q.length}</strong> questions.<br><br>${
+      unanswered>0
+        ?`<span style="color:#dc2626">${unanswered} question(s) still unanswered.</span>`
+        :`<span style="color:#16a34a">All questions completed ✓</span>`
+    }`;
+  }
+  document.getElementById('confirm-overlay').classList.add('open');
+});
+
+// Confirm modal — cancel
+document.getElementById('confirm-cancel').addEventListener('click',function(){
+  document.getElementById('confirm-overlay').classList.remove('open');
+});
+
+// Confirm modal — confirm submit (calls the real submitTest)
+document.getElementById('confirm-submit').addEventListener('click',function(){
+  document.getElementById('confirm-overlay').classList.remove('open');
+  submitTest();
+});
+
+// Click outside modal to close
+document.getElementById('confirm-overlay').addEventListener('click',function(e){
+  if(e.target===this) this.classList.remove('open');
+});
+
+// Escape key to close modal
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') document.getElementById('confirm-overlay').classList.remove('open');
+});
+
+</script>
+
+</body>
+</html>
