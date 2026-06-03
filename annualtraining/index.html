@@ -8,315 +8,151 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root {
-  --blue-900: #0a1628; --blue-800: #0f2246; --blue-700: #163568;
-  --blue-600: #1d4ed8; --blue-500: #2563eb; --blue-400: #3b82f6;
-  --blue-300: #93c5fd; --blue-100: #dbeafe; --blue-50: #eff6ff;
-  --grey-900: #111827; --grey-700: #374151; --grey-600: #4b5563;
-  --grey-500: #6b7280; --grey-400: #9ca3af; --grey-300: #d1d5db;
-  --grey-200: #e5e7eb; --grey-100: #f3f4f6; --grey-50: #f9fafb;
-  --white: #fff; --green: #16a34a; --green-bg: #f0fdf4;
-  --red: #dc2626; --red-bg: #fef2f2;
-  --radius: 8px; --radius-lg: 12px;
+  --blue-900:#0a1628;--blue-800:#0f2246;--blue-700:#163568;--blue-600:#1d4ed8;--blue-500:#2563eb;--blue-400:#3b82f6;--blue-300:#93c5fd;--blue-100:#dbeafe;--blue-50:#eff6ff;
+  --grey-900:#111827;--grey-700:#374151;--grey-600:#4b5563;--grey-500:#6b7280;--grey-400:#9ca3af;--grey-300:#d1d5db;--grey-200:#e5e7eb;--grey-100:#f3f4f6;--grey-50:#f9fafb;
+  --white:#fff;--green:#16a34a;--green-bg:#f0fdf4;--red:#dc2626;--red-bg:#fef2f2;--radius:8px;--radius-lg:12px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background: var(--grey-100);
-  color: var(--grey-900);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-input, textarea, button { font: inherit; }
-
-/* ── Header ── */
-header {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--blue-900);
-  border-bottom: 1px solid rgba(255,255,255,.06);
-  box-shadow: 0 2px 20px rgba(0,0,0,.35);
-}
-.header-inner {
-  max-width: 920px; margin: 0 auto;
-  padding: 0 28px; height: 60px;
-  display: flex; align-items: center; gap: 14px;
-}
-.hbadge {
-  background: var(--blue-700); color: var(--white);
-  font-size: 10px; font-weight: 700; letter-spacing: .12em;
-  padding: 4px 10px; border-radius: 5px;
-  white-space: nowrap; display: flex; align-items: center;
-}
-.hbadge img { height: 32px; display: block; }
-.hdiv { width: 1px; height: 24px; background: rgba(255,255,255,.12); }
-.htitle { color: var(--white); font-size: 14.5px; font-weight: 600; }
-.hsub { color: var(--blue-300); font-size: 12px; margin-top: 1px; }
-.hprog { margin-left: auto; display: flex; align-items: center; gap: 11px; }
-.hprog-label { color: var(--blue-300); font-size: 11.5px; font-weight: 500; white-space: nowrap; }
-.hprog-track { width: 130px; height: 3px; background: rgba(255,255,255,.1); border-radius: 2px; overflow: hidden; }
-.hprog-fill {
-  height: 100%; width: 0%;
-  background: linear-gradient(90deg, var(--blue-500), var(--blue-300));
-  border-radius: 2px; transition: width .18s ease;
-}
-
-/* ── Main ── */
-main { max-width: 920px; margin: 0 auto; padding: 20px 28px 80px; }
-
-/* ── Email card ── */
-.email-card {
-  background: var(--white);
-  border: 1px solid var(--grey-200);
-  border-radius: var(--radius-lg);
-  padding: 18px 22px; margin-bottom: 16px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.05);
-  display: grid;
-  grid-template-columns: auto repeat(3, minmax(160px, 1fr));
-  gap: 16px; align-items: start;
-}
-.email-icon {
-  width: 36px; height: 36px;
-  background: var(--blue-50); border-radius: 7px;
-  display: flex; align-items: center; justify-content: center;
-}
-.email-icon svg {
-  width: 17px; height: 17px;
-  stroke: var(--blue-500); fill: none;
-  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-}
-.field-group { display: flex; flex-direction: column; gap: 6px; }
-.email-label {
-  font-size: 12.5px; font-weight: 600; color: var(--grey-700);
-  display: flex; align-items: center; gap: 7px; white-space: nowrap;
-}
-.req-chip {
-  font-size: 10px; font-weight: 600;
-  color: var(--blue-600); background: var(--blue-50);
-  border: 1px solid var(--blue-100); border-radius: 4px;
-  padding: 1px 7px; letter-spacing: .03em;
-}
-.email-input {
-  width: 100%;
-  background: var(--grey-50);
-  border: 1.5px solid var(--grey-200);
-  border-radius: 7px; padding: 9px 13px;
-  font-size: 13.5px; color: var(--grey-900); outline: none;
-}
-.email-input:focus {
-  border-color: var(--blue-500);
-  box-shadow: 0 0 0 3px rgba(37,99,235,.1);
-  background: var(--white);
-}
-.email-input.error {
-  border-color: var(--red);
-  box-shadow: 0 0 0 3px rgba(220,38,38,.08);
-}
-.email-err, .name-err {
-  display: none; margin-top: 5px;
-  font-size: 11.5px; color: var(--red); font-weight: 500;
-}
-.field-group.has-error .email-label::after { content: ' *'; color: var(--red); font-weight: 700; }
-
-/* ── Section blocks ── */
-.section-block {
-  margin-top: 10px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--grey-200);
-  box-shadow: 0 1px 4px rgba(0,0,0,.05);
-}
-.section-title {
-  display: flex; align-items: center;
-  justify-content: space-between; gap: 12px;
-  background: #0f2557; color: white;
-  padding: 12px 16px; font-weight: 700; font-size: 16px;
-}
-.section-progress { font-size: 13px; font-weight: 700; color: #86efac; white-space: nowrap; }
-.section-title-left { display: flex; align-items: center; gap: 10px; }
-.s-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue-400); flex-shrink: 0; }
-
-/* ── Training card / policy ── */
-.training-card { background: var(--white); border-bottom: 1px solid var(--grey-100); padding: 14px 18px 12px; }
-.training-full summary {
-  cursor: pointer; color: var(--blue-700);
-  font-size: 12.5px; font-weight: 800; list-style-position: inside;
-}
-.training-full-body { display: grid; gap: 3px; margin-top: 8px; color: var(--grey-700); font-size: 12.5px; line-height: 1.34; }
-.training-full-body p { margin: 0; }
-.policy-line.title { font-size: 13.5px; font-weight: 800; color: var(--grey-900); text-align: center; line-height: 1.25; margin: 4px 0 2px; }
-.policy-line.heading { font-size: 12.8px; font-weight: 800; color: var(--grey-900); margin-top: 7px; }
-.policy-line.subheading { font-size: 12.5px; font-weight: 800; color: var(--grey-800); margin-top: 5px; }
-.policy-line.body { color: var(--grey-700); }
-.policy-line.lead { font-weight: 700; color: var(--grey-800); margin-top: 3px; }
-.policy-line.contact { color: var(--grey-700); font-weight: 600; }
-.policy-line.link a { color: var(--blue-700); font-weight: 700; word-break: break-word; text-decoration: none; }
-.policy-line.link a:hover { text-decoration: underline; }
-.policy-outline-heading {
-  display: grid; grid-template-columns: 30px minmax(0, 1fr);
-  gap: 6px; align-items: start; margin: 8px 0 2px;
-  color: var(--grey-900); font-size: 13px; font-weight: 800;
-  text-transform: uppercase; line-height: 1.25;
-}
-.policy-item {
-  display: grid; grid-template-columns: 30px minmax(0, 1fr);
-  gap: 6px; align-items: start;
-  color: var(--grey-700); line-height: 1.32; margin: 0;
-}
-.policy-marker { text-align: right; color: var(--grey-900); font-weight: 500; white-space: nowrap; }
-.policy-item.bullet .policy-marker { font-size: 13px; line-height: 1.1; }
-
-/* ── Question rows ── */
-.qrow {
-  background: var(--white);
-  border-bottom: 1px solid var(--grey-100);
-  padding: 10px 18px;
-  display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 6px 12px;
-}
-.qrow:last-child { border-bottom: none; }
-.qrow:hover { background: var(--grey-50); }
-.qrow.unanswered { background: #fff8f8; border-left: 3px solid var(--red); padding-left: 15px; }
-.qnum { font-size: 11px; font-weight: 700; color: var(--grey-400); text-align: right; padding-top: 3px; }
-.qbody { min-width: 0; }
-.qtext { font-size: 13px; line-height: 1.32; color: var(--grey-900); margin-bottom: 9px; }
-.answer-list { display: grid; grid-template-columns: 1fr; gap: 3px; }
-.answer-option {
-  display: grid; grid-template-columns: 16px minmax(0, 1fr);
-  align-items: start; gap: 7px; padding: 2px 0;
-  cursor: pointer; font-size: 12.5px; font-weight: 500;
-  color: var(--grey-700); line-height: 1.25;
-}
-.answer-option input { width: 15px; height: 15px; margin-top: 0; accent-color: var(--blue-600); cursor: pointer; }
-.answer-option:hover { color: var(--blue-700); }
-.answer-option.selected { color: var(--blue-700); font-weight: 600; }
-.answer-option.multi.selected { color: #166534; font-weight: 600; }
-
-/* ── Attestation ── */
-.attestation-card {
-  background: var(--white);
-  border: 1px solid var(--grey-200);
-  border-radius: var(--radius-lg);
-  padding: 14px 18px; margin-top: 18px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.05);
-}
-.attestation-option {
-  display: grid; grid-template-columns: 18px minmax(0, 1fr);
-  gap: 8px; align-items: start;
-  cursor: pointer; font-size: 13px; line-height: 1.4;
-  color: var(--grey-800); font-weight: 600;
-}
-.attestation-option input { width: 16px; height: 16px; margin-top: 2px; accent-color: var(--blue-600); cursor: pointer; }
-.attestation-card.error { border-color: var(--red); box-shadow: 0 0 0 3px rgba(220,38,38,.08); }
-.attestation-err { display: none; margin-top: 8px; font-size: 11.5px; color: var(--red); font-weight: 600; }
-
-/* ── Submit ── */
-.submit-area { margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 9px; }
-.submit-btn {
-  background: var(--blue-600); color: var(--white);
-  border: none; padding: 13px 44px; border-radius: 8px;
-  font-size: 14.5px; font-weight: 600; cursor: pointer;
-  box-shadow: 0 4px 14px rgba(37,99,235,.35);
-}
-.submit-btn:hover:not(:disabled) { background: var(--blue-500); box-shadow: 0 6px 20px rgba(37,99,235,.45); }
-.submit-btn:disabled { opacity: .6; cursor: not-allowed; }
-.submit-hint { font-size: 11.5px; color: var(--grey-400); font-weight: 500; }
-
-/* ── Unanswered chip ── */
-.unanswered-chip {
-  position: fixed; right: 18px; bottom: 18px; z-index: 150;
-  background: #dc2626; color: white; border-radius: 999px;
-  padding: 10px 16px; font-size: 13px; font-weight: 700;
-  box-shadow: 0 10px 30px rgba(0,0,0,.18); cursor: pointer;
-}
-.unanswered-chip.hidden { opacity: 0; pointer-events: none; }
-
-/* ── Results overlay ── */
-#overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(10,22,40,.78); backdrop-filter: blur(4px);
-  z-index: 200; align-items: center; justify-content: center; padding: 20px;
-}
-#overlay.open { display: flex; }
-.rpanel {
-  background: var(--white); border-radius: var(--radius-lg);
-  width: 100%; max-width: 660px; max-height: 88vh; overflow-y: auto;
-  box-shadow: 0 24px 60px rgba(0,0,0,.2); border-top: 4px solid var(--blue-600);
-}
-.rhead { padding: 26px 28px 18px; border-bottom: 1px solid var(--grey-100); }
-.rhead h2 { font-size: 18px; font-weight: 700; color: var(--grey-900); margin-bottom: 3px; display: flex; align-items: center; gap: 9px; }
-.rbadge { font-size: 10px; font-weight: 700; letter-spacing: .08em; padding: 3px 9px; border-radius: 20px; }
-.rbadge.pass { background: var(--green-bg); color: var(--green); border: 1px solid #86efac; }
-.rbadge.fail { background: var(--red-bg); color: var(--red); border: 1px solid #fca5a5; }
-.score-row { display: flex; align-items: flex-end; gap: 12px; margin: 14px 0 10px; }
-.score-big { font-size: 44px; font-weight: 700; color: var(--blue-600); line-height: 1; }
-.score-denom { font-size: 18px; color: var(--grey-400); font-weight: 400; margin-bottom: 4px; }
-.score-pct { font-size: 14px; font-weight: 600; color: var(--grey-500); margin-bottom: 5px; }
-.sbar { height: 5px; background: var(--grey-100); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
-.sbar-fill { height: 100%; border-radius: 3px; width: 0; transition: width .4s ease; }
-.score-note { font-size: 12.5px; color: var(--grey-500); }
-.wsection { padding: 18px 28px 8px; }
-.wsection h3 { font-size: 11.5px; font-weight: 700; color: var(--grey-700); letter-spacing: .05em; margin-bottom: 11px; display: flex; align-items: center; gap: 7px; }
-.wbadge { background: var(--red-bg); color: var(--red); border-radius: 20px; padding: 1px 8px; font-size: 11px; font-weight: 700; }
-.witem { border: 1px solid var(--grey-200); border-radius: var(--radius); padding: 11px 14px; margin-bottom: 8px; background: var(--grey-50); }
-.wnum { font-size: 10px; font-weight: 700; color: var(--grey-400); letter-spacing: .05em; margin-bottom: 3px; }
-.wtext { font-size: 12.5px; color: var(--grey-900); line-height: 1.45; margin-bottom: 7px; }
-.answer-row { display: flex; gap: 10px; font-size: 11.5px; font-weight: 600; flex-wrap: wrap; }
-.ans-y { color: var(--red); background: var(--red-bg); padding: 2px 8px; border-radius: 4px; }
-.ans-c { color: var(--green); background: var(--green-bg); padding: 2px 8px; border-radius: 4px; }
-.estatus { margin: 14px 28px; padding: 10px 14px; border-radius: 7px; font-size: 12.5px; font-weight: 600; display: none; }
-.estatus.sending { background: var(--blue-50); color: var(--blue-700); border: 1px solid var(--blue-100); }
-.estatus.success { background: var(--green-bg); color: var(--green); border: 1px solid #86efac; }
-.estatus.fail { background: var(--red-bg); color: var(--red); border: 1px solid #fca5a5; }
-.estatus.notice { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
-.rfooter { padding: 14px 28px 26px; display: flex; gap: 9px; }
-.btn-close {
-  flex: 1; padding: 10px; border-radius: 7px;
-  font-size: 13.5px; font-weight: 600; cursor: pointer;
-  border: 1.5px solid var(--grey-200); background: var(--white); color: var(--grey-700);
-}
-.btn-close:hover { background: var(--grey-50); }
-.btn-print {
-  background: var(--blue-600); color: var(--white); border: none;
-  padding: 10px 22px; border-radius: 7px; font-size: 13.5px; font-weight: 600;
-  cursor: pointer; display: flex; align-items: center; gap: 7px;
-}
-.btn-print:hover { background: var(--blue-500); }
-.btn-print svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-/* ── Confirm overlay ── */
-.confirm-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,.45);
-  display: none; align-items: center; justify-content: center;
-  z-index: 9999; padding: 20px;
-}
-.confirm-overlay.open { display: flex; }
-.confirm-box {
-  background: #fff; width: 100%; max-width: 460px;
-  border-radius: 12px; padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.18);
-}
-.confirm-box h3 { font-size: 20px; margin-bottom: 10px; }
-.confirm-box p { font-size: 14px; color: #4b5563; line-height: 1.5; margin-bottom: 18px; }
-.confirm-actions { display: flex; gap: 10px; }
-.confirm-actions button { flex: 1; padding: 11px; border-radius: 8px; font-weight: 700; cursor: pointer; border: none; }
-.confirm-cancel { background: #f3f4f6; }
-.confirm-submit { background: #2563eb; color: white; }
-
-/* ── Responsive ── */
-@media (max-width: 720px) {
-  .hprog { display: none; }
-  main { padding: 16px 14px 70px; }
-  .header-inner { padding: 0 16px; }
-  .email-card { grid-template-columns: 1fr; }
-  .email-icon { display: none; }
-  .qrow { grid-template-columns: 24px minmax(0, 1fr); padding: 9px 12px; }
-  .training-card { padding: 13px 12px 11px; }
-  .attestation-card { padding: 13px 14px; }
-  .rfooter { flex-direction: column; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--grey-100);color:var(--grey-900);min-height:100vh;-webkit-font-smoothing:antialiased;}
+input,textarea,button{font:inherit;}
+header{position:sticky;top:0;z-index:100;background:var(--blue-900);border-bottom:1px solid rgba(255,255,255,.06);box-shadow:0 2px 20px rgba(0,0,0,.35);}
+.header-inner{max-width:920px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;gap:14px;}
+.hbadge{background:var(--blue-700);color:var(--white);font-size:10px;font-weight:700;letter-spacing:.12em;padding:4px 10px;border-radius:5px;white-space:nowrap;display:flex;align-items:center;}
+.hbadge img{height:32px;display:block;}
+.hdiv{width:1px;height:24px;background:rgba(255,255,255,.12);}
+.htitle{color:var(--white);font-size:14.5px;font-weight:600;}
+.hsub{color:var(--blue-300);font-size:12px;margin-top:1px;}
+.hprog{margin-left:auto;display:flex;align-items:center;gap:11px;}
+.hprog-label{color:var(--blue-300);font-size:11.5px;font-weight:500;white-space:nowrap;}
+.hprog-track{width:130px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
+.hprog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue-500),var(--blue-300));border-radius:2px;transition:width .18s ease;}
+main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
+.email-card{background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-lg);padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:grid;grid-template-columns:auto repeat(3,minmax(160px,1fr));gap:16px;align-items:start;}
+.email-icon{width:36px;height:36px;background:var(--blue-50);border-radius:7px;display:flex;align-items:center;justify-content:center;}
+.email-icon svg{width:17px;height:17px;stroke:var(--blue-500);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.field-group{display:flex;flex-direction:column;gap:6px;}
+.email-label{font-size:12.5px;font-weight:600;color:var(--grey-700);display:flex;align-items:center;gap:7px;white-space:nowrap;}
+.req-chip{font-size:10px;font-weight:600;color:var(--blue-600);background:var(--blue-50);border:1px solid var(--blue-100);border-radius:4px;padding:1px 7px;letter-spacing:.03em;}
+.email-input{width:100%;background:var(--grey-50);border:1.5px solid var(--grey-200);border-radius:7px;padding:9px 13px;font-size:13.5px;color:var(--grey-900);outline:none;}
+.email-input:focus{border-color:var(--blue-500);box-shadow:0 0 0 3px rgba(37,99,235,.1);background:var(--white);}
+.email-input.error{border-color:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.08);}
+.email-err,.name-err{display:none;margin-top:5px;font-size:11.5px;color:var(--red);font-weight:500;}
+.field-group.has-error .email-label::after{content:' *';color:var(--red);font-weight:700;}
+.section-block{margin-top:10px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--grey-200);box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#0f2557;color:white;padding:12px 16px;font-weight:700;font-size:16px;}
+.section-progress{font-size:13px;font-weight:700;color:#86efac;white-space:nowrap;}
+.section-title-left{display:flex;align-items:center;gap:10px;}
+.s-dot{width:5px;height:5px;border-radius:50%;background:var(--blue-400);flex-shrink:0;}
+.training-card{background:var(--white);border-bottom:1px solid var(--grey-100);padding:14px 18px 12px;}
+.training-full summary{cursor:pointer;color:var(--blue-700);font-size:12.5px;font-weight:800;list-style:none;display:inline-flex;align-items:center;min-height:32px;touch-action:manipulation;-webkit-tap-highlight-color:rgba(37,99,235,.12);}
+.training-full summary::-webkit-details-marker{display:none;}
+.training-full summary::before{content:"\25B6";display:inline-block;margin-right:6px;font-size:11px;line-height:1;color:var(--blue-700);}
+.training-full[open] summary::before{content:"\25BE";}
+.training-full-body{display:grid;gap:3px;margin-top:8px;color:var(--grey-700);font-size:12.5px;line-height:1.34;}
+.training-full-body p{margin:0;}
+.policy-line.title{font-size:13.5px;font-weight:800;color:var(--grey-900);text-align:center;line-height:1.25;margin:4px 0 2px;}
+.policy-line.heading{font-size:12.8px;font-weight:800;color:var(--grey-900);margin-top:7px;text-transform:none;}
+.policy-line.subheading{font-size:12.5px;font-weight:800;color:var(--grey-800);margin-top:5px;}
+.policy-line.body{color:var(--grey-700);}
+.policy-line.lead{font-weight:700;color:var(--grey-800);margin-top:3px;}
+.policy-line.contact{color:var(--grey-700);font-weight:600;}
+.policy-line.link a{color:var(--blue-700);font-weight:700;word-break:break-word;text-decoration:none;}
+.policy-line.link a:hover{text-decoration:underline;}
+.policy-outline-heading{display:grid;grid-template-columns:30px minmax(0,1fr);gap:6px;align-items:start;margin:8px 0 2px;color:var(--grey-900);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:0;line-height:1.25;}
+.policy-item{display:grid;grid-template-columns:30px minmax(0,1fr);gap:6px;align-items:start;color:var(--grey-700);line-height:1.32;margin:0;}
+.policy-marker{text-align:right;color:var(--grey-900);font-weight:500;white-space:nowrap;}
+.policy-item.bullet .policy-marker{font-size:13px;line-height:1.1;}
+.qrow{background:var(--white);border-bottom:1px solid var(--grey-100);padding:10px 18px;display:grid;grid-template-columns:34px minmax(0,1fr);gap:6px 12px;}
+.qrow:last-child{border-bottom:none;}
+.qrow:hover{background:var(--grey-50);}
+.qrow.unanswered{background:#fff8f8;border-left:3px solid var(--red);padding-left:15px;}
+.qnum{font-size:11px;font-weight:700;color:var(--grey-400);text-align:right;padding-top:3px;}
+.qbody{min-width:0;}
+.qtext{font-size:13px;line-height:1.32;color:var(--grey-900);margin-bottom:9px;}
+.radio-pair{display:flex;gap:7px;flex-wrap:wrap;}
+.rpill{display:flex;align-items:center;justify-content:center;gap:5px;min-width:58px;padding:5px 13px;border-radius:15px;border:1px solid var(--grey-200);background:var(--grey-50);cursor:pointer;font-size:12px;font-weight:700;color:var(--grey-500);line-height:1.2;white-space:nowrap;}
+.rpill input[type="radio"]{display:none;}
+.rpill:hover{border-color:var(--blue-400);color:var(--blue-600);background:var(--blue-50);}
+.rpill.true-pill.selected{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.rpill.false-pill.selected{border-color:var(--red);background:var(--red-bg);color:var(--red);}
+.answer-list{display:grid;grid-template-columns:1fr;gap:3px;}
+.answer-option{display:grid;grid-template-columns:16px minmax(0,1fr);align-items:start;gap:7px;padding:2px 0;cursor:pointer;font-size:12.5px;font-weight:500;color:var(--grey-700);line-height:1.25;}
+.answer-option input{width:15px;height:15px;margin-top:0;accent-color:var(--blue-600);cursor:pointer;}
+.answer-option:hover{color:var(--blue-700);}
+.answer-option.selected{color:var(--blue-700);font-weight:600;}
+.answer-option.multi.selected{color:#166534;font-weight:600;}
+.attestation-card{background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-lg);padding:14px 18px;margin-top:18px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.attestation-option{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;align-items:start;cursor:pointer;font-size:13px;line-height:1.4;color:var(--grey-800);font-weight:600;}
+.attestation-option input{width:16px;height:16px;margin-top:2px;accent-color:var(--blue-600);cursor:pointer;}
+.attestation-card.error{border-color:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.08);}
+.attestation-err{display:none;margin-top:8px;font-size:11.5px;color:var(--red);font-weight:600;}
+.submit-area{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:9px;}
+.submit-btn{background:var(--blue-600);color:var(--white);border:none;padding:13px 44px;border-radius:8px;font-size:14.5px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.35);}
+.submit-btn:hover:not(:disabled){background:var(--blue-500);box-shadow:0 6px 20px rgba(37,99,235,.45);}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;}
+.submit-hint{font-size:11.5px;color:var(--grey-400);font-weight:500;}
+#overlay{display:none;position:fixed;inset:0;background:rgba(10,22,40,.78);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px;}
+#overlay.open{display:flex;}
+.rpanel{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:660px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.2);border-top:4px solid var(--blue-600);}
+.rhead{padding:26px 28px 18px;border-bottom:1px solid var(--grey-100);}
+.rhead h2{font-size:18px;font-weight:700;color:var(--grey-900);margin-bottom:3px;display:flex;align-items:center;gap:9px;}
+.rbadge{font-size:10px;font-weight:700;letter-spacing:.08em;padding:3px 9px;border-radius:20px;}
+.rbadge.pass{background:var(--green-bg);color:var(--green);border:1px solid #86efac;}
+.rbadge.fail{background:var(--red-bg);color:var(--red);border:1px solid #fca5a5;}
+.score-row{display:flex;align-items:flex-end;gap:12px;margin:14px 0 10px;}
+.score-big{font-size:44px;font-weight:700;color:var(--blue-600);line-height:1;}
+.score-denom{font-size:18px;color:var(--grey-400);font-weight:400;margin-bottom:4px;}
+.score-pct{font-size:14px;font-weight:600;color:var(--grey-500);margin-bottom:5px;}
+.sbar{height:5px;background:var(--grey-100);border-radius:3px;overflow:hidden;margin-bottom:10px;}
+.sbar-fill{height:100%;border-radius:3px;width:0;transition:width .4s ease;}
+.score-note{font-size:12.5px;color:var(--grey-500);}
+.wsection{padding:18px 28px 8px;}
+.wsection h3{font-size:11.5px;font-weight:700;color:var(--grey-700);letter-spacing:.05em;margin-bottom:11px;display:flex;align-items:center;gap:7px;}
+.wbadge{background:var(--red-bg);color:var(--red);border-radius:20px;padding:1px 8px;font-size:11px;font-weight:700;}
+.witem{border:1px solid var(--grey-200);border-radius:var(--radius);padding:11px 14px;margin-bottom:8px;background:var(--grey-50);}
+.wnum{font-size:10px;font-weight:700;color:var(--grey-400);letter-spacing:.05em;margin-bottom:3px;}
+.wcategory{font-size:12px;font-weight:600;color:var(--blue-700);margin-bottom:6px;}
+.wtext{font-size:12.5px;color:var(--grey-900);line-height:1.45;margin-bottom:7px;}
+.answer-row{display:flex;gap:10px;font-size:11.5px;font-weight:600;flex-wrap:wrap;}
+.ans-y{color:var(--red);background:var(--red-bg);padding:2px 8px;border-radius:4px;}
+.ans-c{color:var(--green);background:var(--green-bg);padding:2px 8px;border-radius:4px;}
+.estatus{margin:14px 28px;padding:10px 14px;border-radius:7px;font-size:12.5px;font-weight:600;display:none;}
+.estatus.sending{background:var(--blue-50);color:var(--blue-700);border:1px solid var(--blue-100);}
+.estatus.success{background:var(--green-bg);color:var(--green);border:1px solid #86efac;}
+.estatus.fail{background:var(--red-bg);color:var(--red);border:1px solid #fca5a5;}
+.estatus.notice{background:#fffbeb;color:#92400e;border:1px solid #fde68a;}
+.rfooter{padding:14px 28px 26px;display:flex;gap:9px;}
+.btn-close{flex:1;padding:10px;border-radius:7px;font-size:13.5px;font-weight:600;cursor:pointer;border:1.5px solid var(--grey-200);background:var(--white);color:var(--grey-700);}
+.btn-close:hover{background:var(--grey-50);}
+.btn-print{background:var(--blue-600);color:var(--white);border:none;padding:10px 22px;border-radius:7px;font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;}
+.btn-print:hover{background:var(--blue-500);}
+.btn-print svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.unanswered-chip{position:fixed;right:18px;bottom:18px;z-index:150;background:#dc2626;color:white;border-radius:999px;padding:10px 16px;font-size:13px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.18);cursor:pointer;}
+.unanswered-chip.hidden{opacity:0;pointer-events:none;}
+.confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;}
+.confirm-overlay.open{display:flex;}
+.confirm-box{background:#fff;width:100%;max-width:460px;border-radius:12px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.18);}
+.confirm-box h3{font-size:20px;margin-bottom:10px;}
+.confirm-box p{font-size:14px;color:#4b5563;line-height:1.5;margin-bottom:18px;}
+.confirm-actions{display:flex;gap:10px;}
+.confirm-actions button{flex:1;padding:11px;border-radius:8px;font-weight:700;cursor:pointer;border:none;}
+.confirm-cancel{background:#f3f4f6;}
+.confirm-submit{background:#2563eb;color:white;}
+@media(max-width:720px){
+  .hprog{display:none;}
+  main{padding:16px 14px 70px;}
+  .header-inner{padding:0 16px;}
+  .email-card{grid-template-columns:1fr;}
+  .email-icon{display:none;}
+  .qrow{grid-template-columns:24px minmax(0,1fr);padding:9px 12px;}
+  .training-card{padding:13px 12px 11px;}
+  .attestation-card{padding:13px 14px;}
+  .rfooter{flex-direction:column;}
 }
 </style>
 </head>
 <body>
-
 <header>
   <div class="header-inner">
     <div class="hbadge">
@@ -368,7 +204,7 @@ main { max-width: 920px; margin: 0 auto; padding: 20px 28px 80px; }
 
   <div class="submit-area">
     <button class="submit-btn" id="submit-btn" type="button">Submit Quiz</button>
-    <div class="submit-hint">Results are emailed automatically to you and your supervisors.</div>
+    <div class="submit-hint">Review your answers before submitting.</div>
   </div>
 </main>
 
@@ -377,7 +213,7 @@ main { max-width: 920px; margin: 0 auto; padding: 20px 28px 80px; }
 <div id="overlay">
   <div class="rpanel">
     <div class="rhead">
-      <h2>Quiz Results <span class="rbadge" id="rbadge"></span></h2>
+      <h2>Quiz Results <span class="rbadge" id="rbadge">Passed</span></h2>
       <div class="score-row">
         <div class="score-big" id="s-correct">0</div>
         <div class="score-denom" id="s-denom">/ 0</div>
@@ -410,142 +246,236 @@ main { max-width: 920px; margin: 0 auto; padding: 20px 28px 80px; }
 </div>
 
 <script>
-// ─── EmailJS Configuration ────────────────────────────────────────────────────
-// Replace these three placeholder values with your EmailJS credentials.
-// Use the separate email template HTML file included with this quiz.
-const EMAILJS_PUBLIC_KEY  = "YOUR_EMAILJS_PUBLIC_KEY";
-const EMAILJS_SERVICE_ID  = "YOUR_EMAILJS_SERVICE_ID";
+/*
+  EMAILJS CREDENTIALS GO HERE
+  Replace the three placeholder values below before deploying:
+    EMAILJS_PUBLIC_KEY  - your EmailJS public key
+    EMAILJS_SERVICE_ID  - your EmailJS service ID
+    EMAILJS_TEMPLATE_ID - your EmailJS template ID
+  Use the separate email template HTML file included with this quiz for the EmailJS template body.
+*/
+const EMAILJS_PUBLIC_KEY = "LxSaEqReKmQP3k0Ai";
+const EMAILJS_SERVICE_ID = "service_aue3uyw";
 const EMAILJS_TEMPLATE_ID = "template_7vp9doi";
-
-const EMAILJS_CONFIGURED = [EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID]
-  .every(v => !v.startsWith("YOUR_"));
-
-if (EMAILJS_CONFIGURED && window.emailjs) emailjs.init(EMAILJS_PUBLIC_KEY);
-
-// ─── Quiz Data ────────────────────────────────────────────────────────────────
-const PASSING_SCORE = 70; // percent
+const EMAILJS_CONFIGURED = ![EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID].some(v => v.startsWith("YOUR_"));
+if (EMAILJS_CONFIGURED && window.emailjs) {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+}
 
 const Q = [
   {
-    n: 1, s: "1. Abuse and Neglect",
-    t: "Which of the following are considered abuse and neglect?",
-    type: "single",
-    options: ["Verbal, physical, and sexual mistreatment", "Mental mistreatment", "Physical mistreatment", "Sexual mistreatment", "All of the above"],
-    a: "All of the above"
+    "n": 1,
+    "s": "1. Abuse and Neglect",
+    "t": "Which of the following are considered abuse and neglect?",
+    "type": "single",
+    "options": [
+      "Verbal, physical, and sexual mistreatment",
+      "Mental mistreatment",
+      "Physical mistreatment",
+      "Sexual mistreatment",
+      "All of the above"
+    ],
+    "a": "All of the above"
   },
   {
-    n: 2, s: "1. Abuse and Neglect",
-    t: "Employees who identify, notice, or recognize incidences or circumstances of mistreatment, neglect, verbal, mental, sexual and/or physical abuse, including injuries of unknown sources, or misappropriation of patient property, must report these findings immediately to the Agency and other appropriate authorities in accordance with state law.",
-    type: "single", options: ["Yes", "No"], a: "Yes"
+    "n": 2,
+    "s": "1. Abuse and Neglect",
+    "t": "Employees who identify, notice, or recognize incidences or circumstances of mistreatment, neglect, verbal, mental, sexual and/or physical abuse, including injuries of unknown sources, or misappropriation of patient property, must report these findings immediately to the Agency and other appropriate authorities in accordance with state law.",
+    "type": "single",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "a": "Yes"
   },
   {
-    n: 3, s: "1. Abuse and Neglect",
-    t: "The Agency is required to report allegations, observations and suspected cases of exploitation, abuse and/or neglect of an adult client that is 18 years or older to:",
-    type: "single",
-    options: ["Adult Protective Services", "Child Protective Services"],
-    a: "Adult Protective Services"
+    "n": 3,
+    "s": "1. Abuse and Neglect",
+    "t": "The Agency is required to report allegations, observations and suspected cases of exploitation, abuse and/or neglect of an adult client that is 18 years or older to:",
+    "type": "single",
+    "options": [
+      "Adult Protective Services",
+      "Child Protective Services"
+    ],
+    "a": "Adult Protective Services"
   },
   {
-    n: 4, s: "2. Agency Expectations",
-    t: "Agency expectations are also known as client rights.",
-    type: "single", options: ["Yes", "No"], a: "Yes"
+    "n": 4,
+    "s": "2. Agency Expectations",
+    "t": "Agency expectations are also known as client rights.",
+    "type": "single",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "a": "Yes"
   },
   {
-    n: 5, s: "2. Agency Expectations",
-    t: "The Agency makes the following commitments to our clients. Check all that apply.",
-    type: "multi",
-    options: [
+    "n": 5,
+    "s": "2. Agency Expectations",
+    "t": "The Agency makes the following commitments to our clients. Check all that apply.",
+    "type": "multi",
+    "options": [
       "Involve clients in the development of their service plan.",
       "Treat client records and information pertaining to a client's personal, medical, and mental health status as confidential.",
       "Provide the health and personal status of a client to family members and family friends."
     ],
-    a: [
+    "a": [
       "Involve clients in the development of their service plan.",
       "Treat client records and information pertaining to a client's personal, medical, and mental health status as confidential."
     ]
   },
   {
-    n: 6, s: "3. Emergencies and Disasters",
-    t: "The Agency maintains communication with the local Office of Emergency Management to ensure the safety and well-being of clients and employees during emergencies or disasters.",
-    type: "single", options: ["Yes", "No"], a: "Yes"
+    "n": 6,
+    "s": "3. Emergencies and Disasters",
+    "t": "The Agency maintains communication with the local Office of Emergency Management to ensure the safety and well-being of clients and employees during emergencies or disasters.",
+    "type": "single",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "a": "Yes"
   },
   {
-    n: 7, s: "3. Emergencies and Disasters",
-    t: "A client is assessed for risk during an emergency.",
-    type: "single",
-    options: ["During the initial assessment.", "When snow or icy weather is forecasted.", "Both"],
-    a: "Both"
+    "n": 7,
+    "s": "3. Emergencies and Disasters",
+    "t": "A client is assessed for risk during an emergency.",
+    "type": "single",
+    "options": [
+      "During the initial assessment.",
+      "When snow or icy weather is forecasted.",
+      "Both"
+    ],
+    "a": "Both"
   },
   {
-    n: 8, s: "4. Grievance Procedures",
-    t: "Clients are encouraged to make suggestions for improving care and/or registering concerns.",
-    type: "single", options: ["Yes", "No"], a: "Yes"
+    "n": 8,
+    "s": "4. Grievance Procedures",
+    "t": "Clients are encouraged to make suggestions for improving care and/or registering concerns.",
+    "type": "single",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "a": "Yes"
   },
   {
-    n: 9, s: "4. Grievance Procedures",
-    t: "The Agency investigates and documents complaints made by:",
-    type: "single",
-    options: ["A client", "A client's legal representative", "A client's family member", "All the above"],
-    a: "All the above"
+    "n": 9,
+    "s": "4. Grievance Procedures",
+    "t": "The Agency investigates and documents complaints made by:",
+    "type": "single",
+    "options": [
+      "A client",
+      "A client's legal representative",
+      "A client's family member",
+      "All the above"
+    ],
+    "a": "All the above"
   },
   {
-    n: 10, s: "4. Grievance Procedures",
-    t: "All complaints will receive a written response within the following number of days.",
-    type: "single",
-    options: ["7 days", "14 days", "A written response is not needed."],
-    a: "7 days"
+    "n": 10,
+    "s": "4. Grievance Procedures",
+    "t": "All complaints will receive a written response within the following number of days.",
+    "type": "single",
+    "options": [
+      "7 days",
+      "14 days",
+      "A written response is not needed."
+    ],
+    "a": "7 days"
   },
   {
-    n: 11, s: "5. Infection Control",
-    t: "The Agency practices infection control measures when providing service to its clients in order to minimize the risk of infections to employees, clients, families and the community-at-large.",
-    type: "single", options: ["Yes", "No"], a: "Yes"
+    "n": 11,
+    "s": "5. Infection Control",
+    "t": "The Agency practices infection control measures when providing service to its clients in order to minimize the risk of infections to employees, clients, families and the community-at-large.",
+    "type": "single",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "a": "Yes"
   },
   {
-    n: 12, s: "5. Infection Control",
-    t: "Examples of infectious/communicable diseases include:",
-    type: "multi",
-    options: ["Tuberculosis", "Lice", "Measles", "Ingrown toenail"],
-    a: ["Tuberculosis", "Lice", "Measles"]
+    "n": 12,
+    "s": "5. Infection Control",
+    "t": "Examples of infectious/communicable diseases include:",
+    "type": "multi",
+    "options": [
+      "Tuberculosis",
+      "Lice",
+      "Measles",
+      "Ingrown toenail"
+    ],
+    "a": [
+      "Tuberculosis",
+      "Lice",
+      "Measles"
+    ]
   },
   {
-    n: 13, s: "5. Infection Control",
-    t: "Clients and caregivers should:",
-    type: "single",
-    options: [
+    "n": 13,
+    "s": "5. Infection Control",
+    "t": "Clients and caregivers should:",
+    "type": "single",
+    "options": [
       "Wash hands when visibly soiled",
       "Wash hands after using the bathroom.",
       "Wash hands before, during, and after meal preparation",
       "All of the above"
     ],
-    a: "All of the above"
+    "a": "All of the above"
   },
   {
-    n: 14, s: "6. Confidentiality",
-    t: "All information related to the provision of services to clients is confidential.",
-    type: "single", options: ["Yes", "No"], a: "Yes"
+    "n": 14,
+    "s": "6. Confidentiality",
+    "t": "All information related to the provision of services to clients is confidential.",
+    "type": "single",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "a": "Yes"
   },
   {
-    n: 15, s: "6. Confidentiality",
-    t: "Caregivers are encouraged to share personal functional and medical client information with employees from other personal care, support care, or health care organizations.",
-    type: "single", options: ["Yes", "No"], a: "No"
+    "n": 15,
+    "s": "6. Confidentiality",
+    "t": "Caregivers are encouraged to share personal functional and medical client information with employees from other personal care, support care, or health care organizations.",
+    "type": "single",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "a": "No"
   },
   {
-    n: 16, s: "6. Confidentiality",
-    t: "The law that regulates health care confidentiality is:",
-    type: "single",
-    options: ["HIPAA", "OSHA", "All of the above"],
-    a: "HIPAA"
+    "n": 16,
+    "s": "6. Confidentiality",
+    "t": "The law that regulates health care confidentiality is:",
+    "type": "single",
+    "options": [
+      "HIPAA",
+      "OSHA",
+      "All of the above"
+    ],
+    "a": "HIPAA"
   },
   {
-    n: 17, s: "7. Caring for Dementia Clients in the Home",
-    t: "Creating a dementia-friendly environment is a major step in supporting persons living with Alzheimer's and related dementias. A thoughtfully arranged space can reduce confusion, improve safety, and enhance comfort.",
-    type: "single", options: ["Yes", "No"], a: "Yes"
+    "n": 17,
+    "s": "7. Caring for Dementia Clients in the Home",
+    "t": "Creating a dementia-friendly environment is a major step in supporting persons living with Alzheimer's and related dementias. A thoughtfully arranged space can reduce confusion, improve safety, and enhance comfort.",
+    "type": "single",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "a": "Yes"
   },
   {
-    n: 18, s: "7. Caring for Dementia Clients in the Home",
-    t: "A Dementia Friendly Environment Checklist includes:",
-    type: "multi",
-    options: [
+    "n": 18,
+    "s": "7. Caring for Dementia Clients in the Home",
+    "t": "A Dementia Friendly Environment Checklist includes:",
+    "type": "multi",
+    "options": [
       "Safety features such as grab bars and non-slip flooring.",
       "Clutter-free walkways",
       "Labeling of rooms and items with simple, readable signs",
@@ -553,7 +483,7 @@ const Q = [
       "Incorporation of familiar and meaningful objects for comfort",
       "All of the above"
     ],
-    a: [
+    "a": [
       "Safety features such as grab bars and non-slip flooring.",
       "Clutter-free walkways",
       "Labeling of rooms and items with simple, readable signs",
@@ -561,439 +491,1896 @@ const Q = [
     ]
   },
   {
-    n: 19, s: "7. Caring for Dementia Clients in the Home",
-    t: "People with dementia often respond better to encouragement than to correction.",
-    type: "single", options: ["Yes", "No"], a: "Yes"
+    "n": 19,
+    "s": "7. Caring for Dementia Clients in the Home",
+    "t": "People with dementia often respond better to encouragement than to correction.",
+    "type": "single",
+    "options": [
+      "Yes",
+      "No"
+    ],
+    "a": "Yes"
   }
 ];
-
 const TRAINING_MODULES = {
-  "1. Abuse and Neglect": { full_policy: [
-    { text: "Identifying, Reporting, and Investigating Abuse, Neglect,", role: "title" },
-    { text: "Misappropriation of client Property and Exploitation", role: "title" },
-    { text: "Policy", role: "heading" },
-    { text: "The Agency and employees will identify and report possible victims of alleged/suspected abuse, neglect, or exploitation.", role: "body" },
-    { text: "Purpose", role: "heading" },
-    { text: "To define the processes for identifying and reporting possible victims of abuse, neglect, or exploitation.", role: "bullet", marker: "*" },
-    { text: "To ensure Agency clients are free of sexual, emotional, physical, and mental abuse or neglect.", role: "bullet", marker: "*" },
-    { text: "To avoid misappropriation of a client\u2019s resources.", role: "bullet", marker: "*" },
-    { text: "Procedure", role: "heading" },
-    { text: "Identification and reporting", role: "outline-heading", marker: "A." },
-    { text: "Agency employees are oriented to signs and symptoms indicating possible abuse, neglect, or exploitation.", role: "numbered", marker: "1." },
-    { text: "Any employee (whether employed directly or under arrangement) in the normal course of providing services to clients, who identifies, notices, or recognizes incidences or circumstances of mistreatment, neglect, verbal, mental, sexual and/or physical abuse, including injuries of unknown sources, or misappropriation of patient property, must report these findings immediately to the Agency and other appropriate authorities in accordance with state law.", role: "numbered", marker: "2." },
-    { text: "Criteria to identify neglect or abuse, physical assault and domestic abuse include:", role: "numbered", marker: "3." },
-    { text: "Signs of Abuse", role: "subheading" },
-    { text: "Burns in unusual places.", role: "numbered", marker: "a.", visual_indent: 26 },
-    { text: "Bruises on the body that could be intentional.", role: "numbered", marker: "b.", visual_indent: 26 },
-    { text: "Unexplained injuries, frequent falls or multiple hematomas of various colors.", role: "numbered", marker: "c.", visual_indent: 26 },
-    { text: "Broken eyeglasses.", role: "numbered", marker: "d.", visual_indent: 26 },
-    { text: "Cuts, discoloration of eyes.", role: "numbered", marker: "e.", visual_indent: 26 },
-    { text: "Sudden changes in behavior.", role: "numbered", marker: "f.", visual_indent: 26 },
-    { text: "Signs of dehydration.", role: "numbered", marker: "g.", visual_indent: 26 },
-    { text: "Wounds", role: "numbered", marker: "h.", visual_indent: 26 },
-    { text: "Weight loss", role: "numbered", marker: "i.", visual_indent: 26 },
-    { text: "Any client who reports an abusive incident.", role: "numbered", marker: "j.", visual_indent: 26 },
-    { text: "Criteria to Identify Exploitation", role: "subheading" },
-    { text: "Abuse and/or misuse of patient\u2019s money.", role: "numbered", marker: "a.", visual_indent: 36 },
-    { text: "An inability of caregiver/family to account for patient\u2019s money or property.", role: "numbered", marker: "b.", visual_indent: 36 },
-    { text: "Discrepancies between patient\u2019s resources and living situation.", role: "numbered", marker: "c.", visual_indent: 36 },
-    { text: "Reports of demands for goods in exchange for services.", role: "numbered", marker: "d.", visual_indent: 36 },
-    { text: "Criteria to Identify Rape or Sexual Molestation", role: "subheading" },
-    { text: "Feelings of humiliation, degradation, shame, guilt, embarrassment, self-blame, anger, and revenge.", role: "numbered", marker: "a.", visual_indent: 24 },
-    { text: "Fear of injury, mutilation, and death.", role: "numbered", marker: "b.", visual_indent: 24 },
-    { text: "Complete disruption of client\u2019s normal activities of daily living and lifestyle.", role: "numbered", marker: "c.", visual_indent: 24 },
-    { text: "Presence of abrasions, bruises, swelling, lacerations and/or teeth marks.", role: "numbered", marker: "d.", visual_indent: 24 },
-    { text: "Tearful, trembling, sobbing, hyperventilation and/or withdrawal.", role: "numbered", marker: "e.", visual_indent: 24 },
-    { text: "Long periods of silence.", role: "numbered", marker: "f.", visual_indent: 24 },
-    { text: "Sudden marked irritability, avoidance of relationships and/or marked change in sexual behavior.", role: "numbered", marker: "g.", visual_indent: 24 },
-    { text: "Phobic reactions to being alone, going outside and/or staying inside.", role: "numbered", marker: "h.", visual_indent: 24 },
-    { text: "Employees will immediately report an assessment of client\u2019s condition which might indicate abuse, neglect, or exploitation to the Administrator. The Administrator or designee will assess the client for abuse, neglect and/or exploitation.", role: "numbered", marker: "4." },
-    { text: "All findings and communications will be documented in the client record.", role: "numbered", marker: "5." },
-    { text: "The Agency will report allegations, observations and suspected cases of exploitation, abuse and/or neglect to:", role: "numbered", marker: "6." },
-    { text: "Adult Protective Services, if the client is 18 years or older", role: "numbered", marker: "a.", visual_indent: 60 },
-    { text: "Child Protective Services, if the client is less than 18 years old.", role: "numbered", marker: "b.", visual_indent: 60 },
-    { text: "Division of Licensing and Citification", role: "numbered", marker: "c.", visual_indent: 60 },
-    { text: "A written report via the online form or the designated Department form within 48 hours of the verbal report.", role: "bullet", marker: "*", visual_indent: 84 },
-    { text: "All reports to the Division of Licensing and Certification will include at a minimum:", role: "numbered", marker: "7." },
-    { text: "Agency name, address, and phone number.", role: "numbered", marker: "a.", visual_indent: 24 },
-    { text: "Name of the client.", role: "numbered", marker: "b.", visual_indent: 24 },
-    { text: "Address of the client.", role: "numbered", marker: "c.", visual_indent: 24 },
-    { text: "Information regarding the nature of the abuse, exploitation, or misappropriation of client property.", role: "numbered", marker: "d.", visual_indent: 24 },
-    { text: "Name and title, if any, of the alleged perpetrator.", role: "numbered", marker: "e.", visual_indent: 24 },
-    { text: "The name of the person making the report.", role: "numbered", marker: "f.", visual_indent: 24 },
-    { text: "Contact number of the person making the report.", role: "numbered", marker: "g.", visual_indent: 24 },
-    { text: "Employees are oriented at hire and annually.", role: "numbered", marker: "10." },
-    { text: "Investigation", role: "outline-heading", marker: "B." },
-    { text: "Agency investigations regarding an allegation include, but are not limited to, the following documentation:", role: "numbered", marker: "1." },
-    { text: "Date and time of the alleged events(s).", role: "numbered", marker: "a.", visual_indent: 12 },
-    { text: "The nature of the allegation.", role: "numbered", marker: "b.", visual_indent: 12 },
-    { text: "Date and time all required individuals were notified.", role: "numbered", marker: "c.", visual_indent: 12 },
-    { text: "Name and contact information of the initial reporter.", role: "numbered", marker: "d.", visual_indent: 12 },
-    { text: "Name and contact information of the alleged perpetrator and their title, if any.", role: "numbered", marker: "e.", visual_indent: 12 },
-    { text: "Date and time the alleged perpetrator was removed from duty, if an employee;", role: "numbered", marker: "f.", visual_indent: 12 },
-    { text: "Documented interviews with the client, all individuals with possible knowledge of the alleged incident, and the alleged perpetrator.", role: "numbered", marker: "g.", visual_indent: 12 },
-    { text: "A conclusion statement.", role: "numbered", marker: "h.", visual_indent: 12 },
-    { text: "An action plan.", role: "numbered", marker: "i.", visual_indent: 12 },
-    { text: "The alleged perpetrator, if an employee, may not work with any client until an investigation has been completed.", role: "numbered", marker: "2." },
-    { text: "The investigative report will be submitted to the Department no later than the close of business on the seventh calendar day after the alleged incident.", role: "numbered", marker: "3." },
-    { text: "Any reasonable suspicion of a crime involving the client, as the victim, will be reported to law enforcement within the following time frames:", role: "numbered", marker: "4." },
-    { text: "Any event that caused reasonable suspicion and resulted in serious bodily injury to a client must be reported immediately, but not later than two hours after forming the suspicion.", role: "numbered", marker: "a." },
-    { text: "An event that caused reasonable suspicion and did not result in serious bodily injury to a client must be reported not later than 24 hours after forming the suspicion.", role: "numbered", marker: "b." },
-    { text: "The agency will not interfere with, impede or obstruct an investigation by the Department, including but not limited to influencing or limiting client or staff participation in Department investigative activities.", role: "numbered", marker: "5." }
-  ]},
-  "2. Agency Expectations": { full_policy: [
-    { text: "Agency Expectations", role: "title" },
-    { text: "Agency/Client Relationship", role: "title" },
-    { text: "Client Rights", role: "title" },
-    { text: "Policy", role: "heading" },
-    { text: "It is the goal of the Agency and employees to form a collaborative relationship with clients.", role: "body" },
-    { text: "Purpose", role: "heading" },
-    { text: "To respect the rights of clients.", role: "body" },
-    { text: "Process", role: "heading" },
-    { text: "The Agency will provide each client with a written notice of the agency expectations at the time the client or legal representative signs a contract with the Agency.", role: "numbered", marker: "1." },
-    { text: "A signed copy will be maintained in the client\u2019s record.", role: "numbered", marker: "2." },
-    { text: "The Agency makes the following commitments to our clients:", role: "numbered", marker: "3." },
-    { text: "Inform clients of the names of agency staff and their qualifications, upon request.", role: "numbered", marker: "a." },
-    { text: "Provide services to clients free from abuse, neglect, exploitation, or misappropriation of property.", role: "numbered", marker: "b." },
-    { text: "Involve clients in the development of their service plan.", role: "numbered", marker: "c." },
-    { text: "Arrange for clients to receive the services as identified on their service plan, unless a client refuses services.", role: "numbered", marker: "d." },
-    { text: "Communicate with clients about services and supports in a language the client understands", role: "numbered", marker: "e." },
-    { text: "Inform clients if services cannot be delivered on a given day.", role: "numbered", marker: "f." },
-    { text: "Provide clients with access to their records and produce paper copies of all records pertaining to a client upon the client\u2019s or legal representative\u2019s request. If the request for paper copies is made orally, the agency will document the date the request was received in the client record (the Agency may assess a reasonable, cost-based fee for paper copies consistent with applicable law).", role: "numbered", marker: "g." },
-    { text: "Treat client records and information pertaining to a client\u2019s personal, medical and mental health status as confidential.", role: "numbered", marker: "h." },
-    { text: "Inform clients, verbally and in writing, of how to file a grievance with the agency, provided in language understood by the client.", role: "numbered", marker: "i." },
-    { text: "Inform clients, verbally and in writing, and in a language understood by the client, of how to file a complaint with the Department and that this complaint may be filed instead of or in addition to a grievance.", role: "numbered", marker: "j." },
-    { text: "Inform clients of the outcome of any licensing inspection or investigation conducted by the Department, upon request.", role: "numbered", marker: "k." },
-    { text: "Inform clients of their state protection and advocacy rights, including but not limited to providing contact information for the Division of Licensing and Certification, Adult Protective Services and the Maine Long Term Care Ombudsman Program.", role: "numbered", marker: "l." }
-  ]},
-  "3. Emergencies and Disasters": { full_policy: [
-    { text: "Emergencies and Disasters", role: "title" },
-    { text: "POLICY", role: "heading" },
-    { text: "The Agency maintains communication with the local Office of Emergency Management to ensure the safety and well-being of clients and employees during emergencies or disasters.", role: "body" },
-    { text: "PURPOSE", role: "heading" },
-    { text: "To provide direction and instruction for employees to follow in the event of a life threatening or potentially life-threatening situation that disrupts delivery of home care services.", role: "bullet", marker: "*" },
-    { text: "To identify the process for disaster readiness and emergency management.", role: "bullet", marker: "*" },
-    { text: "PROCEDURE", role: "heading" },
-    { text: "Employees receive information regarding how to respond to an emergency with specific instructions for emergencies or disasters during orientation and as needed.", role: "numbered", marker: "1." },
-    { text: "During the initial assessment, each client is assessed for service needs and risk during an emergency. An individual client emergency plan is documented as part of the assessment, to include:", role: "numbered", marker: "2." },
-    { text: "What to expect if they need to evacuate from their home.", role: "bullet", marker: "*" },
-    { text: "Need to evacuate when the warning is given while help is available, otherwise assistance may not be available.", role: "bullet", marker: "*" },
-    { text: "Preparing an emergency supply kit with essential medications, equipment, and supplies to bring with them to a shelter.", role: "bullet", marker: "*" },
-    { text: "For clients on O2 or need electricity for life sustaining equipment: arranging to obtain extra supply of oxygen canisters, refills and other needed O2 equipment.", role: "bullet", marker: "*" },
-    { text: "For clients with animals, arranging with family or friends to take the animal during an emergency. If it is a special needs animal, checking to see if the shelter accepts animals. Preparing food, water, bowls, cat litter, cages, collars, muzzles, leashes, and medications for animals.", role: "bullet", marker: "*" },
-    { text: "If a client does not want to evacuate, an Agency representative will:", role: "bullet", marker: "*" },
-    { text: "Assess the client\u2019s understanding of the potential impact of their choice and their understanding that they are assuming full responsibility for that choice. This will be clearly documented in the client\u2019s clinical record.", role: "bullet", marker: "*" },
-    { text: "The Agency will notify the fire department, emergency management, police, local shelter, their family, etc", role: "bullet", marker: "*" },
-    { text: "In the event the Agency is in the evacuation zone, the administrator issues the order to evacuate the office.", role: "bullet", marker: "*" },
-    { text: "Staff are responsible for checking in/out with his/her supervisor.", role: "bullet", marker: "*" },
-    { text: "Clients are identified and prioritized based upon their needs so that care/service is ensured for them in the event of a disaster \u2013 those whose health and safety might be at risk.", role: "body" },
-    { text: "PRIORITY 1", role: "heading" },
-    { text: "Clients that cannot be left alone without Agency support services or family members.", role: "body" },
-    { text: "PRIORITY 2", role: "heading" },
-    { text: "Semi-independent clients with family support", role: "body" },
-    { text: "PRIORITY 3", role: "heading" },
-    { text: "Independent clients", role: "body" },
-    { text: "In the event of a weather-related or civil disaster emergency, the", role: "body" },
-    { text: "telephone call tree/employee listing will be activated to notify employee that the agency is operating in emergency/disaster mode. Employees are encouraged to charge cellular phones frequently.", role: "contact" },
-    { text: "Employees are encouraged to be alert to changes in the weather or other crisis which may occur in the geographic area: Potential occurrences include:", role: "lead" },
-    { text: "Hurricanes, tornadoes, high winds", role: "bullet", marker: "*" },
-    { text: "Floods", role: "bullet", marker: "*" },
-    { text: "Chemical spills", role: "bullet", marker: "*" },
-    { text: "Inclement weather", role: "bullet", marker: "*" },
-    { text: "In the case of emergency weather conditions, clients and family members are contacted prior to the emergency to make contingency plans.", role: "body" }
-  ]},
-  "4. Grievance Procedures": { full_policy: [
-    { text: "Grievance Procedure", role: "title" },
-    { text: "Policy", role: "heading" },
-    { text: "To provide for a prompt and equitable resolution of complaints by clients.", role: "body" },
-    { text: "Purpose", role: "heading" },
-    { text: "To provide a mechanism for use by the client to assure response, and, if possible, resolution of a complaint in a timely manner.", role: "body" },
-    { text: "Procedure", role: "heading" },
-    { text: "Each client is given information about what they should expect while receiving services from the Agency.", role: "body" },
-    { text: "Each client receives in writing the Agency Expectations prior to or at the time they sign a contract with the Agency. At this time clients are advised of the grievance procedure. This includes information about registering complaints about home care to the Department of Home Health Licensing and Certification.", role: "numbered", marker: "1." },
-    { text: "Clients are encouraged to make suggestions for improving care and/or register concerns to Agency employees without fear of coercion, discrimination or reprisal for doing so or unreasonable interruption of care.", role: "numbered", marker: "2." },
-    { text: "The Agency will:", role: "bullet", marker: "3." },
-    { text: "Investigate complaints made by a client, the client\u2019s legal representative (if any), or a family member. Document both the complaint and the resolution of the complaint.", role: "numbered", marker: "a.", visual_indent: 24 },
-    { text: "Take action to prevent further potential violations, including retaliation, while the complaint is being investigated.", role: "numbered", marker: "b.", visual_indent: 24 },
-    { text: "The designated individual to respond to and takes action to resolve complaints is the Administrator or designee", role: "bullet", marker: "4." },
-    { text: "Intake information is obtained from the appropriate sources.", role: "bullet", marker: "a.", visual_indent: 24 },
-    { text: "Investigative measures will be implemented based on the nature of the complaint.", role: "bullet", marker: "b.", visual_indent: 24 },
-    { text: "Appropriate authorities are informed as applicable.", role: "bullet", marker: "c.", visual_indent: 24 },
-    { text: "Corrective action is specific and directly related to the complaint.", role: "bullet", marker: "d.", visual_indent: 24 },
-    { text: "Client rights are protected.", role: "bullet", marker: "e.", visual_indent: 24 },
-    { text: "Complaint resolution is achieved in accordance with established time frames.", role: "bullet", marker: "f.", visual_indent: 24 },
-    { text: "Complaints are logged, tracked and trended.", role: "bullet", marker: "g.", visual_indent: 24 },
-    { text: "Complaint management is incorporated into Quality Assessment and Performance Improvement activities.", role: "bullet", marker: "h.", visual_indent: 24 },
-    { text: "All complaints will be address timely. Every effort will be made to talk with the or person making the complaint to assure them the Agency is addressing the concern. A written response will be sent within seven calendar days.", role: "numbered", marker: "5." },
-    { text: "The Agency retains a record of all grievances filed. The complaint, investigation, and written response is filed in the client record and contains the following:", role: "numbered", marker: "6." },
-    { text: "Client\u2019s name", role: "bullet", marker: "a.", visual_indent: 12 },
-    { text: "Date of filing of the grievance", role: "bullet", marker: "b.", visual_indent: 12 },
-    { text: "The nature of the grievance.", role: "bullet", marker: "c.", visual_indent: 12 },
-    { text: "Findings", role: "bullet", marker: "d.", visual_indent: 12 },
-    { text: "Resolution, if any", role: "bullet", marker: "e.", visual_indent: 12 },
-    { text: "Registering complaints about home care to the Department of Home Health Licensing and Certification.", role: "lead", marker: "7." },
-    { text: "There is an online form to file a complaint about a facility, agency, or center that is licensed by the Division of Licensing & Certification (DLC) or subject to the Division's oversight under the Centers for Medicare and Medicaid Services (CMS) certification.", role: "numbered", marker: "a.", visual_indent: 24 },
-    { text: "https://www.maine.gov/dhhs/dlc/safety-reporting/file-a-complains", role: "link" },
-    { text: "Fax 207-287-9307, or", role: "numbered", marker: "b.", visual_indent: 24 },
-    { text: "Division of Licensing and Certification Attn: Complaint Intake 11 State House Station 41 Anthony Avenue Augusta, Maine 04333", role: "numbered", marker: "c.", visual_indent: 24 },
-    { text: "Telephone 207-287-9308 or 1-800-383-2441", role: "numbered", marker: "d.", visual_indent: 24 },
-    { text: "The following information is needed:", role: "lead" },
-    { text: "Name, mailing address, phone number and email address Name and address of the facility, agency, or center;", role: "bullet", marker: "*", visual_indent: 24 },
-    { text: "Details of the concerns including the date and time of the incident;", role: "bullet", marker: "*", visual_indent: 24 },
-    { text: "If anyone else was involved in the incident;", role: "bullet", marker: "*", visual_indent: 24 },
-    { text: "If there were any witnesses;", role: "bullet", marker: "*", visual_indent: 24 },
-    { text: "If the Administrator, Manager, or any staff of the facility, agency, or center was notified;", role: "bullet", marker: "*", visual_indent: 24 },
-    { text: "If the facility, agency, or center has tried to address the situation;", role: "bullet", marker: "*", visual_indent: 24 },
-    { text: "If law enforcement is involved;", role: "bullet", marker: "*", visual_indent: 24 },
-    { text: "If this same thing has happened before to the client or others.", role: "bullet", marker: "*", visual_indent: 24 }
-  ]},
-  "5. Infection Control": { full_policy: [
-    { text: "Infection Control", role: "title" },
-    { text: "Standard Precautions", role: "title" },
-    { text: "Policy", role: "heading" },
-    { text: "The Agency practices infection control measures, when providing service to its clients in order to minimize the risk of infections to employees/ clients/families and the community-at-large in accordance with Occupational Safety and Health Administration (OSHA) regulations.", role: "body" },
-    { text: "Purpose", role: "heading" },
-    { text: "Identify the expectations of employees to reduce the spread of infection in the home environment and office by maintaining standard precautions when providing services for clients.", role: "body" },
-    { text: "Definition", role: "heading" },
-    { text: "Infectious/Communicable Diseases are those that are capable of being transmitted from one person or species to another.", role: "body" },
-    { text: "Examples", role: "heading" },
-    { text: "Examples include, but not limited to:", role: "lead" },
-    { text: "Examples: Malaria Strep Throat, Influenza (the flu) HIV/Aids Measles Mumps Rubella; SARS Tuberculosis Common Cold Chicken Pox Conjunctivitis Hepatitis (A, B, C) Lice; Ringworm Scabies Scarlet Fever Yeast Infections Sexually Transmitted", role: "body" },
-    { text: "Guidelines", role: "heading" },
-    { text: "All clients will be considered potentially infections.", role: "numbered", marker: "1." },
-    { text: "Employees have a responsibility to protect the health and well-being of clients/families.", role: "numbered", marker: "2." },
-    { text: "Employees have a responsibility to protect themselves and each other.", role: "numbered", marker: "3." },
-    { text: "Procedures", role: "heading" },
-    { text: "Standard Precautions are the minimum infection prevention practices that apply regardless of suspected or confirmed infection status of the client.", role: "numbered", marker: "1." },
-    { text: "Examples of standard precautions include:", role: "lead" },
-    { text: "Hand hygiene.", role: "numbered", marker: "a.", visual_indent: 12 },
-    { text: "Use of personal protective equipment (e.g., gloves, masks, eyewear).", role: "numbered", marker: "b.", visual_indent: 12 },
-    { text: "Respiratory hygiene/cough etiquette.", role: "numbered", marker: "c.", visual_indent: 12 },
-    { text: "Clean and disinfect environmental surfaces.", role: "numbered", marker: "d.", visual_indent: 12 },
-    { text: "WASH HANDS \u2013 Client and Employee When visibly soiled; before and after eating; after using the bathroom; before and after providing hands-on care; before, during, and after meal preparation.", role: "subheading" },
-    { text: "DISINFECT AND SANITIZE AS NEEDED", role: "heading" },
-    { text: "Wipe down hard surfaces with designated cleaning products when visibly soiled. Hard surfaces include but are not limited to tables, countertops, sinks, toilets, doorknobs, phones.", role: "body" },
-    { text: "COVER YOUR CAUGH AND SNEEZE \u2013 Client and Employee", role: "subheading" },
-    { text: "Cough and sneeze into a tissue or into the elbow.", role: "numbered", marker: "a.", visual_indent: 36 },
-    { text: "Educate the client and family members on how to cover their cough and sneeze.", role: "numbered", marker: "b.", visual_indent: 36 },
-    { text: "Employees shall report health symptoms and/or exposure to any communicable or infectious disease to the Administrator or designee.", role: "numbered", marker: "2." },
-    { text: "Signs and symptoms may include:", role: "subheading" },
-    { text: "Elevated temperature \u2013 100.5 or higher", role: "numbered", marker: "a.", visual_indent: 24 },
-    { text: "Persistent cough", role: "numbered", marker: "b.", visual_indent: 24 },
-    { text: "Shortness of breath", role: "numbered", marker: "c.", visual_indent: 24 },
-    { text: "Congestion", role: "numbered", marker: "d.", visual_indent: 24 },
-    { text: "Nausea, vomiting, diarrhea.", role: "numbered", marker: "e.", visual_indent: 24 },
-    { text: "Persistent sore throat", role: "numbered", marker: "f.", visual_indent: 24 },
-    { text: "Infected employees shall consult with their Health Care Provider regarding when they should be removed from client contact and when client contact can once again be resumed.", role: "numbered", marker: "3." },
-    { text: "REFERENCES", role: "heading" },
-    { text: "Occupational Safety and Health Administration (OSHA)", role: "numbered", marker: "1." },
-    { text: "Center for Disease Control and Prevention (CDC)", role: "numbered", marker: "2." },
-    { text: "State Health Department", role: "numbered", marker: "3." }
-  ]},
-  "6. Confidentiality": { full_policy: [
-    { text: "Confidentiality", role: "title" },
-    { text: "Policy", role: "heading" },
-    { text: "All information related to the provision of services to clients is confidential. The Administrator is responsible for ensuring that employees are trained and understand the confidentiality and privacy of clients. At all times the Agency and employees will comply with the current regulations for the Health Information Portability and Accountability Act (HIPAA) for protected health information (PHI).", role: "body" },
-    { text: "ORIENTATION", role: "outline-heading", marker: "A." },
-    { text: "All staff will be educated during orientation regarding security measures with home client records.", role: "bullet", marker: "1.", visual_indent: 24 },
-    { text: "CONFIDENTIALITY", role: "outline-heading", marker: "B." },
-    { text: "Employees will treat any information obtained from clients, caregivers, physicians and other sources in a confidential manner.", role: "numbered", marker: "1." },
-    { text: "All requests for specific client information are to be directed to the Administrator or designee.", role: "bullet", marker: "*" },
-    { text: "Discussion of client information in a public place is prohibited.", role: "bullet", marker: "*" },
-    { text: "All written client information is stored in the client\u2019s record. Charts are not removed from the office unless specific reason has been identified and approved.", role: "bullet", marker: "*" },
-    { text: "Records will not be left in unattended areas in the office, e.g., the reception area. After normal business hours all client records will be kept stored in locked cabinets or a locked room.", role: "bullet", marker: "*" },
-    { text: "HEALTH INFORMATION PORTABILITY AND ACCOUNTABILITY ACT (HIPAA)", role: "heading", marker: "C." },
-    { text: "The Agency will comply with applicable HIPAA rules and regulations.", role: "numbered", marker: "1." },
-    { text: "Only the Administrator or designee is authorized to release protected health information.", role: "bullet", marker: "*" }
-  ]},
-  "7. Caring for Dementia Clients in the Home": { full_policy: [
-    { text: "CARING FOR DEMENTIA CLIENTS IN THE HOME", role: "title" },
-    { text: "Creating a dementia-friendly environment is a major step in supporting persons living with Alzheimer\u2019s and related dementias. A thoughtfully arranged space can reduce confusion, improve safety, and enhance comfort.", role: "body" },
-    { text: "For caregivers, making adjustments at home or in care settings transforms daily challenges into more manageable moments, fostering independence and dignity.", role: "body" },
-    { text: "A dementia-friendly environment takes into account the changing needs of the individual and adapts surroundings to match their abilities. From lighting and furniture to signage and sensory cues, each element plays a role in how a person experiences their space.", role: "body" },
-    { text: "Starting with a dementia-friendly environment checklist can help caregivers systematically address common obstacles and build a supportive setting.", role: "body" },
-    { text: "Why a Dementia-Friendly Environment Matters", role: "heading" },
-    { text: "Dementia affects memory, perception, reasoning, and motor skills, making familiar environments feel unfamiliar and overwhelming. Without adaptations, ordinary spaces can become sources of frustration, fear, or risk. For caregivers, a disorganized or unsafe environment increases the burden of supervision and care.", role: "body" },
-    { text: "Designing spaces that respond to cognitive and physical changes reduces agitation, decreases the risk of accidents, and supports autonomy. For example, clear pathways and good lighting help with orientation and mobility. Familiar objects and visual cues ease anxiety and encourage engagement.", role: "body" },
-    { text: "Knowing the impact of the environment on behavior is a cornerstone of person-centered care. Caregivers equipped with knowledge and practical strategies can create a setting that not only meets basic needs but also nurtures emotional well-being.", role: "body" },
-    { text: "Starting with a Dementia Friendly Environment Checklist", role: "heading" },
-    { text: "Using a checklist is a straightforward way to assess and improve living spaces for persons with dementia. It helps caregivers identify potential hazards and areas for enhancement while prioritizing changes based on immediate needs.", role: "body" },
-    { text: "Key areas on a checklist might include:", role: "lead" },
-    { text: "Safety features such as grab bars and non-slip flooring", role: "bullet", marker: "*" },
-    { text: "Clear, clutter-free walkways", role: "bullet", marker: "*" },
-    { text: "Lighting adjustments to reduce shadows and glare", role: "bullet", marker: "*" },
-    { text: "Labeling of rooms and items with simple, readable signs", role: "bullet", marker: "*" },
-    { text: "Use of contrasting colors to distinguish doors, furniture, and floors", role: "bullet", marker: "*" },
-    { text: "Creation of quiet zones to reduce sensory overload", role: "bullet", marker: "*" },
-    { text: "Incorporation of familiar and meaningful objects for comfort", role: "bullet", marker: "*" },
-    { text: "Organized storage for personal items to support independence", role: "bullet", marker: "*" },
-    { text: "This list is not exhaustive but provides a solid foundation for caregivers starting to adapt environments for those with dementia. Reviewing and updating the checklist periodically ensures the environment keeps pace with changes in the person\u2019s condition.", role: "body" },
-    { text: "Lighting and Color: Guiding and Calming", role: "heading" },
-    { text: "Lighting affects mood, safety, and spatial awareness. Persons with dementia often experience difficulty judging depth and distinguishing colors, so strategic lighting can alleviate confusion. Natural light during the day supports circadian rhythms and enhances alertness.", role: "body" },
-    { text: "In the evening, soft lighting helps signal winding down and prevents overstimulation. Avoid harsh fluorescent bulbs and flickering lights that may trigger anxiety or headaches.", role: "body" },
-    { text: "Colors can also be powerful tools. High-contrast color schemes help with distinguishing edges and identifying objects. For example, painting door frames a different color than walls makes entrances easier to find. Dark carpets or rugs against light floors prevent missteps caused by visual misinterpretation.", role: "body" },
-    { text: "Furniture Arrangement and Safety", role: "heading" },
-    { text: "Furniture should be arranged to create open, navigable spaces free of tripping hazards. Avoid placing items in pathways and keep seating areas cozy and inviting to encourage rest and socialization.", role: "body" },
-    { text: "Chairs with armrests aid standing and sitting. Stable furniture reduces the risks of falls caused by shifting or unstable surfaces. Sharp corners can be cushioned or replaced to prevent injury.", role: "body" },
-    { text: "Keeping furniture consistent in style and placement helps maintain orientation. Frequent rearranging may increase confusion and stress for the person living with dementia.", role: "body" },
-    { text: "Signage and Visual Cues", role: "heading" },
-    { text: "Clear signage supports independence by helping individuals find their way and locate personal belongings. Use simple words and, where possible, pictures that reflect the room\u2019s purpose (e.g., a bathtub image on the bathroom door).", role: "body" },
-    { text: "Signs should be placed at eye level and use large, legible fonts. Labels on drawers and cupboards guide the person in performing daily tasks like dressing or meal preparation.", role: "body" },
-    { text: "Visual cues, such as placing favorite photos near important areas, can provide comfort and reinforce memory.", role: "body" },
-    { text: "Reducing Noise and Sensory Overload", role: "heading" },
-    { text: "Persons living with dementia are often sensitive to loud or sudden noises, which can trigger agitation or confusion. Creating a calm environment includes minimizing background noise from televisions, radios, or household appliances.", role: "body" },
-    { text: "Soft furnishings like curtains, carpets, and cushions absorb sound and reduce echoes. Introducing pleasant background music or nature sounds at a low volume can have a soothing effect.", role: "body" },
-    { text: "Using essential oils or subtle aromatherapy may help some individuals relax, though caregivers should monitor reactions closely.", role: "body" },
-    { text: "How to Use Sensory Engagement Tactfully", role: "heading" },
-    { text: "Engaging the senses can ground a person in the present moment and reduce agitation. Sensory gardens, tactile objects, and music are tools caregivers can use to enrich environments.", role: "body" },
-    { text: "Textures like soft blankets or smooth stones can offer comfort. Aromas of favorite foods or flowers may evoke positive memories. Gentle sounds of water features or wind chimes introduce calming background stimuli. These elements encourage curiosity and emotional connection while countering isolation.", role: "body" },
-    { text: "Creating Meaningful Spaces for Engagement", role: "heading" },
-    { text: "Incorporating spaces for activity and relaxation promotes well-being. A small garden or indoor plants invite sensory stimulation. Areas designated for hobbies such as puzzles, crafts, or listening to music encourage purposeful engagement.", role: "body" },
-    { text: "Familiar objects and family photos can be displayed to spark recognition and conversation. Comfortable seating arranged to facilitate interaction supports social connection.", role: "body" },
-    { text: "Caregiver Tips for Dementia", role: "heading" },
-    { text: "Be Patient and Practice Observation", role: "subheading" },
-    { text: "Alongside environmental changes, caregiver behavior deeply influences the success of a dementia-friendly setting. Observing how the person interacts with their surroundings helps identify challenges and preferences.", role: "body" },
-    { text: "Patience and flexibility are key. What works one day may need adjusting the next. Caregivers should encourage independence while providing gentle guidance.", role: "body" },
-    { text: "Involving the person with dementia in decisions about their environment, when possible, supports dignity and personal choice.", role: "body" },
-    { text: "Simplify Tasks and Break Them Down", role: "subheading" },
-    { text: "Complex tasks can become overwhelming or intimidating for someone with dementia, leading to anxiety or refusal to participate.", role: "body" },
-    { text: "Breaking activities into smaller, clear steps makes tasks more approachable. Instead of asking someone to \u201cget dressed,\u201d guide them gently through each part: \u201cLet\u2019s put on your shirt first,\u201d then \u201cNow, your pants.\u201d Use calm, concise instructions paired with demonstrations when needed.", role: "body" },
-    { text: "This approach promotes engagement and helps maintain a sense of accomplishment. Providing choices within those steps, such as selecting between two outfits, can also empower and reduce frustration.", role: "body" },
-    { text: "Use Positive Reinforcement", role: "subheading" },
-    { text: "People with dementia often respond better to encouragement than to correction. Praising efforts, no matter how small helps build confidence and encourages the repetition of positive behaviors.", role: "body" },
-    { text: "For example, saying \u201cYou did a great job brushing your hair today\u201d reinforces the behavior in a supportive way. Positive reinforcement fosters trust and cooperation, whereas correcting or criticizing mistakes may increase anxiety or cause withdrawal. Celebrating successes also improves mood and strengthens the emotional connection between caregiver and person.", role: "body" },
-    { text: "Maintain a Calm and Reassuring Presence", role: "subheading" },
-    { text: "Your tone, facial expressions, and body language communicate as much as your words. Approaching caregiving with patience and calmness creates a safe, predictable environment. If agitation or confusion arises, a soothing voice and gentle touch can help calm the person.", role: "body" },
-    { text: "Avoid rushing or showing frustration, as this can escalate anxiety. Sometimes simply sitting quietly together, holding hands, or maintaining eye contact can provide reassurance and ease distress. Being present without judgment allows the person to feel valued and understood.", role: "body" },
-    { text: "Joining support groups or educational programs helps caregivers stay informed and connected. The National Council of Certified Dementia Practitioners (NCCDP) offers a range of dementia care resources and certification options to support caregiving excellence.", role: "body" },
-    { text: "Supporting Emergency Response and Safety", role: "heading" },
-    { text: "Creating a dementia-friendly environment includes preparation for emergencies. This may mean installing door alarms, using GPS trackers, or marking emergency contacts clearly.", role: "body" },
-    { text: "First responders benefit from specialized dementia training to respond effectively and compassionately to incidents involving persons with dementia. Our Certified First Responder Dementia Trainer\u00ae (CFRDT\u00ae) program prepares trainers to equip emergency personnel with these skills.", role: "body" },
-    { text: "Responders who complete the training and subsequent seminar may earn the Certified First Responder-Dementia Trained\u00ae (CFR-DT\u00ae) certification, recognizing their expertise in managing dementia-related emergencies safely.", role: "body" },
-    { text: "Organizing for Independence and Ease", role: "heading" },
-    { text: "Clutter can overwhelm and confuse persons living with dementia. Organizing spaces with simplicity and order reduces stress and supports daily functioning. Storage areas should be clearly labeled and items stored in consistent places to aid memory.", role: "body" },
-    { text: "In the kitchen, for example, keeping frequently used utensils within easy reach and marking cupboard contents with pictures or words can encourage safe meal preparation. Bedrooms organized with clothing sorted by type and season minimize frustration during dressing.", role: "body" },
-    { text: "Limiting options reduces decision fatigue. A carefully curated wardrobe or simplified kitchen tools help maintain independence while preventing overwhelm.", role: "body" },
-    { text: "Managing Transitions and Wandering Risks", role: "heading" },
-    { text: "Transitions between rooms or activities may trigger confusion or anxiety. Smooth pathways and consistent cues help ease these moments. Visual guides such as colored tape on the floor can direct movement or mark boundaries, reducing aimless wandering.", role: "body" },
-    { text: "To reduce the risk of accidents, doors and windows may be equipped with alarms or locks that are subtle but effective. Caregivers should balance safety with freedom, allowing supervised movement and access to outdoor spaces like secured gardens when possible.", role: "body" },
-    { text: "Making Outdoor Spaces Calm and Comfortable", role: "heading" },
-    { text: "Spending time outside can do a lot of good for someone living with dementia. It gives them a chance to relax, get some fresh air, and enjoy nature, which can lift their mood. To make outdoor areas feel safe and welcoming, it helps to have cozy places to sit, both in the sun and in the shade, so they can choose what feels best.", role: "body" },
-    { text: "A raised garden bed is a great addition. It\u2019s easier to reach and can give them something fun to do, like planting flowers or vegetables. Watching things grow can bring a lot of joy and a sense of purpose.", role: "body" },
-    { text: "Using plants that change with the seasons can also be helpful as it gives a gentle reminder of the time of year. Flowers that attract birds and butterflies add movement and color that can be really soothing. Just make sure there aren\u2019t any plants that might be harmful or have sharp leaves.", role: "body" },
-    { text: "Keep gardening tools like small rakes or watering cans in an obvious spot so they can easily find and use them, but also make sure everything stays safe and organized. It\u2019s good to check that paths around the yard are smooth and free of anything slippery or uneven to prevent trips and falls.", role: "body" },
-    { text: "Trim back any low branches that might get in the way, and try to hide things like garbage bins or compost piles to keep the space neat and calm. If you have a porch or balcony, make sure it feels secure with solid railings and a safe floor.", role: "body" },
-    { text: "Using plants or trellises to hide fences can help make the space feel more open and less like a barrier, which can be comforting.", role: "body" },
-    { text: "Outdoor areas designed for dementia safety provide sensory stimulation and a place for physical activity without the hazards of open, unsecured spaces.", role: "body" },
-    { text: "Personalizing the Environment", role: "heading" },
-    { text: "Every person\u2019s history and preferences are unique. Tailoring the environment with familiar objects, photos, and mementos creates a sense of identity and belonging.", role: "body" },
-    { text: "Caregivers can assemble memory boxes filled with meaningful items or decorate rooms with themes related to the person\u2019s interests or past profession. This personalization fosters conversation, joy, and reassurance.", role: "body" },
-    { text: "Engaging the person in selecting or arranging belongings respects autonomy and strengthens bonds.", role: "body" },
-    { text: "Technology and Assistive Devices", role: "heading" },
-    { text: "Modern technology complements environmental adaptations. Devices such as GPS trackers, medication reminders, and voice-activated assistants enhance safety and independence.", role: "body" },
-    { text: "Motion sensors can alert caregivers to unusual activity. Smart lighting systems simulate natural daylight to support sleep-wake cycles.", role: "body" },
-    { text: "When introducing technology, caregivers should ensure ease of use and avoid overwhelming the person with dementia. Gradual integration and familiarization improve acceptance.", role: "body" },
-    { text: "The Role of Education and Certification", role: "heading" },
-    { text: "Building a dementia-friendly environment takes time, attention, and heart. Each thoughtful change contributes to comfort, safety, and dignity for persons living with dementia.", role: "body" },
-    { text: "Caregivers who use practical checklists, personalize spaces and engage with ongoing training create settings that promote quality of life.", role: "body" }
-  ]}
+  "1. Abuse and Neglect": {
+    "full_policy": [
+      {
+        "text": "Identifying, Reporting, and Investigating Abuse, Neglect,",
+        "role": "title"
+      },
+      {
+        "text": "Misappropriation of client Property and Exploitation",
+        "role": "title"
+      },
+      {
+        "text": "Policy",
+        "role": "heading"
+      },
+      {
+        "text": "The Agency and employees will identify and report possible victims of alleged/suspected abuse, neglect, or exploitation.",
+        "role": "body"
+      },
+      {
+        "text": "Purpose",
+        "role": "heading"
+      },
+      {
+        "text": "To define the processes for identifying and reporting possible victims of abuse, neglect, or exploitation.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "To ensure Agency clients are free of sexual, emotional, physical, and mental abuse or neglect.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "To avoid misappropriation of a client\u2019s resources.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Procedure",
+        "role": "heading"
+      },
+      {
+        "text": "Identification and reporting",
+        "role": "outline-heading",
+        "marker": "A.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Agency employees are oriented to signs and symptoms indicating possible abuse, neglect, or exploitation.",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Any employee (whether employed directly or under arrangement) in the normal course of providing services to clients, who identifies, notices, or recognizes incidences or circumstances of mistreatment, neglect, verbal, mental, sexual and/or physical abuse, including injuries of unknown sources, or misappropriation of patient property, must report these findings immediately to the Agency and other appropriate authorities in accordance with state law.",
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Criteria to identify neglect or abuse, physical assault and domestic abuse include:",
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Signs of Abuse",
+        "role": "subheading"
+      },
+      {
+        "text": "Burns in unusual places.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Bruises on the body that could be intentional.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Unexplained injuries, frequent falls or multiple hematomas of various colors.",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Broken eyeglasses.",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Cuts, discoloration of eyes.",
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Sudden changes in behavior.",
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Signs of dehydration.",
+        "role": "numbered",
+        "marker": "g.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Wounds",
+        "role": "numbered",
+        "marker": "h.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Weight loss",
+        "role": "numbered",
+        "marker": "i.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Any client who reports an abusive incident.",
+        "role": "numbered",
+        "marker": "j.",
+        "level": 0,
+        "visual_indent": 26
+      },
+      {
+        "text": "Criteria to Identify Exploitation",
+        "role": "subheading"
+      },
+      {
+        "text": "Abuse and/or misuse of patient\u2019s money.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 36
+      },
+      {
+        "text": "An inability of caregiver/family to account for patient\u2019s money or property.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 36
+      },
+      {
+        "text": "Discrepancies between patient\u2019s resources and living situation.",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0,
+        "visual_indent": 36
+      },
+      {
+        "text": "Reports of demands for goods in exchange for services.",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0,
+        "visual_indent": 36
+      },
+      {
+        "text": "Criteria to Identify Rape or Sexual Molestation",
+        "role": "subheading"
+      },
+      {
+        "text": "Feelings of humiliation, degradation, shame, guilt, embarrassment, self-blame, anger, and revenge.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Fear of injury, mutilation, and death.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Complete disruption of client\u2019s normal activities of daily living and lifestyle.",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Presence of abrasions, bruises, swelling, lacerations and/or teeth marks.",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Tearful, trembling, sobbing, hyperventilation and/or withdrawal.",
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Long periods of silence.",
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Sudden marked irritability, avoidance of relationships and/or marked change in sexual behavior.",
+        "role": "numbered",
+        "marker": "g.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Phobic reactions to being alone, going outside and/or staying inside.",
+        "role": "numbered",
+        "marker": "h.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Employees will immediately report an assessment of client\u2019s condition which might indicate abuse, neglect, or exploitation to the Administrator. The Administrator or designee will assess the client for abuse, neglect and/or exploitation.",
+        "role": "numbered",
+        "marker": "4.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "All findings and communications will be documented in the client record.",
+        "role": "numbered",
+        "marker": "5.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "The Agency will report allegations, observations and suspected cases of exploitation, abuse and/or neglect to:",
+        "role": "numbered",
+        "marker": "6.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Adult Protective Services, if the client is 18 years or older",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 60
+      },
+      {
+        "text": "Child Protective Services, if the client is less than 18 years old.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 60
+      },
+      {
+        "text": "Division of Licensing and Citification",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0,
+        "visual_indent": 60
+      },
+      {
+        "text": "A written report via the online form or the designated Department form within 48 hours of the verbal report.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 1,
+        "visual_indent": 84
+      },
+      {
+        "text": "All reports to the Division of Licensing and Certification will include at a minimum:",
+        "role": "numbered",
+        "marker": "7.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Agency name, address, and phone number.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Name of the client.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Address of the client.",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Information regarding the nature of the abuse, exploitation, or misappropriation of client property.",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Name and title, if any, of the alleged perpetrator.",
+        "role": "numbered",
+        "marker": "e.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "The name of the person making the report.",
+        "role": "numbered",
+        "marker": "f.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Contact number of the person making the report.",
+        "role": "numbered",
+        "marker": "g.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Employees are oriented at hire and annually.",
+        "role": "numbered",
+        "marker": "10.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Investigation",
+        "role": "outline-heading",
+        "marker": "B.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Agency investigations regarding an allegation include, but are not limited to, the following documentation:",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Date and time of the alleged events(s).",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "The nature of the allegation.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Date and time all required individuals were notified.",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Name and contact information of the initial reporter.",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Name and contact information of the alleged perpetrator and their title, if any.",
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Date and time the alleged perpetrator was removed from duty, if an employee;",
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Documented interviews with the client, all individuals with possible knowledge of the alleged incident, and the alleged perpetrator.",
+        "role": "numbered",
+        "marker": "g.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "A conclusion statement.",
+        "role": "numbered",
+        "marker": "h.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "An action plan.",
+        "role": "numbered",
+        "marker": "i.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "The alleged perpetrator, if an employee, may not work with any client until an investigation has been completed.",
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "The investigative report will be submitted to the Department no later than the close of business on the seventh calendar day after the alleged incident.",
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Any reasonable suspicion of a crime involving the client, as the victim, will be reported to law enforcement within the following time frames:",
+        "role": "numbered",
+        "marker": "4.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Any event that caused reasonable suspicion and resulted in serious bodily injury to a client must be reported immediately, but not later than two hours after forming the suspicion.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "An event that caused reasonable suspicion and did not result in serious bodily injury to a client must be reported not later than 24 hours after forming the suspicion.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "The agency will not interfere with, impede or obstruct an investigation by the Department, including but not limited to influencing or limiting client or staff participation in Department investigative activities.",
+        "role": "numbered",
+        "marker": "5.",
+        "level": 0,
+        "visual_indent": 0
+      }
+    ]
+  },
+  "2. Agency Expectations": {
+    "full_policy": [
+      {
+        "text": "Agency Expectations",
+        "role": "title"
+      },
+      {
+        "text": "Agency/Client Relationship",
+        "role": "title"
+      },
+      {
+        "text": "Client Rights",
+        "role": "title"
+      },
+      {
+        "text": "Policy",
+        "role": "heading"
+      },
+      {
+        "text": "It is the goal of the Agency and employees to form a collaborative relationship with clients.",
+        "role": "body"
+      },
+      {
+        "text": "Purpose",
+        "role": "heading"
+      },
+      {
+        "text": "To respect the rights of clients.",
+        "role": "body"
+      },
+      {
+        "text": "Process",
+        "role": "heading"
+      },
+      {
+        "text": "The Agency will provide each client with a written notice of the agency expectations at the time the client or legal representative signs a contract with the Agency.",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "A signed copy will be maintained in the client\u2019s record.",
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "The Agency makes the following commitments to our clients:",
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Inform clients of the names of agency staff and their qualifications, upon request.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Provide services to clients free from abuse, neglect, exploitation, or misappropriation of property.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Involve clients in the development of their service plan.",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Arrange for clients to receive the services as identified on their service plan, unless a client refuses services.",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Communicate with clients about services and supports in a language the client understands",
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Inform clients if services cannot be delivered on a given day.",
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Provide clients with access to their records and produce paper copies of all records pertaining to a client upon the client\u2019s or legal representative\u2019s request. If the request for paper copies is made orally, the agency will document the date the request was received in the client record (the Agency may assess a reasonable, cost-based fee for paper copies consistent with applicable law).",
+        "role": "numbered",
+        "marker": "g.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Treat client records and information pertaining to a client\u2019s personal, medical and mental health status as confidential.",
+        "role": "numbered",
+        "marker": "h.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Inform clients, verbally and in writing, of how to file a grievance with the agency, provided in language understood by the client.",
+        "role": "numbered",
+        "marker": "i.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Inform clients, verbally and in writing, and in a language understood by the client, of how to file a complaint with the Department and that this complaint may be filed instead of or in addition to a grievance.",
+        "role": "numbered",
+        "marker": "j.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Inform clients of the outcome of any licensing inspection or investigation conducted by the Department, upon request.",
+        "role": "numbered",
+        "marker": "k.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Inform clients of their state protection and advocacy rights, including but not limited to providing contact information for the Division of Licensing and Certification, Adult Protective Services and the Maine Long Term Care Ombudsman Program.",
+        "role": "numbered",
+        "marker": "l.",
+        "level": 0,
+        "visual_indent": 0
+      }
+    ]
+  },
+  "3. Emergencies and Disasters": {
+    "full_policy": [
+      {
+        "text": "Emergencies and Disasters",
+        "role": "title"
+      },
+      {
+        "text": "POLICY",
+        "role": "heading"
+      },
+      {
+        "text": "The Agency maintains communication with the local Office of Emergency Management to ensure the safety and well-being of clients and employees during emergencies or disasters.",
+        "role": "body"
+      },
+      {
+        "text": "PURPOSE",
+        "role": "heading"
+      },
+      {
+        "text": "To provide direction and instruction for employees to follow in the event of a life threatening or potentially life-threatening situation that disrupts delivery of home care services.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "To identify the process for disaster readiness and emergency management.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "PROCEDURE",
+        "role": "heading"
+      },
+      {
+        "text": "Employees receive information regarding how to respond to an emergency with specific instructions for emergencies or disasters during orientation and as needed.",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "During the initial assessment, each client is assessed for service needs and risk during an emergency. An individual client emergency plan is documented as part of the assessment, to include:",
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "What to expect if they need to evacuate from their home.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Need to evacuate when the warning is given while help is available, otherwise assistance may not be available.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Preparing an emergency supply kit with essential medications, equipment, and supplies to bring with them to a shelter.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "For clients on O2 or need electricity for life sustaining equipment: arranging to obtain extra supply of oxygen canisters, refills and other needed O2 equipment.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "For clients with animals, arranging with family or friends to take the animal during an emergency. If it is a special needs animal, checking to see if the shelter accepts animals. Preparing food, water, bowls, cat litter, cages, collars, muzzles, leashes, and medications for animals.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "If a client does not want to evacuate, an Agency representative will:",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Assess the client\u2019s understanding of the potential impact of their choice and their understanding that they are assuming full responsibility for that choice. This will be clearly documented in the client\u2019s clinical record.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "The Agency will notify the fire department, emergency management, police, local shelter, their family, etc",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "In the event the Agency is in the evacuation zone, the administrator issues the order to evacuate the office.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Staff are responsible for checking in/out with his/her supervisor.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Clients are identified and prioritized based upon their needs so that care/service is ensured for them in the event of a disaster \u2013 those whose health and safety might be at risk.",
+        "role": "body"
+      },
+      {
+        "text": "PRIORITY 1",
+        "role": "heading"
+      },
+      {
+        "text": "Clients that cannot be left alone without Agency support services or family members.",
+        "role": "body"
+      },
+      {
+        "text": "PRIORITY 2",
+        "role": "heading"
+      },
+      {
+        "text": "Semi-independent clients with family support",
+        "role": "body"
+      },
+      {
+        "text": "PRIORITY 3",
+        "role": "heading"
+      },
+      {
+        "text": "Independent clients",
+        "role": "body"
+      },
+      {
+        "text": "In the event of a weather-related or civil disaster emergency, the",
+        "role": "body"
+      },
+      {
+        "text": "telephone call tree/employee listing will be activated to notify employee that the agency is operating in emergency/disaster mode. Employees are encouraged to charge cellular phones frequently.",
+        "role": "contact"
+      },
+      {
+        "text": "Employees are encouraged to be alert to changes in the weather or other crisis which may occur in the geographic area: Potential occurrences include:",
+        "role": "lead"
+      },
+      {
+        "text": "Hurricanes, tornadoes, high winds",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Floods",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Chemical spills",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Inclement weather",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "In the case of emergency weather conditions, clients and family members are contacted prior to the emergency to make contingency plans.",
+        "role": "body"
+      }
+    ]
+  },
+  "4. Grievance Procedures": {
+    "full_policy": [
+      {
+        "text": "Grievance Procedure",
+        "role": "title"
+      },
+      {
+        "text": "Policy",
+        "role": "heading"
+      },
+      {
+        "text": "To provide for a prompt and equitable resolution of complaints by clients.",
+        "role": "body"
+      },
+      {
+        "text": "Purpose",
+        "role": "heading"
+      },
+      {
+        "text": "To provide a mechanism for use by the client to assure response, and, if possible, resolution of a complaint in a timely manner.",
+        "role": "body"
+      },
+      {
+        "text": "Procedure",
+        "role": "heading"
+      },
+      {
+        "text": "Each client is given information about what they should expect while receiving services from the Agency.",
+        "role": "body"
+      },
+      {
+        "text": "Each client receives in writing the Agency Expectations prior to or at the time they sign a contract with the Agency. At this time clients are advised of the grievance procedure. This includes information about registering complaints about home care to the Department of Home Health Licensing and Certification.",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Clients are encouraged to make suggestions for improving care and/or register concerns to Agency employees without fear of coercion, discrimination or reprisal for doing so or unreasonable interruption of care.",
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "The Agency will:",
+        "role": "bullet",
+        "marker": "3.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Investigate complaints made by a client, the client\u2019s legal representative (if any), or a family member. Document both the complaint and the resolution of the complaint.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Take action to prevent further potential violations, including retaliation, while the complaint is being investigated.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "The designated individual to respond to and takes action to resolve complaints is the Administrator or designee",
+        "role": "bullet",
+        "marker": "4.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Intake information is obtained from the appropriate sources.",
+        "role": "bullet",
+        "marker": "a.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Investigative measures will be implemented based on the nature of the complaint.",
+        "role": "bullet",
+        "marker": "b.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Appropriate authorities are informed as applicable.",
+        "role": "bullet",
+        "marker": "c.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Corrective action is specific and directly related to the complaint.",
+        "role": "bullet",
+        "marker": "d.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Client rights are protected.",
+        "role": "bullet",
+        "marker": "e.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Complaint resolution is achieved in accordance with established time frames.",
+        "role": "bullet",
+        "marker": "f.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Complaints are logged, tracked and trended.",
+        "role": "bullet",
+        "marker": "g.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Complaint management is incorporated into Quality Assessment and Performance Improvement activities.",
+        "role": "bullet",
+        "marker": "h.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "All complaints will be address timely. Every effort will be made to talk with the or person making the complaint to assure them the Agency is addressing the concern. A written response will be sent within seven calendar days.",
+        "role": "numbered",
+        "marker": "5.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "The Agency retains a record of all grievances filed. The complaint, investigation, and written response is filed in the client record and contains the following:",
+        "role": "numbered",
+        "marker": "6.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Client\u2019s name",
+        "role": "bullet",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Date of filing of the grievance",
+        "role": "bullet",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "The nature of the grievance.",
+        "role": "bullet",
+        "marker": "c.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Findings",
+        "role": "bullet",
+        "marker": "d.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Resolution, if any",
+        "role": "bullet",
+        "marker": "e.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Registering complaints about home care to the Department of Home Health Licensing and Certification.",
+        "role": "lead",
+        "marker": "7.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "There is an online form to file a complaint about a facility, agency, or center that is licensed by the Division of Licensing & Certification (DLC) or subject to the Division's oversight under the Centers for Medicare and Medicaid Services (CMS) certification.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "https://www.maine.gov/dhhs/dlc/safety-reporting/file-a-complains",
+        "role": "link"
+      },
+      {
+        "text": "Fax 207-287-9307, or",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Division of Licensing and Certification Attn: Complaint Intake 11 State House Station 41 Anthony Avenue Augusta, Maine 04333",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "Telephone 207-287-9308 or 1-800-383-2441",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "The following information is needed:",
+        "role": "lead"
+      },
+      {
+        "text": "Name, mailing address, phone number and email address Name and address of the facility, agency, or center;",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Details of the concerns including the date and time of the incident;",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "If anyone else was involved in the incident;",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "If there were any witnesses;",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "If the Administrator, Manager, or any staff of the facility, agency, or center was notified;",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "If the facility, agency, or center has tried to address the situation;",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "If law enforcement is involved;",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "If this same thing has happened before to the client or others.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 24
+      }
+    ]
+  },
+  "5. Infection Control": {
+    "full_policy": [
+      {
+        "text": "Infection Control",
+        "role": "title"
+      },
+      {
+        "text": "Standard Precautions",
+        "role": "title"
+      },
+      {
+        "text": "Policy",
+        "role": "heading"
+      },
+      {
+        "text": "The Agency practices infection control measures, when providing service to its clients in order to minimize the risk of infections to employees/ clients/families and the community-at-large in accordance with Occupational Safety and Health Administration (OSHA) regulations.",
+        "role": "body"
+      },
+      {
+        "text": "Purpose",
+        "role": "heading"
+      },
+      {
+        "text": "Identify the expectations of employees to reduce the spread of infection in the home environment and office by maintaining standard precautions when providing services for clients.",
+        "role": "body"
+      },
+      {
+        "text": "Definition",
+        "role": "heading"
+      },
+      {
+        "text": "Infectious/Communicable Diseases are those that are capable of being transmitted from one person or species to another.",
+        "role": "body"
+      },
+      {
+        "text": "Examples",
+        "role": "heading"
+      },
+      {
+        "text": "Examples include, but not limited to:",
+        "role": "lead"
+      },
+      {
+        "text": "Examples: Malaria Strep Throat, Influenza (the flu) HIV/Aids Measles Mumps Rubella; SARS Tuberculosis Common Cold Chicken Pox Conjunctivitis Hepatitis (A, B, C) Lice; Ringworm Scabies Scarlet Fever Yeast Infections Sexually Transmitted",
+        "role": "body"
+      },
+      {
+        "text": "Guidelines",
+        "role": "heading"
+      },
+      {
+        "text": "All clients will be considered potentially infections.",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Employees have a responsibility to protect the health and well-being of clients/families.",
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Employees have a responsibility to protect themselves and each other.",
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Procedures",
+        "role": "heading"
+      },
+      {
+        "text": "Standard Precautions are the minimum infection prevention practices that apply regardless of suspected or confirmed infection status of the client.",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Examples of standard precautions include:",
+        "role": "lead"
+      },
+      {
+        "text": "Hand hygiene.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Use of personal protective equipment (e.g., gloves, masks, eyewear).",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Respiratory hygiene/cough etiquette.",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "Clean and disinfect environmental surfaces.",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0,
+        "visual_indent": 12
+      },
+      {
+        "text": "WASH HANDS \u2013 Client and Employee When visibly soiled; before and after eating; after using the bathroom; before and after providing hands-on care; before, during, and after meal preparation.",
+        "role": "subheading"
+      },
+      {
+        "text": "DISINFECT AND SANITIZE AS NEEDED",
+        "role": "heading"
+      },
+      {
+        "text": "Wipe down hard surfaces with designated cleaning products when visibly soiled. Hard surfaces include but are not limited to tables, countertops, sinks, toilets, doorknobs, phones.",
+        "role": "body"
+      },
+      {
+        "text": "COVER YOUR CAUGH AND SNEEZE \u2013 Client and Employee",
+        "role": "subheading"
+      },
+      {
+        "text": "Cough and sneeze into a tissue or into the elbow.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 36
+      },
+      {
+        "text": "Educate the client and family members on how to cover their cough and sneeze.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 36
+      },
+      {
+        "text": "Employees shall report health symptoms and/or exposure to any communicable or infectious disease to the Administrator or designee.",
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Signs and symptoms may include:",
+        "role": "subheading"
+      },
+      {
+        "text": "Elevated temperature \u2013 100.5 or higher",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Persistent cough",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Shortness of breath",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Congestion",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Nausea, vomiting, diarrhea.",
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Persistent sore throat",
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0,
+        "visual_indent": 24
+      },
+      {
+        "text": "Infected employees shall consult with their Health Care Provider regarding when they should be removed from client contact and when client contact can once again be resumed.",
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "REFERENCES",
+        "role": "heading"
+      },
+      {
+        "text": "Occupational Safety and Health Administration (OSHA)",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Center for Disease Control and Prevention (CDC)",
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "State Health Department",
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0,
+        "visual_indent": 0
+      }
+    ]
+  },
+  "6. Confidentiality": {
+    "full_policy": [
+      {
+        "text": "Confidentiality",
+        "role": "title"
+      },
+      {
+        "text": "Policy",
+        "role": "heading"
+      },
+      {
+        "text": "All information related to the provision of services to clients is confidential. The Administrator is responsible for ensuring that employees are trained and understand the confidentiality and privacy of clients. At all times the Agency and employees will comply with the current regulations for the Health Information Portability and Accountability Act (HIPAA) for protected health information (PHI).",
+        "role": "body"
+      },
+      {
+        "text": "ORIENTATION",
+        "role": "outline-heading",
+        "marker": "A.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "All staff will be educated during orientation regarding security measures with home client records.",
+        "role": "bullet",
+        "marker": "1.",
+        "level": 1,
+        "visual_indent": 24
+      },
+      {
+        "text": "CONFIDENTIALITY",
+        "role": "outline-heading",
+        "marker": "B.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Employees will treat any information obtained from clients, caregivers, physicians and other sources in a confidential manner.",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "All requests for specific client information are to be directed to the Administrator or designee.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Discussion of client information in a public place is prohibited.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "All written client information is stored in the client\u2019s record. Charts are not removed from the office unless specific reason has been identified and approved.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Records will not be left in unattended areas in the office, e.g., the reception area. After normal business hours all client records will be kept stored in locked cabinets or a locked room.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "HEALTH INFORMATION PORTABILITY AND ACCOUNTABILITY ACT (HIPAA)",
+        "role": "heading",
+        "marker": "C.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "The Agency will comply with applicable HIPAA rules and regulations.",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Only the Administrator or designee is authorized to release protected health information.",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      }
+    ]
+  },
+  "7. Caring for Dementia Clients in the Home": {
+    "full_policy": [
+      {
+        "text": "CARING FOR DEMENTIA CLIENTS IN THE HOME",
+        "role": "title"
+      },
+      {
+        "text": "Creating a dementia-friendly environment is a major step in supporting persons living with Alzheimer\u2019s and related dementias. A thoughtfully arranged space can reduce confusion, improve safety, and enhance comfort.",
+        "role": "body"
+      },
+      {
+        "text": "For caregivers, making adjustments at home or in care settings transforms daily challenges into more manageable moments, fostering independence and dignity.",
+        "role": "body"
+      },
+      {
+        "text": "A dementia-friendly environment takes into account the changing needs of the individual and adapts surroundings to match their abilities. From lighting and furniture to signage and sensory cues, each element plays a role in how a person experiences their space.",
+        "role": "body"
+      },
+      {
+        "text": "Starting with a dementia-friendly environment checklist can help caregivers systematically address common obstacles and build a supportive setting.",
+        "role": "body"
+      },
+      {
+        "text": "Why a Dementia-Friendly Environment Matters",
+        "role": "heading"
+      },
+      {
+        "text": "Dementia affects memory, perception, reasoning, and motor skills, making familiar environments feel unfamiliar and overwhelming. Without adaptations, ordinary spaces can become sources of frustration, fear, or risk. For caregivers, a disorganized or unsafe environment increases the burden of supervision and care.",
+        "role": "body"
+      },
+      {
+        "text": "Designing spaces that respond to cognitive and physical changes reduces agitation, decreases the risk of accidents, and supports autonomy. For example, clear pathways and good lighting help with orientation and mobility. Familiar objects and visual cues ease anxiety and encourage engagement.",
+        "role": "body"
+      },
+      {
+        "text": "Knowing the impact of the environment on behavior is a cornerstone of person-centered care. Caregivers equipped with knowledge and practical strategies can create a setting that not only meets basic needs but also nurtures emotional well-being.",
+        "role": "body"
+      },
+      {
+        "text": "Starting with a Dementia Friendly Environment Checklist",
+        "role": "heading"
+      },
+      {
+        "text": "Using a checklist is a straightforward way to assess and improve living spaces for persons with dementia. It helps caregivers identify potential hazards and areas for enhancement while prioritizing changes based on immediate needs.",
+        "role": "body"
+      },
+      {
+        "text": "Key areas on a checklist might include:",
+        "role": "lead"
+      },
+      {
+        "text": "Safety features such as grab bars and non-slip flooring",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Clear, clutter-free walkways",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Lighting adjustments to reduce shadows and glare",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Labeling of rooms and items with simple, readable signs",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Use of contrasting colors to distinguish doors, furniture, and floors",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Creation of quiet zones to reduce sensory overload",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Incorporation of familiar and meaningful objects for comfort",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "Organized storage for personal items to support independence",
+        "role": "bullet",
+        "marker": "*",
+        "level": 0,
+        "visual_indent": 0
+      },
+      {
+        "text": "This list is not exhaustive but provides a solid foundation for caregivers starting to adapt environments for those with dementia. Reviewing and updating the checklist periodically ensures the environment keeps pace with changes in the person\u2019s condition.",
+        "role": "body"
+      },
+      {
+        "text": "Lighting and Color: Guiding and Calming",
+        "role": "heading"
+      },
+      {
+        "text": "Lighting affects mood, safety, and spatial awareness. Persons with dementia often experience difficulty judging depth and distinguishing colors, so strategic lighting can alleviate confusion. Natural light during the day supports circadian rhythms and enhances alertness.",
+        "role": "body"
+      },
+      {
+        "text": "In the evening, soft lighting helps signal winding down and prevents overstimulation. Avoid harsh fluorescent bulbs and flickering lights that may trigger anxiety or headaches.",
+        "role": "body"
+      },
+      {
+        "text": "Colors can also be powerful tools. High-contrast color schemes help with distinguishing edges and identifying objects. For example, painting door frames a different color than walls makes entrances easier to find. Dark carpets or rugs against light floors prevent missteps caused by visual misinterpretation.",
+        "role": "body"
+      },
+      {
+        "text": "Furniture Arrangement and Safety",
+        "role": "heading"
+      },
+      {
+        "text": "Furniture should be arranged to create open, navigable spaces free of tripping hazards. Avoid placing items in pathways and keep seating areas cozy and inviting to encourage rest and socialization.",
+        "role": "body"
+      },
+      {
+        "text": "Chairs with armrests aid standing and sitting. Stable furniture reduces the risks of falls caused by shifting or unstable surfaces. Sharp corners can be cushioned or replaced to prevent injury.",
+        "role": "body"
+      },
+      {
+        "text": "Keeping furniture consistent in style and placement helps maintain orientation. Frequent rearranging may increase confusion and stress for the person living with dementia.",
+        "role": "body"
+      },
+      {
+        "text": "Signage and Visual Cues",
+        "role": "heading"
+      },
+      {
+        "text": "Clear signage supports independence by helping individuals find their way and locate personal belongings. Use simple words and, where possible, pictures that reflect the room\u2019s purpose (e.g., a bathtub image on the bathroom door).",
+        "role": "body"
+      },
+      {
+        "text": "Signs should be placed at eye level and use large, legible fonts. Labels on drawers and cupboards guide the person in performing daily tasks like dressing or meal preparation.",
+        "role": "body"
+      },
+      {
+        "text": "Visual cues, such as placing favorite photos near important areas, can provide comfort and reinforce memory.",
+        "role": "body"
+      },
+      {
+        "text": "Reducing Noise and Sensory Overload",
+        "role": "heading"
+      },
+      {
+        "text": "Persons living with dementia are often sensitive to loud or sudden noises, which can trigger agitation or confusion. Creating a calm environment includes minimizing background noise from televisions, radios, or household appliances.",
+        "role": "body"
+      },
+      {
+        "text": "Soft furnishings like curtains, carpets, and cushions absorb sound and reduce echoes. Introducing pleasant background music or nature sounds at a low volume can have a soothing effect.",
+        "role": "body"
+      },
+      {
+        "text": "Using essential oils or subtle aromatherapy may help some individuals relax, though caregivers should monitor reactions closely.",
+        "role": "body"
+      },
+      {
+        "text": "How to Use Sensory Engagement Tactfully",
+        "role": "heading"
+      },
+      {
+        "text": "Engaging the senses can ground a person in the present moment and reduce agitation. Sensory gardens, tactile objects, and music are tools caregivers can use to enrich environments.",
+        "role": "body"
+      },
+      {
+        "text": "Textures like soft blankets or smooth stones can offer comfort. Aromas of favorite foods or flowers may evoke positive memories. Gentle sounds of water features or wind chimes introduce calming background stimuli. These elements encourage curiosity and emotional connection while countering isolation.",
+        "role": "body"
+      },
+      {
+        "text": "Creating Meaningful Spaces for Engagement",
+        "role": "heading"
+      },
+      {
+        "text": "Incorporating spaces for activity and relaxation promotes well-being. A small garden or indoor plants invite sensory stimulation. Areas designated for hobbies such as puzzles, crafts, or listening to music encourage purposeful engagement.",
+        "role": "body"
+      },
+      {
+        "text": "Familiar objects and family photos can be displayed to spark recognition and conversation. Comfortable seating arranged to facilitate interaction supports social connection.",
+        "role": "body"
+      },
+      {
+        "text": "Caregiver Tips for Dementia",
+        "role": "heading"
+      },
+      {
+        "text": "Be Patient and Practice Observation",
+        "role": "subheading"
+      },
+      {
+        "text": "Alongside environmental changes, caregiver behavior deeply influences the success of a dementia-friendly setting. Observing how the person interacts with their surroundings helps identify challenges and preferences.",
+        "role": "body"
+      },
+      {
+        "text": "Patience and flexibility are key. What works one day may need adjusting the next. Caregivers should encourage independence while providing gentle guidance.",
+        "role": "body"
+      },
+      {
+        "text": "Involving the person with dementia in decisions about their environment, when possible, supports dignity and personal choice.",
+        "role": "body"
+      },
+      {
+        "text": "Simplify Tasks and Break Them Down",
+        "role": "subheading"
+      },
+      {
+        "text": "Complex tasks can become overwhelming or intimidating for someone with dementia, leading to anxiety or refusal to participate.",
+        "role": "body"
+      },
+      {
+        "text": "Breaking activities into smaller, clear steps makes tasks more approachable. Instead of asking someone to \u201cget dressed,\u201d guide them gently through each part: \u201cLet\u2019s put on your shirt first,\u201d then \u201cNow, your pants.\u201d Use calm, concise instructions paired with demonstrations when needed.",
+        "role": "body"
+      },
+      {
+        "text": "This approach promotes engagement and helps maintain a sense of accomplishment. Providing choices within those steps, such as selecting between two outfits, can also empower and reduce frustration.",
+        "role": "body"
+      },
+      {
+        "text": "Use Positive Reinforcement",
+        "role": "subheading"
+      },
+      {
+        "text": "People with dementia often respond better to encouragement than to correction. Praising efforts, no matter how small helps build confidence and encourages the repetition of positive behaviors.",
+        "role": "body"
+      },
+      {
+        "text": "For example, saying \u201cYou did a great job brushing your hair today\u201d reinforces the behavior in a supportive way. Positive reinforcement fosters trust and cooperation, whereas correcting or criticizing mistakes may increase anxiety or cause withdrawal. Celebrating successes also improves mood and strengthens the emotional connection between caregiver and person.",
+        "role": "body"
+      },
+      {
+        "text": "Maintain a Calm and Reassuring Presence",
+        "role": "subheading"
+      },
+      {
+        "text": "Your tone, facial expressions, and body language communicate as much as your words. Approaching caregiving with patience and calmness creates a safe, predictable environment. If agitation or confusion arises, a soothing voice and gentle touch can help calm the person.",
+        "role": "body"
+      },
+      {
+        "text": "Avoid rushing or showing frustration, as this can escalate anxiety. Sometimes simply sitting quietly together, holding hands, or maintaining eye contact can provide reassurance and ease distress. Being present without judgment allows the person to feel valued and understood.",
+        "role": "body"
+      },
+      {
+        "text": "Joining support groups or educational programs helps caregivers stay informed and connected. The National Council of Certified Dementia Practitioners (NCCDP) offers a range of dementia care resources and certification options to support caregiving excellence.",
+        "role": "body"
+      },
+      {
+        "text": "Supporting Emergency Response and Safety",
+        "role": "heading"
+      },
+      {
+        "text": "Creating a dementia-friendly environment includes preparation for emergencies. This may mean installing door alarms, using GPS trackers, or marking emergency contacts clearly.",
+        "role": "body"
+      },
+      {
+        "text": "First responders benefit from specialized dementia training to respond effectively and compassionately to incidents involving persons with dementia. Our Certified First Responder Dementia Trainer\u00ae (CFRDT\u00ae) program prepares trainers to equip emergency personnel with these skills.",
+        "role": "body"
+      },
+      {
+        "text": "Responders who complete the training and subsequent seminar may earn the Certified First Responder-Dementia Trained\u00ae (CFR-DT\u00ae) certification, recognizing their expertise in managing dementia-related emergencies safely.",
+        "role": "body"
+      },
+      {
+        "text": "Organizing for Independence and Ease",
+        "role": "heading"
+      },
+      {
+        "text": "Clutter can overwhelm and confuse persons living with dementia. Organizing spaces with simplicity and order reduces stress and supports daily functioning. Storage areas should be clearly labeled and items stored in consistent places to aid memory.",
+        "role": "body"
+      },
+      {
+        "text": "In the kitchen, for example, keeping frequently used utensils within easy reach and marking cupboard contents with pictures or words can encourage safe meal preparation. Bedrooms organized with clothing sorted by type and season minimize frustration during dressing.",
+        "role": "body"
+      },
+      {
+        "text": "Limiting options reduces decision fatigue. A carefully curated wardrobe or simplified kitchen tools help maintain independence while preventing overwhelm.",
+        "role": "body"
+      },
+      {
+        "text": "Managing Transitions and Wandering Risks",
+        "role": "heading"
+      },
+      {
+        "text": "Transitions between rooms or activities may trigger confusion or anxiety. Smooth pathways and consistent cues help ease these moments. Visual guides such as colored tape on the floor can direct movement or mark boundaries, reducing aimless wandering.",
+        "role": "body"
+      },
+      {
+        "text": "To reduce the risk of accidents, doors and windows may be equipped with alarms or locks that are subtle but effective. Caregivers should balance safety with freedom, allowing supervised movement and access to outdoor spaces like secured gardens when possible.",
+        "role": "body"
+      },
+      {
+        "text": "Making Outdoor Spaces Calm and Comfortable",
+        "role": "heading"
+      },
+      {
+        "text": "Spending time outside can do a lot of good for someone living with dementia. It gives them a chance to relax, get some fresh air, and enjoy nature, which can lift their mood. To make outdoor areas feel safe and welcoming, it helps to have cozy places to sit, both in the sun and in the shade, so they can choose what feels best.",
+        "role": "body"
+      },
+      {
+        "text": "A raised garden bed is a great addition. It\u2019s easier to reach and can give them something fun to do, like planting flowers or vegetables. Watching things grow can bring a lot of joy and a sense of purpose.",
+        "role": "body"
+      },
+      {
+        "text": "Using plants that change with the seasons can also be helpful as it gives a gentle reminder of the time of year. Flowers that attract birds and butterflies add movement and color that can be really soothing. Just make sure there aren\u2019t any plants that might be harmful or have sharp leaves.",
+        "role": "body"
+      },
+      {
+        "text": "Keep gardening tools like small rakes or watering cans in an obvious spot so they can easily find and use them, but also make sure everything stays safe and organized. It\u2019s good to check that paths around the yard are smooth and free of anything slippery or uneven to prevent trips and falls.",
+        "role": "body"
+      },
+      {
+        "text": "Trim back any low branches that might get in the way, and try to hide things like garbage bins or compost piles to keep the space neat and calm. If you have a porch or balcony, make sure it feels secure with solid railings and a safe floor.",
+        "role": "body"
+      },
+      {
+        "text": "Using plants or trellises to hide fences can help make the space feel more open and less like a barrier, which can be comforting.",
+        "role": "body"
+      },
+      {
+        "text": "Outdoor areas designed for dementia safety provide sensory stimulation and a place for physical activity without the hazards of open, unsecured spaces.",
+        "role": "body"
+      },
+      {
+        "text": "Personalizing the Environment",
+        "role": "heading"
+      },
+      {
+        "text": "Every person\u2019s history and preferences are unique. Tailoring the environment with familiar objects, photos, and mementos creates a sense of identity and belonging.",
+        "role": "body"
+      },
+      {
+        "text": "Caregivers can assemble memory boxes filled with meaningful items or decorate rooms with themes related to the person\u2019s interests or past profession. This personalization fosters conversation, joy, and reassurance.",
+        "role": "body"
+      },
+      {
+        "text": "Engaging the person in selecting or arranging belongings respects autonomy and strengthens bonds.",
+        "role": "body"
+      },
+      {
+        "text": "Technology and Assistive Devices",
+        "role": "heading"
+      },
+      {
+        "text": "Modern technology complements environmental adaptations. Devices such as GPS trackers, medication reminders, and voice-activated assistants enhance safety and independence.",
+        "role": "body"
+      },
+      {
+        "text": "Motion sensors can alert caregivers to unusual activity. Smart lighting systems simulate natural daylight to support sleep-wake cycles.",
+        "role": "body"
+      },
+      {
+        "text": "When introducing technology, caregivers should ensure ease of use and avoid overwhelming the person with dementia. Gradual integration and familiarization improve acceptance.",
+        "role": "body"
+      },
+      {
+        "text": "The Role of Education and Certification",
+        "role": "heading"
+      },
+      {
+        "text": "Building a dementia-friendly environment takes time, attention, and heart. Each thoughtful change contributes to comfort, safety, and dignity for persons living with dementia.",
+        "role": "body"
+      },
+      {
+        "text": "Caregivers who use practical checklists, personalize spaces and engage with ongoing training create settings that promote quality of life.",
+        "role": "body"
+      }
+    ]
+  }
 };
+let _printData = {};
 
-// ─── Utilities ────────────────────────────────────────────────────────────────
-
-function escapeHtml(value) {
-  return String(value ?? "").replace(/[&<>"']/g, ch => (
-    { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]
-  ));
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+  }[ch]));
 }
 
-function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function sameSet(a, b) {
+function validateEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+function answerName(q){ return `q${q.n}`; }
+function correctArray(q){ return Array.isArray(q.a) ? q.a.slice() : [q.a]; }
+function sameSet(a,b){
   if (a.length !== b.length) return false;
-  const sa = a.slice().sort(), sb = b.slice().sort();
-  return sa.every((v, i) => v === sb[i]);
+  const sa = a.slice().sort();
+  const sb = b.slice().sort();
+  return sa.every((v,i) => v === sb[i]);
+}
+function selectedValues(q){
+  return Array.from(document.querySelectorAll(`input[name="${answerName(q)}"]:checked`)).map(i => i.value);
+}
+function isAnswered(q){ return selectedValues(q).length > 0; }
+function formatAnswer(value){
+  if (value === null || value === undefined || (Array.isArray(value) && value.length === 0)) return "Not answered";
+  return Array.isArray(value) ? value.join("; ") : value;
 }
 
-function correctArray(q) {
-  return Array.isArray(q.a) ? q.a.slice() : [q.a];
+function isYesNoQuestion(q){
+  if (q.type !== "single" || q.options.length !== 2) return false;
+  const values = q.options.map(opt => String(opt).trim().toLowerCase()).sort();
+  return values[0] === "no" && values[1] === "yes";
 }
 
-function selectedValues(q) {
-  return Array.from(
-    document.querySelectorAll(`input[name="q${q.n}"]:checked`)
-  ).map(i => i.value);
+function policyText(item){
+  const text = String(item.text ?? "");
+  return text;
 }
 
-function isAnswered(q) {
-  return selectedValues(q).length > 0;
-}
-
-function formatAnswer(value) {
-  if (value === null || value === undefined) return "Not answered";
-  if (Array.isArray(value)) return value.length ? value.join("; ") : "Not answered";
-  return value;
-}
-
-// ─── Field validation helpers ─────────────────────────────────────────────────
-
-function setFieldError(inputId, errorId, hasError) {
-  const input = document.getElementById(inputId);
-  const group = input.closest(".field-group");
-  const errEl = document.getElementById(errorId);
-  input.classList.toggle("error", hasError);
-  group.classList.toggle("has-error", hasError);
-  errEl.style.display = hasError ? "block" : "none";
-}
-
-function setAttestationError(hasError) {
-  document.getElementById("attestation-card").classList.toggle("error", hasError);
-  document.getElementById("attestation-err").style.display = hasError ? "block" : "none";
-}
-
-// ─── Policy rendering ─────────────────────────────────────────────────────────
-
-function renderPolicyItem(item) {
-  const text  = String(item.text ?? "");
-  const role  = item.role || "body";
-  const indent = Math.min(72, Math.max(0, Number(item.visual_indent || 0)));
-  const indentStyle = indent ? ` style="margin-left:${indent}px"` : "";
+function policyMarker(item){
   const marker = String(item.marker || "");
-  const markerHtml = marker === "*" ? "&bull;" : escapeHtml(marker);
+  return marker === "*" ? "&bull;" : escapeHtml(marker);
+}
 
-  const content = role === "link" && /^https?:\/\//.test(text)
-    ? `<a href="${escapeHtml(text)}" target="_blank" rel="noopener">${escapeHtml(text)}</a>`
-    : escapeHtml(text);
+function policyIndentStyle(item){
+  const indent = Math.min(72, Math.max(0, Number(item.visual_indent || 0)));
+  return indent ? ` style="margin-left:${indent}px"` : "";
+}
 
+function renderPolicyContent(item){
+  const text = policyText(item);
+  if ((item.role || "") === "link" && /^https?:\/\//.test(text)) {
+    return `<a href="${escapeHtml(text)}" target="_blank" rel="noopener">${escapeHtml(text)}</a>`;
+  }
+  return escapeHtml(text);
+}
+
+function renderPolicyLine(item){
+  const role = item.role || "body";
   if (role === "outline-heading") {
-    return `<div class="policy-outline-heading"${indentStyle}><span class="policy-marker">${markerHtml}</span><span>${content}</span></div>`;
+    return `<div class="policy-outline-heading"${policyIndentStyle(item)}><span class="policy-marker">${policyMarker(item)}</span><span>${renderPolicyContent(item)}</span></div>`;
   }
   if (role === "numbered" || role === "lettered" || role === "bullet") {
-    return `<div class="policy-item ${escapeHtml(role)}"${indentStyle}><span class="policy-marker">${markerHtml}</span><span>${content}</span></div>`;
+    return `<div class="policy-item ${escapeHtml(role)}"${policyIndentStyle(item)}><span class="policy-marker">${policyMarker(item)}</span><span>${renderPolicyContent(item)}</span></div>`;
   }
-  return `<p class="policy-line ${escapeHtml(role)}">${content}</p>`;
+  return `<p class="policy-line ${escapeHtml(role)}">${renderPolicyContent(item)}</p>`;
 }
 
-function renderTrainingModule(sectionName) {
+function renderPolicyLines(items){
+  return items.map(renderPolicyLine).join("");
+}
+
+function renderTrainingModule(sectionName){
   const module = TRAINING_MODULES[sectionName];
-  if (!module?.full_policy?.length) return "";
-  const body = module.full_policy.map(renderPolicyItem).join("");
-  return `<div class="training-card">
-    <details class="training-full">
-      <summary>Read Policy Details</summary>
-      <div class="training-full-body">${body}</div>
-    </details>
-  </div>`;
+  if (!module) return "";
+  const fullPolicy = module.full_policy && module.full_policy.length
+    ? `<details class="training-full"><summary>Read Policy Details</summary><div class="training-full-body">${renderPolicyLines(module.full_policy)}</div></details>`
+    : "";
+  return `<div class="training-card">${fullPolicy}</div>`;
 }
 
-// ─── Quiz rendering ───────────────────────────────────────────────────────────
-
-function renderQuestions() {
+function renderQuestions(){
   document.getElementById("header-sub").textContent = `${Q.length} questions - Annual Training`;
   document.getElementById("prog-label").textContent = `0 of ${Q.length}`;
-
   const container = document.getElementById("test-form");
   let currentSection = null;
   let block = null;
@@ -1004,303 +2391,305 @@ function renderQuestions() {
       block = document.createElement("section");
       block.className = "section-block";
       block.dataset.section = q.s;
-      block.innerHTML = `
-        <div class="section-title">
-          <div class="section-title-left"><span class="s-dot"></span><span>${escapeHtml(q.s)}</span></div>
-          <span class="section-progress">0/0</span>
-        </div>
-        ${renderTrainingModule(q.s)}`;
+      block.innerHTML = `<div class="section-title"><div class="section-title-left"><span class="s-dot"></span><span>${escapeHtml(q.s)}</span></div><span class="section-progress">0/0</span></div>${renderTrainingModule(q.s)}`;
       container.appendChild(block);
     }
-
-    const inputType = q.type === "multi" ? "checkbox" : "radio";
-    const optionsHtml = q.options.map((opt, i) => `
-      <label class="answer-option ${q.type}" for="q${q.n}_${i}">
-        <input id="q${q.n}_${i}" type="${inputType}" name="q${q.n}" value="${escapeHtml(opt)}">
-        <span>${escapeHtml(opt)}</span>
-      </label>`).join("");
 
     const row = document.createElement("div");
     row.className = "qrow";
     row.id = `r${q.n}`;
     row.dataset.section = q.s;
-    row.innerHTML = `
-      <div class="qnum">${q.n}</div>
-      <div class="qbody">
-        <div class="qtext">${escapeHtml(q.t)}</div>
-        <div class="answer-list">${optionsHtml}</div>
-      </div>`;
+    const inputType = q.type === "multi" ? "checkbox" : "radio";
+    const yesNo = isYesNoQuestion(q);
+    const options = q.options.map((opt, i) => {
+      const id = `q${q.n}_${i}`;
+      if (yesNo) {
+        const pillClass = String(opt).trim().toLowerCase() === "yes" ? "true-pill" : "false-pill";
+        return `<label class="rpill ${pillClass}" for="${id}">
+          <input id="${id}" type="radio" name="${answerName(q)}" value="${escapeHtml(opt)}">
+          <span>${escapeHtml(opt)}</span>
+        </label>`;
+      }
+      return `<label class="answer-option ${q.type}" for="${id}">
+        <input id="${id}" type="${inputType}" name="${answerName(q)}" value="${escapeHtml(opt)}">
+        <span>${escapeHtml(opt)}</span>
+      </label>`;
+    }).join("");
+    const answerClass = yesNo ? "radio-pair" : "answer-list";
 
-    row.querySelectorAll("input").forEach(inp => inp.addEventListener("change", () => {
-      row.querySelectorAll(".answer-option").forEach(label =>
-        label.classList.toggle("selected", label.querySelector("input").checked)
-      );
-      updateProgress();
-    }));
-
+    row.innerHTML = `<div class="qnum">${q.n}</div><div class="qbody"><div class="qtext">${escapeHtml(q.t)}</div><div class="${answerClass}">${options}</div></div>`;
     block.appendChild(row);
+
+    row.querySelectorAll("input").forEach(inp => {
+      inp.addEventListener("change", () => {
+        updateSelected(row);
+        updateProgress();
+      });
+    });
   });
 
   updateProgress();
 }
 
-function updateProgress() {
-  const answered   = Q.filter(isAnswered).length;
+function updateSelected(row){
+  row.querySelectorAll(".answer-option,.rpill").forEach(label => {
+    const input = label.querySelector("input");
+    label.classList.toggle("selected", input.checked);
+  });
+}
+
+function updateSectionProgress(){
+  document.querySelectorAll(".section-block").forEach(block => {
+    const rows = Array.from(block.querySelectorAll(".qrow"));
+    const answered = rows.filter(row => row.querySelector("input:checked")).length;
+    block.querySelector(".section-progress").textContent = `${answered}/${rows.length}`;
+  });
+}
+
+function updateProgress(){
+  const answered = Q.filter(isAnswered).length;
   const unanswered = Q.length - answered;
-
   document.getElementById("prog-label").textContent = `${answered} of ${Q.length}`;
-  document.getElementById("prog-fill").style.width   = `${(answered / Q.length) * 100}%`;
-
+  document.getElementById("prog-fill").style.width = `${(answered / Q.length) * 100}%`;
   const chip = document.getElementById("unanswered-chip");
   chip.textContent = `${unanswered} unanswered`;
   chip.classList.toggle("hidden", unanswered === 0);
-
-  document.querySelectorAll(".section-block").forEach(block => {
-    const rows     = block.querySelectorAll(".qrow");
-    const done     = Array.from(rows).filter(r => r.querySelector("input:checked")).length;
-    block.querySelector(".section-progress").textContent = `${done}/${rows.length}`;
-  });
+  updateSectionProgress();
 }
 
-// ─── Scoring ──────────────────────────────────────────────────────────────────
+function showFieldError(inputId, errorId){
+  const input = document.getElementById(inputId);
+  input.classList.add("error");
+  input.closest(".field-group").classList.add("has-error");
+  document.getElementById(errorId).style.display = "block";
+}
 
-function scoreQuiz() {
+function clearFieldError(inputId, errorId){
+  const input = document.getElementById(inputId);
+  input.classList.remove("error");
+  input.closest(".field-group").classList.remove("has-error");
+  document.getElementById(errorId).style.display = "none";
+}
+
+function showAttestationError(){
+  document.getElementById("attestation-card").classList.add("error");
+  document.getElementById("attestation-err").style.display = "block";
+}
+
+function clearAttestationError(){
+  document.getElementById("attestation-card").classList.remove("error");
+  document.getElementById("attestation-err").style.display = "none";
+}
+
+function scoreQuiz(){
   let correct = 0;
   const wrong = [];
   Q.forEach(q => {
-    if (sameSet(selectedValues(q), correctArray(q))) {
+    const selected = selectedValues(q);
+    const right = correctArray(q);
+    const ok = sameSet(selected, right);
+    if (ok) {
       correct++;
     } else {
-      wrong.push({ ...q, userAnswer: q.type === "multi" ? selectedValues(q) : (selectedValues(q)[0] ?? null) });
+      wrong.push({...q, userAnswer: q.type === "multi" ? selected : (selected[0] || null)});
     }
   });
-  return { correct, wrong };
+  return {correct, wrong};
 }
 
-// ─── Wrong-answers table (used in results panel + print) ─────────────────────
-
-function wrongHtmlTable(wrong, cap) {
-  if (!wrong.length) {
+function wrongHtmlTable(wrong, cap){
+  if (wrong.length === 0) {
     return '<p style="font-family:Arial,sans-serif;font-size:13px;color:#16a34a;font-weight:600;margin:0;">Perfect score - all answers correct.</p>';
   }
-
-  const shown    = cap ? wrong.slice(0, cap) : wrong;
-  const overflow = cap && wrong.length > cap
-    ? `<p style="font-family:Arial,sans-serif;font-size:11px;color:#6b7280;margin:10px 0 0;font-style:italic;">Showing ${cap} of ${wrong.length} incorrect answers. See printed results for the full list.</p>`
-    : "";
-
-  const rows = shown.map((w, i) => `
-    <tr style="background:${i % 2 === 0 ? "#ffffff" : "#f9fafb"};">
+  const shown = wrong.slice(0, cap || wrong.length);
+  const rows = shown.map((w, i) => {
+    const bg = i % 2 === 0 ? "#ffffff" : "#f9fafb";
+    return `<tr style="background:${bg};">
       <td style="padding:6px 8px;border:1px solid #e5e7eb;font-weight:700;color:#6b7280;vertical-align:top;">Q${w.n}</td>
       <td style="padding:6px 8px;border:1px solid #e5e7eb;color:#374151;vertical-align:top;font-size:11px;">${escapeHtml(w.s)}</td>
       <td style="padding:6px 8px;border:1px solid #e5e7eb;color:#111827;vertical-align:top;">${escapeHtml(w.t)}</td>
       <td style="padding:6px 8px;border:1px solid #e5e7eb;color:#dc2626;font-weight:600;vertical-align:top;">${escapeHtml(formatAnswer(w.userAnswer))}</td>
       <td style="padding:6px 8px;border:1px solid #e5e7eb;color:#16a34a;font-weight:600;vertical-align:top;">${escapeHtml(formatAnswer(correctArray(w)))}</td>
-    </tr>`).join("");
-
-  return `
-    <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:12px;">
-      <thead><tr style="background:#f3f4f6;">
-        <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:38px;">#</th>
-        <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:130px;">Section</th>
-        <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;">Question</th>
-        <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:120px;">Your Answer</th>
-        <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:120px;">Correct</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>${overflow}`;
+    </tr>`;
+  }).join("");
+  const overflow = cap && wrong.length > cap
+    ? `<p style="font-family:Arial,sans-serif;font-size:11px;color:#6b7280;margin:10px 0 0;font-style:italic;">Showing ${cap} of ${wrong.length} incorrect answers. See printed results for the full list.</p>`
+    : "";
+  return `<table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:12px;">
+    <thead><tr style="background:#f3f4f6;">
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:38px;">#</th>
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:130px;">Section</th>
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;">Question</th>
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:120px;">Your Answer</th>
+      <th style="padding:6px 8px;text-align:left;font-weight:700;color:#374151;border:1px solid #e5e7eb;width:120px;">Correct</th>
+    </tr></thead><tbody>${rows}</tbody></table>${overflow}`;
 }
 
-function renderWrongPanel(wrong) {
+function renderWrongPanel(wrong){
   const ws = document.getElementById("wsection");
-  if (!wrong.length) {
+  if (wrong.length === 0) {
     ws.innerHTML = '<p style="color:var(--green);font-size:13px;font-weight:600;padding-bottom:16px">Perfect score - all answers correct.</p>';
     return;
   }
-  ws.innerHTML = `<h3>Incorrect Answers <span class="wbadge">${wrong.length}</span></h3>` +
-    wrong.map(w => `
-      <div class="witem">
-        <div class="wnum">Q${w.n} - ${escapeHtml(w.s)}</div>
-        <div class="wtext">${escapeHtml(w.t)}</div>
-        <div class="answer-row">
-          <span class="ans-y">Your answer: ${escapeHtml(formatAnswer(w.userAnswer))}</span>
-          <span class="ans-c">Correct: ${escapeHtml(formatAnswer(correctArray(w)))}</span>
-        </div>
-      </div>`).join("");
+  ws.innerHTML = `<h3>Incorrect Answers <span class="wbadge">${wrong.length}</span></h3>` + wrong.map(w => {
+    return `<div class="witem">
+      <div class="wnum">Q${w.n} - ${escapeHtml(w.s)}</div>
+      <div class="wtext">${escapeHtml(w.t)}</div>
+      <div class="answer-row">
+        <span class="ans-y">Your answer: ${escapeHtml(formatAnswer(w.userAnswer))}</span>
+        <span class="ans-c">Correct: ${escapeHtml(formatAnswer(correctArray(w)))}</span>
+      </div>
+    </div>`;
+  }).join("");
 }
 
-// ─── Submission ───────────────────────────────────────────────────────────────
-
-let _printData = {};
-
-function submitTest() {
-  const fn  = document.getElementById("first-name").value.trim();
-  const ln  = document.getElementById("last-name").value.trim();
-  const em  = document.getElementById("taker-email").value.trim();
+function submitTest(){
+  const fn = document.getElementById("first-name").value.trim();
+  const ln = document.getElementById("last-name").value.trim();
+  const em = document.getElementById("taker-email").value.trim();
   const attested = document.getElementById("training-attestation").checked;
-
-  setFieldError("first-name",   "first-name-err",  !fn);
-  setFieldError("last-name",    "last-name-err",    !ln);
-  setFieldError("taker-email",  "email-err",        !validateEmail(em));
-  setAttestationError(!attested);
-
-  if (!fn || !ln || !validateEmail(em) || !attested) {
-    const firstErr = document.querySelector(".email-input.error") || document.getElementById("attestation-card");
-    firstErr.scrollIntoView({ behavior: "smooth", block: "center" });
+  let err = false;
+  if (!fn) { showFieldError("first-name","first-name-err"); err = true; } else clearFieldError("first-name","first-name-err");
+  if (!ln) { showFieldError("last-name","last-name-err"); err = true; } else clearFieldError("last-name","last-name-err");
+  if (!validateEmail(em)) { showFieldError("taker-email","email-err"); err = true; } else clearFieldError("taker-email","email-err");
+  if (!attested) { showAttestationError(); err = true; } else clearAttestationError();
+  if (err) {
+    const target = document.querySelector(".email-input.error") || document.getElementById("attestation-card");
+    target.scrollIntoView({behavior:"smooth", block:"center"});
     return;
   }
 
-  // Mark unanswered rows
-  Q.forEach(q => document.getElementById(`r${q.n}`).classList.toggle("unanswered", !isAnswered(q)));
+  const unanswered = Q.filter(q => !isAnswered(q));
+  Q.forEach(q => document.getElementById(`r${q.n}`).classList.remove("unanswered"));
+  unanswered.forEach(q => document.getElementById(`r${q.n}`).classList.add("unanswered"));
 
-  const { correct, wrong } = scoreQuiz();
-  const total   = Q.length;
-  const pct     = Math.round((correct / total) * 100);
-  const passed  = pct >= PASSING_SCORE;
+  const {correct, wrong} = scoreQuiz();
+  const total = Q.length;
+  const pct = Math.round((correct / total) * 100);
+  const passed = pct >= 70;
   const dateStr = new Date().toLocaleString();
   const attestationText = "Annual training reviewed and completed by employee.";
+  _printData = {firstName:fn, lastName:ln, email:em, correct, total, pct, passed, wrong, dateStr, attestationText};
 
-  _printData = { firstName: fn, lastName: ln, email: em, correct, total, pct, passed, wrong, dateStr, attestationText };
-
-  // Populate results panel
   document.getElementById("s-correct").textContent = correct;
-  document.getElementById("s-denom").textContent   = `/ ${total}`;
-  document.getElementById("s-pct").textContent     = `${pct}%`;
-  document.getElementById("rbadge").textContent    = passed ? "Passed" : "Failed";
-  document.getElementById("rbadge").className      = `rbadge ${passed ? "pass" : "fail"}`;
-  document.getElementById("s-note").textContent    = passed
-    ? "A passing score of 70% or higher was achieved."
-    : "A score of 70% or higher is required to pass.";
-
+  document.getElementById("s-denom").textContent = `/ ${total}`;
+  document.getElementById("s-pct").textContent = `${pct}%`;
+  document.getElementById("rbadge").textContent = passed ? "Passed" : "Failed";
+  document.getElementById("rbadge").className = `rbadge ${passed ? "pass" : "fail"}`;
+  document.getElementById("s-note").textContent = passed ? "A passing score of 70% or higher was achieved." : "A score of 70% or higher is required to pass.";
   const fill = document.getElementById("sbar-fill");
   fill.style.background = passed ? "var(--green)" : "var(--red)";
   requestAnimationFrame(() => fill.style.width = `${pct}%`);
-
   renderWrongPanel(wrong);
   document.getElementById("overlay").classList.add("open");
 
   const btn = document.getElementById("submit-btn");
-  btn.disabled    = true;
+  btn.disabled = true;
   btn.textContent = "Submitted";
 
-  // Email results
   const status = document.getElementById("estatus");
   status.style.display = "block";
 
   if (!EMAILJS_CONFIGURED || !window.emailjs) {
-    status.className   = "estatus notice";
+    status.className = "estatus notice";
     status.textContent = "EmailJS credentials are placeholders, so results were not emailed. Add the credentials in the marked section of this HTML file.";
     return;
   }
 
-  status.className   = "estatus sending";
+  status.className = "estatus sending";
   status.textContent = "Sending results...";
-
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-    taker_name:    `${fn} ${ln}`,
-    taker_email:   em,
-    score:         `${correct}/${total}`,
-    pct:           `${pct}%`,
-    result:        passed ? "PASSED" : "FAILED",
-    result_bg:     passed ? "#f0fdf4"  : "#fef2f2",
-    result_color:  passed ? "#16a34a"  : "#dc2626",
-    result_border: passed ? "#86efac"  : "#fca5a5",
-    status_label:  passed ? "Pass"     : "Retake Required",
-    status_color:  passed ? "#16a34a"  : "#dc2626",
-    status_sub:    `Score ${pct}% (passing: ${PASSING_SCORE}%)`,
-    wrong_count:   wrong.length,
+    taker_name: `${fn} ${ln}`,
+    taker_email: em,
+    score: `${correct}/${total}`,
+    pct: `${pct}%`,
+    result: passed ? "PASSED" : "FAILED",
+    result_bg: passed ? "#f0fdf4" : "#fef2f2",
+    result_color: passed ? "#16a34a" : "#dc2626",
+    result_border: passed ? "#86efac" : "#fca5a5",
+    status_label: passed ? "Pass" : "Retake Required",
+    status_color: passed ? "#16a34a" : "#dc2626",
+    status_sub: `Score ${pct}% (passing: 70%)`,
+    wrong_count: wrong.length,
     wrong_answers: wrongHtmlTable(wrong, 50),
-    date:          dateStr,
-    attestation:   attestationText
+    date: dateStr,
+    attestation: attestationText
   }).then(() => {
-    status.className   = "estatus success";
+    status.className = "estatus success";
     status.textContent = `Results emailed to ${em}.`;
   }).catch(e => {
-    status.className   = "estatus fail";
+    status.className = "estatus fail";
     status.textContent = `Email failed. ${JSON.stringify(e)}`;
   });
 }
 
-// ─── Print ────────────────────────────────────────────────────────────────────
+document.getElementById("btn-close").addEventListener("click", () => document.getElementById("overlay").classList.remove("open"));
+document.getElementById("training-attestation").addEventListener("change", () => {
+  if (document.getElementById("training-attestation").checked) clearAttestationError();
+});
+document.getElementById("unanswered-chip").addEventListener("click", () => {
+  const next = Q.find(q => !isAnswered(q));
+  if (next) document.getElementById(`r${next.n}`).scrollIntoView({behavior:"smooth", block:"center"});
+});
+document.getElementById("submit-btn").addEventListener("click", () => {
+  const answered = Q.filter(isAnswered).length;
+  const unanswered = Q.length - answered;
+  const attested = document.getElementById("training-attestation").checked;
+  document.getElementById("confirm-text").innerHTML = `You answered <strong>${answered}</strong> out of <strong>${Q.length}</strong> questions.<br><br>${
+    unanswered > 0 ? `<span style="color:#dc2626">${unanswered} question(s) still unanswered.</span>` : `<span style="color:#16a34a">All questions completed.</span>`
+  }<br><br>${
+    attested ? `<span style="color:#16a34a">Training attestation confirmed.</span>` : `<span style="color:#dc2626">Training attestation is not yet confirmed.</span>`
+  }`;
+  document.getElementById("confirm-overlay").classList.add("open");
+});
+document.getElementById("confirm-cancel").addEventListener("click", () => document.getElementById("confirm-overlay").classList.remove("open"));
+document.getElementById("confirm-submit").addEventListener("click", () => {
+  document.getElementById("confirm-overlay").classList.remove("open");
+  submitTest();
+});
+document.getElementById("confirm-overlay").addEventListener("click", e => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove("open");
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") document.getElementById("confirm-overlay").classList.remove("open");
+});
 
-function printResults() {
+document.getElementById("btn-print").addEventListener("click", () => {
   if (!_printData.firstName) { alert("Please submit the quiz first."); return; }
-
-  const { firstName, lastName, email, correct, total, pct, passed, wrong, dateStr, attestationText } = _printData;
+  const {firstName,lastName,email,correct,total,pct,passed,wrong,dateStr,attestationText} = _printData;
   const barColor = passed ? "#16a34a" : "#dc2626";
-
-  const html = `<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8">
-<title>Annual Training Quiz Result - ${escapeHtml(firstName)} ${escapeHtml(lastName)}</title>
-<style>
-body{font-family:Arial,sans-serif;font-size:10pt;color:#111;background:#fff;padding:.5in .6in}
-.pp-header{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:2.5pt solid #0f2246;padding-bottom:10pt;margin-bottom:10pt}
-.pp-company{font-size:14pt;font-weight:700;color:#0f2246}
-.pp-subtitle{font-size:9pt;color:#4b5563;font-weight:500;letter-spacing:.08em}
-.pp-doc-info{text-align:right;font-size:8.5pt;color:#4b5563}
-.pp-candidate{background:#eff6ff;border:1pt solid #bfdbfe;border-radius:6pt;padding:9pt 12pt;margin-bottom:10pt;display:flex;justify-content:space-between;align-items:center}
-.pp-cand-name{font-size:13pt;font-weight:700;color:#0f2246;margin-bottom:2pt}
-.pp-cand-sub{font-size:8.5pt;color:#4b5563}
-.pp-cand-sub+.pp-cand-sub{margin-top:3pt}
-.pp-result-badge{font-size:11pt;font-weight:700;padding:6pt 16pt;border-radius:20pt;letter-spacing:.05em;background:${passed ? "#f0fdf4" : "#fef2f2"};color:${barColor};border:1.5pt solid ${passed ? "#86efac" : "#fca5a5"}}
-.pp-scores{display:flex;gap:10pt;margin-bottom:10pt}
-.pp-score-box{flex:1;border:1pt solid #e5e7eb;border-radius:6pt;padding:8pt 10pt;text-align:center}
-.pp-score-label{font-size:7.5pt;font-weight:600;color:#6b7280;letter-spacing:.07em;margin-bottom:3pt}
-.pp-score-val{font-size:18pt;font-weight:700;color:#1d4ed8;line-height:1}
-.pp-score-sub{font-size:8pt;color:#6b7280;margin-top:2pt}
-.pp-bar-track{height:8pt;background:#e5e7eb;border-radius:4pt;overflow:hidden;margin:8pt 0 10pt}
-.pp-bar-fill{height:100%;border-radius:4pt;width:${pct}%;background:${barColor}}
-.pp-section-title{font-size:8.5pt;font-weight:700;color:#374151;letter-spacing:.08em;border-bottom:1pt solid #e5e7eb;padding-bottom:4pt;margin-bottom:6pt;margin-top:10pt}
-.pp-footer{margin-top:12pt;border-top:1pt solid #e5e7eb;padding-top:7pt;display:flex;justify-content:space-between;font-size:7.5pt;color:#9ca3af}
-@media print{body{padding:.4in .5in}}
-</style></head><body>
-<div class="pp-header">
-  <div>
-    <div class="pp-company">Careco Homecare</div>
-    <div class="pp-subtitle">Annual Training Quiz - Official Result</div>
-  </div>
-  <div class="pp-doc-info">
-    <div><strong>Date:</strong> ${escapeHtml(dateStr)}</div>
-    <div><strong>Quiz version:</strong> ${total}-question assessment</div>
-    <div><strong>Passing threshold:</strong> ${PASSING_SCORE}%</div>
-  </div>
-</div>
-<div class="pp-candidate">
-  <div>
-    <div class="pp-cand-name">${escapeHtml(firstName)} ${escapeHtml(lastName)}</div>
-    <div class="pp-cand-sub">${escapeHtml(email)}</div>
-    <div class="pp-cand-sub">${escapeHtml(attestationText)}</div>
-  </div>
-  <div class="pp-result-badge">${passed ? "PASSED" : "FAILED"}</div>
-</div>
-<div class="pp-scores">
-  <div class="pp-score-box">
-    <div class="pp-score-label">Score</div>
-    <div class="pp-score-val">${correct}/${total}</div>
-    <div class="pp-score-sub">Questions correct</div>
-  </div>
-  <div class="pp-score-box">
-    <div class="pp-score-label">Percentage</div>
-    <div class="pp-score-val" style="color:${barColor}">${pct}%</div>
-    <div class="pp-score-sub">${passed ? "Above passing threshold" : "Below passing threshold"}</div>
-  </div>
-  <div class="pp-score-box">
-    <div class="pp-score-label">Incorrect</div>
-    <div class="pp-score-val" style="color:${wrong.length > 0 ? "#dc2626" : "#16a34a"}">${wrong.length}</div>
-    <div class="pp-score-sub">${wrong.length === 0 ? "No errors" : "Questions to review"}</div>
-  </div>
-</div>
-<div class="pp-bar-track"><div class="pp-bar-fill"></div></div>
-<div class="pp-section-title">Incorrect Answers (${wrong.length})</div>
-${wrongHtmlTable(wrong)}
-<div class="pp-footer">
-  <div>Careco Homecare</div>
-  <div>This document was generated automatically upon quiz submission.</div>
-  <div>Printed: ${new Date().toLocaleString()}</div>
-</div>
-<script>window.onload = function(){ window.print(); }<\/script>
-</body></html>`;
-
+  const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Annual Training Quiz Result - ${escapeHtml(firstName)} ${escapeHtml(lastName)}</title>
+  <style>
+  body{font-family:Arial,sans-serif;font-size:10pt;color:#111;background:#fff;padding:0.5in 0.6in;}
+  .pp-header{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:2.5pt solid #0f2246;padding-bottom:10pt;margin-bottom:10pt;}
+  .pp-company{font-size:14pt;font-weight:700;color:#0f2246;}
+  .pp-subtitle{font-size:9pt;color:#4b5563;font-weight:500;letter-spacing:0.08em;}
+  .pp-doc-info{text-align:right;font-size:8.5pt;color:#4b5563;}
+  .pp-candidate{background:#eff6ff;border:1pt solid #bfdbfe;border-radius:6pt;padding:9pt 12pt;margin-bottom:10pt;display:flex;justify-content:space-between;align-items:center;}
+  .pp-cand-name{font-size:13pt;font-weight:700;color:#0f2246;margin-bottom:2pt;}
+  .pp-cand-email{font-size:8.5pt;color:#4b5563;}
+  .pp-result-badge{font-size:11pt;font-weight:700;padding:6pt 16pt;border-radius:20pt;letter-spacing:0.05em;background:${passed ? "#f0fdf4" : "#fef2f2"};color:${barColor};border:1.5pt solid ${passed ? "#86efac" : "#fca5a5"};}
+  .pp-scores{display:flex;gap:10pt;margin-bottom:10pt;}
+  .pp-score-box{flex:1;border:1pt solid #e5e7eb;border-radius:6pt;padding:8pt 10pt;text-align:center;}
+  .pp-score-label{font-size:7.5pt;font-weight:600;color:#6b7280;letter-spacing:0.07em;margin-bottom:3pt;}
+  .pp-score-val{font-size:18pt;font-weight:700;color:#1d4ed8;line-height:1;}
+  .pp-score-sub{font-size:8pt;color:#6b7280;margin-top:2pt;}
+  .pp-bar-track{height:8pt;background:#e5e7eb;border-radius:4pt;overflow:hidden;margin:8pt 0 10pt;}
+  .pp-bar-fill{height:100%;border-radius:4pt;width:${pct}%;background:${barColor};}
+  .pp-section-title{font-size:8.5pt;font-weight:700;color:#374151;letter-spacing:0.08em;border-bottom:1pt solid #e5e7eb;padding-bottom:4pt;margin-bottom:6pt;margin-top:10pt;}
+  .pp-footer{margin-top:12pt;border-top:1pt solid #e5e7eb;padding-top:7pt;display:flex;justify-content:space-between;font-size:7.5pt;color:#9ca3af;}
+  @media print{body{padding:0.4in 0.5in;}}
+  </style></head><body>
+  <div class="pp-header"><div><div class="pp-company">Careco Homecare</div><div class="pp-subtitle">Annual Training Quiz - Official Result</div></div>
+  <div class="pp-doc-info"><div><strong>Date:</strong> ${escapeHtml(dateStr)}</div><div><strong>Quiz version:</strong> ${total}-question assessment</div><div><strong>Passing threshold:</strong> 70%</div></div></div>
+  <div class="pp-candidate"><div><div class="pp-cand-name">${escapeHtml(firstName)} ${escapeHtml(lastName)}</div><div class="pp-cand-email">${escapeHtml(email)}</div><div class="pp-cand-email" style="margin-top:3pt;">${escapeHtml(attestationText)}</div></div><div class="pp-result-badge">${passed ? "PASSED" : "FAILED"}</div></div>
+  <div class="pp-scores"><div class="pp-score-box"><div class="pp-score-label">Score</div><div class="pp-score-val">${correct}/${total}</div><div class="pp-score-sub">Questions correct</div></div>
+  <div class="pp-score-box"><div class="pp-score-label">Percentage</div><div class="pp-score-val" style="color:${barColor}">${pct}%</div><div class="pp-score-sub">${passed ? "Above passing threshold" : "Below passing threshold"}</div></div>
+  <div class="pp-score-box"><div class="pp-score-label">Incorrect</div><div class="pp-score-val" style="color:${wrong.length > 0 ? "#dc2626" : "#16a34a"}">${wrong.length}</div><div class="pp-score-sub">${wrong.length === 0 ? "No errors" : "Questions to review"}</div></div></div>
+  <div class="pp-bar-track"><div class="pp-bar-fill"></div></div>
+  <div class="pp-section-title">Incorrect Answers (${wrong.length})</div>${wrongHtmlTable(wrong)}
+  <div class="pp-footer"><div>Careco Homecare</div><div>This document was generated automatically upon quiz submission.</div><div>Printed: ${new Date().toLocaleString()}</div></div>
+  <script>window.onload=function(){window.print();}<\/script></body></html>`;
   const win = window.open("", "_blank", "width=900,height=700");
   if (!win || win.closed || typeof win.closed === "undefined") {
     alert("Pop-up blocked. Please allow pop-ups for this site, then click Print Results again.");
@@ -1309,62 +2698,30 @@ ${wrongHtmlTable(wrong)}
   win.document.open();
   win.document.write(html);
   win.document.close();
+});
+
+function initializePolicyDetails(){
+  document.querySelectorAll(".training-full summary").forEach(summary => {
+    if (summary.dataset.boundPolicyToggle) return;
+    const details = summary.closest("details");
+    if (!details) return;
+    summary.dataset.boundPolicyToggle = "true";
+    summary.setAttribute("role", "button");
+    summary.setAttribute("aria-expanded", details.open ? "true" : "false");
+    const toggle = event => {
+      event.preventDefault();
+      details.open = !details.open;
+      summary.setAttribute("aria-expanded", details.open ? "true" : "false");
+    };
+    summary.addEventListener("click", toggle);
+    summary.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") toggle(event);
+    });
+  });
 }
 
-// ─── Event listeners ──────────────────────────────────────────────────────────
-
-document.getElementById("btn-close").addEventListener("click", () =>
-  document.getElementById("overlay").classList.remove("open")
-);
-
-document.getElementById("training-attestation").addEventListener("change", function() {
-  if (this.checked) setAttestationError(false);
-});
-
-document.getElementById("unanswered-chip").addEventListener("click", () => {
-  const next = Q.find(q => !isAnswered(q));
-  if (next) document.getElementById(`r${next.n}`).scrollIntoView({ behavior: "smooth", block: "center" });
-});
-
-document.getElementById("submit-btn").addEventListener("click", () => {
-  const answered  = Q.filter(isAnswered).length;
-  const unanswered = Q.length - answered;
-  const attested  = document.getElementById("training-attestation").checked;
-
-  const answeredHtml   = `You answered <strong>${answered}</strong> out of <strong>${Q.length}</strong> questions.`;
-  const unansweredHtml = unanswered > 0
-    ? `<span style="color:#dc2626">${unanswered} question(s) still unanswered.</span>`
-    : `<span style="color:#16a34a">All questions completed.</span>`;
-  const attestedHtml   = attested
-    ? `<span style="color:#16a34a">Training attestation confirmed.</span>`
-    : `<span style="color:#dc2626">Training attestation is not yet confirmed.</span>`;
-
-  document.getElementById("confirm-text").innerHTML = `${answeredHtml}<br><br>${unansweredHtml}<br><br>${attestedHtml}`;
-  document.getElementById("confirm-overlay").classList.add("open");
-});
-
-document.getElementById("confirm-cancel").addEventListener("click", () =>
-  document.getElementById("confirm-overlay").classList.remove("open")
-);
-
-document.getElementById("confirm-submit").addEventListener("click", () => {
-  document.getElementById("confirm-overlay").classList.remove("open");
-  submitTest();
-});
-
-document.getElementById("confirm-overlay").addEventListener("click", e => {
-  if (e.target === e.currentTarget) e.currentTarget.classList.remove("open");
-});
-
-document.getElementById("btn-print").addEventListener("click", printResults);
-
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") document.getElementById("confirm-overlay").classList.remove("open");
-});
-
-// ─── Init ─────────────────────────────────────────────────────────────────────
-
 renderQuestions();
+initializePolicyDetails();
 </script>
 </body>
 </html>
