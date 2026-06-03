@@ -28,9 +28,6 @@ header{position:sticky;top:0;z-index:100;background:var(--blue-900);border-botto
 .hprog-track{width:130px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
 .hprog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue-500),var(--blue-300));border-radius:2px;transition:width .18s ease;}
 main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
-.email-card{background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-lg);padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:grid;grid-template-columns:auto minmax(220px,1fr);gap:16px;align-items:start;}
-.email-icon{width:36px;height:36px;background:var(--blue-50);border-radius:7px;display:flex;align-items:center;justify-content:center;}
-.email-icon svg{width:17px;height:17px;stroke:var(--blue-500);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .field-group{display:flex;flex-direction:column;gap:6px;}
 .email-label{font-size:12.5px;font-weight:600;color:var(--grey-700);display:flex;align-items:center;gap:7px;white-space:nowrap;}
 .req-chip{font-size:10px;font-weight:600;color:var(--blue-600);background:var(--blue-50);border:1px solid var(--blue-100);border-radius:4px;padding:1px 7px;letter-spacing:.03em;}
@@ -84,6 +81,7 @@ main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
 .answer-option.multi.selected{color:#166534;font-weight:600;}
 .attestation-card{background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-lg);padding:14px 18px;margin-top:18px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
 .attestation-text{font-size:13px;line-height:1.4;color:var(--grey-800);font-weight:600;margin-bottom:10px;}
+.signature-grid{display:grid;grid-template-columns:1fr;gap:12px;align-items:start;}
 .attestation-card.error{border-color:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.08);}
 .attestation-err{display:none;margin-top:8px;font-size:11.5px;color:var(--red);font-weight:600;}
 .submit-area{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:9px;}
@@ -142,11 +140,10 @@ main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
   .hprog{display:none;}
   main{padding:16px 14px 70px;}
   .header-inner{padding:0 16px;}
-  .email-card{grid-template-columns:1fr;}
-  .email-icon{display:none;}
   .qrow{grid-template-columns:24px minmax(0,1fr);padding:9px 12px;}
   .training-card{padding:13px 12px 11px;}
   .attestation-card{padding:13px 14px;}
+  .signature-grid{grid-template-columns:1fr;}
   .rfooter{flex-direction:column;}
 }
 </style>
@@ -170,24 +167,20 @@ main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
 </header>
 
 <main>
-  <div class="email-card">
-    <div class="email-icon">
-      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-    </div>
-    <div class="field-group">
-      <label class="email-label" for="taker-email">Email Address <span class="req-chip">Required</span></label>
-      <input type="email" id="taker-email" class="email-input" placeholder="yourname@example.com" autocomplete="email">
-      <div class="email-err" id="email-err">Please enter a valid email address.</div>
-    </div>
-  </div>
-
   <form id="test-form" novalidate></form>
 
   <div class="attestation-card" id="attestation-card">
     <div class="attestation-text">I confirm that I reviewed the annual training material, completed this quiz myself, and agree that typing my full name below serves as my electronic signature for this training record.</div>
-    <div class="field-group">
-      <label class="email-label" for="signature-name">Type Full Name <span class="req-chip">Required</span></label>
-      <input type="text" id="signature-name" class="email-input" placeholder="First and last name" autocomplete="name">
+    <div class="signature-grid">
+      <div class="field-group">
+        <label class="email-label" for="taker-email">Email Address <span class="req-chip">Required</span></label>
+        <input type="email" id="taker-email" class="email-input" placeholder="yourname@example.com" autocomplete="email">
+        <div class="email-err" id="email-err">Please enter a valid email address.</div>
+      </div>
+      <div class="field-group">
+        <label class="email-label" for="signature-name">Type Full Name</label>
+        <input type="text" id="signature-name" class="email-input" placeholder="First and last name" autocomplete="name">
+      </div>
     </div>
     <div class="attestation-err" id="attestation-err">Please type your full name as your electronic signature before submitting.</div>
   </div>
