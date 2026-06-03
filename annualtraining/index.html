@@ -28,7 +28,7 @@ header{position:sticky;top:0;z-index:100;background:var(--blue-900);border-botto
 .hprog-track{width:130px;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
 .hprog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue-500),var(--blue-300));border-radius:2px;transition:width .18s ease;}
 main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
-.email-card{background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-lg);padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:grid;grid-template-columns:auto repeat(3,minmax(160px,1fr));gap:16px;align-items:start;}
+.email-card{background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-lg);padding:18px 22px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.05);display:grid;grid-template-columns:auto minmax(220px,1fr);gap:16px;align-items:start;}
 .email-icon{width:36px;height:36px;background:var(--blue-50);border-radius:7px;display:flex;align-items:center;justify-content:center;}
 .email-icon svg{width:17px;height:17px;stroke:var(--blue-500);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .field-group{display:flex;flex-direction:column;gap:6px;}
@@ -83,8 +83,7 @@ main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
 .answer-option.selected{color:var(--blue-700);font-weight:600;}
 .answer-option.multi.selected{color:#166534;font-weight:600;}
 .attestation-card{background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-lg);padding:14px 18px;margin-top:18px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
-.attestation-option{display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px;align-items:start;cursor:pointer;font-size:13px;line-height:1.4;color:var(--grey-800);font-weight:600;}
-.attestation-option input{width:16px;height:16px;margin-top:2px;accent-color:var(--blue-600);cursor:pointer;}
+.attestation-text{font-size:13px;line-height:1.4;color:var(--grey-800);font-weight:600;margin-bottom:10px;}
 .attestation-card.error{border-color:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.08);}
 .attestation-err{display:none;margin-top:8px;font-size:11.5px;color:var(--red);font-weight:600;}
 .submit-area{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:9px;}
@@ -180,26 +179,17 @@ main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
       <input type="email" id="taker-email" class="email-input" placeholder="yourname@example.com" autocomplete="email">
       <div class="email-err" id="email-err">Please enter a valid email address.</div>
     </div>
-    <div class="field-group">
-      <label class="email-label" for="first-name">First Name</label>
-      <input type="text" id="first-name" class="email-input" placeholder="First name" autocomplete="given-name">
-      <div class="name-err" id="first-name-err">Please enter your first name.</div>
-    </div>
-    <div class="field-group">
-      <label class="email-label" for="last-name">Last Name</label>
-      <input type="text" id="last-name" class="email-input" placeholder="Last name" autocomplete="family-name">
-      <div class="name-err" id="last-name-err">Please enter your last name.</div>
-    </div>
   </div>
 
   <form id="test-form" novalidate></form>
 
   <div class="attestation-card" id="attestation-card">
-    <label class="attestation-option" for="training-attestation">
-      <input type="checkbox" id="training-attestation">
-      <span>I confirm that I reviewed the annual training material and completed this quiz myself.</span>
-    </label>
-    <div class="attestation-err" id="attestation-err">Results are emailed automatically to you and your supervisors.</div>
+    <div class="attestation-text">I confirm that I reviewed the annual training material, completed this quiz myself, and agree that typing my full name below serves as my electronic signature for this training record.</div>
+    <div class="field-group">
+      <label class="email-label" for="signature-name">Type Full Name <span class="req-chip">Required</span></label>
+      <input type="text" id="signature-name" class="email-input" placeholder="First and last name" autocomplete="name">
+    </div>
+    <div class="attestation-err" id="attestation-err">Please type your full name as your electronic signature before submitting.</div>
   </div>
 
   <div class="submit-area">
@@ -2473,11 +2463,13 @@ function clearFieldError(inputId, errorId){
 
 function showAttestationError(){
   document.getElementById("attestation-card").classList.add("error");
+  document.getElementById("signature-name").classList.add("error");
   document.getElementById("attestation-err").style.display = "block";
 }
 
 function clearAttestationError(){
   document.getElementById("attestation-card").classList.remove("error");
+  document.getElementById("signature-name").classList.remove("error");
   document.getElementById("attestation-err").style.display = "none";
 }
 
@@ -2544,15 +2536,11 @@ function renderWrongPanel(wrong){
 }
 
 function submitTest(){
-  const fn = document.getElementById("first-name").value.trim();
-  const ln = document.getElementById("last-name").value.trim();
   const em = document.getElementById("taker-email").value.trim();
-  const attested = document.getElementById("training-attestation").checked;
+  const signatureName = document.getElementById("signature-name").value.trim();
   let err = false;
-  if (!fn) { showFieldError("first-name","first-name-err"); err = true; } else clearFieldError("first-name","first-name-err");
-  if (!ln) { showFieldError("last-name","last-name-err"); err = true; } else clearFieldError("last-name","last-name-err");
   if (!validateEmail(em)) { showFieldError("taker-email","email-err"); err = true; } else clearFieldError("taker-email","email-err");
-  if (!attested) { showAttestationError(); err = true; } else clearAttestationError();
+  if (!signatureName) { showAttestationError(); err = true; } else clearAttestationError();
   if (err) {
     const target = document.querySelector(".email-input.error") || document.getElementById("attestation-card");
     target.scrollIntoView({behavior:"smooth", block:"center"});
@@ -2568,8 +2556,8 @@ function submitTest(){
   const pct = Math.round((correct / total) * 100);
   const passed = pct >= 70;
   const dateStr = new Date().toLocaleString();
-  const attestationText = "Annual training reviewed and completed by employee.";
-  _printData = {firstName:fn, lastName:ln, email:em, correct, total, pct, passed, wrong, dateStr, attestationText};
+  const attestationText = "Attestation: checked";
+  _printData = {signatureName, email:em, correct, total, pct, passed, wrong, dateStr, attestationText};
 
   document.getElementById("s-correct").textContent = correct;
   document.getElementById("s-denom").textContent = `/ ${total}`;
@@ -2599,7 +2587,7 @@ function submitTest(){
   status.className = "estatus sending";
   status.textContent = "Sending results...";
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-    taker_name: `${fn} ${ln}`,
+    taker_name: signatureName,
     taker_email: em,
     score: `${correct}/${total}`,
     pct: `${pct}%`,
@@ -2624,8 +2612,8 @@ function submitTest(){
 }
 
 document.getElementById("btn-close").addEventListener("click", () => document.getElementById("overlay").classList.remove("open"));
-document.getElementById("training-attestation").addEventListener("change", () => {
-  if (document.getElementById("training-attestation").checked) clearAttestationError();
+document.getElementById("signature-name").addEventListener("input", () => {
+  if (document.getElementById("signature-name").value.trim()) clearAttestationError();
 });
 document.getElementById("unanswered-chip").addEventListener("click", () => {
   const next = Q.find(q => !isAnswered(q));
@@ -2634,11 +2622,11 @@ document.getElementById("unanswered-chip").addEventListener("click", () => {
 document.getElementById("submit-btn").addEventListener("click", () => {
   const answered = Q.filter(isAnswered).length;
   const unanswered = Q.length - answered;
-  const attested = document.getElementById("training-attestation").checked;
+  const signatureName = document.getElementById("signature-name").value.trim();
   document.getElementById("confirm-text").innerHTML = `You answered <strong>${answered}</strong> out of <strong>${Q.length}</strong> questions.<br><br>${
     unanswered > 0 ? `<span style="color:#dc2626">${unanswered} question(s) still unanswered.</span>` : `<span style="color:#16a34a">All questions completed.</span>`
   }<br><br>${
-    attested ? `<span style="color:#16a34a">Training attestation confirmed.</span>` : `<span style="color:#dc2626">Training attestation is not yet confirmed.</span>`
+    signatureName ? `<span style="color:#16a34a">Electronic signature entered: ${escapeHtml(signatureName)}</span>` : `<span style="color:#dc2626">Electronic signature is not yet entered.</span>`
   }`;
   document.getElementById("confirm-overlay").classList.add("open");
 });
@@ -2655,10 +2643,10 @@ document.addEventListener("keydown", e => {
 });
 
 document.getElementById("btn-print").addEventListener("click", () => {
-  if (!_printData.firstName) { alert("Please submit the quiz first."); return; }
-  const {firstName,lastName,email,correct,total,pct,passed,wrong,dateStr,attestationText} = _printData;
+  if (!_printData.signatureName) { alert("Please submit the quiz first."); return; }
+  const {signatureName,email,correct,total,pct,passed,wrong,dateStr,attestationText} = _printData;
   const barColor = passed ? "#16a34a" : "#dc2626";
-  const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Annual Training Quiz Result - ${escapeHtml(firstName)} ${escapeHtml(lastName)}</title>
+  const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Annual Training Quiz Result - ${escapeHtml(signatureName)}</title>
   <style>
   body{font-family:Arial,sans-serif;font-size:10pt;color:#111;background:#fff;padding:0.5in 0.6in;}
   .pp-header{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:2.5pt solid #0f2246;padding-bottom:10pt;margin-bottom:10pt;}
@@ -2682,7 +2670,7 @@ document.getElementById("btn-print").addEventListener("click", () => {
   </style></head><body>
   <div class="pp-header"><div><div class="pp-company">Careco Homecare</div><div class="pp-subtitle">Annual Training Quiz - Official Result</div></div>
   <div class="pp-doc-info"><div><strong>Date:</strong> ${escapeHtml(dateStr)}</div><div><strong>Quiz version:</strong> ${total}-question assessment</div><div><strong>Passing threshold:</strong> 70%</div></div></div>
-  <div class="pp-candidate"><div><div class="pp-cand-name">${escapeHtml(firstName)} ${escapeHtml(lastName)}</div><div class="pp-cand-email">${escapeHtml(email)}</div><div class="pp-cand-email" style="margin-top:3pt;">${escapeHtml(attestationText)}</div></div><div class="pp-result-badge">${passed ? "PASSED" : "FAILED"}</div></div>
+  <div class="pp-candidate"><div><div class="pp-cand-name">${escapeHtml(signatureName)}</div><div class="pp-cand-email">${escapeHtml(email)}</div><div class="pp-cand-email" style="margin-top:3pt;">${escapeHtml(attestationText)}</div></div><div class="pp-result-badge">${passed ? "PASSED" : "FAILED"}</div></div>
   <div class="pp-scores"><div class="pp-score-box"><div class="pp-score-label">Score</div><div class="pp-score-val">${correct}/${total}</div><div class="pp-score-sub">Questions correct</div></div>
   <div class="pp-score-box"><div class="pp-score-label">Percentage</div><div class="pp-score-val" style="color:${barColor}">${pct}%</div><div class="pp-score-sub">${passed ? "Above passing threshold" : "Below passing threshold"}</div></div>
   <div class="pp-score-box"><div class="pp-score-label">Incorrect</div><div class="pp-score-val" style="color:${wrong.length > 0 ? "#dc2626" : "#16a34a"}">${wrong.length}</div><div class="pp-score-sub">${wrong.length === 0 ? "No errors" : "Questions to review"}</div></div></div>
