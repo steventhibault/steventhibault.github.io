@@ -56,8 +56,13 @@ main{max-width:920px;margin:0 auto;padding:20px 28px 80px;}
 .policy-line.contact{color:var(--grey-700);font-weight:600;}
 .policy-line.link a{color:var(--blue-700);font-weight:700;word-break:break-word;text-decoration:none;}
 .policy-line.link a:hover{text-decoration:underline;}
-.policy-list{display:grid;gap:5px;margin:0 0 6px 18px;padding-left:15px;color:var(--grey-700);}
-.policy-list li{padding-left:2px;line-height:1.42;}
+.policy-outline-heading{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;align-items:start;margin:12px 0 4px;color:var(--grey-900);font-size:14px;font-family:Georgia,"Times New Roman",serif;font-weight:800;text-transform:uppercase;letter-spacing:.01em;}
+.policy-item{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;align-items:start;color:var(--grey-700);line-height:1.42;margin:2px 0;}
+.policy-item.level-1{margin-left:24px;}
+.policy-item.level-2{margin-left:48px;}
+.policy-item.level-3{margin-left:72px;}
+.policy-marker{text-align:right;color:var(--grey-900);font-weight:500;white-space:nowrap;}
+.policy-item.bullet .policy-marker{font-size:14px;line-height:1.1;}
 .qrow{background:var(--white);border-bottom:1px solid var(--grey-100);padding:10px 18px;display:grid;grid-template-columns:34px minmax(0,1fr);gap:6px 12px;}
 .qrow:last-child{border-bottom:none;}
 .qrow:hover{background:var(--grey-50);}
@@ -516,15 +521,21 @@ const TRAINING_MODULES = {
       },
       {
         "text": "To define the processes for identifying and reporting possible victims of abuse, neglect, or exploitation.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "To ensure Agency clients are free of sexual, emotional, physical, and mental abuse or neglect.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "To avoid misappropriation of a client\u2019s resources.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Procedure",
@@ -532,19 +543,27 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Identification and reporting",
-        "role": "heading"
+        "role": "outline-heading",
+        "marker": "A.",
+        "level": 0
       },
       {
         "text": "Agency employees are oriented to signs and symptoms indicating possible abuse, neglect, or exploitation.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "Any employee (whether employed directly or under arrangement) in the normal course of providing services to clients, who identifies, notices, or recognizes incidences or circumstances of mistreatment, neglect, verbal, mental, sexual and/or physical abuse, including injuries of unknown sources, or misappropriation of patient property, must report these findings immediately to the Agency and other appropriate authorities in accordance with state law.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0
       },
       {
         "text": "Criteria to identify neglect or abuse, physical assault and domestic abuse include:",
-        "role": "lead"
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0
       },
       {
         "text": "Signs of Abuse",
@@ -552,43 +571,63 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Burns in unusual places.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "Bruises on the body that could be intentional.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "Unexplained injuries, frequent falls or multiple hematomas of various colors.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0
       },
       {
         "text": "Broken eyeglasses.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0
       },
       {
         "text": "Cuts, discoloration of eyes.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0
       },
       {
         "text": "Sudden changes in behavior.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0
       },
       {
         "text": "Signs of dehydration.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "g.",
+        "level": 0
       },
       {
         "text": "Wounds",
-        "role": "body"
+        "role": "numbered",
+        "marker": "h.",
+        "level": 0
       },
       {
         "text": "Weight loss",
-        "role": "body"
+        "role": "numbered",
+        "marker": "i.",
+        "level": 0
       },
       {
         "text": "Any client who reports an abusive incident.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "j.",
+        "level": 0
       },
       {
         "text": "Criteria to Identify Exploitation",
@@ -596,19 +635,27 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Abuse and/or misuse of patient\u2019s money.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "An inability of caregiver/family to account for patient\u2019s money or property.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "Discrepancies between patient\u2019s resources and living situation.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0
       },
       {
         "text": "Reports of demands for goods in exchange for services.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0
       },
       {
         "text": "Criteria to Identify Rape or Sexual Molestation",
@@ -616,167 +663,249 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Feelings of humiliation, degradation, shame, guilt, embarrassment, self-blame, anger, and revenge.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "Fear of injury, mutilation, and death.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "Complete disruption of client\u2019s normal activities of daily living and lifestyle.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0
       },
       {
         "text": "Presence of abrasions, bruises, swelling, lacerations and/or teeth marks.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0
       },
       {
         "text": "Tearful, trembling, sobbing, hyperventilation and/or withdrawal.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0
       },
       {
         "text": "Long periods of silence.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0
       },
       {
         "text": "Sudden marked irritability, avoidance of relationships and/or marked change in sexual behavior.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "g.",
+        "level": 0
       },
       {
         "text": "Phobic reactions to being alone, going outside and/or staying inside.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "h.",
+        "level": 0
       },
       {
         "text": "Employees will immediately report an assessment of client\u2019s condition which might indicate abuse, neglect, or exploitation to the Administrator. The Administrator or designee will assess the client for abuse, neglect and/or exploitation.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "4.",
+        "level": 0
       },
       {
         "text": "All findings and communications will be documented in the client record.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "5.",
+        "level": 0
       },
       {
         "text": "The Agency will report allegations, observations and suspected cases of exploitation, abuse and/or neglect to:",
-        "role": "lead"
+        "role": "numbered",
+        "marker": "6.",
+        "level": 0
       },
       {
         "text": "Adult Protective Services, if the client is 18 years or older",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "Child Protective Services, if the client is less than 18 years old.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "Division of Licensing and Citification",
-        "role": "body"
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0
       },
       {
         "text": "A written report via the online form or the designated Department form within 48 hours of the verbal report.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 1
       },
       {
         "text": "All reports to the Division of Licensing and Certification will include at a minimum:",
-        "role": "lead"
+        "role": "numbered",
+        "marker": "7.",
+        "level": 0
       },
       {
         "text": "Agency name, address, and phone number.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 1
       },
       {
         "text": "Name of the client.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 1
       },
       {
         "text": "Address of the client.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "c.",
+        "level": 1
       },
       {
         "text": "Information regarding the nature of the abuse, exploitation, or misappropriation of client property.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "d.",
+        "level": 1
       },
       {
         "text": "Name and title, if any, of the alleged perpetrator.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "e.",
+        "level": 1
       },
       {
         "text": "The name of the person making the report.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "f.",
+        "level": 1
       },
       {
         "text": "Contact number of the person making the report.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "g.",
+        "level": 1
       },
       {
-        "text": "10. Employees are oriented at hire and annually.",
-        "role": "numbered"
+        "text": "Employees are oriented at hire and annually.",
+        "role": "numbered",
+        "marker": "10.",
+        "level": 0
       },
       {
         "text": "Investigation",
-        "role": "heading"
+        "role": "outline-heading",
+        "marker": "B.",
+        "level": 0
       },
       {
-        "text": "1. Agency investigations regarding an allegation include, but are not limited to, the following documentation:",
-        "role": "lead"
+        "text": "Agency investigations regarding an allegation include, but are not limited to, the following documentation:",
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "Date and time of the alleged events(s).",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "The nature of the allegation.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "Date and time all required individuals were notified.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0
       },
       {
         "text": "Name and contact information of the initial reporter.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0
       },
       {
         "text": "Name and contact information of the alleged perpetrator and their title, if any.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0
       },
       {
         "text": "Date and time the alleged perpetrator was removed from duty, if an employee;",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0
       },
       {
         "text": "Documented interviews with the client, all individuals with possible knowledge of the alleged incident, and the alleged perpetrator.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "g.",
+        "level": 0
       },
       {
         "text": "A conclusion statement.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "h.",
+        "level": 0
       },
       {
         "text": "An action plan.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "i.",
+        "level": 0
       },
       {
-        "text": "2. The alleged perpetrator, if an employee, may not work with any client until an investigation has been completed.",
-        "role": "numbered"
+        "text": "The alleged perpetrator, if an employee, may not work with any client until an investigation has been completed.",
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0
       },
       {
-        "text": "3. The investigative report will be submitted to the Department no later than the close of business on the seventh calendar day after the alleged incident.",
-        "role": "numbered"
+        "text": "The investigative report will be submitted to the Department no later than the close of business on the seventh calendar day after the alleged incident.",
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0
       },
       {
-        "text": "4. Any reasonable suspicion of a crime involving the client, as the victim, will be reported to law enforcement within the following time frames:",
-        "role": "lead"
+        "text": "Any reasonable suspicion of a crime involving the client, as the victim, will be reported to law enforcement within the following time frames:",
+        "role": "numbered",
+        "marker": "4.",
+        "level": 0
       },
       {
         "text": "Any event that caused reasonable suspicion and resulted in serious bodily injury to a client must be reported immediately, but not later than two hours after forming the suspicion.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "An event that caused reasonable suspicion and did not result in serious bodily injury to a client must be reported not later than 24 hours after forming the suspicion.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
-        "text": "5. The agency will not interfere with, impede or obstruct an investigation by the Department, including but not limited to influencing or limiting client or staff participation in Department investigative activities.",
-        "role": "numbered"
+        "text": "The agency will not interfere with, impede or obstruct an investigation by the Department, including but not limited to influencing or limiting client or staff participation in Department investigative activities.",
+        "role": "numbered",
+        "marker": "5.",
+        "level": 0
       }
     ]
   },
@@ -816,63 +945,93 @@ const TRAINING_MODULES = {
       },
       {
         "text": "The Agency will provide each client with a written notice of the agency expectations at the time the client or legal representative signs a contract with the Agency.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "A signed copy will be maintained in the client\u2019s record.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0
       },
       {
         "text": "The Agency makes the following commitments to our clients:",
-        "role": "lead"
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0
       },
       {
-        "text": "a. Inform clients of the names of agency staff and their qualifications, upon request.",
-        "role": "lettered"
+        "text": "Inform clients of the names of agency staff and their qualifications, upon request.",
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
-        "text": "b. Provide services to clients free from abuse, neglect, exploitation, or misappropriation of property.",
-        "role": "lettered"
+        "text": "Provide services to clients free from abuse, neglect, exploitation, or misappropriation of property.",
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
-        "text": "c. Involve clients in the development of their service plan.",
-        "role": "lettered"
+        "text": "Involve clients in the development of their service plan.",
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0
       },
       {
-        "text": "d. Arrange for clients to receive the services as identified on their service plan, unless a client refuses services.",
-        "role": "lettered"
+        "text": "Arrange for clients to receive the services as identified on their service plan, unless a client refuses services.",
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0
       },
       {
-        "text": "e. Communicate with clients about services and supports in a language the client understands",
-        "role": "lettered"
+        "text": "Communicate with clients about services and supports in a language the client understands",
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0
       },
       {
-        "text": "f. Inform clients if services cannot be delivered on a given day.",
-        "role": "lettered"
+        "text": "Inform clients if services cannot be delivered on a given day.",
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0
       },
       {
-        "text": "g. Provide clients with access to their records and produce paper copies of all records pertaining to a client upon the client\u2019s or legal representative\u2019s request. If the request for paper copies is made orally, the agency will document the date the request was received in the client record (the Agency may assess a reasonable, cost-based fee for paper copies consistent with applicable law).",
-        "role": "lettered"
+        "text": "Provide clients with access to their records and produce paper copies of all records pertaining to a client upon the client\u2019s or legal representative\u2019s request. If the request for paper copies is made orally, the agency will document the date the request was received in the client record (the Agency may assess a reasonable, cost-based fee for paper copies consistent with applicable law).",
+        "role": "numbered",
+        "marker": "g.",
+        "level": 0
       },
       {
-        "text": "h. Treat client records and information pertaining to a client\u2019s personal, medical and mental health status as confidential.",
-        "role": "lettered"
+        "text": "Treat client records and information pertaining to a client\u2019s personal, medical and mental health status as confidential.",
+        "role": "numbered",
+        "marker": "h.",
+        "level": 0
       },
       {
-        "text": "i. Inform clients, verbally and in writing, of how to file a grievance with the agency, provided in language understood by the client.",
-        "role": "lettered"
+        "text": "Inform clients, verbally and in writing, of how to file a grievance with the agency, provided in language understood by the client.",
+        "role": "numbered",
+        "marker": "i.",
+        "level": 0
       },
       {
-        "text": "j. Inform clients, verbally and in writing, and in a language understood by the client, of how to file a complaint with the Department and that this complaint may be filed instead of or in addition to a grievance.",
-        "role": "lettered"
+        "text": "Inform clients, verbally and in writing, and in a language understood by the client, of how to file a complaint with the Department and that this complaint may be filed instead of or in addition to a grievance.",
+        "role": "numbered",
+        "marker": "j.",
+        "level": 0
       },
       {
-        "text": "k. Inform clients of the outcome of any licensing inspection or investigation conducted by the Department, upon request.",
-        "role": "lettered"
+        "text": "Inform clients of the outcome of any licensing inspection or investigation conducted by the Department, upon request.",
+        "role": "numbered",
+        "marker": "k.",
+        "level": 0
       },
       {
-        "text": "l. Inform clients of their state protection and advocacy rights, including but not limited to providing contact information for the Division of Licensing and Certification, Adult Protective Services and the Maine Long Term Care Ombudsman Program.",
-        "role": "lettered"
+        "text": "Inform clients of their state protection and advocacy rights, including but not limited to providing contact information for the Division of Licensing and Certification, Adult Protective Services and the Maine Long Term Care Ombudsman Program.",
+        "role": "numbered",
+        "marker": "l.",
+        "level": 0
       }
     ]
   },
@@ -896,11 +1055,15 @@ const TRAINING_MODULES = {
       },
       {
         "text": "To provide direction and instruction for employees to follow in the event of a life threatening or potentially life-threatening situation that disrupts delivery of home care services.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "To identify the process for disaster readiness and emergency management.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "PROCEDURE",
@@ -908,51 +1071,75 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Employees receive information regarding how to respond to an emergency with specific instructions for emergencies or disasters during orientation and as needed.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "During the initial assessment, each client is assessed for service needs and risk during an emergency. An individual client emergency plan is documented as part of the assessment, to include:",
-        "role": "body"
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0
       },
       {
         "text": "What to expect if they need to evacuate from their home.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Need to evacuate when the warning is given while help is available, otherwise assistance may not be available.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Preparing an emergency supply kit with essential medications, equipment, and supplies to bring with them to a shelter.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "For clients on O2 or need electricity for life sustaining equipment: arranging to obtain extra supply of oxygen canisters, refills and other needed O2 equipment.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "For clients with animals, arranging with family or friends to take the animal during an emergency. If it is a special needs animal, checking to see if the shelter accepts animals. Preparing food, water, bowls, cat litter, cages, collars, muzzles, leashes, and medications for animals.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "If a client does not want to evacuate, an Agency representative will:",
-        "role": "lead"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Assess the client\u2019s understanding of the potential impact of their choice and their understanding that they are assuming full responsibility for that choice. This will be clearly documented in the client\u2019s clinical record.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "The Agency will notify the fire department, emergency management, police, local shelter, their family, etc",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "In the event the Agency is in the evacuation zone, the administrator issues the order to evacuate the office.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Staff are responsible for checking in/out with his/her supervisor.",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Clients are identified and prioritized based upon their needs so that care/service is ensured for them in the event of a disaster \u2013 those whose health and safety might be at risk.",
@@ -996,19 +1183,27 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Hurricanes, tornadoes, high winds",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Floods",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Chemical spills",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Inclement weather",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "In the case of emergency weather conditions, clients and family members are contacted prior to the emergency to make contingency plans.",
@@ -1048,95 +1243,141 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Each client receives in writing the Agency Expectations prior to or at the time they sign a contract with the Agency. At this time clients are advised of the grievance procedure. This includes information about registering complaints about home care to the Department of Home Health Licensing and Certification.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "Clients are encouraged to make suggestions for improving care and/or register concerns to Agency employees without fear of coercion, discrimination or reprisal for doing so or unreasonable interruption of care.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0
       },
       {
         "text": "The Agency will:",
-        "role": "lead"
+        "role": "bullet",
+        "marker": "3.",
+        "level": 0
       },
       {
         "text": "Investigate complaints made by a client, the client\u2019s legal representative (if any), or a family member. Document both the complaint and the resolution of the complaint.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "Take action to prevent further potential violations, including retaliation, while the complaint is being investigated.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "The designated individual to respond to and takes action to resolve complaints is the Administrator or designee",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "4.",
+        "level": 0
       },
       {
         "text": "Intake information is obtained from the appropriate sources.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "a.",
+        "level": 1
       },
       {
         "text": "Investigative measures will be implemented based on the nature of the complaint.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "b.",
+        "level": 1
       },
       {
         "text": "Appropriate authorities are informed as applicable.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "c.",
+        "level": 1
       },
       {
         "text": "Corrective action is specific and directly related to the complaint.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "d.",
+        "level": 1
       },
       {
         "text": "Client rights are protected.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "e.",
+        "level": 1
       },
       {
         "text": "Complaint resolution is achieved in accordance with established time frames.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "f.",
+        "level": 1
       },
       {
         "text": "Complaints are logged, tracked and trended.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "g.",
+        "level": 1
       },
       {
         "text": "Complaint management is incorporated into Quality Assessment and Performance Improvement activities.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "h.",
+        "level": 1
       },
       {
         "text": "All complaints will be address timely. Every effort will be made to talk with the or person making the complaint to assure them the Agency is addressing the concern. A written response will be sent within seven calendar days.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "5.",
+        "level": 0
       },
       {
         "text": "The Agency retains a record of all grievances filed. The complaint, investigation, and written response is filed in the client record and contains the following:",
-        "role": "lead"
+        "role": "numbered",
+        "marker": "6.",
+        "level": 0
       },
       {
         "text": "Client\u2019s name",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "Date of filing of the grievance",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "The nature of the grievance.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "c.",
+        "level": 0
       },
       {
         "text": "Findings",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "d.",
+        "level": 0
       },
       {
         "text": "Resolution, if any",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "e.",
+        "level": 0
       },
       {
         "text": "Registering complaints about home care to the Department of Home Health Licensing and Certification.",
-        "role": "lead"
+        "role": "lead",
+        "marker": "7.",
+        "level": 0
       },
       {
         "text": "There is an online form to file a complaint about a facility, agency, or center that is licensed by the Division of Licensing & Certification (DLC) or subject to the Division's oversight under the Centers for Medicare and Medicaid Services (CMS) certification.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 1
       },
       {
         "text": "https://www.maine.gov/dhhs/dlc/safety-reporting/file-a-complains",
@@ -1144,15 +1385,21 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Fax 207-287-9307, or",
-        "role": "contact"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 1
       },
       {
         "text": "Division of Licensing and Certification Attn: Complaint Intake 11 State House Station 41 Anthony Avenue Augusta, Maine 04333",
-        "role": "contact"
+        "role": "numbered",
+        "marker": "c.",
+        "level": 1
       },
       {
         "text": "Telephone 207-287-9308 or 1-800-383-2441",
-        "role": "contact"
+        "role": "numbered",
+        "marker": "d.",
+        "level": 1
       },
       {
         "text": "The following information is needed:",
@@ -1160,35 +1407,51 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Name, mailing address, phone number and email address Name and address of the facility, agency, or center;",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Details of the concerns including the date and time of the incident;",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "If anyone else was involved in the incident;",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "If there were any witnesses;",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "If the Administrator, Manager, or any staff of the facility, agency, or center was notified;",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "If the facility, agency, or center has tried to address the situation;",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "If law enforcement is involved;",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "If this same thing has happened before to the client or others.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       }
     ]
   },
@@ -1244,15 +1507,21 @@ const TRAINING_MODULES = {
       },
       {
         "text": "All clients will be considered potentially infections.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "Employees have a responsibility to protect the health and well-being of clients/families.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0
       },
       {
         "text": "Employees have a responsibility to protect themselves and each other.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0
       },
       {
         "text": "Procedures",
@@ -1260,7 +1529,9 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Standard Precautions are the minimum infection prevention practices that apply regardless of suspected or confirmed infection status of the client.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "Examples of standard precautions include:",
@@ -1268,19 +1539,27 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Hand hygiene.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "Use of personal protective equipment (e.g., gloves, masks, eyewear).",
-        "role": "body"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "Respiratory hygiene/cough etiquette.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0
       },
       {
         "text": "Clean and disinfect environmental surfaces.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0
       },
       {
         "text": "WASH HANDS \u2013 Client and Employee When visibly soiled; before and after eating; after using the bathroom; before and after providing hands-on care; before, during, and after meal preparation.",
@@ -1300,15 +1579,21 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Cough and sneeze into a tissue or into the elbow.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "Educate the client and family members on how to cover their cough and sneeze.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "Employees shall report health symptoms and/or exposure to any communicable or infectious disease to the Administrator or designee.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0
       },
       {
         "text": "Signs and symptoms may include:",
@@ -1316,31 +1601,45 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Elevated temperature \u2013 100.5 or higher",
-        "role": "body"
+        "role": "numbered",
+        "marker": "a.",
+        "level": 0
       },
       {
         "text": "Persistent cough",
-        "role": "body"
+        "role": "numbered",
+        "marker": "b.",
+        "level": 0
       },
       {
         "text": "Shortness of breath",
-        "role": "body"
+        "role": "numbered",
+        "marker": "c.",
+        "level": 0
       },
       {
         "text": "Congestion",
-        "role": "body"
+        "role": "numbered",
+        "marker": "d.",
+        "level": 0
       },
       {
         "text": "Nausea, vomiting, diarrhea.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "e.",
+        "level": 0
       },
       {
         "text": "Persistent sore throat",
-        "role": "body"
+        "role": "numbered",
+        "marker": "f.",
+        "level": 0
       },
       {
         "text": "Infected employees shall consult with their Health Care Provider regarding when they should be removed from client contact and when client contact can once again be resumed.",
-        "role": "body"
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0
       },
       {
         "text": "REFERENCES",
@@ -1348,15 +1647,21 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Occupational Safety and Health Administration (OSHA)",
-        "role": "body"
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "Center for Disease Control and Prevention (CDC)",
-        "role": "body"
+        "role": "numbered",
+        "marker": "2.",
+        "level": 0
       },
       {
         "text": "State Health Department",
-        "role": "body"
+        "role": "numbered",
+        "marker": "3.",
+        "level": 0
       }
     ]
   },
@@ -1376,47 +1681,69 @@ const TRAINING_MODULES = {
       },
       {
         "text": "ORIENTATION",
-        "role": "heading"
+        "role": "outline-heading",
+        "marker": "A.",
+        "level": 0
       },
       {
         "text": "All staff will be educated during orientation regarding security measures with home client records.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "1.",
+        "level": 1
       },
       {
         "text": "CONFIDENTIALITY",
-        "role": "heading"
+        "role": "outline-heading",
+        "marker": "B.",
+        "level": 0
       },
       {
         "text": "Employees will treat any information obtained from clients, caregivers, physicians and other sources in a confidential manner.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "All requests for specific client information are to be directed to the Administrator or designee.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Discussion of client information in a public place is prohibited.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "All written client information is stored in the client\u2019s record. Charts are not removed from the office unless specific reason has been identified and approved.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Records will not be left in unattended areas in the office, e.g., the reception area. After normal business hours all client records will be kept stored in locked cabinets or a locked room.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "HEALTH INFORMATION PORTABILITY AND ACCOUNTABILITY ACT (HIPAA)",
-        "role": "heading"
+        "role": "heading",
+        "marker": "C.",
+        "level": 0
       },
       {
         "text": "The Agency will comply with applicable HIPAA rules and regulations.",
-        "role": "bullet"
+        "role": "numbered",
+        "marker": "1.",
+        "level": 0
       },
       {
         "text": "Only the Administrator or designee is authorized to release protected health information.",
-        "role": "bullet"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       }
     ]
   },
@@ -1468,39 +1795,57 @@ const TRAINING_MODULES = {
       },
       {
         "text": "Key areas on a checklist might include:",
-        "role": "lead"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Safety features such as grab bars and non-slip flooring",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Clear, clutter-free walkways",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Lighting adjustments to reduce shadows and glare",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Labeling of rooms and items with simple, readable signs",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Use of contrasting colors to distinguish doors, furniture, and floors",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Creation of quiet zones to reduce sensory overload",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Incorporation of familiar and meaningful objects for comfort",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "Organized storage for personal items to support independence",
-        "role": "body"
+        "role": "bullet",
+        "marker": "*",
+        "level": 0
       },
       {
         "text": "This list is not exhaustive but provides a solid foundation for caregivers starting to adapt environments for those with dementia. Reviewing and updating the checklist periodically ensures the environment keeps pace with changes in the person\u2019s condition.",
@@ -1809,7 +2154,12 @@ function formatAnswer(value){
 
 function policyText(item){
   const text = String(item.text ?? "");
-  return text.replace(/^(?:[a-z]\.|\d+\.)\s+/, "");
+  return text;
+}
+
+function policyMarker(item){
+  const marker = String(item.marker || "");
+  return marker === "*" ? "&bull;" : escapeHtml(marker);
 }
 
 function renderPolicyContent(item){
@@ -1822,33 +2172,17 @@ function renderPolicyContent(item){
 
 function renderPolicyLine(item){
   const role = item.role || "body";
+  if (role === "outline-heading") {
+    return `<div class="policy-outline-heading level-${Number(item.level || 0)}"><span class="policy-marker">${policyMarker(item)}</span><span>${renderPolicyContent(item)}</span></div>`;
+  }
+  if (role === "numbered" || role === "lettered" || role === "bullet") {
+    return `<div class="policy-item ${escapeHtml(role)} level-${Number(item.level || 0)}"><span class="policy-marker">${policyMarker(item)}</span><span>${renderPolicyContent(item)}</span></div>`;
+  }
   return `<p class="policy-line ${escapeHtml(role)}">${renderPolicyContent(item)}</p>`;
 }
 
-function renderPolicyList(items){
-  return `<ul class="policy-list">${items.map(item => `<li>${renderPolicyContent(item)}</li>`).join("")}</ul>`;
-}
-
 function renderPolicyLines(items){
-  const listRoles = new Set(["bullet", "indented", "numbered", "lettered"]);
-  const html = [];
-  let list = [];
-  const flushList = () => {
-    if (!list.length) return;
-    html.push(renderPolicyList(list));
-    list = [];
-  };
-
-  items.forEach(item => {
-    if (listRoles.has(item.role || "body")) {
-      list.push(item);
-      return;
-    }
-    flushList();
-    html.push(renderPolicyLine(item));
-  });
-  flushList();
-  return html.join("");
+  return items.map(renderPolicyLine).join("");
 }
 
 function renderTrainingModule(sectionName){
