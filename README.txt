@@ -1,31 +1,51 @@
-STEPHEN THIBAULT PERSONAL WEBSITE UPDATE
-======================================
+STEPHEN THIBAULT MODERN TECH WEBSITE
+===================================
 
-FILES
------
+GITHUB-READY FILE STRUCTURE
+---------------------------
 index.html
 projects.html
+robots.txt
+sitemap.xml
+assets/
+  styles.css
+  favicon.svg
 
 WHAT CHANGED
 ------------
-- Added a Projects link to the homepage.
-- Added a new Projects page that showcases:
-  - workflow automation
-  - business-process improvement
-  - healthcare operations
-  - ecommerce and wholesale distribution
-  - marketplace program launches and testing
-  - analytics and reporting
-  - custom business solutions
-- Added a featured filepackR project section with a crawlable backlink:
-  https://filepackr.com/
+- Complete redesign in a modern, clean SaaS style inspired by filepackR.
+- Added a stronger homepage with:
+  - modern sticky navigation
+  - business operations and automation positioning
+  - industry experience
+  - capabilities section
+  - featured filepackR project
+  - crawlable backlink to https://filepackr.com/
+- Added a polished Projects page with:
+  - filepackR featured case study
+  - automation and process-improvement capabilities
+  - healthcare, ecommerce, wholesale distribution, and marketplace experience
+  - eBay program-launch and testing experience
+- Added responsive mobile behavior.
+- Added robots.txt and sitemap.xml for stevethibault.com.
 
 UPLOAD
 ------
-Replace the existing homepage index.html with the new index.html.
-Upload projects.html into the same folder as index.html.
+Upload the CONTENTS of this ZIP to the root of the GitHub Pages repository
+for stevethibault.com.
 
-NOTE
-----
-The visible phone number and tel: link are now consistent:
-(949) 463-1615
+EXPECTED STRUCTURE
+------------------
+your-repository/
+├── index.html
+├── projects.html
+├── robots.txt
+├── sitemap.xml
+└── assets/
+    ├── styles.css
+    └── favicon.svg
+
+BACKLINK
+--------
+The homepage and Projects page both include a crawlable link to:
+https://filepackr.com/
