@@ -1,51 +1,17 @@
-STEPHEN THIBAULT MODERN TECH WEBSITE
-===================================
+Stephen Thibault SEO Site
 
-GITHUB-READY FILE STRUCTURE
----------------------------
-index.html
-projects.html
-robots.txt
-sitemap.xml
-assets/
-  styles.css
-  favicon.svg
+Upload these files to the root of the GitHub Pages repository for stevethibault.com.
 
-WHAT CHANGED
-------------
-- Complete redesign in a modern, clean SaaS style inspired by filepackR.
-- Added a stronger homepage with:
-  - modern sticky navigation
-  - business operations and automation positioning
-  - industry experience
-  - capabilities section
-  - featured filepackR project
-  - crawlable backlink to https://filepackr.com/
-- Added a polished Projects page with:
-  - filepackR featured case study
-  - automation and process-improvement capabilities
-  - healthcare, ecommerce, wholesale distribution, and marketplace experience
-  - eBay program-launch and testing experience
-- Added responsive mobile behavior.
-- Added robots.txt and sitemap.xml for stevethibault.com.
+Included SEO updates:
+- Homepage optimized for Stephen Thibault, Steve Thibault, workflow automation, reporting, and operations automation.
+- About page with Stephen Thibault, Steve Thibault, and Steven Thibault name variants.
+- Dedicated service pages for workflow automation, business process improvement, reporting, document processing, healthcare operations, and ecommerce operations.
+- Dedicated project case-study pages.
+- Google Analytics tag G-77PRSY89RS installed on every HTML page.
+- Canonical URLs, meta descriptions, Open Graph tags, robots.txt, sitemap.xml, and JSON-LD structured data.
+- No geographic location references included.
 
-UPLOAD
-------
-Upload the CONTENTS of this ZIP to the root of the GitHub Pages repository
-for stevethibault.com.
-
-EXPECTED STRUCTURE
-------------------
-your-repository/
-├── index.html
-├── projects.html
-├── robots.txt
-├── sitemap.xml
-└── assets/
-    ├── styles.css
-    └── favicon.svg
-
-BACKLINK
---------
-The homepage and Projects page both include a crawlable link to:
-https://filepackr.com/
+After upload:
+1. Keep the CNAME file in the repository root.
+2. Submit https://stevethibault.com/sitemap.xml in Google Search Console.
+3. Request indexing for the homepage, about page, projects page, and the main service pages.
