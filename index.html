@@ -279,32 +279,33 @@ gtag('config', 'G-77PRSY89RS');
 
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 
-  <div id="contactModal" aria-hidden="true" style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; background:rgba(26,39,68,0.58); padding:20px; box-sizing:border-box; backdrop-filter:blur(6px);">
-    <div role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" style="position:relative; width:min(100%, 405px); background:#ffffff; border:1px solid rgba(26,39,68,0.12); border-radius:20px; padding:25px; box-shadow:0 24px 70px rgba(26,39,68,0.24); box-sizing:border-box; font-family:Arial, Helvetica, sans-serif; color:#1a2744; overflow:hidden;">
-      <div style="position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, #2563eb, #0f766e);"></div>
-      <button type="button" id="closeContactModal" aria-label="Close contact form" style="position:absolute; top:11px; right:13px; width:32px; height:32px; border:1px solid rgba(26,39,68,0.10); border-radius:999px; background:#f8fbff; color:#1a2744; font-size:22px; line-height:1; cursor:pointer; padding:0; display:flex; align-items:center; justify-content:center;">&times;</button>
+  <div id="contactModal" aria-hidden="true" style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; background:rgba(26,39,68,0.56); padding:18px; box-sizing:border-box; backdrop-filter:blur(6px);">
+    <div role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" style="position:relative; width:min(100%, 365px); background:#ffffff; border:1px solid rgba(26,39,68,0.12); border-radius:24px; padding:24px; box-shadow:0 28px 80px rgba(26,39,68,0.25); box-sizing:border-box; font-family:Arial, Helvetica, sans-serif; color:#1a2744;">
+      <button type="button" id="closeContactModal" aria-label="Close contact form" style="position:absolute; top:15px; right:15px; width:30px; height:30px; border:1px solid rgba(26,39,68,0.12); border-radius:999px; background:#f8fbff; color:#1a2744; font-size:21px; line-height:1; cursor:pointer; padding:0; display:flex; align-items:center; justify-content:center;">&times;</button>
 
       <form action="https://formsubmit.co/steve@stevethibault.com" method="POST" style="margin:0;">
         <input type="hidden" name="_subject" value="Website inquiry from stevethibault.com">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="true">
 
-        <span style="display:inline-block; color:#0f766e; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.13em; margin:2px 0 8px 0;">Contact</span>
-        <h2 id="contactModalTitle" style="margin:0 34px 17px 0; color:#1a2744; font-size:23px; line-height:1.12; letter-spacing:-0.035em;">Contact Stephen</h2>
+        <div style="display:flex; align-items:center; gap:11px; margin:0 42px 18px 0;">
+          <span style="width:38px; height:38px; border-radius:12px; background:#1a2744; color:#ffffff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; letter-spacing:0.02em; flex:0 0 auto;">ST</span>
+          <h2 id="contactModalTitle" style="margin:0; color:#1a2744; font-size:26px; line-height:1.05; letter-spacing:-0.045em; font-weight:800;">Contact</h2>
+        </div>
 
         <label for="contact-name" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Name</label>
-        <input id="contact-name" type="text" name="name" placeholder="Your name" required style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:12px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
+        <input id="contact-name" type="text" name="name" placeholder="Your name" required style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:14px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
 
         <label for="contact-email" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Email</label>
-        <input id="contact-email" type="email" name="email" placeholder="your@email.com" required style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:12px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
+        <input id="contact-email" type="email" name="email" placeholder="your@email.com" required style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:14px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
 
         <label for="contact-phone" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Phone</label>
-        <input id="contact-phone" type="tel" name="phone" placeholder="Optional" style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:12px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
+        <input id="contact-phone" type="tel" name="phone" placeholder="Optional" style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:14px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
 
         <label for="contact-message" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Message</label>
-        <textarea id="contact-message" name="message" placeholder="Tell me what you are looking for..." required style="width:100%; box-sizing:border-box; min-height:96px; resize:vertical; border:1px solid rgba(26,39,68,0.16); border-radius:12px; padding:11px 12px; font-size:14px; font-family:Arial, Helvetica, sans-serif; margin-bottom:15px; background:#f8fbff; color:#1a2744; outline:none;"></textarea>
+        <textarea id="contact-message" name="message" placeholder="Tell me what you are looking for..." required style="width:100%; box-sizing:border-box; min-height:86px; resize:vertical; border:1px solid rgba(26,39,68,0.16); border-radius:14px; padding:11px 12px; font-size:14px; font-family:Arial, Helvetica, sans-serif; margin-bottom:16px; background:#f8fbff; color:#1a2744; outline:none;"></textarea>
 
-        <button type="submit" style="border:0; background:#2563eb; color:#ffffff; padding:12px 18px; border-radius:999px; font-size:14px; font-weight:800; cursor:pointer; font-family:Arial, Helvetica, sans-serif; box-shadow:0 12px 24px rgba(37,99,235,0.22);">
+        <button type="submit" style="border:0; background:#2563eb; color:#ffffff; padding:12px 18px; border-radius:999px; font-size:14px; font-weight:800; cursor:pointer; font-family:Arial, Helvetica, sans-serif; box-shadow:0 14px 30px rgba(37,99,235,0.24);">
           Send Message
         </button>
       </form>
