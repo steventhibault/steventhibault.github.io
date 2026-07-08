@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -49,6 +48,137 @@ gtag('config', 'G-77PRSY89RS');
     ]
   }
   </script>
+
+  <!-- Contact modal styles. Everything else on the page still comes from assets/styles.css. -->
+  <style>
+    .contact-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 20, 34, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      z-index: 1000;
+    }
+    .contact-modal-overlay.open {
+      display: flex;
+    }
+    .contact-modal {
+      background: #ffffff;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(15, 20, 34, 0.3);
+    }
+    .contact-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: #1a2744;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .contact-modal-close:hover {
+      background: rgba(26, 39, 68, 0.08);
+    }
+    .contact-modal h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1.4rem;
+    }
+    .contact-modal p.contact-modal-sub {
+      margin: 0 0 1.5rem;
+      color: rgba(26, 39, 68, 0.7);
+      font-size: 0.95rem;
+    }
+
+    .form-row {
+      margin-bottom: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-row label {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: #1a2744;
+    }
+    .form-row input,
+    .form-row textarea {
+      font: inherit;
+      padding: 0.7rem 0.85rem;
+      border: 1px solid rgba(26, 39, 68, 0.2);
+      border-radius: 8px;
+      background: #fbfbfd;
+      color: #1a2744;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus {
+      outline: none;
+      border-color: #1a2744;
+      box-shadow: 0 0 0 3px rgba(26, 39, 68, 0.12);
+    }
+    .form-row textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+    .form-row .field-error {
+      display: none;
+      font-size: 0.8rem;
+      color: #b3261e;
+    }
+    .form-row.has-error input,
+    .form-row.has-error textarea {
+      border-color: #b3261e;
+    }
+    .form-row.has-error .field-error {
+      display: block;
+    }
+
+    .form-submit {
+      width: 100%;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      font: inherit;
+    }
+    .form-submit[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .form-status {
+      margin-top: 1rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: none;
+    }
+    .form-status.visible {
+      display: block;
+    }
+    .form-status.success {
+      background: rgba(35, 134, 54, 0.1);
+      color: #1a6b32;
+      border: 1px solid rgba(35, 134, 54, 0.25);
+    }
+    .form-status.error {
+      background: rgba(179, 38, 30, 0.08);
+      color: #b3261e;
+      border: 1px solid rgba(179, 38, 30, 0.25);
+    }
+  </style>
 </head>
 <body>
   <nav class="nav" aria-label="Primary navigation">
@@ -278,7 +408,212 @@ gtag('config', 'G-77PRSY89RS');
     </div>
   </footer>
 
+  <!-- Contact form modal. Opened by intercepting every mailto: link on the page (see script below). -->
+  <div class="contact-modal-overlay" id="contact-modal-overlay">
+    <div class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+      <button type="button" class="contact-modal-close" id="contact-modal-close" aria-label="Close contact form">✕</button>
+      <h2 id="contact-modal-title">Let's talk</h2>
+      <p class="contact-modal-sub">Send a message and I'll get back to you directly.</p>
+
+      <form id="contact-form" novalidate>
+        <div class="form-row" id="row-name">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="name" autocomplete="name" required />
+          <span class="field-error">Please enter your name.</span>
+        </div>
+
+        <div class="form-row" id="row-email">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" autocomplete="email" required />
+          <span class="field-error">Please enter a valid email address.</span>
+        </div>
+
+        <div class="form-row" id="row-subject">
+          <label for="cf-subject">Subject</label>
+          <input type="text" id="cf-subject" name="subject" autocomplete="off" required />
+          <span class="field-error">Please enter a subject.</span>
+        </div>
+
+        <div class="form-row" id="row-message">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required></textarea>
+          <span class="field-error">Please enter a message.</span>
+        </div>
+
+        <!-- Honeypot field, hidden from real visitors, used to filter basic spam bots -->
+        <div style="position:absolute; left:-9999px; top:-9999px;" aria-hidden="true">
+          <label for="cf-company">Company</label>
+          <input type="text" id="cf-company" name="company" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button type="submit" class="button button-primary form-submit" id="cf-submit-btn">Send message</button>
+
+        <div class="form-status" id="cf-form-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+
+  <!-- EmailJS: same pattern used elsewhere on stevethibault.com projects (Annual Training Quiz, PCA test). -->
+  <!-- Sign up / log in at https://www.emailjs.com, then fill in the three values below. -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      // ---- CONFIGURE THESE THREE VALUES ----
+      var EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
+      var EMAILJS_SERVICE_ID = "YOUR_EMAILJS_SERVICE_ID";
+      var EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
+      // Template variables sent: from_name, from_email, subject, message
+      // Set your EmailJS template's "To email" to steve@stevethibault.com
+      // ---------------------------------------
+
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+      var overlay = document.getElementById("contact-modal-overlay");
+      var closeBtn = document.getElementById("contact-modal-close");
+      var form = document.getElementById("contact-form");
+      var statusEl = document.getElementById("cf-form-status");
+      var submitBtn = document.getElementById("cf-submit-btn");
+      var lastFocused = null;
+
+      function openModal(prefillSubject) {
+        lastFocused = document.activeElement;
+        overlay.classList.add("open");
+        document.body.style.overflow = "hidden";
+        if (prefillSubject) {
+          document.getElementById("cf-subject").value = prefillSubject;
+        }
+        document.getElementById("cf-name").focus();
+      }
+
+      function closeModal() {
+        overlay.classList.remove("open");
+        document.body.style.overflow = "";
+        if (lastFocused) {
+          lastFocused.focus();
+        }
+      }
+
+      // Intercept every mailto: link on the page and open the modal instead of the email client.
+      document.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          var href = link.getAttribute("href") || "";
+          var subjectMatch = href.match(/subject=([^&]+)/);
+          var subject = subjectMatch ? decodeURIComponent(subjectMatch[1].replace(/\+/g, " ")) : "";
+          openModal(subject);
+        });
+      });
+
+      closeBtn.addEventListener("click", closeModal);
+      overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) {
+          closeModal();
+        }
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && overlay.classList.contains("open")) {
+          closeModal();
+        }
+      });
+
+      var fields = ["cf-name", "cf-email", "cf-subject", "cf-message"];
+      var rowIds = {
+        "cf-name": "row-name",
+        "cf-email": "row-email",
+        "cf-subject": "row-subject",
+        "cf-message": "row-message"
+      };
+
+      function clearErrors() {
+        fields.forEach(function (id) {
+          document.getElementById(rowIds[id]).classList.remove("has-error");
+        });
+      }
+
+      function isValidEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      }
+
+      function validate() {
+        clearErrors();
+        var valid = true;
+
+        fields.forEach(function (id) {
+          var input = document.getElementById(id);
+          var row = document.getElementById(rowIds[id]);
+          if (!input.value.trim()) {
+            row.classList.add("has-error");
+            valid = false;
+          }
+        });
+
+        var emailInput = document.getElementById("cf-email");
+        if (emailInput.value.trim() && !isValidEmail(emailInput.value.trim())) {
+          document.getElementById("row-email").classList.add("has-error");
+          valid = false;
+        }
+
+        return valid;
+      }
+
+      function showStatus(message, type) {
+        statusEl.textContent = message;
+        statusEl.className = "form-status visible " + type;
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Honeypot check — if filled, silently drop (likely a bot)
+        if (document.getElementById("cf-company").value.trim()) {
+          return;
+        }
+
+        if (!validate()) {
+          showStatus("Please fix the highlighted fields and try again.", "error");
+          return;
+        }
+
+        if (EMAILJS_PUBLIC_KEY === "YOUR_EMAILJS_PUBLIC_KEY") {
+          showStatus(
+            "Form isn't connected yet — add your EmailJS keys in the page source to activate it.",
+            "error"
+          );
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+        statusEl.className = "form-status";
+
+        var params = {
+          from_name: document.getElementById("cf-name").value.trim(),
+          from_email: document.getElementById("cf-email").value.trim(),
+          subject: document.getElementById("cf-subject").value.trim(),
+          message: document.getElementById("cf-message").value.trim()
+        };
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params).then(
+          function () {
+            form.reset();
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Send message";
+            showStatus("Message sent — thanks for reaching out. I'll get back to you soon.", "success");
+          },
+          function (err) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Send message";
+            showStatus(
+              "Something went wrong sending your message. Please try again, or email steve@stevethibault.com directly.",
+              "error"
+            );
+          }
+        );
+      });
+    })();
+  </script>
 
 </body>
 </html>
