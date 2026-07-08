@@ -8,8 +8,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-gtag('config', 'G-77PRSY89RS');
-
+    gtag('config', 'G-77PRSY89RS');
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +18,14 @@ gtag('config', 'G-77PRSY89RS');
   <meta property="og:description" content="Business operations, automation, analytics, and process improvement across healthcare, ecommerce, distribution, and marketplace operations." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://stevethibault.com/" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:site_name" content="Stephen Thibault" />
+  <meta property="og:image" content="https://stevethibault.com/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stephen Thibault | Operations, Automation & Process Improvement" />
+  <meta name="twitter:description" content="Business operations, automation, analytics, and process improvement across healthcare, ecommerce, distribution, and marketplace operations." />
+  <meta name="twitter:image" content="https://stevethibault.com/assets/og-image.jpg" />
   <link rel="canonical" href="https://stevethibault.com/" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/styles.css" />
@@ -27,27 +33,170 @@ gtag('config', 'G-77PRSY89RS');
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Stephen Thibault",
-    "alternateName": ["Steve Thibault", "Steven Thibault"],
-    "url": "https://stevethibault.com/",
-    "jobTitle": "Operations & Automation Specialist",
-    "email": "mailto:steve@stevethibault.com",
-    "sameAs": [
-      "https://linkedin.com/in/stephenthibault"
-    ],
-    "knowsAbout": [
-      "Business operations",
-      "Workflow automation",
-      "Process improvement",
-      "Reporting and analytics",
-      "Healthcare operations",
-      "Ecommerce operations",
-      "Wholesale distribution",
-      "Marketplace operations"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://stevethibault.com/#person",
+        "name": "Stephen Thibault",
+        "alternateName": ["Steve Thibault", "Steven Thibault"],
+        "url": "https://stevethibault.com/",
+        "jobTitle": "Operations & Automation Specialist",
+        "email": "mailto:steve@stevethibault.com",
+        "sameAs": [
+          "https://linkedin.com/in/stephenthibault"
+        ],
+        "knowsAbout": [
+          "Business operations",
+          "Workflow automation",
+          "Process improvement",
+          "Reporting and analytics",
+          "Healthcare operations",
+          "Ecommerce operations",
+          "Wholesale distribution",
+          "Marketplace operations"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://stevethibault.com/#website",
+        "url": "https://stevethibault.com/",
+        "name": "Stephen Thibault",
+        "description": "Business operations, automation, analytics, and process improvement across healthcare, ecommerce, distribution, and marketplace operations.",
+        "publisher": { "@id": "https://stevethibault.com/#person" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "filepackR",
+        "url": "https://filepackr.com/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Windows",
+        "description": "PDF splitter, merger, and document-processing software that uses OCR-powered classification and customizable rules to organize and route files.",
+        "creator": { "@id": "https://stevethibault.com/#person" }
+      }
     ]
   }
   </script>
+
+  <!-- Styles for the contact modal, consolidated from what were previously
+       repeated inline style="" attributes on the modal, header, label,
+       input, textarea, and button elements. Values are unchanged. -->
+  <style>
+    .contact-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26, 39, 68, 0.56);
+      padding: 18px;
+      box-sizing: border-box;
+      backdrop-filter: blur(6px);
+    }
+    .contact-dialog {
+      position: relative;
+      width: min(100%, 365px);
+      background: #ffffff;
+      border: 1px solid rgba(26, 39, 68, 0.12);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 28px 80px rgba(26, 39, 68, 0.25);
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #1a2744;
+    }
+    .contact-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(26, 39, 68, 0.12);
+      border-radius: 999px;
+      background: #f8fbff;
+      color: #1a2744;
+      font-size: 21px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-header {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin: 0 42px 18px 0;
+    }
+    .contact-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #1a2744;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      flex: 0 0 auto;
+    }
+    .contact-title {
+      margin: 0;
+      color: #1a2744;
+      font-size: 26px;
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      font-weight: 800;
+    }
+    .contact-label {
+      display: block;
+      font-weight: 800;
+      margin: 0 0 6px 0;
+      color: #1a2744;
+      font-size: 14px;
+    }
+    .contact-input {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid rgba(26, 39, 68, 0.16);
+      border-radius: 14px;
+      padding: 11px 12px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      background: #f8fbff;
+      color: #1a2744;
+      outline: none;
+    }
+    .contact-textarea {
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 86px;
+      resize: vertical;
+      border: 1px solid rgba(26, 39, 68, 0.16);
+      border-radius: 14px;
+      padding: 11px 12px;
+      font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-bottom: 16px;
+      background: #f8fbff;
+      color: #1a2744;
+      outline: none;
+    }
+    .contact-submit {
+      border: 0;
+      background: #2563eb;
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: Arial, Helvetica, sans-serif;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.24);
+    }
+  </style>
 </head>
 <body>
   <nav class="nav" aria-label="Primary navigation">
@@ -91,178 +240,177 @@ gtag('config', 'G-77PRSY89RS');
           </div>
         </div>
 
-    <aside class="hero-card" aria-label="Operational improvement workflow">
-      <div class="window-bar">
-        <span class="window-dot"></span>
-        <span class="window-dot"></span>
-        <span class="window-dot"></span>
-        <span class="window-title">Operational Improvement Workflow</span>
+        <aside class="hero-card" aria-label="Operational improvement workflow">
+          <div class="window-bar">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-title">Operational Improvement Workflow</span>
+          </div>
+          <div class="workflow-list">
+            <div class="workflow-row">
+              <span class="workflow-icon">01</span>
+              <div>
+                <strong>Find the bottleneck</strong>
+                <p>Identify repetitive work, friction points, and avoidable errors.</p>
+              </div>
+            </div>
+            <div class="workflow-row">
+              <span class="workflow-icon">02</span>
+              <div>
+                <strong>Design the better process</strong>
+                <p>Build a clearer workflow around the way the business actually operates.</p>
+              </div>
+            </div>
+            <div class="workflow-row">
+              <span class="workflow-icon">03</span>
+              <div>
+                <strong>Automate what makes sense</strong>
+                <p>Use practical tools, reporting, and custom systems to reduce manual effort.</p>
+              </div>
+            </div>
+            <div class="workflow-row">
+              <span class="workflow-icon">04</span>
+              <div>
+                <strong>Improve visibility</strong>
+                <p>Make performance, risks, and follow-up work easier to track.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
       </div>
-      <div class="workflow-list">
-        <div class="workflow-row">
-          <span class="workflow-icon">01</span>
-          <div>
-            <strong>Find the bottleneck</strong>
-            <p>Identify repetitive work, friction points, and avoidable errors.</p>
+    </section>
+
+    <section class="trust">
+      <div class="container trust-box">
+        <strong>Experience across operationally complex environments.</strong>
+        <div class="trust-list">
+          <span>✓ Healthcare</span>
+          <span>✓ Ecommerce</span>
+          <span>✓ Wholesale distribution</span>
+          <span>✓ Marketplace operations</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="capabilities">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Core capabilities</span>
+          <h2>Practical improvements that make work faster, clearer, and easier to manage.</h2>
+          <p>I focus on useful systems that reduce repetitive work, improve consistency, and give teams better visibility into what needs attention.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <span class="card-icon">01</span>
+            <h3>Workflow automation</h3>
+            <p>Identify repetitive tasks and build practical tools that reduce manual effort while keeping staff in control.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">02</span>
+            <h3>Business-process improvement</h3>
+            <p>Analyze how work moves through a company, identify bottlenecks, and create cleaner repeatable systems.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">03</span>
+            <h3>Reporting & analytics</h3>
+            <p>Create reporting systems that improve visibility, track risks, and support better operational decisions.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">04</span>
+            <h3>Custom business tools</h3>
+            <p>Build focused solutions around real business needs instead of forcing teams into rigid one-size-fits-all systems.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">05</span>
+            <h3>Program launches & testing</h3>
+            <p>Support new initiatives, pilot programs, operational testing, and the process changes required to launch effectively.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">06</span>
+            <h3>Scalable operations</h3>
+            <p>Design processes that remain easier to manage as volume, complexity, and team responsibilities grow.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="industries">
+      <div class="container split-grid">
+        <div>
+          <span class="kicker">Industry experience</span>
+          <h2>Operational thinking that transfers across industries.</h2>
+          <p class="section-copy">
+            Different industries have different details, but the underlying challenges are often similar:
+            repetitive work, unclear handoffs, missing visibility, inconsistent processes, and too much staff time
+            spent fixing preventable problems.
+          </p>
+        </div>
+
+        <div class="stack">
+          <div class="stack-item">
+            <span class="check" aria-hidden="true">✓</span>
+            <div><strong>Healthcare operations</strong><p>Document-heavy onboarding, compliance, training, reporting, and audit-readiness workflows.</p></div>
+          </div>
+          <div class="stack-item">
+            <span class="check" aria-hidden="true">✓</span>
+            <div><strong>Ecommerce & marketplace operations</strong><p>Listing quality, reporting, seller workflows, account operations, and scalable process improvements.</p></div>
+          </div>
+          <div class="stack-item">
+            <span class="check" aria-hidden="true">✓</span>
+            <div><strong>Wholesale distribution</strong><p>Inventory, order-flow, operational reporting, and process consistency across high-volume environments.</p></div>
+          </div>
+          <div class="stack-item">
+            <span class="check" aria-hidden="true">✓</span>
+            <div><strong>New program testing</strong><p>Support launches, pilot programs, operational testing, and evolving business requirements.</p></div>
           </div>
         </div>
-        <div class="workflow-row">
-          <span class="workflow-icon">02</span>
-          <div>
-            <strong>Design the better process</strong>
-            <p>Build a clearer workflow around the way the business actually operates.</p>
-          </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Featured project</span>
+          <h2>filepackR: PDF document processing powered by Intelligent File Routing.</h2>
+          <p>One example of the type of practical operational improvement I build: software that turns a fragile manual workflow into a cleaner, more repeatable system.</p>
         </div>
-        <div class="workflow-row">
-          <span class="workflow-icon">03</span>
-          <div>
-            <strong>Automate what makes sense</strong>
-            <p>Use practical tools, reporting, and custom systems to reduce manual effort.</p>
+
+        <article class="project-card">
+          <div class="project-visual">
+            <span>Featured automation project</span>
+            <strong>filepackR</strong>
+            <span>File. Pack. Route.</span>
           </div>
-        </div>
-        <div class="workflow-row">
-          <span class="workflow-icon">04</span>
-          <div>
-            <strong>Improve visibility</strong>
-            <p>Make performance, risks, and follow-up work easier to track.</p>
+          <div class="project-copy">
+            <h3>From messy paperwork to audit-ready records.</h3>
+            <p>
+              filepackR is a PDF splitter, merger, and document-processing software platform built to identify, organize,
+              and route files through the right workflows. It combines OCR-powered classification, customizable
+              rules, review queues, and local-first processing.
+            </p>
+            <ul class="project-list">
+              <li><i aria-hidden="true">✓</i><span>Mixed paper stacks into logical digital archives</span></li>
+              <li><i aria-hidden="true">✓</i><span>Merge related pages and supporting records</span></li>
+              <li><i aria-hidden="true">✓</i><span>Apply consistent filenames and routing logic</span></li>
+              <li><i aria-hidden="true">✓</i><span>Surface exceptions for human review</span></li>
+            </ul>
+            <a class="text-link" href="https://filepackr.com/" target="_blank" rel="noopener noreferrer">Visit filepackR.com <span>→</span></a>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container cta-box">
+        <div>
+          <h2>Let's build something better.</h2>
+          <p>For workflow automation, operational improvement, analytics, or custom business tools, get in touch.</p>
         </div>
+        <a class="button button-primary" href="mailto:steve@stevethibault.com?subject=Website%20inquiry" aria-label="Email Stephen Thibault">steve@stevethibault.com</a>
       </div>
-    </aside>
-  </div>
-</section>
-
-<section class="trust">
-  <div class="container trust-box">
-    <strong>Experience across operationally complex environments.</strong>
-    <div class="trust-list">
-      <span>✓ Healthcare</span>
-      <span>✓ Ecommerce</span>
-      <span>✓ Wholesale distribution</span>
-      <span>✓ Marketplace operations</span>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt" id="capabilities">
-  <div class="container">
-    <div class="section-head">
-      <span class="kicker">Core capabilities</span>
-      <h2>Practical improvements that make work faster, clearer, and easier to manage.</h2>
-      <p>I focus on useful systems that reduce repetitive work, improve consistency, and give teams better visibility into what needs attention.</p>
-    </div>
-
-    <div class="grid">
-      <article class="card">
-        <span class="card-icon">01</span>
-        <h3>Workflow automation</h3>
-        <p>Identify repetitive tasks and build practical tools that reduce manual effort while keeping staff in control.</p>
-      </article>
-      <article class="card">
-        <span class="card-icon">02</span>
-        <h3>Business-process improvement</h3>
-        <p>Analyze how work moves through a company, identify bottlenecks, and create cleaner repeatable systems.</p>
-      </article>
-      <article class="card">
-        <span class="card-icon">03</span>
-        <h3>Reporting & analytics</h3>
-        <p>Create reporting systems that improve visibility, track risks, and support better operational decisions.</p>
-      </article>
-      <article class="card">
-        <span class="card-icon">04</span>
-        <h3>Custom business tools</h3>
-        <p>Build focused solutions around real business needs instead of forcing teams into rigid one-size-fits-all systems.</p>
-      </article>
-      <article class="card">
-        <span class="card-icon">05</span>
-        <h3>Program launches & testing</h3>
-        <p>Support new initiatives, pilot programs, operational testing, and the process changes required to launch effectively.</p>
-      </article>
-      <article class="card">
-        <span class="card-icon">06</span>
-        <h3>Scalable operations</h3>
-        <p>Design processes that remain easier to manage as volume, complexity, and team responsibilities grow.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="industries">
-  <div class="container split-grid">
-    <div>
-      <span class="kicker">Industry experience</span>
-      <h2>Operational thinking that transfers across industries.</h2>
-      <p class="section-copy">
-        Different industries have different details, but the underlying challenges are often similar:
-        repetitive work, unclear handoffs, missing visibility, inconsistent processes, and too much staff time
-        spent fixing preventable problems.
-      </p>
-    </div>
-
-    <div class="stack">
-      <div class="stack-item">
-        <span class="check" aria-hidden="true">✓</span>
-        <div><strong>Healthcare operations</strong><p>Document-heavy onboarding, compliance, training, reporting, and audit-readiness workflows.</p></div>
-      </div>
-      <div class="stack-item">
-        <span class="check" aria-hidden="true">✓</span>
-        <div><strong>Ecommerce & marketplace operations</strong><p>Listing quality, reporting, seller workflows, account operations, and scalable process improvements.</p></div>
-      </div>
-      <div class="stack-item">
-        <span class="check" aria-hidden="true">✓</span>
-        <div><strong>Wholesale distribution</strong><p>Inventory, order-flow, operational reporting, and process consistency across high-volume environments.</p></div>
-      </div>
-      <div class="stack-item">
-        <span class="check" aria-hidden="true">✓</span>
-        <div><strong>New program testing</strong><p>Support launches, pilot programs, operational testing, and evolving business requirements.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-head">
-      <span class="kicker">Featured project</span>
-      <h2>filepackR: PDF document processing powered by Intelligent File Routing.</h2>
-      <p>One example of the type of practical operational improvement I build: software that turns a fragile manual workflow into a cleaner, more repeatable system.</p>
-    </div>
-
-    <article class="project-card">
-      <div class="project-visual">
-        <span>Featured automation project</span>
-        <strong>filepackR</strong>
-        <span>File. Pack. Route.</span>
-      </div>
-      <div class="project-copy">
-        <h3>From messy paperwork to audit-ready records.</h3>
-        <p>
-          filepackR is a PDF splitter, merger, and document-processing software platform built to identify, organize,
-          and route files through the right workflows. It combines OCR-powered classification, customizable
-          rules, review queues, and local-first processing.
-        </p>
-        <ul class="project-list">
-          <li><i aria-hidden="true">✓</i><span>Mixed paper stacks into logical digital archives</span></li>
-          <li><i aria-hidden="true">✓</i><span>Merge related pages and supporting records</span></li>
-          <li><i aria-hidden="true">✓</i><span>Apply consistent filenames and routing logic</span></li>
-          <li><i aria-hidden="true">✓</i><span>Surface exceptions for human review</span></li>
-        </ul>
-        <a class="text-link" href="https://filepackr.com/" target="_blank" rel="noopener noreferrer">Visit filepackR.com <span>→</span></a>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="container cta-box">
-    <div>
-      <h2>Let's build something better.</h2>
-      <p>For workflow automation, operational improvement, analytics, or custom business tools, get in touch.</p>
-    </div>
-    <a class="button button-primary" href="mailto:steve@stevethibault.com?subject=Website%20inquiry" aria-label="Email Stephen Thibault">steve@stevethibault.com</a>
-  </div>
-</section>
-
+    </section>
   </main>
 
   <footer>
@@ -276,35 +424,33 @@ gtag('config', 'G-77PRSY89RS');
     </div>
   </footer>
 
-  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
-
-  <div id="contactModal" aria-hidden="true" style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; background:rgba(26,39,68,0.56); padding:18px; box-sizing:border-box; backdrop-filter:blur(6px);">
-    <div role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" style="position:relative; width:min(100%, 365px); background:#ffffff; border:1px solid rgba(26,39,68,0.12); border-radius:24px; padding:24px; box-shadow:0 28px 80px rgba(26,39,68,0.25); box-sizing:border-box; font-family:Arial, Helvetica, sans-serif; color:#1a2744;">
-      <button type="button" id="closeContactModal" aria-label="Close contact form" style="position:absolute; top:15px; right:15px; width:30px; height:30px; border:1px solid rgba(26,39,68,0.12); border-radius:999px; background:#f8fbff; color:#1a2744; font-size:21px; line-height:1; cursor:pointer; padding:0; display:flex; align-items:center; justify-content:center;">&times;</button>
+  <div id="contactModal" class="contact-modal" aria-hidden="true" style="display:none;">
+    <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+      <button type="button" id="closeContactModal" class="contact-close" aria-label="Close contact form">&times;</button>
 
       <form action="https://formsubmit.co/steve@stevethibault.com" method="POST" style="margin:0;">
         <input type="hidden" name="_subject" value="Website inquiry from stevethibault.com">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="true">
 
-        <div style="display:flex; align-items:center; gap:11px; margin:0 42px 18px 0;">
-          <span style="width:38px; height:38px; border-radius:12px; background:#1a2744; color:#ffffff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; letter-spacing:0.02em; flex:0 0 auto;">ST</span>
-          <h2 id="contactModalTitle" style="margin:0; color:#1a2744; font-size:26px; line-height:1.05; letter-spacing:-0.045em; font-weight:800;">Contact</h2>
+        <div class="contact-header">
+          <span class="contact-avatar">ST</span>
+          <h2 id="contactModalTitle" class="contact-title">Contact</h2>
         </div>
 
-        <label for="contact-name" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Name</label>
-        <input id="contact-name" type="text" name="name" placeholder="Your name" required style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:14px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
+        <label for="contact-name" class="contact-label">Name</label>
+        <input id="contact-name" type="text" name="name" placeholder="Your name" required class="contact-input">
 
-        <label for="contact-email" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Email</label>
-        <input id="contact-email" type="email" name="email" placeholder="your@email.com" required style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:14px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
+        <label for="contact-email" class="contact-label">Email</label>
+        <input id="contact-email" type="email" name="email" placeholder="your@email.com" required class="contact-input">
 
-        <label for="contact-phone" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Phone</label>
-        <input id="contact-phone" type="tel" name="phone" placeholder="Optional" style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:14px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
+        <label for="contact-phone" class="contact-label">Phone</label>
+        <input id="contact-phone" type="tel" name="phone" placeholder="Optional" class="contact-input">
 
-        <label for="contact-message" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Message</label>
-        <textarea id="contact-message" name="message" placeholder="Tell me what you are looking for..." required style="width:100%; box-sizing:border-box; min-height:86px; resize:vertical; border:1px solid rgba(26,39,68,0.16); border-radius:14px; padding:11px 12px; font-size:14px; font-family:Arial, Helvetica, sans-serif; margin-bottom:16px; background:#f8fbff; color:#1a2744; outline:none;"></textarea>
+        <label for="contact-message" class="contact-label">Message</label>
+        <textarea id="contact-message" name="message" placeholder="Tell me what you are looking for..." required class="contact-textarea"></textarea>
 
-        <button type="submit" style="border:0; background:#2563eb; color:#ffffff; padding:12px 18px; border-radius:10px; font-size:14px; font-weight:800; cursor:pointer; font-family:Arial, Helvetica, sans-serif; box-shadow:0 14px 30px rgba(37,99,235,0.24);">
+        <button type="submit" class="contact-submit">
           Send Message
         </button>
       </form>
@@ -312,6 +458,8 @@ gtag('config', 'G-77PRSY89RS');
   </div>
 
   <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
     const contactModal = document.getElementById("contactModal");
     const closeContactModal = document.getElementById("closeContactModal");
 
