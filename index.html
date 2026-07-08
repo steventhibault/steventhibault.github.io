@@ -63,7 +63,7 @@ gtag('config', 'G-77PRSY89RS');
         <a href="#capabilities">Capabilities</a>
         <a href="#industries">Industries</a>
         <a href="/projects.html">Projects</a>
-        <a class="button button-primary" href="/contactform.html" aria-label="Email Stephen Thibault">Let's talk</a>
+        <a class="button button-primary" href="mailto:steve@stevethibault.com?subject=Website%20inquiry" aria-label="Email Stephen Thibault">Let's talk</a>
       </div>
     </div>
   </nav>
@@ -81,7 +81,7 @@ gtag('config', 'G-77PRSY89RS');
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="/projects.html">Explore projects</a>
-            <a class="button button-secondary" href="/contactform.html" aria-label="Email Stephen Thibault">Contact me</a>
+            <a class="button button-secondary" href="mailto:steve@stevethibault.com?subject=Website%20inquiry" aria-label="Email Stephen Thibault">Contact me</a>
           </div>
           <div class="proof">
             <span><i aria-hidden="true">✓</i> Workflow automation</span>
@@ -259,7 +259,7 @@ gtag('config', 'G-77PRSY89RS');
       <h2>Let's build something better.</h2>
       <p>For workflow automation, operational improvement, analytics, or custom business tools, get in touch.</p>
     </div>
-    <a class="button button-primary" href="/contactform.html" aria-label="Email Stephen Thibault">steve@stevethibault.com</a>
+    <a class="button button-primary" href="mailto:steve@stevethibault.com?subject=Website%20inquiry" aria-label="Email Stephen Thibault">steve@stevethibault.com</a>
   </div>
 </section>
 
@@ -270,7 +270,7 @@ gtag('config', 'G-77PRSY89RS');
       <span>© <span id="year"></span> Stephen Thibault</span>
       <div class="footer-links">
         <a href="/projects.html">Projects</a>
-        <a href="/contactform.html" aria-label="Email Stephen Thibault">Email</a>
+        <a href="mailto:steve@stevethibault.com?subject=Website%20inquiry" aria-label="Email Stephen Thibault">Email</a>
         <a href="tel:+19494631615">(949) 463-1612</a>
         <a href="https://linkedin.com/in/stephenthibault" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
@@ -278,6 +278,78 @@ gtag('config', 'G-77PRSY89RS');
   </footer>
 
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+
+  <div id="contactModal" aria-hidden="true" style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; background:rgba(26,39,68,0.58); padding:20px; box-sizing:border-box; backdrop-filter:blur(6px);">
+    <div role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" style="position:relative; width:min(100%, 405px); background:#ffffff; border:1px solid rgba(26,39,68,0.12); border-radius:20px; padding:25px; box-shadow:0 24px 70px rgba(26,39,68,0.24); box-sizing:border-box; font-family:Arial, Helvetica, sans-serif; color:#1a2744; overflow:hidden;">
+      <div style="position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg, #2563eb, #0f766e);"></div>
+      <button type="button" id="closeContactModal" aria-label="Close contact form" style="position:absolute; top:11px; right:13px; width:32px; height:32px; border:1px solid rgba(26,39,68,0.10); border-radius:999px; background:#f8fbff; color:#1a2744; font-size:22px; line-height:1; cursor:pointer; padding:0; display:flex; align-items:center; justify-content:center;">&times;</button>
+
+      <form action="https://formsubmit.co/steve@stevethibault.com" method="POST" style="margin:0;">
+        <input type="hidden" name="_subject" value="Website inquiry from stevethibault.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+
+        <span style="display:inline-block; color:#0f766e; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.13em; margin:2px 0 8px 0;">Contact</span>
+        <h2 id="contactModalTitle" style="margin:0 34px 17px 0; color:#1a2744; font-size:23px; line-height:1.12; letter-spacing:-0.035em;">Contact Stephen</h2>
+
+        <label for="contact-name" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Name</label>
+        <input id="contact-name" type="text" name="name" placeholder="Your name" required style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:12px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
+
+        <label for="contact-email" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Email</label>
+        <input id="contact-email" type="email" name="email" placeholder="your@email.com" required style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:12px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
+
+        <label for="contact-phone" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Phone</label>
+        <input id="contact-phone" type="tel" name="phone" placeholder="Optional" style="width:100%; box-sizing:border-box; border:1px solid rgba(26,39,68,0.16); border-radius:12px; padding:11px 12px; font-size:14px; margin-bottom:12px; background:#f8fbff; color:#1a2744; outline:none;">
+
+        <label for="contact-message" style="display:block; font-weight:800; margin:0 0 6px 0; color:#1a2744; font-size:14px;">Message</label>
+        <textarea id="contact-message" name="message" placeholder="Tell me what you are looking for..." required style="width:100%; box-sizing:border-box; min-height:96px; resize:vertical; border:1px solid rgba(26,39,68,0.16); border-radius:12px; padding:11px 12px; font-size:14px; font-family:Arial, Helvetica, sans-serif; margin-bottom:15px; background:#f8fbff; color:#1a2744; outline:none;"></textarea>
+
+        <button type="submit" style="border:0; background:#2563eb; color:#ffffff; padding:12px 18px; border-radius:999px; font-size:14px; font-weight:800; cursor:pointer; font-family:Arial, Helvetica, sans-serif; box-shadow:0 12px 24px rgba(37,99,235,0.22);">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const contactModal = document.getElementById("contactModal");
+    const closeContactModal = document.getElementById("closeContactModal");
+
+    function openContactModal(event) {
+      event.preventDefault();
+      contactModal.style.display = "flex";
+      contactModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      setTimeout(function() {
+        const firstField = document.getElementById("contact-name");
+        if (firstField) firstField.focus();
+      }, 50);
+    }
+
+    function closeContactForm() {
+      contactModal.style.display = "none";
+      contactModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll('a[href^="mailto:steve@stevethibault.com"]').forEach(function(link) {
+      link.addEventListener("click", openContactModal);
+    });
+
+    closeContactModal.addEventListener("click", closeContactForm);
+
+    contactModal.addEventListener("click", function(event) {
+      if (event.target === contactModal) {
+        closeContactForm();
+      }
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && contactModal.style.display === "flex") {
+        closeContactForm();
+      }
+    });
+  </script>
 
 </body>
 </html>
