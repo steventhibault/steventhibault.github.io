@@ -1,1 +1,32 @@
 formsubmit.co
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Test</title>
+</head>
+<body>
+
+<h1>Contact Test</h1>
+
+<form action="https://formsubmit.co/steve@stevethibault.com" method="POST">
+  <input type="hidden" name="_subject" value="Website inquiry from stevethibault.com">
+  <input type="hidden" name="_captcha" value="true">
+
+  <input type="text" name="name" placeholder="Your name" required>
+  <br><br>
+
+  <input type="email" name="email" placeholder="Your email" required>
+  <br><br>
+
+  <input type="tel" name="phone" placeholder="Phone">
+  <br><br>
+
+  <textarea name="message" placeholder="Message" required></textarea>
+  <br><br>
+
+  <button type="submit">Send Message</button>
+</form>
+
+</body>
+</html>
