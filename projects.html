@@ -13,15 +13,78 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Selected projects and operational improvement work by Stephen Thibault, including automation, healthcare workflows, ecommerce operations, analytics, and filepackR software." />
+  <meta name="theme-color" content="#1a2744" />
+  <meta property="og:title" content="Projects | Stephen Thibault" />
+  <meta property="og:description" content="Selected projects and operational improvement work: automation, healthcare workflows, ecommerce operations, analytics, and filepackR software." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://stevethibault.com/projects.html" />
+  <meta property="og:site_name" content="Stephen Thibault" />
+  <meta property="og:image" content="https://stevethibault.com/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Projects | Stephen Thibault" />
+  <meta name="twitter:description" content="Selected projects and operational improvement work: automation, healthcare workflows, ecommerce operations, analytics, and filepackR software." />
+  <meta name="twitter:image" content="https://stevethibault.com/assets/og-image.jpg" />
   <link rel="canonical" href="https://stevethibault.com/projects.html" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="assets/styles.css" />
   <title>Projects | Stephen Thibault</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://stevethibault.com/#person",
+        "name": "Stephen Thibault",
+        "alternateName": ["Steve Thibault", "Steven Thibault"],
+        "url": "https://stevethibault.com/",
+        "jobTitle": "Operations & Automation Specialist",
+        "sameAs": [
+          "https://linkedin.com/in/stephenthibault"
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://stevethibault.com/projects.html#page",
+        "url": "https://stevethibault.com/projects.html",
+        "name": "Projects | Stephen Thibault",
+        "description": "Selected projects and operational improvement work by Stephen Thibault, including automation, healthcare workflows, ecommerce operations, analytics, and filepackR software.",
+        "isPartOf": { "@id": "https://stevethibault.com/#website" },
+        "about": { "@id": "https://stevethibault.com/#person" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "filepackR",
+        "url": "https://filepackr.com/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Windows",
+        "description": "PDF splitter, merger, and document-processing software that uses OCR-powered classification and customizable rules to organize and route files.",
+        "creator": { "@id": "https://stevethibault.com/#person" }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* Layout for the two anonymized case-study cards, reusing the
+       existing .project-card visual pattern side by side on wider
+       screens. */
+    .case-study-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 28px;
+    }
+    .case-study-grid .project-card {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="index.html" aria-label="Stephen Thibault homepage">
+      <a class="brand" href="/" aria-label="Stephen Thibault homepage">
         <span class="brand-mark">ST</span>
         <span class="brand-copy">
           <strong>Stephen Thibault</strong>
@@ -29,10 +92,10 @@
         </span>
       </a>
       <div class="nav-links">
-        <a href="index.html">Home</a>
+        <a href="/">Home</a>
         <a href="#work">Projects</a>
         <a href="#capabilities">Capabilities</a>
-        <a class="button button-primary" href="mailto:Steve@stevethibault.com">Let's talk</a>
+        <a class="button button-primary" href="mailto:steve@stevethibault.com">Let's talk</a>
       </div>
     </div>
   </nav>
@@ -90,7 +153,73 @@
       </div>
     </section>
 
-    <section class="section" id="capabilities">
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Case studies</span>
+          <h2>Operational reporting systems built around real compliance and reconciliation needs.</h2>
+          <p>Two examples of reporting and reconciliation systems built for operationally complex, regulated environments. Details are anonymized; no client names or data are shown.</p>
+        </div>
+
+        <div class="case-study-grid">
+          <article class="project-card">
+            <div class="project-visual">
+              <span>Case study</span>
+              <strong>Compliance Reporting</strong>
+              <span>Reconcile. Report. Attest.</span>
+            </div>
+            <div class="project-copy">
+              <h3>Turning fragmented compliance data into a single audit-ready report.</h3>
+              <p>
+                A regional homecare provider needed to produce quarterly compliance reports pulling from
+                electronic visit verification (EVV) data, participant records, and several separate operational
+                logs — previously a manual reconciliation process repeated by hand every quarter.
+              </p>
+              <p>
+                Built a consolidated reporting workbook that integrates EVV data, participant demographics and
+                health-condition tracking, discharge and transportation logs, and a financial summary into one
+                system, with automated formulas replacing manual cross-referencing and a structured
+                attestation process for audit readiness.
+              </p>
+              <ul class="project-list">
+                <li><i>✓</i><span>Eliminated manual reconciliation across separate data sources</span></li>
+                <li><i>✓</i><span>Automated compliance calculations across all four quarters</span></li>
+                <li><i>✓</i><span>Financial summary tied directly to source data</span></li>
+                <li><i>✓</i><span>Reduced a multi-day manual process to a repeatable system</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-visual">
+              <span>Case study</span>
+              <strong>Visit Reconciliation</strong>
+              <span>Territory. Client. Exception.</span>
+            </div>
+            <div class="project-copy">
+              <h3>Reconciling multi-state operational data at the territory and client level.</h3>
+              <p>
+                A homecare operation running across two states needed clearer visibility into visit-level data
+                by territory and by client, with reconciliation in place to catch discrepancies before they
+                became compliance issues.
+              </p>
+              <p>
+                Built a comparison workbook that processes raw visit data into weekly territory and client-level
+                views, with dedicated reconciliation logic and state-specific reporting, surfacing exceptions
+                instead of requiring manual review of every record.
+              </p>
+              <ul class="project-list">
+                <li><i>✓</i><span>Weekly rollups by territory and by client from raw visit data</span></li>
+                <li><i>✓</i><span>State-specific reconciliation views for multi-state operations</span></li>
+                <li><i>✓</i><span>Exception-based review instead of full manual audits</span></li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="capabilities">
       <div class="container">
         <div class="section-head">
           <span class="kicker">What I build and improve</span>
@@ -133,7 +262,7 @@
       </div>
     </section>
 
-    <section class="section section-alt">
+    <section class="section">
       <div class="container split-grid">
         <div>
           <span class="kicker">Experience that translates</span>
@@ -160,7 +289,7 @@
           <h2>Have a workflow that needs improvement?</h2>
           <p>Let's discuss automation, reporting, process improvement, or a custom operational tool tailored to your needs.</p>
         </div>
-        <a class="button button-primary" href="mailto:Steve@stevethibault.com">Start a conversation</a>
+        <a class="button button-primary" href="mailto:steve@stevethibault.com">Start a conversation</a>
       </div>
     </section>
   </main>
@@ -169,8 +298,8 @@
     <div class="container footer-inner">
       <span>© <span id="year"></span> Stephen Thibault</span>
       <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="mailto:Steve@stevethibault.com">Email</a>
+        <a href="/">Home</a>
+        <a href="mailto:steve@stevethibault.com">Email</a>
         <a href="https://linkedin.com/in/stephenthibault" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </div>
