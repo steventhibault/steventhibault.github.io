@@ -1,6 +1,6 @@
 :root {
   --ink: #142033;
-  --muted: #647086;
+  --muted: #475569;
   --soft: #f4f7fb;
   --line: #dfe6f0;
   --accent: #2563eb;
@@ -413,6 +413,13 @@ h3 {
 .project-card p {
   color: var(--muted);
   margin: 12px 0 0;
+}
+
+.card p,
+.feature-card p,
+.project-card p,
+.stack-item p {
+  color: #334155;
 }
 
 .link-more {
