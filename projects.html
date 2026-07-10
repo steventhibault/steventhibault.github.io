@@ -90,6 +90,82 @@
     .case-study-grid .project-copy {
       padding: 0 28px 28px;
     }
+
+    /* Clickable screenshot thumbnail inside the filepackR .project-visual
+       panel, plus the lightbox overlay it opens into. */
+    .shot-frame {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #0c1729;
+      cursor: pointer;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+    }
+    .shot-frame-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 11px;
+    }
+    .shot-frame-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .shot-frame-dot:nth-child(1) { background: #f59e0b; }
+    .shot-frame-dot:nth-child(2) { background: #22c55e; }
+    .shot-frame-dot:nth-child(3) { background: #60a5fa; }
+    .shot-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .shot-caption {
+      display: block;
+      margin-top: 12px;
+      color: #c7d3e6;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .img-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 16, 28, 0.88);
+      padding: 24px;
+      backdrop-filter: blur(4px);
+    }
+    .img-lightbox.is-open {
+      display: flex;
+    }
+    .img-lightbox img {
+      max-width: min(94vw, 1200px);
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    }
+    .img-lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -140,9 +216,15 @@
 
         <article class="project-card">
           <div class="project-visual">
-            <span>Featured software project</span>
-            <strong>filepackR</strong>
-            <span>File. Pack. Route.</span>
+            <div class="shot-frame" onclick="openImgLightbox('assets/filepackr-preview.jpg', 'filepackR interface showing a document packet sorted into 13 output PDFs')" role="button" tabindex="0" aria-label="View full-size screenshot of filepackR" onkeydown="if(event.key==='Enter'){this.click();}">
+              <div class="shot-frame-bar">
+                <span class="shot-frame-dot"></span>
+                <span class="shot-frame-dot"></span>
+                <span class="shot-frame-dot"></span>
+              </div>
+              <img src="assets/filepackr-preview.jpg" alt="filepackR interface showing a document packet sorted into 13 output PDFs" loading="lazy">
+            </div>
+            <span class="shot-caption">Click to view full size</span>
           </div>
           <div class="project-copy">
             <h3>Cleaner document workflows with less repetitive work.</h3>
@@ -184,7 +266,7 @@
               <p>
                 A regional homecare provider needed to produce quarterly compliance reports pulling from
                 electronic visit verification (EVV) data, participant records, and several separate operational
-                logs, previously a manual reconciliation process repeated by hand every quarter.
+                logs — previously a manual reconciliation process repeated by hand every quarter.
               </p>
               <p>
                 Built a consolidated reporting workbook that integrates EVV data, participant demographics and
@@ -210,7 +292,7 @@
             <div class="project-copy">
               <h3>Reconciling multi-state operational data at the territory and client level.</h3>
               <p>
-                A homecare operation running across multiple states needed clearer visibility into visit-level data
+                A homecare operation running across two states needed clearer visibility into visit-level data
                 by territory and by client, with reconciliation in place to catch discrepancies before they
                 became compliance issues.
               </p>
@@ -317,5 +399,36 @@
   </footer>
 
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+
+  <div id="imgLightbox" class="img-lightbox" aria-hidden="true">
+    <button type="button" id="closeImgLightbox" class="img-lightbox-close" aria-label="Close image preview">&times;</button>
+    <img id="imgLightboxImg" src="" alt="">
+  </div>
+
+  <script>
+    function openImgLightbox(src, altText) {
+      var lb = document.getElementById("imgLightbox");
+      var img = document.getElementById("imgLightboxImg");
+      img.src = src;
+      img.alt = altText || "";
+      lb.classList.add("is-open");
+      lb.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeImgLightbox() {
+      var lb = document.getElementById("imgLightbox");
+      lb.classList.remove("is-open");
+      lb.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+    document.getElementById("closeImgLightbox").addEventListener("click", closeImgLightbox);
+    document.getElementById("imgLightbox").addEventListener("click", function(event) {
+      if (event.target === this) closeImgLightbox();
+    });
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") closeImgLightbox();
+    });
+  </script>
+
 </body>
 </html>
