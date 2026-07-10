@@ -693,7 +693,7 @@ footer {
 
 .case-study-icon img {
   display: block;
-  width: min(136px, 100%);
+  width: min(152px, 100%);
   height: auto;
   filter: drop-shadow(0 18px 34px rgba(20, 32, 51, 0.12));
 }
@@ -728,7 +728,7 @@ footer {
   }
 
   .case-study-icon img {
-    width: min(136px, 100%);
+    width: min(152px, 100%);
   }
 }
 
@@ -817,22 +817,22 @@ footer {
   }
 
   .case-study-icon img {
-    width: 136px;
+    width: 152px;
   }
 }
 
 .case-study-icon img {
-  width: min(136px, 100%) !important;
+  width: min(152px, 100%) !important;
 }
 
 @media (max-width: 930px) {
   .case-study-icon img {
-    width: min(136px, 100%) !important;
+    width: min(152px, 100%) !important;
   }
 }
 
 @media (max-width: 700px) {
   .case-study-icon img {
-    width: 136px !important;
+    width: 152px !important;
   }
 }
