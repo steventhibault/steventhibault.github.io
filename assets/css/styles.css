@@ -725,3 +725,42 @@ h3 {
     padding: 28px;
   }
 }
+
+/* Spreadsheet automation icon beside reporting/reconciliation case-study bullets. */
+.case-study-copy-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 230px;
+  gap: 30px;
+  align-items: center;
+  margin-top: 18px;
+}
+.case-study-copy-grid .project-list {
+  margin: 0;
+}
+.case-study-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 170px;
+}
+.case-study-icon img {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  filter: drop-shadow(0 18px 34px rgba(20, 32, 51, 0.12));
+}
+
+@media (max-width: 760px) {
+  .case-study-copy-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .case-study-icon {
+    justify-content: flex-start;
+    min-height: 0;
+  }
+  .case-study-icon img {
+    max-width: 150px;
+  }
+}
