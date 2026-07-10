@@ -725,3 +725,9 @@ h3 {
     padding: 28px;
   }
 }
+
+/* Accessibility contrast fix for PageSpeed flagged card/stack text */
+.card p,
+.stack-item p {
+  color: #334155;
+}
