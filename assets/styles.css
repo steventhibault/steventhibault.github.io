@@ -1,4 +1,15 @@
 /* =====================================================
+   STEPHEN THIBAULT SITE CSS
+   -----------------------------------------------------
+   How to use this file:
+   - Use Ctrl + F to search the class name from your HTML.
+   - Major sections are labeled with large comment blocks.
+   - Comments explain what each group controls.
+   - Responsive/mobile rules are near the bottom.
+===================================================== */
+
+
+/* =====================================================
    1. DESIGN TOKENS / GLOBAL VARIABLES
    -----------------------------------------------------
    These variables control the main colors, shadows, page
