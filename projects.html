@@ -67,17 +67,28 @@
   }
   </script>
   <style>
-    /* Layout for the two anonymized case-study cards, reusing the
-       existing .project-card visual pattern side by side on wider
-       screens. */
+    /* .project-card is a 2-column grid (.9fr visual / 1.1fr copy) that
+       only collapses to a single column via the site's own
+       @media (max-width: 930px) rule in styles.css. That query checks
+       viewport width, not this card's actual rendered width, so when
+       two cards share a row they can end up narrower than the
+       breakpoint accounts for. Force the same single-column layout
+       styles.css already uses on mobile, applied here regardless of
+       viewport width, and stack the two cards in a single column. */
     .case-study-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 24px;
       margin-top: 28px;
     }
     .case-study-grid .project-card {
-      margin: 0;
+      grid-template-columns: 1fr;
+    }
+    .case-study-grid .project-visual {
+      min-height: 240px;
+    }
+    .case-study-grid .project-copy {
+      padding: 0 28px 28px;
     }
   </style>
 </head>
