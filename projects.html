@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -223,13 +224,11 @@
       text-align: center;
     }
 
-
-
     /* Spreadsheet automation icon beside reporting/reconciliation case-study bullets. */
     .case-study-copy-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 230px;
-      gap: 30px;
+      grid-template-columns: minmax(0, 620px) minmax(180px, 1fr);
+      gap: 32px;
       align-items: center;
       margin-top: 18px;
     }
@@ -237,15 +236,13 @@
       margin: 0;
     }
     .case-study-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
       min-height: 170px;
     }
     .case-study-icon img {
       display: block;
-      width: 100%;
-      max-width: 220px;
+      width: min(210px, 100%);
       height: auto;
       filter: drop-shadow(0 18px 34px rgba(20, 32, 51, 0.12));
     }
@@ -256,11 +253,11 @@
         gap: 12px;
       }
       .case-study-icon {
-        justify-content: flex-start;
+        place-items: start;
         min-height: 0;
       }
       .case-study-icon img {
-        max-width: 150px;
+        width: 150px;
       }
     }
 
