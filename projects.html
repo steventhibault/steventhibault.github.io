@@ -166,6 +166,78 @@
       line-height: 1;
       cursor: pointer;
     }
+
+
+    /* Ecommerce migration case study with configurator proof image. */
+    .case-study-grid .project-card.ecommerce-case {
+      grid-template-columns: minmax(0, 0.98fr) minmax(360px, 1.02fr);
+      align-items: stretch;
+      overflow: hidden;
+    }
+    .case-study-grid .project-card.ecommerce-case .project-copy {
+      order: 1;
+      padding: 32px;
+    }
+    .case-study-grid .project-card.ecommerce-case .project-visual {
+      order: 2;
+      min-height: 100%;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.22), transparent 36%),
+        linear-gradient(135deg, #12233d 0%, #1d3564 100%);
+    }
+    .ecommerce-case .configurator-label {
+      display: inline-flex;
+      align-self: flex-start;
+      margin-bottom: 14px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.11);
+      color: #dbeafe;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .ecommerce-case .shot-frame {
+      background: #f8fbff;
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+    .ecommerce-case .shot-frame img {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: left top;
+      background: #ffffff;
+    }
+    .ecommerce-case .shot-caption {
+      color: #d7e4f7;
+    }
+    .ecommerce-case .visual-note {
+      margin-top: 12px;
+      color: #b9c8de;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .case-study-grid .project-card.ecommerce-case {
+        grid-template-columns: 1fr;
+      }
+      .case-study-grid .project-card.ecommerce-case .project-copy,
+      .case-study-grid .project-card.ecommerce-case .project-visual {
+        order: initial;
+      }
+      .case-study-grid .project-card.ecommerce-case .project-copy {
+        padding: 0 28px 28px;
+      }
+      .case-study-grid .project-card.ecommerce-case .project-visual {
+        min-height: 260px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -256,31 +328,40 @@
         </div>
 
         <div class="case-study-grid">
-          <article class="project-card">
-            <div class="project-visual">
-              <span>Case study</span>
-              <strong>eCommerce Platform Migration</strong>
-              <span>Migrate. Configure. Simplify.</span>
+          <article class="project-card ecommerce-case">
+            <div class="project-visual configurator-visual">
+              <span class="configurator-label">Case study visual</span>
+              <div class="shot-frame" onclick="openImgLightbox('assets/ecommerce-configurator.jpg', 'Custom Shopify configure-to-order server workflow with component sections, current configuration, price as configured, and add to cart controls')" role="button" tabindex="0" aria-label="View full-size screenshot of the ecommerce configurator" onkeydown="if(event.key==='Enter'){this.click();}">
+                <div class="shot-frame-bar">
+                  <span class="shot-frame-dot"></span>
+                  <span class="shot-frame-dot"></span>
+                  <span class="shot-frame-dot"></span>
+                </div>
+                <img src="assets/ecommerce-configurator.png" alt="Custom Shopify configure-to-order server workflow with component sections, current configuration, price as configured, and add to cart controls" loading="lazy">
+              </div>
+              <span class="shot-caption">Click to view full size</span>
+              <p class="visual-note">Custom configure-to-order workflow built around component choices, quote items, and a live configuration summary.</p>
             </div>
             <div class="project-copy">
-              <h3>Migrating a 20,000-SKU catalog to Shopify, with a custom configurator Shopify wasn't built for.</h3>
+              <h3>Migrating a 20,000-SKU Magento catalog to Shopify while preserving a complex configure-to-order workflow.</h3>
               <p>
-                A computer hardware distributor needed to move its entire storefront off Magento onto Shopify. A
-                straight migration would have worked for a typical catalog, but this business let customers
-                configure a custom-built server or PC piece by piece before ordering, a workflow Shopify's
-                standard product model doesn't support out of the box.
+                A computer hardware distributor needed to move its storefront from Magento to Shopify. A basic
+                catalog migration would have been simple enough, but customers were not just buying individual
+                products. They needed to configure refurbished servers piece by piece, with sections for chassis,
+                drives, processors, memory, power supplies, warranties, quote items, and other build options.
               </p>
               <p>
-                Migrated the full catalog of over 20,000 SKUs along with existing payment processing and
-                inventory integrations, preserving SEO rankings through the platform change, and built a custom
-                configuration system on top of Shopify's standard architecture so customers could keep
-                "configuring to order" as they always had.
+                The project combined platform migration, catalog cleanup, integration support, and custom
+                configuration logic. The result was a Shopify storefront that could support a large SKU catalog,
+                preserve SEO-sensitive content and URL planning, and keep the configure-to-order buying process
+                familiar for customers and manageable for non-technical staff.
               </p>
               <ul class="project-list">
-                <li><i>✓</i><span>Migrated 20,000+ SKUs with payment and inventory integrations intact</span></li>
-                <li><i>✓</i><span>Preserved existing SEO rankings through the platform change</span></li>
-                <li><i>✓</i><span>Built a custom product configurator beyond Shopify's native capabilities</span></li>
-                <li><i>✓</i><span>Gave non-technical staff full control without the constant need for a developer</span></li>
+                <li><i>✓</i><span>Migrated a 20,000+ SKU catalog from Magento to Shopify</span></li>
+                <li><i>✓</i><span>Rebuilt the configure-to-order server workflow inside Shopify</span></li>
+                <li><i>✓</i><span>Supported component sections, quote items, cart flow, and current-configuration tracking</span></li>
+                <li><i>✓</i><span>Maintained payment, inventory, and SEO-sensitive migration requirements</span></li>
+                <li><i>✓</i><span>Gave non-technical staff more control without constant developer changes</span></li>
               </ul>
             </div>
           </article>
