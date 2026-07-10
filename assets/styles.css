@@ -331,7 +331,7 @@ h2 {
   background: var(--teal-soft);
 }
 .card h3 { margin: 1px 0 7px; font-size: 1.05rem; }
-.card p { margin: 0; color: #69788d; font-size: .93rem; }
+.card p { margin: 0; color: #334155; font-size: .93rem; }
 
 .split-grid {
   display: grid;
