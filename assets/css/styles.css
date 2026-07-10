@@ -729,7 +729,7 @@ h3 {
 /* Spreadsheet automation icon beside reporting/reconciliation case-study bullets. */
 .case-study-copy-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 230px;
+  grid-template-columns: minmax(0, 1fr) 390px;
   gap: 30px;
   align-items: center;
   margin-top: 18px;
@@ -746,9 +746,15 @@ h3 {
 .case-study-icon img {
   display: block;
   width: 100%;
-  max-width: 220px;
+  max-width: 215px;
   height: auto;
   filter: drop-shadow(0 18px 34px rgba(20, 32, 51, 0.12));
+}
+
+@media (max-width: 900px) {
+  .case-study-copy-grid {
+    grid-template-columns: minmax(0, 1fr) 260px;
+  }
 }
 
 @media (max-width: 760px) {
