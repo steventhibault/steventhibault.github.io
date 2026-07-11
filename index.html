@@ -307,20 +307,28 @@
   <main id="main-content">
     <section class="hero">
       <div class="hero-mouse-glow" aria-hidden="true"></div>
-      <div class="ops-flow" aria-hidden="true">
-        <svg class="ops-flow-lines" viewBox="0 0 420 420" focusable="false">
-          <path d="M78 210 C126 126, 196 108, 276 130" />
-          <path d="M78 210 C150 246, 222 278, 334 238" />
-          <path d="M146 96 C196 156, 246 194, 334 238" />
-          <path d="M146 96 C230 80, 306 110, 350 170" />
-        </svg>
-        <span class="flow-node flow-node-1"></span>
-        <span class="flow-node flow-node-2"></span>
-        <span class="flow-node flow-node-3"></span>
-        <span class="flow-node flow-node-4"></span>
-        <span class="flow-node flow-node-5"></span>
-        <span class="flow-pulse flow-pulse-1"></span>
-        <span class="flow-pulse flow-pulse-2"></span>
+      <div class="ops-system" aria-hidden="true">
+        <span class="ops-ring ops-ring-outer"></span>
+        <span class="ops-ring ops-ring-middle"></span>
+        <span class="ops-ring ops-ring-inner"></span>
+        <span class="ops-hub"></span>
+
+        <span class="ops-tooth ops-tooth-1"></span>
+        <span class="ops-tooth ops-tooth-2"></span>
+        <span class="ops-tooth ops-tooth-3"></span>
+        <span class="ops-tooth ops-tooth-4"></span>
+        <span class="ops-tooth ops-tooth-5"></span>
+        <span class="ops-tooth ops-tooth-6"></span>
+        <span class="ops-tooth ops-tooth-7"></span>
+        <span class="ops-tooth ops-tooth-8"></span>
+        <span class="ops-tooth ops-tooth-9"></span>
+        <span class="ops-tooth ops-tooth-10"></span>
+        <span class="ops-tooth ops-tooth-11"></span>
+        <span class="ops-tooth ops-tooth-12"></span>
+
+        <span class="ops-node ops-node-1"></span>
+        <span class="ops-node ops-node-2"></span>
+        <span class="ops-node ops-node-3"></span>
       </div>
       <div class="container hero-grid">
         <div>
@@ -643,7 +651,9 @@
     (function () {
       const hero = document.querySelector(".hero, .page-hero");
       const glow = document.querySelector(".hero-mouse-glow");
-      const flow = document.querySelector(".ops-flow");
+      const opsSystem = document.querySelector(".ops-system");
+      let lastX = null;
+      let rotation = 0;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       if (hero && glow && !reducedMotion) {
@@ -655,15 +665,12 @@
           hero.style.setProperty("--glow-x", x + "px");
           hero.style.setProperty("--glow-y", y + "px");
 
-          if (flow) {
-            const tiltX = ((y / rect.height) - 0.5) * -5;
-            const tiltY = ((x / rect.width) - 0.5) * 5;
-            flow.style.transform =
-              "translate(-50%, -50%) perspective(900px) rotateX(" +
-              tiltX +
-              "deg) rotateY(" +
-              tiltY +
-              "deg)";
+          if (opsSystem) {
+            if (lastX !== null) {
+              rotation += (x - lastX) * 0.22;
+            }
+            lastX = x;
+            opsSystem.style.setProperty("--ops-rotation", rotation + "deg");
           }
         }, { passive: true });
       }
