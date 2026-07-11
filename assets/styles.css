@@ -1325,31 +1325,62 @@ footer {
   will-change: transform, left, top;
 }
 
-.orbit-dot {
+.gear-ring {
+  position: absolute;
+  inset: 28px;
+  border: 1px solid rgba(37, 99, 235, 0.20);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 22px rgba(37, 99, 235, 0.05),
+    0 0 24px rgba(15, 118, 110, 0.04);
+}
+
+.gear-hub {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 14px;
-  height: 14px;
-  margin: -7px;
-  border: 1.5px solid rgba(37, 99, 235, 0.82);
+  width: 58px;
+  height: 58px;
+  margin: -29px;
+  border: 1.5px solid rgba(26, 39, 68, 0.34);
   border-radius: 50%;
-  background: transparent;
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.12);
+  background: rgba(255, 255, 255, 0.10);
+  box-shadow:
+    inset 0 0 0 10px rgba(255, 255, 255, 0.08),
+    0 0 22px rgba(37, 99, 235, 0.08);
 }
 
-.orbit-dot:nth-child(even) {
-  border-color: rgba(15, 118, 110, 0.78);
-  background: transparent;
-  box-shadow: 0 0 8px rgba(15, 118, 110, 0.12);
+.gear-tooth {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 10px;
+  margin: -5px -9px;
+  border: 1.4px solid rgba(37, 99, 235, 0.72);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.08);
+  transform-origin: 50% 50%;
 }
 
-.orbit-dot-1 { transform: rotate(0deg) translateX(160px); }
-.orbit-dot-2 { transform: rotate(60deg) translateX(160px); }
-.orbit-dot-3 { transform: rotate(120deg) translateX(160px); }
-.orbit-dot-4 { transform: rotate(180deg) translateX(160px); }
-.orbit-dot-5 { transform: rotate(240deg) translateX(160px); }
-.orbit-dot-6 { transform: rotate(300deg) translateX(160px); }
+.gear-tooth:nth-of-type(even) {
+  border-color: rgba(15, 118, 110, 0.72);
+  box-shadow: 0 0 8px rgba(15, 118, 110, 0.08);
+}
+
+.gear-tooth-1  { transform: rotate(0deg) translateX(160px) rotate(90deg); }
+.gear-tooth-2  { transform: rotate(30deg) translateX(160px) rotate(90deg); }
+.gear-tooth-3  { transform: rotate(60deg) translateX(160px) rotate(90deg); }
+.gear-tooth-4  { transform: rotate(90deg) translateX(160px) rotate(90deg); }
+.gear-tooth-5  { transform: rotate(120deg) translateX(160px) rotate(90deg); }
+.gear-tooth-6  { transform: rotate(150deg) translateX(160px) rotate(90deg); }
+.gear-tooth-7  { transform: rotate(180deg) translateX(160px) rotate(90deg); }
+.gear-tooth-8  { transform: rotate(210deg) translateX(160px) rotate(90deg); }
+.gear-tooth-9  { transform: rotate(240deg) translateX(160px) rotate(90deg); }
+.gear-tooth-10 { transform: rotate(270deg) translateX(160px) rotate(90deg); }
+.gear-tooth-11 { transform: rotate(300deg) translateX(160px) rotate(90deg); }
+.gear-tooth-12 { transform: rotate(330deg) translateX(160px) rotate(90deg); }
 
 @media (prefers-reduced-motion: reduce),
        (hover: none),
