@@ -1311,81 +1311,129 @@ footer {
   }
 }
 
-.glow-orbit {
+.ops-system {
+  --ops-rotation: 0deg;
   position: absolute;
   left: var(--glow-x);
   top: var(--glow-y);
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
+  width: 340px;
+  height: 340px;
   pointer-events: none;
-  transform: translate(-50%, -50%) rotate(0deg);
+  transform: translate(-50%, -50%) rotate(var(--ops-rotation));
   transition: left 120ms ease-out, top 120ms ease-out;
   z-index: 0;
   will-change: transform, left, top;
 }
 
-.gear-ring {
-  position: absolute;
-  inset: 28px;
-  border: 1px solid rgba(37, 99, 235, 0.20);
-  border-radius: 50%;
-  box-shadow:
-    inset 0 0 22px rgba(37, 99, 235, 0.05),
-    0 0 24px rgba(15, 118, 110, 0.04);
-}
-
-.gear-hub {
+.ops-ring {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 58px;
-  height: 58px;
-  margin: -29px;
-  border: 1.5px solid rgba(26, 39, 68, 0.34);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ops-ring-outer {
+  width: 286px;
+  height: 286px;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  box-shadow:
+    inset 0 0 24px rgba(37, 99, 235, 0.035),
+    0 0 28px rgba(15, 118, 110, 0.035);
+}
+
+.ops-ring-middle {
+  width: 214px;
+  height: 214px;
+  border: 1px dashed rgba(15, 118, 110, 0.34);
+  transform: translate(-50%, -50%) rotate(calc(var(--ops-rotation) * -0.55));
+}
+
+.ops-ring-inner {
+  width: 112px;
+  height: 112px;
+  border: 1px solid rgba(26, 39, 68, 0.26);
+  box-shadow: inset 0 0 0 14px rgba(255, 255, 255, 0.06);
+  transform: translate(-50%, -50%) rotate(calc(var(--ops-rotation) * -0.8));
+}
+
+.ops-hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38px;
+  height: 38px;
+  margin: -19px;
+  border: 1.5px solid rgba(26, 39, 68, 0.42);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 0 0 8px rgba(37, 99, 235, 0.035),
+    0 0 18px rgba(37, 99, 235, 0.08);
+}
+
+.ops-tooth {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 8px;
+  margin: -4px -10px;
+  border: 1.25px solid rgba(37, 99, 235, 0.68);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 7px rgba(37, 99, 235, 0.06);
+}
+
+.ops-tooth:nth-of-type(even) {
+  border-color: rgba(15, 118, 110, 0.66);
+  box-shadow: 0 0 7px rgba(15, 118, 110, 0.05);
+}
+
+.ops-tooth-1  { transform: rotate(0deg) translateX(152px) rotate(90deg); }
+.ops-tooth-2  { transform: rotate(30deg) translateX(152px) rotate(90deg); }
+.ops-tooth-3  { transform: rotate(60deg) translateX(152px) rotate(90deg); }
+.ops-tooth-4  { transform: rotate(90deg) translateX(152px) rotate(90deg); }
+.ops-tooth-5  { transform: rotate(120deg) translateX(152px) rotate(90deg); }
+.ops-tooth-6  { transform: rotate(150deg) translateX(152px) rotate(90deg); }
+.ops-tooth-7  { transform: rotate(180deg) translateX(152px) rotate(90deg); }
+.ops-tooth-8  { transform: rotate(210deg) translateX(152px) rotate(90deg); }
+.ops-tooth-9  { transform: rotate(240deg) translateX(152px) rotate(90deg); }
+.ops-tooth-10 { transform: rotate(270deg) translateX(152px) rotate(90deg); }
+.ops-tooth-11 { transform: rotate(300deg) translateX(152px) rotate(90deg); }
+.ops-tooth-12 { transform: rotate(330deg) translateX(152px) rotate(90deg); }
+
+.ops-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px;
+  border: 1.5px solid rgba(37, 99, 235, 0.76);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.10);
-  box-shadow:
-    inset 0 0 0 10px rgba(255, 255, 255, 0.08),
-    0 0 22px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.10);
 }
 
-.gear-tooth {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 18px;
-  height: 10px;
-  margin: -5px -9px;
-  border: 1.4px solid rgba(37, 99, 235, 0.72);
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.08);
-  transform-origin: 50% 50%;
+.ops-node-1 {
+  transform: rotate(18deg) translateX(107px);
 }
 
-.gear-tooth:nth-of-type(even) {
-  border-color: rgba(15, 118, 110, 0.72);
-  box-shadow: 0 0 8px rgba(15, 118, 110, 0.08);
+.ops-node-2 {
+  border-color: rgba(15, 118, 110, 0.78);
+  box-shadow: 0 0 12px rgba(15, 118, 110, 0.10);
+  transform: rotate(145deg) translateX(107px);
 }
 
-.gear-tooth-1  { transform: rotate(0deg) translateX(160px) rotate(90deg); }
-.gear-tooth-2  { transform: rotate(30deg) translateX(160px) rotate(90deg); }
-.gear-tooth-3  { transform: rotate(60deg) translateX(160px) rotate(90deg); }
-.gear-tooth-4  { transform: rotate(90deg) translateX(160px) rotate(90deg); }
-.gear-tooth-5  { transform: rotate(120deg) translateX(160px) rotate(90deg); }
-.gear-tooth-6  { transform: rotate(150deg) translateX(160px) rotate(90deg); }
-.gear-tooth-7  { transform: rotate(180deg) translateX(160px) rotate(90deg); }
-.gear-tooth-8  { transform: rotate(210deg) translateX(160px) rotate(90deg); }
-.gear-tooth-9  { transform: rotate(240deg) translateX(160px) rotate(90deg); }
-.gear-tooth-10 { transform: rotate(270deg) translateX(160px) rotate(90deg); }
-.gear-tooth-11 { transform: rotate(300deg) translateX(160px) rotate(90deg); }
-.gear-tooth-12 { transform: rotate(330deg) translateX(160px) rotate(90deg); }
+.ops-node-3 {
+  transform: rotate(262deg) translateX(107px);
+}
 
 @media (prefers-reduced-motion: reduce),
        (hover: none),
        (pointer: coarse) {
-  .glow-orbit {
+  .ops-system {
     display: none;
   }
 }
