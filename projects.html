@@ -216,7 +216,7 @@
       border-color: rgba(255, 255, 255, 0.20);
     }
     .ecommerce-case .shot-frame img {
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 16 / 10;
       object-fit: cover;
       object-position: left top;
       background: #ffffff;
@@ -413,6 +413,7 @@
 
   <main>
     <section class="page-hero">
+      <div class="hero-mouse-glow" aria-hidden="true"></div>
       <div class="container">
         <span class="eyebrow">Selected projects & operational work</span>
         <h1>Building practical systems for <span>real business problems.</span></h1>
@@ -744,6 +745,31 @@
     document.addEventListener("keydown", function(event) {
       if (event.key === "Escape") closeImgLightbox();
     });
+  </script>
+
+
+  <script>
+    (function () {
+      const hero = document.querySelector(".hero, .page-hero");
+      const glow = document.querySelector(".hero-mouse-glow");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (hero && glow && !reducedMotion) {
+        hero.addEventListener("pointermove", function (event) {
+          const rect = hero.getBoundingClientRect();
+          hero.style.setProperty("--glow-x", (event.clientX - rect.left) + "px");
+          hero.style.setProperty("--glow-y", (event.clientY - rect.top) + "px");
+        }, { passive: true });
+      }
+
+      document.querySelectorAll(".card").forEach(function (card) {
+        card.addEventListener("pointermove", function (event) {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--mouse-x", (event.clientX - rect.left) + "px");
+          card.style.setProperty("--mouse-y", (event.clientY - rect.top) + "px");
+        }, { passive: true });
+      });
+    })();
   </script>
 
 </body>
