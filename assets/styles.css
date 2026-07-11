@@ -687,13 +687,13 @@ footer {
 .case-study-icon {
   display: grid;
   place-items: center;
-  min-height: 175px;
+  min-height: 15px;
   width: 100%;
 }
 
 .case-study-icon img {
   display: block;
-  width: min(152px, 100%);
+  width: min(165px, 100%);
   height: auto;
   filter: drop-shadow(0 18px 34px rgba(20, 32, 51, 0.12));
 }
