@@ -9,7 +9,7 @@ robots.txt
 sitemap.xml
 assets/
   styles.css
-  favicon.png
+  favicon.svg
 
 WHAT CHANGED
 ------------
@@ -43,7 +43,7 @@ your-repository/
 ├── sitemap.xml
 └── assets/
     ├── styles.css
-    └── favicon.png
+    └── favicon.svg
 
 BACKLINK
 --------
