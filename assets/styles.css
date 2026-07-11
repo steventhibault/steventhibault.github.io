@@ -1311,109 +1311,50 @@ footer {
   }
 }
 
-/* Operational data-flow effect */
-.ops-flow {
+.glow-orbit {
   position: absolute;
   left: var(--glow-x);
   top: var(--glow-y);
-  width: 420px;
-  height: 420px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
   pointer-events: none;
-  transform: translate(-50%, -50%);
-  transform-style: preserve-3d;
-  transition:
-    left 120ms ease-out,
-    top 120ms ease-out,
-    transform 160ms ease-out;
+  transform: translate(-50%, -50%) rotate(0deg);
+  transition: left 120ms ease-out, top 120ms ease-out;
   z-index: 0;
   will-change: transform, left, top;
 }
 
-.ops-flow-lines {
+.orbit-dot {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.ops-flow-lines path {
-  fill: none;
-  stroke: rgba(37, 99, 235, 0.20);
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  stroke-dasharray: 5 8;
-}
-
-.ops-flow-lines path:nth-child(even) {
-  stroke: rgba(15, 118, 110, 0.22);
-}
-
-.flow-node {
-  position: absolute;
+  left: 50%;
+  top: 50%;
   width: 14px;
   height: 14px;
-  border: 1.5px solid rgba(37, 99, 235, 0.78);
+  margin: -7px;
+  border: 1.5px solid rgba(37, 99, 235, 0.82);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 0 0 5px rgba(37, 99, 235, 0.035),
-    0 0 14px rgba(37, 99, 235, 0.12);
+  background: transparent;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.12);
 }
 
-.flow-node:nth-of-type(even) {
-  border-color: rgba(15, 118, 110, 0.80);
-  box-shadow:
-    0 0 0 5px rgba(15, 118, 110, 0.035),
-    0 0 14px rgba(15, 118, 110, 0.12);
+.orbit-dot:nth-child(even) {
+  border-color: rgba(15, 118, 110, 0.78);
+  background: transparent;
+  box-shadow: 0 0 8px rgba(15, 118, 110, 0.12);
 }
 
-.flow-node-1 { left: 71px;  top: 203px; }
-.flow-node-2 { left: 139px; top: 89px; }
-.flow-node-3 { left: 269px; top: 123px; }
-.flow-node-4 { left: 327px; top: 231px; }
-.flow-node-5 { left: 343px; top: 163px; }
-
-.flow-pulse {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: rgba(37, 99, 235, 0.92);
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.30);
-  offset-rotate: 0deg;
-}
-
-.flow-pulse-1 {
-  offset-path: path("M78 210 C126 126, 196 108, 276 130");
-  animation: flowPulseOne 4.8s linear infinite;
-}
-
-.flow-pulse-2 {
-  background: rgba(15, 118, 110, 0.92);
-  box-shadow: 0 0 12px rgba(15, 118, 110, 0.30);
-  offset-path: path("M78 210 C150 246, 222 278, 334 238");
-  animation: flowPulseTwo 6.2s linear infinite;
-}
-
-@keyframes flowPulseOne {
-  from { offset-distance: 0%; opacity: 0; }
-  12%  { opacity: 1; }
-  88%  { opacity: 1; }
-  to   { offset-distance: 100%; opacity: 0; }
-}
-
-@keyframes flowPulseTwo {
-  from { offset-distance: 100%; opacity: 0; }
-  12%  { opacity: 1; }
-  88%  { opacity: 1; }
-  to   { offset-distance: 0%; opacity: 0; }
-}
+.orbit-dot-1 { transform: rotate(0deg) translateX(160px); }
+.orbit-dot-2 { transform: rotate(60deg) translateX(160px); }
+.orbit-dot-3 { transform: rotate(120deg) translateX(160px); }
+.orbit-dot-4 { transform: rotate(180deg) translateX(160px); }
+.orbit-dot-5 { transform: rotate(240deg) translateX(160px); }
+.orbit-dot-6 { transform: rotate(300deg) translateX(160px); }
 
 @media (prefers-reduced-motion: reduce),
        (hover: none),
        (pointer: coarse) {
-  .ops-flow {
+  .glow-orbit {
     display: none;
   }
 }
