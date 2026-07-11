@@ -120,6 +120,29 @@ a {
   color: var(--blue);
 }
 
+.projects-link {
+  position: relative;
+  color: var(--blue);
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.projects-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--blue);
+  opacity: 0.7;
+}
+
+.projects-link:hover {
+  color: var(--blue-dark);
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -722,6 +745,10 @@ footer {
     display: none;
   }
 
+  .nav-links .projects-link {
+    display: inline-flex !important;
+  }
+
   .case-study-copy-grid {
     grid-template-columns: minmax(0, 1fr) minmax(150px, 210px);
     column-gap: 24px;
@@ -757,7 +784,7 @@ footer {
   }
 
   .nav-links {
-    gap: 0;
+    gap: 14px;
   }
 
   .nav-links .button {
