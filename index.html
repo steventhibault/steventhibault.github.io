@@ -307,21 +307,28 @@
   <main id="main-content">
     <section class="hero">
       <div class="hero-mouse-glow" aria-hidden="true"></div>
-      <div class="glow-orbit" aria-hidden="true">
-        <span class="gear-ring"></span>
-        <span class="gear-hub"></span>
-        <span class="gear-tooth gear-tooth-1"></span>
-        <span class="gear-tooth gear-tooth-2"></span>
-        <span class="gear-tooth gear-tooth-3"></span>
-        <span class="gear-tooth gear-tooth-4"></span>
-        <span class="gear-tooth gear-tooth-5"></span>
-        <span class="gear-tooth gear-tooth-6"></span>
-        <span class="gear-tooth gear-tooth-7"></span>
-        <span class="gear-tooth gear-tooth-8"></span>
-        <span class="gear-tooth gear-tooth-9"></span>
-        <span class="gear-tooth gear-tooth-10"></span>
-        <span class="gear-tooth gear-tooth-11"></span>
-        <span class="gear-tooth gear-tooth-12"></span>
+      <div class="ops-system" aria-hidden="true">
+        <span class="ops-ring ops-ring-outer"></span>
+        <span class="ops-ring ops-ring-middle"></span>
+        <span class="ops-ring ops-ring-inner"></span>
+        <span class="ops-hub"></span>
+
+        <span class="ops-tooth ops-tooth-1"></span>
+        <span class="ops-tooth ops-tooth-2"></span>
+        <span class="ops-tooth ops-tooth-3"></span>
+        <span class="ops-tooth ops-tooth-4"></span>
+        <span class="ops-tooth ops-tooth-5"></span>
+        <span class="ops-tooth ops-tooth-6"></span>
+        <span class="ops-tooth ops-tooth-7"></span>
+        <span class="ops-tooth ops-tooth-8"></span>
+        <span class="ops-tooth ops-tooth-9"></span>
+        <span class="ops-tooth ops-tooth-10"></span>
+        <span class="ops-tooth ops-tooth-11"></span>
+        <span class="ops-tooth ops-tooth-12"></span>
+
+        <span class="ops-node ops-node-1"></span>
+        <span class="ops-node ops-node-2"></span>
+        <span class="ops-node ops-node-3"></span>
       </div>
       <div class="container hero-grid">
         <div>
@@ -644,7 +651,7 @@
     (function () {
       const hero = document.querySelector(".hero, .page-hero");
       const glow = document.querySelector(".hero-mouse-glow");
-      const orbit = document.querySelector(".glow-orbit");
+      const opsSystem = document.querySelector(".ops-system");
       let lastX = null;
       let rotation = 0;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -658,13 +665,12 @@
           hero.style.setProperty("--glow-x", x + "px");
           hero.style.setProperty("--glow-y", y + "px");
 
-          if (orbit) {
+          if (opsSystem) {
             if (lastX !== null) {
-              rotation += (x - lastX) * 0.35;
+              rotation += (x - lastX) * 0.22;
             }
             lastX = x;
-            orbit.style.transform =
-              "translate(-50%, -50%) rotate(" + rotation + "deg)";
+            opsSystem.style.setProperty("--ops-rotation", rotation + "deg");
           }
         }, { passive: true });
       }
