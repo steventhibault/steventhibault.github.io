@@ -307,6 +307,14 @@
   <main id="main-content">
     <section class="hero">
       <div class="hero-mouse-glow" aria-hidden="true"></div>
+      <div class="glow-orbit" aria-hidden="true">
+        <span class="orbit-dot orbit-dot-1"></span>
+        <span class="orbit-dot orbit-dot-2"></span>
+        <span class="orbit-dot orbit-dot-3"></span>
+        <span class="orbit-dot orbit-dot-4"></span>
+        <span class="orbit-dot orbit-dot-5"></span>
+        <span class="orbit-dot orbit-dot-6"></span>
+      </div>
       <div class="container hero-grid">
         <div>
           <span class="eyebrow">Business operations, automation & analytics</span>
@@ -628,13 +636,28 @@
     (function () {
       const hero = document.querySelector(".hero, .page-hero");
       const glow = document.querySelector(".hero-mouse-glow");
+      const orbit = document.querySelector(".glow-orbit");
+      let lastX = null;
+      let rotation = 0;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       if (hero && glow && !reducedMotion) {
         hero.addEventListener("pointermove", function (event) {
           const rect = hero.getBoundingClientRect();
-          hero.style.setProperty("--glow-x", (event.clientX - rect.left) + "px");
-          hero.style.setProperty("--glow-y", (event.clientY - rect.top) + "px");
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+
+          hero.style.setProperty("--glow-x", x + "px");
+          hero.style.setProperty("--glow-y", y + "px");
+
+          if (orbit) {
+            if (lastX !== null) {
+              rotation += (x - lastX) * 0.35;
+            }
+            lastX = x;
+            orbit.style.transform =
+              "translate(-50%, -50%) rotate(" + rotation + "deg)";
+          }
         }, { passive: true });
       }
 
