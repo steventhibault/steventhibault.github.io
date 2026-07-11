@@ -1223,4 +1223,11 @@ footer {
   .content-page .cta-band {
     padding: 28px;
   }
+  
+  .ecommerce-case .shot-frame img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: left top;
+  background: #ffffff;
+}
 }
