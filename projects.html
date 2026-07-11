@@ -13,10 +13,10 @@
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Selected projects and operational improvement work by Stephen Thibault, including automation, healthcare workflows, ecommerce operations, analytics, and filepackR software." />
+  <meta name="description" content="Selected projects and operational improvement work by Stephen Thibault, including automation, healthcare workflows, ecommerce operations, analytics, software, and local business websites." />
   <meta name="theme-color" content="#1a2744" />
   <meta property="og:title" content="Projects | Stephen Thibault" />
-  <meta property="og:description" content="Selected projects and operational improvement work: automation, healthcare workflows, ecommerce operations, analytics, and filepackR software." />
+  <meta property="og:description" content="Selected projects and operational improvement work: automation, healthcare workflows, ecommerce operations, analytics, software, and local business websites." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://stevethibault.com/projects.html" />
   <meta property="og:site_name" content="Stephen Thibault" />
@@ -25,7 +25,7 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Projects | Stephen Thibault" />
-  <meta name="twitter:description" content="Selected projects and operational improvement work: automation, healthcare workflows, ecommerce operations, analytics, and filepackR software." />
+  <meta name="twitter:description" content="Selected projects and operational improvement work: automation, healthcare workflows, ecommerce operations, analytics, software, and local business websites." />
   <meta name="twitter:image" content="https://stevethibault.com/assets/projects-og-image.png" />
   <link rel="canonical" href="https://stevethibault.com/projects.html" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
@@ -51,7 +51,7 @@
         "@id": "https://stevethibault.com/projects.html#page",
         "url": "https://stevethibault.com/projects.html",
         "name": "Projects | Stephen Thibault",
-        "description": "Selected projects and operational improvement work by Stephen Thibault, including automation, healthcare workflows, ecommerce operations, analytics, and filepackR software.",
+        "description": "Selected projects and operational improvement work by Stephen Thibault, including automation, healthcare workflows, ecommerce operations, analytics, software, and local business websites.",
         "isPartOf": { "@id": "https://stevethibault.com/#website" },
         "about": { "@id": "https://stevethibault.com/#person" }
       },
@@ -62,6 +62,20 @@
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Windows",
         "description": "PDF splitter, merger, and document-processing software that uses OCR-powered classification and customizable rules to organize and route files.",
+        "creator": { "@id": "https://stevethibault.com/#person" }
+      },
+      {
+        "@type": "WebSite",
+        "name": "Tran's Market",
+        "url": "https://local-maine.github.io/transmarket/",
+        "description": "A responsive website for a local produce and Asian grocery market, with departments, photography, store information, directions, and customer contact actions.",
+        "creator": { "@id": "https://stevethibault.com/#person" }
+      },
+      {
+        "@type": "WebSite",
+        "name": "The Jewel of India",
+        "url": "https://local-maine.github.io/jewel-of-india/",
+        "description": "A responsive restaurant website with menu browsing, food photography, catering information, and location details for two Maine restaurants.",
         "creator": { "@id": "https://stevethibault.com/#person" }
       }
     ]
@@ -247,7 +261,104 @@
       filter: drop-shadow(0 18px 34px rgba(20, 32, 51, 0.12));
     }
 
+
+    .local-site-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 28px;
+    }
+    .local-site-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #dfe6f0;
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 18px 45px rgba(20, 32, 51, 0.08);
+    }
+    .local-site-preview {
+      position: relative;
+      display: block;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #142033;
+    }
+    .local-site-preview::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 52%, rgba(10, 18, 31, 0.54) 100%);
+      pointer-events: none;
+    }
+    .local-site-preview img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 220ms ease;
+    }
+    .local-site-card:hover .local-site-preview img {
+      transform: scale(1.025);
+    }
+    .local-site-badge {
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      z-index: 1;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #142033;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .local-site-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 26px;
+    }
+    .local-site-location {
+      margin-bottom: 8px;
+      color: #647086;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .local-site-body h3 {
+      margin: 0 0 12px;
+    }
+    .local-site-body p {
+      margin: 0;
+    }
+    .local-site-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0 4px;
+    }
+    .local-site-tags span {
+      padding: 7px 9px;
+      border: 1px solid #dfe6f0;
+      border-radius: 999px;
+      background: #f4f7fb;
+      color: #3e4b60;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .local-site-body .text-link {
+      margin-top: auto;
+      padding-top: 22px;
+    }
+
     @media (max-width: 760px) {
+      .local-site-grid {
+        grid-template-columns: 1fr;
+      }
       .case-study-copy-grid {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -473,7 +584,58 @@
       </div>
     </section>
 
-    <section class="section section-alt" id="capabilities">
+
+    <section class="section section-alt" id="local-websites">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Local business websites</span>
+          <h2>Clear, practical websites built around how customers choose and contact a local business.</h2>
+          <p>These projects focus on mobile usability, straightforward navigation, strong visual presentation, and useful actions such as calling, viewing menus, finding directions, and planning a visit.</p>
+        </div>
+
+        <div class="local-site-grid">
+          <article class="local-site-card">
+            <a class="local-site-preview" href="https://local-maine.github.io/transmarket/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Tran's Market website">
+              <img src="assets/transmarket-preview.webp" alt="Fresh produce display inside Tran's Market" loading="lazy">
+              <span class="local-site-badge">Retail website</span>
+            </a>
+            <div class="local-site-body">
+              <span class="local-site-location">Biddeford, Maine</span>
+              <h3>Tran's Market</h3>
+              <p>Designed and built a responsive website for a neighborhood produce and Asian grocery market. The site organizes departments, photography, store hours, directions, and contact information into a clear path for local shoppers.</p>
+              <div class="local-site-tags">
+                <span>Responsive design</span>
+                <span>Store gallery</span>
+                <span>Directions and calling</span>
+                <span>Location-focused content</span>
+              </div>
+              <a class="text-link" href="https://local-maine.github.io/transmarket/" target="_blank" rel="noopener noreferrer">View live website <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="local-site-card">
+            <a class="local-site-preview" href="https://local-maine.github.io/jewel-of-india/" target="_blank" rel="noopener noreferrer" aria-label="Visit The Jewel of India website">
+              <img src="assets/jewel-of-india-preview.webp" alt="Indian dishes presented in bowls for The Jewel of India website" loading="lazy">
+              <span class="local-site-badge">Restaurant website</span>
+            </a>
+            <div class="local-site-body">
+              <span class="local-site-location">Biddeford and Waterville, Maine</span>
+              <h3>The Jewel of India</h3>
+              <p>Designed and built a responsive restaurant website with menu browsing, food photography, catering information, and separate location details. The structure makes it easy for visitors to explore the menu and contact the correct restaurant.</p>
+              <div class="local-site-tags">
+                <span>Searchable menu</span>
+                <span>Two locations</span>
+                <span>Food gallery</span>
+                <span>Takeout and catering</span>
+              </div>
+              <a class="text-link" href="https://local-maine.github.io/jewel-of-india/" target="_blank" rel="noopener noreferrer">View live website <span>→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="capabilities">
       <div class="container">
         <div class="section-head">
           <span class="kicker">What I build and improve</span>
@@ -516,7 +678,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section section-alt">
       <div class="container split-grid">
         <div>
           <span class="kicker">Experience that translates</span>
