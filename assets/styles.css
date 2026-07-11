@@ -1311,129 +1311,109 @@ footer {
   }
 }
 
-.ops-system {
-  --ops-rotation: 0deg;
+/* Operational data-flow effect */
+.ops-flow {
   position: absolute;
   left: var(--glow-x);
   top: var(--glow-y);
-  width: 340px;
-  height: 340px;
+  width: 420px;
+  height: 420px;
   pointer-events: none;
-  transform: translate(-50%, -50%) rotate(var(--ops-rotation));
-  transition: left 120ms ease-out, top 120ms ease-out;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  transition:
+    left 120ms ease-out,
+    top 120ms ease-out,
+    transform 160ms ease-out;
   z-index: 0;
   will-change: transform, left, top;
 }
 
-.ops-ring {
+.ops-flow-lines {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
-.ops-ring-outer {
-  width: 286px;
-  height: 286px;
-  border: 1px solid rgba(37, 99, 235, 0.22);
+.ops-flow-lines path {
+  fill: none;
+  stroke: rgba(37, 99, 235, 0.20);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-dasharray: 5 8;
+}
+
+.ops-flow-lines path:nth-child(even) {
+  stroke: rgba(15, 118, 110, 0.22);
+}
+
+.flow-node {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid rgba(37, 99, 235, 0.78);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
   box-shadow:
-    inset 0 0 24px rgba(37, 99, 235, 0.035),
-    0 0 28px rgba(15, 118, 110, 0.035);
+    0 0 0 5px rgba(37, 99, 235, 0.035),
+    0 0 14px rgba(37, 99, 235, 0.12);
 }
 
-.ops-ring-middle {
-  width: 214px;
-  height: 214px;
-  border: 1px dashed rgba(15, 118, 110, 0.34);
-  transform: translate(-50%, -50%) rotate(calc(var(--ops-rotation) * -0.55));
-}
-
-.ops-ring-inner {
-  width: 112px;
-  height: 112px;
-  border: 1px solid rgba(26, 39, 68, 0.26);
-  box-shadow: inset 0 0 0 14px rgba(255, 255, 255, 0.06);
-  transform: translate(-50%, -50%) rotate(calc(var(--ops-rotation) * -0.8));
-}
-
-.ops-hub {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 38px;
-  height: 38px;
-  margin: -19px;
-  border: 1.5px solid rgba(26, 39, 68, 0.42);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+.flow-node:nth-of-type(even) {
+  border-color: rgba(15, 118, 110, 0.80);
   box-shadow:
-    0 0 0 8px rgba(37, 99, 235, 0.035),
-    0 0 18px rgba(37, 99, 235, 0.08);
+    0 0 0 5px rgba(15, 118, 110, 0.035),
+    0 0 14px rgba(15, 118, 110, 0.12);
 }
 
-.ops-tooth {
+.flow-node-1 { left: 71px;  top: 203px; }
+.flow-node-2 { left: 139px; top: 89px; }
+.flow-node-3 { left: 269px; top: 123px; }
+.flow-node-4 { left: 327px; top: 231px; }
+.flow-node-5 { left: 343px; top: 163px; }
+
+.flow-pulse {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 20px;
-  height: 8px;
-  margin: -4px -10px;
-  border: 1.25px solid rgba(37, 99, 235, 0.68);
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 7px rgba(37, 99, 235, 0.06);
-}
-
-.ops-tooth:nth-of-type(even) {
-  border-color: rgba(15, 118, 110, 0.66);
-  box-shadow: 0 0 7px rgba(15, 118, 110, 0.05);
-}
-
-.ops-tooth-1  { transform: rotate(0deg) translateX(152px) rotate(90deg); }
-.ops-tooth-2  { transform: rotate(30deg) translateX(152px) rotate(90deg); }
-.ops-tooth-3  { transform: rotate(60deg) translateX(152px) rotate(90deg); }
-.ops-tooth-4  { transform: rotate(90deg) translateX(152px) rotate(90deg); }
-.ops-tooth-5  { transform: rotate(120deg) translateX(152px) rotate(90deg); }
-.ops-tooth-6  { transform: rotate(150deg) translateX(152px) rotate(90deg); }
-.ops-tooth-7  { transform: rotate(180deg) translateX(152px) rotate(90deg); }
-.ops-tooth-8  { transform: rotate(210deg) translateX(152px) rotate(90deg); }
-.ops-tooth-9  { transform: rotate(240deg) translateX(152px) rotate(90deg); }
-.ops-tooth-10 { transform: rotate(270deg) translateX(152px) rotate(90deg); }
-.ops-tooth-11 { transform: rotate(300deg) translateX(152px) rotate(90deg); }
-.ops-tooth-12 { transform: rotate(330deg) translateX(152px) rotate(90deg); }
-
-.ops-node {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 12px;
-  height: 12px;
-  margin: -6px;
-  border: 1.5px solid rgba(37, 99, 235, 0.76);
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.10);
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.10);
+  background: rgba(37, 99, 235, 0.92);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.30);
+  offset-rotate: 0deg;
 }
 
-.ops-node-1 {
-  transform: rotate(18deg) translateX(107px);
+.flow-pulse-1 {
+  offset-path: path("M78 210 C126 126, 196 108, 276 130");
+  animation: flowPulseOne 4.8s linear infinite;
 }
 
-.ops-node-2 {
-  border-color: rgba(15, 118, 110, 0.78);
-  box-shadow: 0 0 12px rgba(15, 118, 110, 0.10);
-  transform: rotate(145deg) translateX(107px);
+.flow-pulse-2 {
+  background: rgba(15, 118, 110, 0.92);
+  box-shadow: 0 0 12px rgba(15, 118, 110, 0.30);
+  offset-path: path("M78 210 C150 246, 222 278, 334 238");
+  animation: flowPulseTwo 6.2s linear infinite;
 }
 
-.ops-node-3 {
-  transform: rotate(262deg) translateX(107px);
+@keyframes flowPulseOne {
+  from { offset-distance: 0%; opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  to   { offset-distance: 100%; opacity: 0; }
+}
+
+@keyframes flowPulseTwo {
+  from { offset-distance: 100%; opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  to   { offset-distance: 0%; opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce),
        (hover: none),
        (pointer: coarse) {
-  .ops-system {
+  .ops-flow {
     display: none;
   }
 }
