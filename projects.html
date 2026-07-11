@@ -77,6 +77,13 @@
         "url": "https://local-maine.github.io/jewel-of-india/",
         "description": "A responsive restaurant website with menu browsing, food photography, catering information, and location details for two Maine restaurants.",
         "creator": { "@id": "https://stevethibault.com/#person" }
+      },
+      {
+        "@type": "WebSite",
+        "name": "Arundel House of Pizza",
+        "url": "https://local-maine.github.io/ahop/",
+        "description": "A responsive restaurant website with online ordering, searchable menu content, reviews, business information, hours, directions, and mobile-friendly customer actions.",
+        "creator": { "@id": "https://stevethibault.com/#person" }
       }
     ]
   }
@@ -264,7 +271,7 @@
 
     .local-site-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
       margin-top: 28px;
     }
@@ -353,6 +360,12 @@
     .local-site-body .text-link {
       margin-top: auto;
       padding-top: 22px;
+    }
+
+    @media (max-width: 1050px) {
+      .local-site-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 760px) {
@@ -629,6 +642,25 @@
                 <span>Takeout and catering</span>
               </div>
               <a class="text-link" href="https://local-maine.github.io/jewel-of-india/" target="_blank" rel="noopener noreferrer">View live website <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="local-site-card">
+            <a class="local-site-preview" href="https://local-maine.github.io/ahop/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Arundel House of Pizza website">
+              <img src="assets/ahop-preview.webp" alt="Fresh vegetable and sausage pizza featured on the Arundel House of Pizza website" loading="lazy">
+              <span class="local-site-badge">Restaurant website</span>
+            </a>
+            <div class="local-site-body">
+              <span class="local-site-location">Arundel, Maine</span>
+              <h3>Arundel House of Pizza</h3>
+              <p>Designed and built a responsive restaurant website with online ordering, searchable menu content, customer reviews, business information, hours, and directions. Mobile visitors can quickly call, navigate, or begin an order.</p>
+              <div class="local-site-tags">
+                <span>Online ordering</span>
+                <span>Searchable menu</span>
+                <span>Mobile actions</span>
+                <span>Hours and directions</span>
+              </div>
+              <a class="text-link" href="https://local-maine.github.io/ahop/" target="_blank" rel="noopener noreferrer">View live website <span>→</span></a>
             </div>
           </article>
         </div>
