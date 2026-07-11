@@ -306,6 +306,7 @@
 
   <main id="main-content">
     <section class="hero">
+      <div class="hero-mouse-glow" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div>
           <span class="eyebrow">Business operations, automation & analytics</span>
@@ -620,6 +621,31 @@
     document.addEventListener("keydown", function(event) {
       if (event.key === "Escape") closeImgLightbox();
     });
+  </script>
+
+
+  <script>
+    (function () {
+      const hero = document.querySelector(".hero, .page-hero");
+      const glow = document.querySelector(".hero-mouse-glow");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (hero && glow && !reducedMotion) {
+        hero.addEventListener("pointermove", function (event) {
+          const rect = hero.getBoundingClientRect();
+          hero.style.setProperty("--glow-x", (event.clientX - rect.left) + "px");
+          hero.style.setProperty("--glow-y", (event.clientY - rect.top) + "px");
+        }, { passive: true });
+      }
+
+      document.querySelectorAll(".card").forEach(function (card) {
+        card.addEventListener("pointermove", function (event) {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--mouse-x", (event.clientX - rect.left) + "px");
+          card.style.setProperty("--mouse-y", (event.clientY - rect.top) + "px");
+        }, { passive: true });
+      });
+    })();
   </script>
 
 </body>
