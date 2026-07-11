@@ -1232,69 +1232,42 @@ footer {
 }
 }
 
-/* Ambient mouse and background effects */
-body {
-  isolation: isolate;
+/* Mouse effects: hero glow and card spotlight */
+.hero,
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  --glow-x: 72%;
+  --glow-y: 34%;
 }
 
-nav,
-main,
-footer {
+.hero > .container,
+.page-hero > .container {
   position: relative;
   z-index: 1;
 }
 
-.ambient-effects {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.ambient-glow {
+.hero-mouse-glow {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 620px;
-  height: 620px;
+  left: var(--glow-x);
+  top: var(--glow-y);
+  width: 720px;
+  height: 720px;
   border-radius: 50%;
-  opacity: 0.52;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
   background:
     radial-gradient(
       circle,
-      rgba(37, 99, 235, 0.18) 0%,
-      rgba(15, 118, 110, 0.10) 34%,
-      rgba(37, 99, 235, 0.04) 54%,
+      rgba(37, 99, 235, 0.26) 0%,
+      rgba(15, 118, 110, 0.14) 30%,
+      rgba(37, 99, 235, 0.06) 52%,
       transparent 72%
     );
-  filter: blur(14px);
-  will-change: transform;
-}
-
-.ambient-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  will-change: transform;
-}
-
-.ambient-orb-one {
-  top: -160px;
-  right: -100px;
-  width: 540px;
-  height: 540px;
-  opacity: 0.32;
-  background: rgba(37, 99, 235, 0.34);
-}
-
-.ambient-orb-two {
-  left: -180px;
-  top: 38%;
-  width: 480px;
-  height: 480px;
-  opacity: 0.22;
-  background: rgba(15, 118, 110, 0.32);
+  filter: blur(18px);
+  opacity: 0.9;
+  transition: left 120ms ease-out, top 120ms ease-out;
+  z-index: 0;
 }
 
 .card {
@@ -1314,10 +1287,10 @@ footer {
   pointer-events: none;
   background:
     radial-gradient(
-      280px circle at var(--mouse-x) var(--mouse-y),
-      rgba(37, 99, 235, 0.14),
-      rgba(15, 118, 110, 0.06) 35%,
-      transparent 68%
+      300px circle at var(--mouse-x) var(--mouse-y),
+      rgba(37, 99, 235, 0.18),
+      rgba(15, 118, 110, 0.08) 38%,
+      transparent 70%
     );
   transition: opacity 180ms ease;
 }
@@ -1332,15 +1305,7 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ambient-glow,
-  .ambient-orb,
-  .card::before {
-    display: none;
-  }
-}
-
-@media (hover: none), (pointer: coarse) {
-  .ambient-glow,
+  .hero-mouse-glow,
   .card::before {
     display: none;
   }
