@@ -176,6 +176,131 @@ a {
   color: var(--blue);
 }
 
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 39, 68, 0.56);
+  padding: 18px;
+  box-sizing: border-box;
+  backdrop-filter: blur(6px);
+}
+
+.contact-dialog {
+  position: relative;
+  width: min(100%, 365px);
+  background: #ffffff;
+  border: 1px solid rgba(26, 39, 68, 0.12);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 28px 80px rgba(26, 39, 68, 0.25);
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1a2744;
+}
+
+.contact-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(26, 39, 68, 0.12);
+  border-radius: 999px;
+  background: #f8fbff;
+  color: #1a2744;
+  font-size: 21px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 42px 18px 0;
+}
+
+.contact-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #1a2744;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  flex: 0 0 auto;
+}
+
+.contact-title {
+  margin: 0;
+  color: #1a2744;
+  font-size: 26px;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+}
+
+.contact-label {
+  display: block;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  color: #1a2744;
+  font-size: 14px;
+}
+
+.contact-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(26, 39, 68, 0.16);
+  border-radius: 14px;
+  padding: 11px 12px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  background: #f8fbff;
+  color: #1a2744;
+  outline: none;
+}
+
+.contact-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 86px;
+  resize: vertical;
+  border: 1px solid rgba(26, 39, 68, 0.16);
+  border-radius: 14px;
+  padding: 11px 12px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 16px;
+  background: #f8fbff;
+  color: #1a2744;
+  outline: none;
+}
+
+.contact-submit {
+  border: 0;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.24);
+}
+
 .hero {
   padding: 88px 0 64px;
   overflow: hidden;
