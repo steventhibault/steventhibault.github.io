@@ -348,10 +348,10 @@ a {
   content: "";
   position: absolute;
   top: 50%;
-  left: 64%;
+  left: 58%;
   z-index: 0;
-  width: min(806px, 62vw);
-  height: 728px;
+  width: min(1048px, 72vw);
+  height: 700px;
   pointer-events: none;
   background: url("hero-color-splash.webp") center / contain no-repeat;
   mix-blend-mode: multiply;
@@ -958,8 +958,8 @@ footer {
   .hero-grid::after {
     top: 67%;
     left: 50%;
-    width: min(806px, 96vw);
-    height: 650px;
+    width: min(960px, 112vw);
+    height: 640px;
     opacity: 1;
   }
 
@@ -1033,8 +1033,8 @@ footer {
   .hero-grid::after {
     top: 70%;
     left: 50%;
-    width: min(690px, 98vw);
-    height: 540px;
+    width: min(760px, 120vw);
+    height: 520px;
     opacity: 1;
   }
 
