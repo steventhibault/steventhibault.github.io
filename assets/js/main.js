@@ -99,6 +99,9 @@
       window.location.href = 'mailto:steve@stevethibault.com?subject=' +
         encodeURIComponent('Website inquiry from stevethibault.com') +
         '&body=' + encodeURIComponent(body);
+
+      contactForm.reset();
+      closeContactForm();
     });
   }
 

@@ -619,6 +619,9 @@
       window.location.href = "mailto:steve@stevethibault.com?subject=" +
         encodeURIComponent("Website inquiry from stevethibault.com") +
         "&body=" + encodeURIComponent(body);
+
+      contactEmailForm.reset();
+      closeContactForm();
     });
 
     contactModal.addEventListener("click", function(event) {
