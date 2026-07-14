@@ -29,6 +29,7 @@
   <meta name="twitter:image" content="https://stevethibault.com/assets/projects-og-image.png" />
   <link rel="canonical" href="https://stevethibault.com/projects.html" />
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preload" as="image" href="/assets/hero-color-splash.webp" fetchpriority="high" />
   <link rel="stylesheet" href="assets/styles.css" />
   <title>Projects | Stephen Thibault</title>
   <script type="application/ld+json">
@@ -142,6 +143,9 @@
       display: block;
       width: 100%;
       height: auto;
+    }
+    .shot-frame picture {
+      display: block;
     }
     .shot-caption {
       display: block;
@@ -447,7 +451,10 @@
                 <span class="shot-frame-dot"></span>
                 <span class="shot-frame-dot"></span>
               </div>
-              <img src="assets/filepackr-preview.jpg" width="1000" height="600" alt="filepackR interface showing a document packet sorted into 13 output PDFs" loading="lazy" decoding="async">
+              <picture>
+                <source media="(max-width: 930px)" type="image/webp" srcset="assets/filepackr-preview-700.webp">
+                <img src="assets/filepackr-preview.jpg" width="1000" height="600" alt="filepackR interface showing a document packet sorted into 13 output PDFs" loading="lazy" decoding="async">
+              </picture>
             </div>
             <span class="shot-caption">Click to view full size</span>
           </div>
@@ -487,7 +494,10 @@
                   <span class="shot-frame-dot"></span>
                   <span class="shot-frame-dot"></span>
                 </div>
-                <img src="assets/ecommerce-configurator.png" width="1000" height="727" alt="Custom Shopify configure-to-order server workflow with component sections, current configuration, price as configured, and add to cart controls" loading="lazy" decoding="async">
+                <picture>
+                  <source media="(max-width: 930px)" type="image/webp" srcset="assets/ecommerce-configurator-700.webp">
+                  <img src="assets/ecommerce-configurator.png" width="1000" height="727" alt="Custom Shopify configure-to-order server workflow with component sections, current configuration, price as configured, and add to cart controls" loading="lazy" decoding="async">
+                </picture>
               </div>
               <p class="visual-note">Custom configure-to-order workflow built around component choices, quote items, and a live configuration summary.</p>
             </div>
