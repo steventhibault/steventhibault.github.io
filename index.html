@@ -706,7 +706,7 @@
           const now = performance.now();
           if (now - lastShardTime > 28) {
             const speed = Math.abs(dx) + Math.abs(dy);
-            spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 10 : 6);
+            spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 7 : 4);
             lastShardTime = now;
           }
 

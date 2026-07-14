@@ -1446,57 +1446,29 @@ footer {
   height: var(--pixel-size);
   pointer-events: none;
   background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.34),
-      rgba(190, 43, 100, 0.48) 38%,
-      rgba(34, 153, 184, 0.44)
-    );
+    linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(37, 99, 235, 0.22)),
+    rgba(247, 250, 253, 0.7);
   box-shadow:
-    -12px 0 0 rgba(198, 145, 28, 0.34),
-    14px 14px 0 rgba(56, 178, 119, 0.26),
-    0 0 18px rgba(190, 43, 100, 0.14);
-  filter: saturate(0.82) contrast(1.02);
+    -12px 0 0 rgba(15, 118, 110, 0.14),
+    14px 14px 0 rgba(26, 39, 68, 0.11);
+  backdrop-filter: blur(5px) contrast(1.7) saturate(0.75);
+  -webkit-backdrop-filter: blur(5px) contrast(1.7) saturate(0.75);
   image-rendering: pixelated;
-  mix-blend-mode: normal;
+  mix-blend-mode: multiply;
   transform: translate(-50%, -50%);
   animation: cursorPixelScatter 680ms steps(6, end) forwards;
 }
 
 .cursor-pixel-shard:nth-child(3n) {
   background:
-    linear-gradient(135deg, rgba(34, 153, 184, 0.5), rgba(53, 93, 172, 0.42), rgba(255, 255, 255, 0.32));
-  box-shadow:
-    -12px 0 0 rgba(190, 43, 100, 0.28),
-    14px 14px 0 rgba(198, 172, 42, 0.28),
-    0 0 18px rgba(34, 153, 184, 0.16);
+    linear-gradient(135deg, rgba(37, 99, 235, 0.28), rgba(255, 255, 255, 0.62)),
+    rgba(247, 250, 253, 0.7);
 }
 
 .cursor-pixel-shard:nth-child(4n) {
   background:
-    linear-gradient(135deg, rgba(198, 101, 28, 0.5), rgba(198, 172, 42, 0.42), rgba(255, 255, 255, 0.3));
-  box-shadow:
-    -12px 0 0 rgba(190, 43, 100, 0.28),
-    14px 14px 0 rgba(34, 153, 184, 0.26),
-    0 0 18px rgba(198, 101, 28, 0.16);
-}
-
-.cursor-pixel-shard:nth-child(5n) {
-  background:
-    linear-gradient(135deg, rgba(56, 178, 119, 0.46), rgba(34, 153, 184, 0.4), rgba(255, 255, 255, 0.28));
-  box-shadow:
-    -12px 0 0 rgba(198, 172, 42, 0.3),
-    14px 14px 0 rgba(116, 87, 185, 0.26),
-    0 0 18px rgba(56, 178, 119, 0.14);
-}
-
-.cursor-pixel-shard:nth-child(7n) {
-  background:
-    linear-gradient(135deg, rgba(116, 87, 185, 0.48), rgba(188, 56, 151, 0.4), rgba(255, 255, 255, 0.3));
-  box-shadow:
-    -12px 0 0 rgba(34, 153, 184, 0.28),
-    14px 14px 0 rgba(198, 101, 28, 0.26),
-    0 0 18px rgba(116, 87, 185, 0.16);
+    linear-gradient(135deg, rgba(15, 118, 110, 0.24), rgba(255, 255, 255, 0.62)),
+    rgba(247, 250, 253, 0.7);
 }
 
 @keyframes cursorPixelScatter {
@@ -1505,7 +1477,7 @@ footer {
     transform: translate(-50%, -50%) scale(0.7);
   }
   12% {
-    opacity: 0.56;
+    opacity: 0.92;
   }
   38% {
     transform:
@@ -1516,7 +1488,7 @@ footer {
       scale(1.15);
   }
   72% {
-    opacity: 0.44;
+    opacity: 0.72;
     transform:
       translate(
         calc(-50% + var(--pixel-end-x)),
