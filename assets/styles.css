@@ -926,8 +926,8 @@ footer {
 .projects-hero::before {
   top: 45%;
   left: 81%;
-  width: min(820px, 58vw);
-  height: 660px;
+  width: min(656px, 46vw);
+  height: 528px;
   opacity: 0.78;
   transform: translate(-50%, -50%) scaleX(-1) rotate(-2deg);
 }
@@ -935,8 +935,8 @@ footer {
 .projects-hero::after {
   top: 47%;
   left: calc(63% - 175px);
-  width: min(1180px, 86vw);
-  height: 820px;
+  width: min(944px, 69vw);
+  height: 656px;
   opacity: 1;
   transform: translate(-50%, -50%) rotate(1deg);
 }
@@ -1024,15 +1024,15 @@ footer {
   .projects-hero::before {
     top: 55%;
     left: 72%;
-    width: min(720px, 86vw);
-    height: 560px;
+    width: min(576px, 69vw);
+    height: 448px;
   }
 
   .projects-hero::after {
     top: 54%;
     left: 56%;
-    width: min(1050px, 122vw);
-    height: 700px;
+    width: min(840px, 98vw);
+    height: 560px;
   }
 }
 
@@ -1118,15 +1118,15 @@ footer {
   .projects-hero::before {
     top: 58%;
     left: 72%;
-    width: min(580px, 104vw);
-    height: 440px;
+    width: min(464px, 83vw);
+    height: 352px;
   }
 
   .projects-hero::after {
     top: 56%;
     left: 50%;
-    width: min(860px, 140vw);
-    height: 580px;
+    width: min(688px, 112vw);
+    height: 464px;
   }
 }
 
