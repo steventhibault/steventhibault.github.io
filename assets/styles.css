@@ -916,7 +916,7 @@ footer {
   content: "";
   position: absolute;
   top: 47%;
-  left: calc(63% - 100px);
+  left: calc(63% - 150px);
   z-index: 0;
   width: min(1040px, 78vw);
   height: 760px;
