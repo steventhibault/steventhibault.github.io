@@ -348,10 +348,10 @@ a {
   content: "";
   position: absolute;
   top: 50%;
-  left: 58%;
+  left: 50%;
   z-index: 0;
-  width: min(1048px, 72vw);
-  height: 700px;
+  width: min(1362px, 100vw);
+  height: 910px;
   pointer-events: none;
   background: url("hero-color-splash.webp") center / contain no-repeat;
   mix-blend-mode: multiply;
@@ -956,10 +956,10 @@ footer {
   }
 
   .hero-grid::after {
-    top: 67%;
+    top: 50%;
     left: 50%;
-    width: min(960px, 112vw);
-    height: 640px;
+    width: min(1248px, 120vw);
+    height: 832px;
     opacity: 1;
   }
 
@@ -1031,10 +1031,10 @@ footer {
   }
 
   .hero-grid::after {
-    top: 70%;
+    top: 50%;
     left: 50%;
-    width: min(760px, 120vw);
-    height: 520px;
+    width: min(988px, 128vw);
+    height: 676px;
     opacity: 1;
   }
 
@@ -1639,7 +1639,7 @@ footer {
 
 @keyframes heroSplashDrift {
   from {
-    opacity: 0.95;
+    opacity: 1;
     transform: translate3d(calc(-50% - 8px), calc(-50% + 6px), 0) scale(0.985) rotate(-2deg);
   }
   to {
