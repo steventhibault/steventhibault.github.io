@@ -125,7 +125,7 @@ a {
   font-weight: 760;
 }
 
-.nav-links a:hover {
+.nav-links a:not(.button):not(.nav-cta):hover {
   color: var(--blue);
 }
 
@@ -176,6 +176,13 @@ a {
   color: white;
   background: linear-gradient(135deg, var(--blue), var(--blue-dark));
   box-shadow: 0 10px 24px rgba(37, 99, 235, 0.24);
+}
+
+.button-primary:hover,
+.button-primary:focus-visible {
+  color: white;
+  background: linear-gradient(135deg, #3b82f6, var(--blue));
+  box-shadow: 0 16px 32px rgba(37, 99, 235, 0.32);
 }
 
 .button-primary::after {
@@ -1266,8 +1273,10 @@ footer {
 }
 
 .content-page .nav-cta:hover,
-.content-page .button:hover {
+.content-page .button:not(.secondary):hover {
   background: var(--accent-dark);
+  color: #fff;
+  box-shadow: 0 18px 38px rgba(37, 99, 235, 0.3);
   transform: none;
 }
 
