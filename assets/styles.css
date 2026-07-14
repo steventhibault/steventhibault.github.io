@@ -1357,7 +1357,7 @@ footer {
 }
 }
 
-/* Mouse effects: hero glow and card spotlight */
+/* Mouse effects: pixelated cursor distortion */
 .hero,
 .page-hero {
   position: relative;
@@ -1376,23 +1376,65 @@ footer {
   position: absolute;
   left: var(--glow-x);
   top: var(--glow-y);
-  width: 460px;
-  height: 460px;
-  border-radius: 50%;
+  width: 176px;
+  height: 176px;
   pointer-events: none;
   transform: translate(-50%, -50%);
   background:
-    radial-gradient(
-      circle,
-      rgba(37, 99, 235, 0.34) 0%,
-      rgba(15, 118, 110, 0.18) 28%,
-      rgba(37, 99, 235, 0.08) 48%,
-      transparent 68%
+    linear-gradient(90deg, rgba(247, 250, 253, 0.62) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(247, 250, 253, 0.62) 1px, transparent 1px),
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(26, 39, 68, 0.22) 0 25%,
+      rgba(37, 99, 235, 0.19) 0 50%,
+      rgba(15, 118, 110, 0.14) 0 75%,
+      rgba(255, 255, 255, 0.24) 0 100%
     );
-  filter: blur(10px);
-  opacity: 0.95;
-  transition: left 120ms ease-out, top 120ms ease-out;
+  background-size: 12px 12px, 12px 12px, 24px 24px;
+  backdrop-filter: blur(7px) contrast(1.55) saturate(0.72);
+  -webkit-backdrop-filter: blur(7px) contrast(1.55) saturate(0.72);
+  clip-path: polygon(
+    12px 0,
+    calc(100% - 24px) 0,
+    calc(100% - 24px) 12px,
+    100% 12px,
+    100% calc(100% - 36px),
+    calc(100% - 12px) calc(100% - 36px),
+    calc(100% - 12px) 100%,
+    36px 100%,
+    36px calc(100% - 12px),
+    0 calc(100% - 12px),
+    0 24px,
+    12px 24px
+  );
+  image-rendering: pixelated;
+  mix-blend-mode: multiply;
+  opacity: 0.78;
+  transition: left 45ms steps(2, end), top 45ms steps(2, end);
   z-index: 0;
+}
+
+.hero-mouse-glow::before,
+.hero-mouse-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 38%, rgba(255, 255, 255, 0.5) 38% 49%, transparent 49%),
+    linear-gradient(0deg, transparent 0 32%, rgba(26, 39, 68, 0.16) 32% 43%, transparent 43%);
+  background-size: 48px 48px;
+}
+
+.hero-mouse-glow::after {
+  inset: 24px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(37, 99, 235, 0.2) 0 12px,
+      rgba(15, 118, 110, 0.14) 12px 24px,
+      transparent 24px 36px
+    );
+  opacity: 0.5;
 }
 
 .card {
@@ -1411,17 +1453,28 @@ footer {
   opacity: 0;
   pointer-events: none;
   background:
-    radial-gradient(
-      220px circle at var(--mouse-x) var(--mouse-y),
-      rgba(37, 99, 235, 0.22),
-      rgba(15, 118, 110, 0.10) 36%,
-      transparent 68%
+    linear-gradient(90deg, rgba(255, 255, 255, 0.48) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.48) 1px, transparent 1px),
+    repeating-conic-gradient(
+      from 0deg at var(--mouse-x) var(--mouse-y),
+      rgba(37, 99, 235, 0.2) 0 25%,
+      rgba(15, 118, 110, 0.12) 0 50%,
+      transparent 0 100%
     );
-  transition: opacity 180ms ease;
+  background-position:
+    var(--mouse-x) var(--mouse-y),
+    var(--mouse-x) var(--mouse-y),
+    var(--mouse-x) var(--mouse-y);
+  background-size: 14px 14px, 14px 14px, 28px 28px;
+  backdrop-filter: blur(4px) contrast(1.35) saturate(0.8);
+  -webkit-backdrop-filter: blur(4px) contrast(1.35) saturate(0.8);
+  image-rendering: pixelated;
+  mix-blend-mode: multiply;
+  transition: opacity 90ms steps(2, end);
 }
 
 .card:hover::before {
-  opacity: 1;
+  opacity: 0.68;
 }
 
 .card > * {
