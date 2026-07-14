@@ -307,10 +307,31 @@ a {
 }
 
 .hero-grid {
+  position: relative;
   display: grid;
   grid-template-columns: 1.02fr 0.98fr;
   gap: 54px;
   align-items: center;
+}
+
+.hero-grid::after {
+  content: "";
+  position: absolute;
+  top: -78px;
+  right: -250px;
+  z-index: 0;
+  width: min(820px, 64vw);
+  height: 560px;
+  pointer-events: none;
+  background: url("hero-color-splash.webp") center / contain no-repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.42;
+  filter: saturate(0.92) contrast(0.98);
+}
+
+.hero-grid > * {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow {
@@ -852,6 +873,14 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .hero-grid::after {
+    top: 320px;
+    right: -230px;
+    width: 720px;
+    height: 500px;
+    opacity: 0.28;
+  }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -917,6 +946,14 @@ footer {
 
   .hero {
     padding: 58px 0 45px;
+  }
+
+  .hero-grid::after {
+    top: 300px;
+    right: -270px;
+    width: 660px;
+    height: 460px;
+    opacity: 0.24;
   }
 
   h1 {
