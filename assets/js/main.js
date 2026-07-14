@@ -31,10 +31,7 @@
     modal.innerHTML = [
       '<div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">',
       '<button type="button" id="closeContactModal" class="contact-close" aria-label="Close contact form">&times;</button>',
-      '<form action="https://formsubmit.co/steve@stevethibault.com" method="POST" style="margin:0;">',
-      '<input type="hidden" name="_subject" value="Website inquiry from stevethibault.com">',
-      '<input type="hidden" name="_template" value="table">',
-      '<input type="hidden" name="_captcha" value="true">',
+      '<form class="contact-email-form" style="margin:0;">',
       '<div class="contact-header"><span class="contact-avatar">ST</span><h2 id="contactModalTitle" class="contact-title">Contact</h2></div>',
       '<label for="contact-name" class="contact-label">Name</label>',
       '<input id="contact-name" type="text" name="name" placeholder="Your name" required class="contact-input">',
@@ -55,6 +52,7 @@
 
   const contactModal = ensureContactModal();
   const closeContactModal = document.getElementById('closeContactModal');
+  const contactForm = contactModal.querySelector('.contact-email-form');
 
   function openContactModal(event) {
     event.preventDefault();
@@ -81,6 +79,28 @@
   });
 
   if (closeContactModal) closeContactModal.addEventListener('click', closeContactForm);
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const name = (document.getElementById('contact-name') || {}).value || '';
+      const email = (document.getElementById('contact-email') || {}).value || '';
+      const phone = (document.getElementById('contact-phone') || {}).value || '';
+      const message = (document.getElementById('contact-message') || {}).value || '';
+      const body = [
+        'Name: ' + name,
+        'Email: ' + email,
+        phone ? 'Phone: ' + phone : '',
+        '',
+        message
+      ].filter(Boolean).join('\n');
+
+      window.location.href = 'mailto:steve@stevethibault.com?subject=' +
+        encodeURIComponent('Website inquiry from stevethibault.com') +
+        '&body=' + encodeURIComponent(body);
+    });
+  }
 
   contactModal.addEventListener('click', function (event) {
     if (event.target === contactModal) closeContactForm();

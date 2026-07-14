@@ -546,11 +546,7 @@
     <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
       <button type="button" id="closeContactModal" class="contact-close" aria-label="Close contact form">&times;</button>
 
-      <form action="https://formsubmit.co/steve@stevethibault.com" method="POST" style="margin:0;">
-        <input type="hidden" name="_subject" value="Website inquiry from stevethibault.com">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="true">
-
+      <form id="contactEmailForm" style="margin:0;">
         <div class="contact-header">
           <span class="contact-avatar">ST</span>
           <h2 id="contactModalTitle" class="contact-title">Contact</h2>
@@ -580,6 +576,7 @@
 
     const contactModal = document.getElementById("contactModal");
     const closeContactModal = document.getElementById("closeContactModal");
+    const contactEmailForm = document.getElementById("contactEmailForm");
 
     function openContactModal(event) {
       event.preventDefault();
@@ -603,6 +600,26 @@
     });
 
     closeContactModal.addEventListener("click", closeContactForm);
+
+    contactEmailForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("contact-name").value || "";
+      const email = document.getElementById("contact-email").value || "";
+      const phone = document.getElementById("contact-phone").value || "";
+      const message = document.getElementById("contact-message").value || "";
+      const body = [
+        "Name: " + name,
+        "Email: " + email,
+        phone ? "Phone: " + phone : "",
+        "",
+        message
+      ].filter(Boolean).join("\n");
+
+      window.location.href = "mailto:steve@stevethibault.com?subject=" +
+        encodeURIComponent("Website inquiry from stevethibault.com") +
+        "&body=" + encodeURIComponent(body);
+    });
 
     contactModal.addEventListener("click", function(event) {
       if (event.target === contactModal) {

@@ -8,11 +8,7 @@
 
 <body style="margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; background:#f6f9fc; font-family:Arial, Helvetica, sans-serif; color:#071735; padding:24px; box-sizing:border-box;">
 
-  <form action="https://formsubmit.co/steve@stevethibault.com" method="POST" style="width:min(100%, 540px); background:#ffffff; border:1px solid #dfe7f0; border-radius:22px; padding:34px; box-shadow:0 20px 60px rgba(7,23,53,0.10); box-sizing:border-box;">
-
-    <input type="hidden" name="_subject" value="Website inquiry from stevethibault.com">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_captcha" value="true">
+  <form id="contactEmailForm" style="width:min(100%, 540px); background:#ffffff; border:1px solid #dfe7f0; border-radius:22px; padding:34px; box-shadow:0 20px 60px rgba(7,23,53,0.10); box-sizing:border-box;">
 
     <label for="name" style="display:block; font-weight:800; margin:0 0 9px 0;">Name</label>
     <input id="name" type="text" name="name" placeholder="Your name" required style="width:100%; box-sizing:border-box; border:1px solid #cbd7e3; border-radius:14px; padding:14px 15px; font-size:16px; margin-bottom:20px; background:#f8fbff; color:#071735; outline:none;">
@@ -27,7 +23,7 @@
     <textarea id="message" name="message" placeholder="Tell me what you are looking for..." required style="width:100%; box-sizing:border-box; min-height:150px; resize:vertical; border:1px solid #cbd7e3; border-radius:14px; padding:14px 15px; font-size:16px; font-family:Arial, Helvetica, sans-serif; margin-bottom:18px; background:#f8fbff; color:#071735; outline:none;"></textarea>
 
     <p style="margin:0 0 20px 0; color:#30415f; font-size:15px; line-height:1.5;">
-      This form sends directly to steve@stevethibault.com.
+      This form opens your email app with the message filled in.
     </p>
 
     <button type="submit" style="border:0; background:#2563eb; color:#ffffff; padding:14px 22px; border-radius:999px; font-size:15px; font-weight:800; cursor:pointer;">
@@ -35,6 +31,28 @@
     </button>
 
   </form>
+
+  <script>
+    document.getElementById("contactEmailForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value || "";
+      const email = document.getElementById("email").value || "";
+      const phone = document.getElementById("phone").value || "";
+      const message = document.getElementById("message").value || "";
+      const body = [
+        "Name: " + name,
+        "Email: " + email,
+        phone ? "Phone: " + phone : "",
+        "",
+        message
+      ].filter(Boolean).join("\n");
+
+      window.location.href = "mailto:steve@stevethibault.com?subject=" +
+        encodeURIComponent("Website inquiry from stevethibault.com") +
+        "&body=" + encodeURIComponent(body);
+    });
+  </script>
 
 </body>
 </html>
