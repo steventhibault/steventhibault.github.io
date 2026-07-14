@@ -715,33 +715,6 @@
         }, { passive: true });
       }
 
-      document.querySelectorAll(".card").forEach(function (card) {
-        let cardLastX = null;
-        let cardLastY = null;
-        let cardLastShardTime = 0;
-
-        card.addEventListener("pointermove", function (event) {
-          const rect = card.getBoundingClientRect();
-          const x = event.clientX - rect.left;
-          const y = event.clientY - rect.top;
-          const dx = cardLastX === null ? 0 : x - cardLastX;
-          const dy = cardLastY === null ? 0 : y - cardLastY;
-
-          card.style.setProperty("--mouse-x", x + "px");
-          card.style.setProperty("--mouse-y", y + "px");
-
-          if (!reducedMotion) {
-            const now = performance.now();
-            if (now - cardLastShardTime > 45) {
-              spawnPixelShards(card, x, y, dx, dy, 3);
-              cardLastShardTime = now;
-            }
-          }
-
-          cardLastX = x;
-          cardLastY = y;
-        }, { passive: true });
-      });
     })();
   </script>
 

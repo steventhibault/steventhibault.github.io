@@ -1511,40 +1511,6 @@ footer {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.48) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.48) 1px, transparent 1px),
-    repeating-conic-gradient(
-      from 0deg at var(--mouse-x) var(--mouse-y),
-      rgba(37, 99, 235, 0.2) 0 25%,
-      rgba(15, 118, 110, 0.12) 0 50%,
-      transparent 0 100%
-    );
-  background-position:
-    var(--mouse-x) var(--mouse-y),
-    var(--mouse-x) var(--mouse-y),
-    var(--mouse-x) var(--mouse-y);
-  background-size: 14px 14px, 14px 14px, 28px 28px;
-  backdrop-filter: blur(4px) contrast(1.35) saturate(0.8);
-  -webkit-backdrop-filter: blur(4px) contrast(1.35) saturate(0.8);
-  image-rendering: pixelated;
-  mix-blend-mode: multiply;
-  transition: opacity 90ms steps(2, end), background-position 80ms steps(2, end);
-}
-
-.card:hover::before {
-  opacity: 0.68;
 }
 
 .card > * {
@@ -1554,7 +1520,6 @@ footer {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-mouse-glow,
-  .card::before,
   .cursor-pixel-shard {
     display: none;
   }
