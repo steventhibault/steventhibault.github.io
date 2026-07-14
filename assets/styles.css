@@ -63,6 +63,17 @@ a {
   border-bottom: 1px solid rgba(223, 231, 242, 0.88);
   background: rgba(247, 250, 253, 0.9);
   backdrop-filter: blur(18px);
+  box-shadow: 0 10px 30px rgba(26, 39, 68, 0.045);
+}
+
+.nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.45), rgba(15, 118, 110, 0.36), transparent);
 }
 
 .nav-inner {
@@ -142,6 +153,8 @@ a {
 }
 
 .button {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -163,6 +176,23 @@ a {
   color: white;
   background: linear-gradient(135deg, var(--blue), var(--blue-dark));
   box-shadow: 0 10px 24px rgba(37, 99, 235, 0.24);
+}
+
+.button-primary::after {
+  content: "";
+  position: absolute;
+  inset: -30% auto -30% -55%;
+  width: 42%;
+  pointer-events: none;
+  transform: skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+  opacity: 0;
+  transition: transform 0.62s ease, opacity 0.22s ease;
+}
+
+.button-primary:hover::after {
+  transform: translateX(360%) skewX(-18deg);
+  opacity: 1;
 }
 
 .button-secondary {
@@ -327,6 +357,9 @@ a {
   mix-blend-mode: multiply;
   opacity: 0.42;
   filter: saturate(0.92) contrast(0.98);
+  transform: translate3d(0, 0, 0) rotate(-1deg);
+  animation: heroSplashDrift 10s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .hero-grid > * {
@@ -354,6 +387,8 @@ a {
   height: 8px;
   border-radius: 50%;
   background: var(--teal);
+  box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.28);
+  animation: accentPulse 2.8s ease-out infinite;
 }
 
 h1,
@@ -423,6 +458,7 @@ h1 span {
   border-radius: 24px;
   background: white;
   box-shadow: var(--shadow);
+  animation: heroCardSettle 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hero-card::before {
@@ -486,6 +522,18 @@ h1 span {
   border: 1px solid #e6edf6;
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.92);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  animation: workflowRowIn 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.workflow-row:nth-child(2) { animation-delay: 80ms; }
+.workflow-row:nth-child(3) { animation-delay: 160ms; }
+.workflow-row:nth-child(4) { animation-delay: 240ms; }
+
+.hero-card .workflow-row:hover {
+  transform: translateX(5px);
+  border-color: #c8d8ed;
+  box-shadow: 0 12px 24px rgba(26, 39, 68, 0.08);
 }
 
 .workflow-icon {
@@ -561,6 +609,16 @@ h1 span {
   margin-bottom: 34px;
 }
 
+.section-head::after {
+  content: "";
+  display: block;
+  width: 86px;
+  height: 3px;
+  margin-top: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blue), var(--teal), transparent);
+}
+
 .kicker {
   color: var(--teal);
   font-size: 12px;
@@ -601,10 +659,27 @@ h2 {
   transition: 0.22s ease;
 }
 
+.grid .card::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 0;
+  height: 3px;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.64), rgba(15, 118, 110, 0.52));
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
 .card:hover {
   transform: translateY(-4px);
   border-color: #c2d1e5;
   box-shadow: var(--shadow-soft);
+}
+
+.grid .card:hover::after {
+  opacity: 1;
 }
 
 .card-icon {
@@ -656,6 +731,13 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 14px;
   background: white;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.stack-item:hover {
+  transform: translateY(-3px);
+  border-color: #c8d8ed;
+  box-shadow: var(--shadow-soft);
 }
 
 .stack-item strong {
@@ -679,6 +761,13 @@ h2 {
   border-radius: 22px;
   background: white;
   box-shadow: var(--shadow-soft);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: #c8d8ed;
+  box-shadow: 0 24px 52px rgba(26, 39, 68, 0.12);
 }
 
 .project-visual {
@@ -1555,10 +1644,64 @@ footer {
   z-index: 1;
 }
 
+@keyframes heroSplashDrift {
+  from {
+    opacity: 0.36;
+    transform: translate3d(-8px, 6px, 0) scale(0.985) rotate(-2deg);
+  }
+  to {
+    opacity: 0.48;
+    transform: translate3d(14px, -10px, 0) scale(1.025) rotate(1deg);
+  }
+}
+
+@keyframes accentPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.30);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(15, 118, 110, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(15, 118, 110, 0);
+  }
+}
+
+@keyframes heroCardSettle {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes workflowRowIn {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-mouse-glow,
   .cursor-pixel-shard {
     display: none;
+  }
+
+  .hero-grid::after,
+  .eyebrow::before,
+  .hero-card,
+  .workflow-row,
+  .button-primary::after {
+    animation: none;
+    transition: none;
   }
 }
 
