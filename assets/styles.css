@@ -915,17 +915,17 @@ footer {
 .projects-hero::after {
   content: "";
   position: absolute;
-  top: 48%;
-  right: 2%;
+  top: 47%;
+  left: 63%;
   z-index: 0;
-  width: min(760px, 62vw);
-  height: 560px;
+  width: min(1040px, 78vw);
+  height: 760px;
   pointer-events: none;
   background: url("hero-color-splash.webp") center / contain no-repeat;
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
   opacity: 1;
-  filter: saturate(0.95) contrast(0.98);
-  transform: translateY(-50%) rotate(1deg);
+  filter: saturate(1.02) contrast(1);
+  transform: translate(-50%, -50%) rotate(1deg);
 }
 
 .page-hero h1 {
@@ -1006,6 +1006,13 @@ footer {
 
   .case-study-icon img {
     width: min(152px, 100%);
+  }
+
+  .projects-hero::after {
+    top: 54%;
+    left: 56%;
+    width: min(920px, 108vw);
+    height: 640px;
   }
 }
 
@@ -1089,10 +1096,10 @@ footer {
   }
 
   .projects-hero::after {
-    top: 52%;
-    right: -10%;
-    width: min(680px, 86vw);
-    height: 480px;
+    top: 56%;
+    left: 50%;
+    width: min(760px, 124vw);
+    height: 520px;
   }
 }
 
