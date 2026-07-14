@@ -412,7 +412,7 @@
   </nav>
 
   <main>
-    <section class="page-hero">
+    <section class="page-hero projects-hero">
       <div class="hero-mouse-glow" aria-hidden="true"></div>
       <div class="container">
         <span class="eyebrow">Selected projects & operational work</span>
@@ -755,6 +755,7 @@
       let lastX = null;
       let lastY = null;
       let lastShardTime = 0;
+      const activeShards = [];
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       function spawnPixelShards(host, x, y, dx, dy, count) {
@@ -778,9 +779,16 @@
           shard.style.setProperty("--pixel-fade-y", (driftY * 1.35) + "px");
 
           host.appendChild(shard);
+          activeShards.push(shard);
+          if (activeShards.length > 90) {
+            const oldShard = activeShards.shift();
+            if (oldShard) oldShard.remove();
+          }
           window.setTimeout(function () {
             shard.remove();
-          }, 760);
+            const shardIndex = activeShards.indexOf(shard);
+            if (shardIndex > -1) activeShards.splice(shardIndex, 1);
+          }, 620);
         }
       }
 
@@ -796,9 +804,9 @@
           hero.style.setProperty("--glow-y", y + "px");
 
           const now = performance.now();
-          if (now - lastShardTime > 28) {
+          if (now - lastShardTime > 24) {
             const speed = Math.abs(dx) + Math.abs(dy);
-            spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 7 : 4);
+            spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 5 : 3);
             lastShardTime = now;
           }
 

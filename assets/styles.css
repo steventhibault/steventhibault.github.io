@@ -912,6 +912,22 @@ footer {
   padding: 78px 0 54px;
 }
 
+.projects-hero::after {
+  content: "";
+  position: absolute;
+  top: 48%;
+  right: 2%;
+  z-index: 0;
+  width: min(760px, 62vw);
+  height: 560px;
+  pointer-events: none;
+  background: url("hero-color-splash.webp") center / contain no-repeat;
+  mix-blend-mode: multiply;
+  opacity: 1;
+  filter: saturate(0.95) contrast(0.98);
+  transform: translateY(-50%) rotate(1deg);
+}
+
 .page-hero h1 {
   max-width: 880px;
   font-size: clamp(3.15rem, 6vw, 5.7rem);
@@ -1070,6 +1086,13 @@ footer {
 
   .page-hero {
     padding: 54px 0 38px;
+  }
+
+  .projects-hero::after {
+    top: 52%;
+    right: -10%;
+    width: min(680px, 86vw);
+    height: 480px;
   }
 }
 
@@ -1570,12 +1593,12 @@ footer {
   box-shadow:
     -12px 0 0 rgba(15, 118, 110, 0.14),
     14px 14px 0 rgba(59, 130, 246, 0.16);
-  backdrop-filter: blur(5px) contrast(1.7) saturate(0.75);
-  -webkit-backdrop-filter: blur(5px) contrast(1.7) saturate(0.75);
+  contain: layout paint;
   image-rendering: pixelated;
   mix-blend-mode: multiply;
-  transform: translate(-50%, -50%);
-  animation: cursorPixelScatter 680ms steps(6, end) forwards;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform, opacity;
+  animation: cursorPixelScatter 540ms steps(6, end) forwards;
 }
 
 .cursor-pixel-shard:nth-child(3n) {
@@ -1593,34 +1616,37 @@ footer {
 @keyframes cursorPixelScatter {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.7);
+    transform: translate3d(-50%, -50%, 0) scale(0.7);
   }
   12% {
     opacity: 0.92;
   }
   38% {
     transform:
-      translate(
+      translate3d(
         calc(-50% + var(--pixel-mid-x)),
-        calc(-50% + var(--pixel-mid-y))
+        calc(-50% + var(--pixel-mid-y)),
+        0
       )
       scale(1.15);
   }
   72% {
     opacity: 0.72;
     transform:
-      translate(
+      translate3d(
         calc(-50% + var(--pixel-end-x)),
-        calc(-50% + var(--pixel-end-y))
+        calc(-50% + var(--pixel-end-y)),
+        0
       )
       scale(0.95);
   }
   100% {
     opacity: 0;
     transform:
-      translate(
+      translate3d(
         calc(-50% + var(--pixel-fade-x)),
-        calc(-50% + var(--pixel-fade-y))
+        calc(-50% + var(--pixel-fade-y)),
+        0
       )
       scale(0.55);
   }
