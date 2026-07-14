@@ -1513,8 +1513,8 @@ footer {
     linear-gradient(0deg, rgba(247, 250, 253, 0.54) 1px, transparent 1px),
     repeating-conic-gradient(
       from 0deg,
-      rgba(26, 39, 68, 0.24) 0 25%,
-      rgba(37, 99, 235, 0.18) 0 50%,
+      rgba(29, 78, 216, 0.24) 0 25%,
+      rgba(37, 99, 235, 0.20) 0 50%,
       rgba(15, 118, 110, 0.16) 0 75%,
       rgba(255, 255, 255, 0.28) 0 100%
     );
@@ -1549,7 +1549,7 @@ footer {
   inset: 0;
   background:
     linear-gradient(90deg, transparent 0 38%, rgba(255, 255, 255, 0.5) 38% 49%, transparent 49%),
-    linear-gradient(0deg, transparent 0 32%, rgba(26, 39, 68, 0.16) 32% 43%, transparent 43%);
+    linear-gradient(0deg, transparent 0 32%, rgba(37, 99, 235, 0.18) 32% 43%, transparent 43%);
   background-size: 48px 48px;
 }
 
@@ -1578,7 +1578,7 @@ footer {
     rgba(247, 250, 253, 0.7);
   box-shadow:
     -12px 0 0 rgba(15, 118, 110, 0.14),
-    14px 14px 0 rgba(26, 39, 68, 0.11);
+    14px 14px 0 rgba(59, 130, 246, 0.16);
   backdrop-filter: blur(5px) contrast(1.7) saturate(0.75);
   -webkit-backdrop-filter: blur(5px) contrast(1.7) saturate(0.75);
   image-rendering: pixelated;
