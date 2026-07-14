@@ -348,10 +348,10 @@ a {
   content: "";
   position: absolute;
   top: 50%;
-  left: 74%;
+  left: 64%;
   z-index: 0;
-  width: min(620px, 45vw);
-  height: 560px;
+  width: min(806px, 62vw);
+  height: 728px;
   pointer-events: none;
   background: url("hero-color-splash.webp") center / contain no-repeat;
   mix-blend-mode: multiply;
@@ -456,22 +456,11 @@ h1 span {
   padding: 20px;
   border: 1px solid rgba(223, 231, 242, 0.78);
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(10px) saturate(1.08);
-  -webkit-backdrop-filter: blur(10px) saturate(1.08);
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(4px) saturate(1.08);
+  -webkit-backdrop-filter: blur(4px) saturate(1.08);
   box-shadow: var(--shadow);
   animation: heroCardSettle 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.hero-card::before {
-  content: "";
-  position: absolute;
-  top: -110px;
-  right: -110px;
-  width: 265px;
-  height: 265px;
-  border-radius: 50%;
-  background: rgba(37, 99, 235, 0.1);
 }
 
 .window-bar {
@@ -523,9 +512,9 @@ h1 span {
   padding: 13px;
   border: 1px solid rgba(230, 237, 246, 0.82);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
   animation: workflowRowIn 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -967,10 +956,10 @@ footer {
   }
 
   .hero-grid::after {
-    top: 68%;
+    top: 67%;
     left: 50%;
-    width: min(620px, 92vw);
-    height: 520px;
+    width: min(806px, 96vw);
+    height: 650px;
     opacity: 1;
   }
 
@@ -1044,8 +1033,8 @@ footer {
   .hero-grid::after {
     top: 70%;
     left: 50%;
-    width: min(560px, 96vw);
-    height: 460px;
+    width: min(690px, 98vw);
+    height: 540px;
     opacity: 1;
   }
 
