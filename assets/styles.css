@@ -912,19 +912,32 @@ footer {
   padding: 78px 0 54px;
 }
 
+.projects-hero::before,
 .projects-hero::after {
   content: "";
   position: absolute;
-  top: 47%;
-  left: calc(63% - 175px);
   z-index: 0;
-  width: min(1040px, 78vw);
-  height: 760px;
   pointer-events: none;
   background: url("hero-color-splash.webp") center / contain no-repeat;
   mix-blend-mode: normal;
-  opacity: 1;
   filter: saturate(1.02) contrast(1);
+}
+
+.projects-hero::before {
+  top: 45%;
+  left: 81%;
+  width: min(820px, 58vw);
+  height: 660px;
+  opacity: 0.78;
+  transform: translate(-50%, -50%) scaleX(-1) rotate(-2deg);
+}
+
+.projects-hero::after {
+  top: 47%;
+  left: calc(63% - 175px);
+  width: min(1180px, 86vw);
+  height: 820px;
+  opacity: 1;
   transform: translate(-50%, -50%) rotate(1deg);
 }
 
@@ -1008,11 +1021,18 @@ footer {
     width: min(152px, 100%);
   }
 
+  .projects-hero::before {
+    top: 55%;
+    left: 72%;
+    width: min(720px, 86vw);
+    height: 560px;
+  }
+
   .projects-hero::after {
     top: 54%;
     left: 56%;
-    width: min(920px, 108vw);
-    height: 640px;
+    width: min(1050px, 122vw);
+    height: 700px;
   }
 }
 
@@ -1095,11 +1115,18 @@ footer {
     padding: 54px 0 38px;
   }
 
+  .projects-hero::before {
+    top: 58%;
+    left: 72%;
+    width: min(580px, 104vw);
+    height: 440px;
+  }
+
   .projects-hero::after {
     top: 56%;
     left: 50%;
-    width: min(760px, 124vw);
-    height: 520px;
+    width: min(860px, 140vw);
+    height: 580px;
   }
 }
 
