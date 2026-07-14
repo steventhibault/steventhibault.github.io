@@ -1446,29 +1446,57 @@ footer {
   height: var(--pixel-size);
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(37, 99, 235, 0.22)),
-    rgba(247, 250, 253, 0.7);
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.42),
+      rgba(255, 0, 110, 0.82) 38%,
+      rgba(0, 212, 255, 0.76)
+    );
   box-shadow:
-    -12px 0 0 rgba(15, 118, 110, 0.14),
-    14px 14px 0 rgba(26, 39, 68, 0.11);
-  backdrop-filter: blur(5px) contrast(1.7) saturate(0.75);
-  -webkit-backdrop-filter: blur(5px) contrast(1.7) saturate(0.75);
+    -12px 0 0 rgba(255, 184, 0, 0.62),
+    14px 14px 0 rgba(20, 255, 135, 0.42),
+    0 0 22px rgba(255, 0, 110, 0.26);
+  filter: saturate(1.45) contrast(1.08);
   image-rendering: pixelated;
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
   transform: translate(-50%, -50%);
   animation: cursorPixelScatter 680ms steps(6, end) forwards;
 }
 
 .cursor-pixel-shard:nth-child(3n) {
   background:
-    linear-gradient(135deg, rgba(37, 99, 235, 0.28), rgba(255, 255, 255, 0.62)),
-    rgba(247, 250, 253, 0.7);
+    linear-gradient(135deg, rgba(0, 212, 255, 0.84), rgba(37, 99, 235, 0.7), rgba(255, 255, 255, 0.4));
+  box-shadow:
+    -12px 0 0 rgba(255, 0, 110, 0.52),
+    14px 14px 0 rgba(255, 214, 10, 0.5),
+    0 0 22px rgba(0, 212, 255, 0.3);
 }
 
 .cursor-pixel-shard:nth-child(4n) {
   background:
-    linear-gradient(135deg, rgba(15, 118, 110, 0.24), rgba(255, 255, 255, 0.62)),
-    rgba(247, 250, 253, 0.7);
+    linear-gradient(135deg, rgba(255, 122, 0, 0.86), rgba(255, 214, 10, 0.74), rgba(255, 255, 255, 0.38));
+  box-shadow:
+    -12px 0 0 rgba(255, 0, 110, 0.5),
+    14px 14px 0 rgba(0, 212, 255, 0.42),
+    0 0 22px rgba(255, 122, 0, 0.3);
+}
+
+.cursor-pixel-shard:nth-child(5n) {
+  background:
+    linear-gradient(135deg, rgba(20, 255, 135, 0.78), rgba(0, 212, 255, 0.68), rgba(255, 255, 255, 0.34));
+  box-shadow:
+    -12px 0 0 rgba(255, 214, 10, 0.54),
+    14px 14px 0 rgba(155, 92, 255, 0.48),
+    0 0 22px rgba(20, 255, 135, 0.28);
+}
+
+.cursor-pixel-shard:nth-child(7n) {
+  background:
+    linear-gradient(135deg, rgba(155, 92, 255, 0.82), rgba(255, 0, 180, 0.68), rgba(255, 255, 255, 0.36));
+  box-shadow:
+    -12px 0 0 rgba(0, 212, 255, 0.5),
+    14px 14px 0 rgba(255, 122, 0, 0.48),
+    0 0 22px rgba(155, 92, 255, 0.3);
 }
 
 @keyframes cursorPixelScatter {
