@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow,noimageindex">
+  <meta name="googlebot" content="noindex,nofollow,noimageindex">
+  <title>Home Cooking</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #11100f;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.14);
+      --text: #f7f2ea;
+      --muted: #bdb4aa;
+      --line: rgba(255, 255, 255, 0.18);
+      --shadow: rgba(0, 0, 0, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 22% 5%, rgba(238, 181, 94, 0.22), transparent 30rem),
+        radial-gradient(circle at 82% 8%, rgba(111, 178, 255, 0.18), transparent 34rem),
+        linear-gradient(135deg, #171514 0%, #0f1114 48%, #17110f 100%);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page-shell {
+      width: min(1440px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 56px;
+    }
+
+    .gallery-header {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(42px, 8vw, 96px);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 660px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.55;
+    }
+
+    .gallery-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .gallery-meta span {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .gallery {
+      column-count: 4;
+      column-gap: 16px;
+    }
+
+    .photo-card {
+      display: block;
+      width: 100%;
+      margin: 0 0 16px;
+      padding: 0;
+      overflow: hidden;
+      break-inside: avoid;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+      box-shadow: 0 18px 45px var(--shadow);
+      cursor: zoom-in;
+      transform: translateZ(0);
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 220ms ease, filter 220ms ease;
+    }
+
+    .photo-card:hover img,
+    .photo-card:focus-visible img {
+      filter: saturate(1.08) contrast(1.04);
+      transform: scale(1.025);
+    }
+
+    .photo-card:focus-visible {
+      outline: 3px solid rgba(255, 255, 255, 0.72);
+      outline-offset: 4px;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(8, 8, 9, 0.92);
+      backdrop-filter: blur(14px);
+    }
+
+    .lightbox.is-open {
+      display: grid;
+    }
+
+    .lightbox-frame {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .lightbox-image {
+      max-width: min(100%, 1320px);
+      max-height: calc(100vh - 100px);
+      width: auto;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.62);
+    }
+
+    .lightbox-button {
+      position: fixed;
+      display: grid;
+      place-items: center;
+      min-width: 44px;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+
+    .lightbox-button:hover,
+    .lightbox-button:focus-visible {
+      background: var(--panel-strong);
+      transform: translateY(-1px);
+    }
+
+    .lightbox-close {
+      top: 22px;
+      right: 22px;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+      top: 50%;
+      font-size: 34px;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-prev:hover,
+    .lightbox-prev:focus-visible,
+    .lightbox-next:hover,
+    .lightbox-next:focus-visible {
+      transform: translateY(calc(-50% - 1px));
+    }
+
+    .lightbox-prev {
+      left: 22px;
+    }
+
+    .lightbox-next {
+      right: 22px;
+    }
+
+    .lightbox-count {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 1100px) {
+      .gallery {
+        column-count: 3;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100% - 22px, 640px);
+        padding-top: 28px;
+      }
+
+      .gallery {
+        column-count: 2;
+        column-gap: 10px;
+      }
+
+      .photo-card {
+        margin-bottom: 10px;
+        border-radius: 14px;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox-image {
+        max-height: calc(100vh - 128px);
+      }
+
+      .lightbox-prev,
+      .lightbox-next {
+        top: auto;
+        bottom: 20px;
+        transform: none;
+      }
+
+      .lightbox-prev:hover,
+      .lightbox-prev:focus-visible,
+      .lightbox-next:hover,
+      .lightbox-next:focus-visible {
+        transform: translateY(-1px);
+      }
+
+      .lightbox-prev {
+        left: 22px;
+      }
+
+      .lightbox-next {
+        right: 22px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .gallery {
+        column-count: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="gallery-header">
+      <div class="eyebrow">Private gallery</div>
+      <h1>Home Cooking</h1>
+      <p class="intro">A direct-link photo page for friends.</p>
+      <div class="gallery-meta">
+        <span id="photoCount">28 photos</span>
+        <span>Tap a photo to view it larger</span>
+      </div>
+    </header>
+
+    <section class="gallery" id="gallery" aria-label="Home cooking photo gallery"></section>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <div class="lightbox-frame">
+      <img class="lightbox-image" id="lightboxImage" alt="">
+      <button class="lightbox-button lightbox-close" id="lightboxClose" type="button" aria-label="Close photo viewer">&times;</button>
+      <button class="lightbox-button lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous photo">&lsaquo;</button>
+      <button class="lightbox-button lightbox-next" id="lightboxNext" type="button" aria-label="Next photo">&rsaquo;</button>
+      <div class="lightbox-count" id="lightboxCount" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <script src="photos.js"></script>
+  <script>
+    const photos = window.COOKING_PHOTOS || [];
+    const gallery = document.getElementById("gallery");
+    const photoCount = document.getElementById("photoCount");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const lightboxPrev = document.getElementById("lightboxPrev");
+    const lightboxNext = document.getElementById("lightboxNext");
+    const lightboxCount = document.getElementById("lightboxCount");
+    let activeIndex = 0;
+
+    photoCount.textContent = `${photos.length} photos`;
+
+    photos.forEach((photo, index) => {
+      const button = document.createElement("button");
+      button.className = "photo-card";
+      button.type = "button";
+      button.setAttribute("aria-label", `Open ${photo.alt}`);
+      button.addEventListener("click", () => openLightbox(index));
+
+      const img = document.createElement("img");
+      img.src = photo.thumb;
+      img.width = photo.thumbWidth;
+      img.height = photo.thumbHeight;
+      img.alt = photo.alt;
+      img.loading = index < 8 ? "eager" : "lazy";
+      img.decoding = "async";
+
+      button.appendChild(img);
+      gallery.appendChild(button);
+    });
+
+    function openLightbox(index) {
+      activeIndex = index;
+      updateLightbox();
+      lightbox.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+
+    function showNext(direction) {
+      activeIndex = (activeIndex + direction + photos.length) % photos.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      const photo = photos[activeIndex];
+      lightboxImage.src = photo.src;
+      lightboxImage.alt = photo.alt;
+      lightboxCount.textContent = `${activeIndex + 1} / ${photos.length}`;
+    }
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightboxPrev.addEventListener("click", () => showNext(-1));
+    lightboxNext.addEventListener("click", () => showNext(1));
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.classList.contains("is-open")) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+
+      if (event.key === "ArrowLeft") {
+        showNext(-1);
+      }
+
+      if (event.key === "ArrowRight") {
+        showNext(1);
+      }
+    });
+  </script>
+</body>
+</html>
