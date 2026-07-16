@@ -250,5 +250,77 @@ window.COOKING_PHOTOS = [
     "thumbWidth": 720,
     "thumbHeight": 524,
     "alt": "Home cooking photo 28"
+  },
+  {
+    "src": "photos/full/cooking-029.jpg",
+    "thumb": "photos/thumbs/cooking-029.jpg",
+    "width": 1215,
+    "height": 911,
+    "thumbWidth": 720,
+    "thumbHeight": 540,
+    "alt": "Home cooking photo 29"
+  },
+  {
+    "src": "photos/full/cooking-030.jpg",
+    "thumb": "photos/thumbs/cooking-030.jpg",
+    "width": 1203,
+    "height": 911,
+    "thumbWidth": 720,
+    "thumbHeight": 545,
+    "alt": "Home cooking photo 30"
+  },
+  {
+    "src": "photos/full/cooking-031.jpg",
+    "thumb": "photos/thumbs/cooking-031.jpg",
+    "width": 1215,
+    "height": 911,
+    "thumbWidth": 720,
+    "thumbHeight": 540,
+    "alt": "Home cooking photo 31"
+  },
+  {
+    "src": "photos/full/cooking-032.jpg",
+    "thumb": "photos/thumbs/cooking-032.jpg",
+    "width": 1215,
+    "height": 911,
+    "thumbWidth": 720,
+    "thumbHeight": 540,
+    "alt": "Home cooking photo 32"
+  },
+  {
+    "src": "photos/full/cooking-033.jpg",
+    "thumb": "photos/thumbs/cooking-033.jpg",
+    "width": 1536,
+    "height": 865,
+    "thumbWidth": 720,
+    "thumbHeight": 405,
+    "alt": "Home cooking photo 33"
+  },
+  {
+    "src": "photos/full/cooking-034.jpg",
+    "thumb": "photos/thumbs/cooking-034.jpg",
+    "width": 1536,
+    "height": 865,
+    "thumbWidth": 720,
+    "thumbHeight": 405,
+    "alt": "Home cooking photo 34"
+  },
+  {
+    "src": "photos/full/cooking-035.jpg",
+    "thumb": "photos/thumbs/cooking-035.jpg",
+    "width": 1536,
+    "height": 865,
+    "thumbWidth": 720,
+    "thumbHeight": 405,
+    "alt": "Home cooking photo 35"
+  },
+  {
+    "src": "photos/full/cooking-036.jpg",
+    "thumb": "photos/thumbs/cooking-036.jpg",
+    "width": 928,
+    "height": 1232,
+    "thumbWidth": 542,
+    "thumbHeight": 720,
+    "alt": "Home cooking photo 36"
   }
 ];
