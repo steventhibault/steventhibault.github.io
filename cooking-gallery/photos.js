@@ -259,5 +259,14 @@ window.COOKING_PHOTOS = [
     "thumbWidth": 720,
     "thumbHeight": 540,
     "alt": "Home cooking photo 29"
+  },
+  {
+    "src": "photos/full/cooking-030.jpg",
+    "thumb": "photos/thumbs/cooking-030.jpg",
+    "width": 1618,
+    "height": 911,
+    "thumbWidth": 720,
+    "thumbHeight": 405,
+    "alt": "Home cooking photo 30"
   }
 ];
