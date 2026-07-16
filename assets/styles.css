@@ -784,6 +784,24 @@ h2 {
     linear-gradient(145deg, #14233f, var(--navy));
 }
 
+.formula-visual::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  bottom: 20px;
+  width: min(520px, 50%);
+  border-radius: 12px;
+  background: url("excel-formulas.png") center / contain no-repeat;
+  opacity: 0.46;
+  pointer-events: none;
+}
+
+.formula-visual > * {
+  position: relative;
+  z-index: 1;
+}
+
 .project-visual strong {
   font-size: 3.75rem;
   letter-spacing: -0.07em;
