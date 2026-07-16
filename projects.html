@@ -29,7 +29,6 @@
   <meta name="twitter:image" content="https://stevethibault.com/assets/projects-og-image.png" />
   <link rel="canonical" href="https://stevethibault.com/projects.html" />
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-  <link rel="preload" as="image" href="/assets/hero-color-splash.webp" fetchpriority="high" />
   <link rel="stylesheet" href="assets/styles.css" />
   <title>Projects | Stephen Thibault</title>
   <script type="application/ld+json">
@@ -104,11 +103,67 @@
       gap: 24px;
       margin-top: 28px;
     }
+    .case-study-impact {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0 30px;
+    }
+    .case-study-impact-card {
+      padding: 18px;
+      border: 1px solid rgba(20, 32, 51, 0.1);
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 14px 32px rgba(20, 32, 51, 0.08);
+    }
+    .case-study-impact-card strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--navy);
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      line-height: 1;
+    }
+    .case-study-impact-card span {
+      color: #64748b;
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
     .case-study-grid .project-card {
       grid-template-columns: 1fr;
     }
     .case-study-grid .project-visual {
       min-height: 240px;
+    }
+    .project-visual.training-visual {
+      background:
+        radial-gradient(circle at 82% 18%, rgba(93, 210, 166, 0.22), transparent 26rem),
+        linear-gradient(145deg, #10213c, #1a2744);
+    }
+    .case-study-grid .project-visual.reconciliation-visual {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        linear-gradient(90deg, rgba(20, 35, 63, 0.98) 0%, rgba(20, 35, 63, 0.86) 52%, rgba(20, 35, 63, 0.62) 100%),
+        linear-gradient(145deg, #14233f, var(--navy));
+    }
+    .project-visual.reconciliation-visual > :not(.project-visual-art) {
+      position: relative;
+      z-index: 1;
+    }
+    .project-visual-art {
+      position: absolute;
+      right: clamp(18px, 4vw, 52px);
+      top: 50%;
+      z-index: 0;
+      width: min(58%, 620px);
+      height: auto;
+      max-height: 82%;
+      object-fit: contain;
+      transform: translateY(-50%);
+      opacity: 0.95;
+      pointer-events: none;
+      user-select: none;
     }
     .case-study-grid .project-copy {
       padding: 0 28px 28px;
@@ -143,9 +198,6 @@
       display: block;
       width: 100%;
       height: auto;
-    }
-    .shot-frame picture {
-      display: block;
     }
     .shot-caption {
       display: block;
@@ -210,7 +262,7 @@
       padding: 28px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       background:
         radial-gradient(circle at top right, rgba(37, 99, 235, 0.22), transparent 36%),
         linear-gradient(135deg, #12233d 0%, #1d3564 100%);
@@ -257,6 +309,33 @@
       width: min(210px, 100%);
       height: auto;
       filter: drop-shadow(0 18px 34px rgba(20, 32, 51, 0.12));
+    }
+    .case-study-icon-link {
+      display: inline-grid;
+      place-items: center;
+      color: inherit;
+      text-decoration: none;
+    }
+    .case-study-resource-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 12px;
+      color: var(--navy);
+      font-size: 0.82rem;
+      font-weight: 800;
+      line-height: 1.35;
+      text-align: center;
+      text-decoration: none;
+    }
+    .case-study-resource-link:hover,
+    .case-study-resource-link:focus-visible {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .case-study-icon--wide img {
+      width: min(300px, 100%) !important;
     }
 
 
@@ -370,12 +449,18 @@
         grid-template-columns: 1fr;
         gap: 12px;
       }
+      .case-study-impact {
+        grid-template-columns: 1fr;
+      }
       .case-study-icon {
         place-items: start;
         min-height: 0;
       }
       .case-study-icon img {
         width: 150px;
+      }
+      .case-study-icon--wide img {
+        width: min(230px, 100%) !important;
       }
     }
 
@@ -402,8 +487,8 @@
       <a class="brand" href="/" aria-label="Stephen Thibault homepage">
         <img class="brand-mark" src="/assets/favicon.svg" alt="" aria-hidden="true" />
         <span class="brand-copy">
-          <strong>Stephen Thibault</strong>
-          <span>Operations & Automation</span>
+          <strong data-text="Stephen Thibault">Stephen Thibault</strong>
+          <span data-text="Operations & Automation">Operations & Automation</span>
         </span>
       </a>
       <div class="nav-links">
@@ -416,7 +501,7 @@
   </nav>
 
   <main>
-    <section class="page-hero projects-hero">
+    <section class="page-hero">
       <div class="hero-mouse-glow" aria-hidden="true"></div>
       <div class="container">
         <span class="eyebrow">Selected projects & operational work</span>
@@ -451,10 +536,7 @@
                 <span class="shot-frame-dot"></span>
                 <span class="shot-frame-dot"></span>
               </div>
-              <picture>
-                <source media="(max-width: 930px)" type="image/webp" srcset="assets/filepackr-preview-420.webp">
-                <img src="assets/filepackr-preview.jpg" width="1000" height="600" alt="filepackR interface showing a document packet sorted into 13 output PDFs" loading="lazy" decoding="async">
-              </picture>
+              <img src="assets/filepackr-preview.jpg" width="1000" height="600" alt="filepackR interface showing a document packet sorted into 13 output PDFs" loading="lazy" decoding="async">
             </div>
             <span class="shot-caption">Click to view full size</span>
           </div>
@@ -482,7 +564,22 @@
         <div class="section-head">
           <span class="kicker">Case studies</span>
           <h2>Real-world projects focused on automation, reporting, and workflow improvement.</h2>
-          <p>Examples of reporting, reconciliation, and platform migration work across regulated and ecommerce environments.</p>
+          <p>Examples of training, assessment, reporting, reconciliation, and platform migration work across regulated and ecommerce environments.</p>
+        </div>
+
+        <div class="case-study-impact" aria-label="Case study impact summary">
+          <div class="case-study-impact-card">
+            <strong>54-82</strong>
+            <span>Estimated annual administrative hours saved across assessment, training, and reporting workflows.</span>
+          </div>
+          <div class="case-study-impact-card">
+            <strong>156</strong>
+            <span>Configured questions converted from paper-based competency testing into a browser-based assessment.</span>
+          </div>
+          <div class="case-study-impact-card">
+            <strong>Q1-Q4</strong>
+            <span>Quarterly compliance reporting structure built around repeatable source-data updates.</span>
+          </div>
         </div>
 
         <div class="case-study-grid">
@@ -494,10 +591,7 @@
                   <span class="shot-frame-dot"></span>
                   <span class="shot-frame-dot"></span>
                 </div>
-                <picture>
-                  <source media="(max-width: 930px)" type="image/webp" srcset="assets/ecommerce-configurator-420.webp">
-                  <img src="assets/ecommerce-configurator.png" width="1000" height="727" alt="Custom Shopify configure-to-order server workflow with component sections, current configuration, price as configured, and add to cart controls" loading="lazy" decoding="async">
-                </picture>
+                <img src="assets/ecommerce-configurator.png" width="1000" height="727" alt="Custom Shopify configure-to-order server workflow with component sections, current configuration, price as configured, and add to cart controls" loading="lazy" decoding="async">
               </div>
               <p class="visual-note">Custom configure-to-order workflow built around component choices, quote items, and a live configuration summary.</p>
             </div>
@@ -520,7 +614,40 @@
           </article>
 
           <article class="project-card">
-            <div class="project-visual formula-visual">
+            <div class="project-visual training-visual">
+              <span>Case study</span>
+              <strong>Digital Training & Assessments</strong>
+              <span>Test. Score. Attest.</span>
+            </div>
+            <div class="project-copy">
+              <h3>Converting paper-based compliance training into self-grading digital workflows.</h3>
+              <p class="project-role"><strong>Role:</strong> Content conversion, assessment design, scoring logic, interface build, email workflow support, testing, and implementation</p>
+              <p>
+                A healthcare operations team needed to reduce paper handling, manual grading, delayed feedback, and separate answer-key review across required competency and annual training workflows.
+              </p>
+              <p>
+                I converted scanned and policy-based training materials into browser-based modules with structured question banks, automatic scoring, completion validation, printable results, and email-result support for supervisor visibility.
+              </p>
+              <div class="case-study-copy-grid">
+                <ul class="project-list">
+                  <li><i>&#10003;</i><span>Built a 156-question PCA/HIPAA competency assessment with automatic scoring</span></li>
+                  <li><i>&#10003;</i><span>Embedded annual training policies directly beside the quiz workflow</span></li>
+                  <li><i>&#10003;</i><span>Added progress tracking, unanswered-question prompts, attestation, and printable records</span></li>
+                  <li><i>&#10003;</i><span>Estimated 34-46 annual administrative hours saved across testing and training workflows</span></li>
+                </ul>
+
+                <div class="case-study-icon">
+                  <a class="case-study-icon-link" href="assets/project-work-summary-management.docx" aria-label="Download project work summary">
+                    <img src="assets/excel-workflow.png" width="1000" height="1000" alt="" loading="lazy" decoding="async">
+                  </a>
+                  <a class="case-study-resource-link" href="assets/project-work-summary-management.docx">View project work summary</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-visual">
               <span>Case study</span>
               <strong>Compliance Reporting</strong>
               <span>Reconcile. Report. Attest.</span>
@@ -529,28 +656,32 @@
               <h3>Turning fragmented compliance data into a single audit-ready report.</h3>
               <p class="project-role"><strong>Role:</strong> Reporting architecture, data reconciliation, formula design, quality control, and implementation</p>
               <p>
-                A regional home healthcare provider needed to combine EVV data, participant records, operational logs, and financial information into a reliable quarterly compliance report.
+                A regional healthcare provider needed to combine EVV data, participant records, operational logs, chart-derived health information, and financial metrics into a reliable quarterly compliance report.
               </p>
               <p>
-                I built a consolidated workbook with automated calculations, source-data reconciliation, and a structured attestation process that replaced repeated manual cross-checking.
+                I built a consolidated workbook with Q1-Q4 reporting tabs, automated calculations, source-data reconciliation, participant demographics, compliance notes, and a structured attestation process that replaced repeated manual cross-checking.
               </p>
               <div class="case-study-copy-grid">
                 <ul class="project-list">
-                  <li><i>✓</i><span>Eliminated manual reconciliation across separate data sources</span></li>
-                  <li><i>✓</i><span>Automated compliance calculations across all four quarters</span></li>
-                  <li><i>✓</i><span>Financial summary tied directly to source data</span></li>
-                  <li><i>✓</i><span>Reduced a multi-day manual process to a repeatable system</span></li>
+                  <li><i>✓</i><span>Integrated AxisCare exports, EVV data, gross margin reports, and chart-derived fields</span></li>
+                  <li><i>✓</i><span>Automated attendance, ADA, utilization, revenue, payroll cost, margin, meals, and activity calculations</span></li>
+                  <li><i>✓</i><span>Organized demographics, service metrics, discharge tracking, transportation notes, and compliance flags</span></li>
+                  <li><i>✓</i><span>Estimated 20-36 annual administrative hours saved by reducing recurring consolidation work</span></li>
                 </ul>
 
-                <div class="case-study-icon" aria-hidden="true">
-                  <img src="assets/excel-workflow.png" width="1000" height="1000" alt="" loading="lazy" decoding="async">
+                <div class="case-study-icon">
+                  <a class="case-study-icon-link" href="assets/project-work-summary-management.docx" aria-label="Download project work summary">
+                    <img src="assets/excel-workflow.png" width="1000" height="1000" alt="" loading="lazy" decoding="async">
+                  </a>
+                  <a class="case-study-resource-link" href="assets/project-work-summary-management.docx">View project work summary</a>
                 </div>
               </div>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-visual formula-visual">
+            <div class="project-visual reconciliation-visual">
+              <img class="project-visual-art" src="assets/reconciliation-excel-formulas.webp?v=2" width="1983" height="793" alt="" aria-hidden="true" decoding="async">
               <span>Case study</span>
               <strong>Visit Reconciliation</strong>
               <span>Territory. Client. Exception.</span>
@@ -571,8 +702,8 @@
                   <li><i>✓</i><span>Exception-based review instead of full manual audits</span></li>
                 </ul>
 
-                <div class="case-study-icon" aria-hidden="true">
-                  <img src="assets/excel-workflow.png" width="1000" height="1000" alt="" loading="lazy" decoding="async">
+                <div class="case-study-icon case-study-icon--wide" aria-hidden="true">
+                  <img src="assets/reconciliation-excel-formulas.webp?v=2" width="1983" height="793" alt="" loading="lazy" decoding="async">
                 </div>
               </div>
             </div>
@@ -725,7 +856,7 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/main.js"></script>
 
   <div id="imgLightbox" class="img-lightbox" aria-hidden="true">
     <button type="button" id="closeImgLightbox" class="img-lightbox-close" aria-label="Close image preview">&times;</button>
@@ -762,68 +893,23 @@
     (function () {
       const hero = document.querySelector(".hero, .page-hero");
       const glow = document.querySelector(".hero-mouse-glow");
-      let lastX = null;
-      let lastY = null;
-      let lastShardTime = 0;
-      const activeShards = [];
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      function spawnPixelShards(host, x, y, dx, dy, count) {
-        for (let index = 0; index < count; index += 1) {
-          const shard = document.createElement("span");
-          const size = 8 + Math.round(Math.random() * 18);
-          const scatterX = (Math.random() - 0.5) * 88;
-          const scatterY = (Math.random() - 0.5) * 88;
-          const driftX = dx * 0.85 + scatterX;
-          const driftY = dy * 0.85 + scatterY;
-
-          shard.className = "cursor-pixel-shard";
-          shard.style.setProperty("--pixel-x", (x + (Math.random() - 0.5) * 24) + "px");
-          shard.style.setProperty("--pixel-y", (y + (Math.random() - 0.5) * 24) + "px");
-          shard.style.setProperty("--pixel-size", size + "px");
-          shard.style.setProperty("--pixel-mid-x", (driftX * 0.45) + "px");
-          shard.style.setProperty("--pixel-mid-y", (driftY * 0.45) + "px");
-          shard.style.setProperty("--pixel-end-x", driftX + "px");
-          shard.style.setProperty("--pixel-end-y", driftY + "px");
-          shard.style.setProperty("--pixel-fade-x", (driftX * 1.35) + "px");
-          shard.style.setProperty("--pixel-fade-y", (driftY * 1.35) + "px");
-
-          host.appendChild(shard);
-          activeShards.push(shard);
-          if (activeShards.length > 90) {
-            const oldShard = activeShards.shift();
-            if (oldShard) oldShard.remove();
-          }
-          window.setTimeout(function () {
-            shard.remove();
-            const shardIndex = activeShards.indexOf(shard);
-            if (shardIndex > -1) activeShards.splice(shardIndex, 1);
-          }, 620);
-        }
-      }
 
       if (hero && glow && !reducedMotion) {
         hero.addEventListener("pointermove", function (event) {
           const rect = hero.getBoundingClientRect();
-          const x = event.clientX - rect.left;
-          const y = event.clientY - rect.top;
-          const dx = lastX === null ? 0 : x - lastX;
-          const dy = lastY === null ? 0 : y - lastY;
-
-          hero.style.setProperty("--glow-x", x + "px");
-          hero.style.setProperty("--glow-y", y + "px");
-
-          const now = performance.now();
-          if (now - lastShardTime > 24) {
-            const speed = Math.abs(dx) + Math.abs(dy);
-            spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 5 : 3);
-            lastShardTime = now;
-          }
-
-          lastX = x;
-          lastY = y;
+          hero.style.setProperty("--glow-x", (event.clientX - rect.left) + "px");
+          hero.style.setProperty("--glow-y", (event.clientY - rect.top) + "px");
         }, { passive: true });
       }
+
+      document.querySelectorAll(".card").forEach(function (card) {
+        card.addEventListener("pointermove", function (event) {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--mouse-x", (event.clientX - rect.left) + "px");
+          card.style.setProperty("--mouse-y", (event.clientY - rect.top) + "px");
+        }, { passive: true });
+      });
     })();
   </script>
 
