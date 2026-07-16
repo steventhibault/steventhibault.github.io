@@ -640,23 +640,6 @@ h2 {
   font-size: 1.05rem;
 }
 
-.spreadsheet-banner {
-  overflow: hidden;
-  margin: 0 0 34px;
-  border: 1px solid rgba(56, 189, 248, 0.32);
-  border-radius: 18px;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.32), transparent 34rem),
-    linear-gradient(135deg, #020617, #0b1628 58%, #020617);
-  box-shadow: 0 24px 62px rgba(15, 23, 42, 0.22);
-}
-
-.spreadsheet-banner img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
