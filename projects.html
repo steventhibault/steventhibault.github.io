@@ -19,6 +19,858 @@
   <meta property="og:description" content="Selected projects and operational improvement work: automation, healthcare workflows, ecommerce operations, analytics, software, and local business websites." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://stevethibault.com/projects.html" />
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-77PRSY89RS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-77PRSY89RS');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Selected projects and operational improvement work by Stephen Thibault, including automation, healthcare workflows, ecommerce operations, analytics, software, and local business websites." />
+  <meta name="theme-color" content="#1a2744" />
+  <meta property="og:title" content="Projects | Stephen Thibault" />
+  <meta property="og:description" content="Selected projects and operational improvement work: automation, healthcare workflows, ecommerce operations, analytics, software, and local business websites." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://stevethibault.com/projects.html" />
+  <meta property="og:site_name" content="Stephen Thibault" />
+  <meta property="og:image" content="https://stevethibault.com/assets/projects-og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Projects | Stephen Thibault" />
+  <meta name="twitter:description" content="Selected projects and operational improvement work: automation, healthcare workflows, ecommerce operations, analytics, software, and local business websites." />
+  <meta name="twitter:image" content="https://stevethibault.com/assets/projects-og-image.png" />
+  <link rel="canonical" href="https://stevethibault.com/projects.html" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preload" as="image" href="/assets/hero-color-splash.webp" fetchpriority="high" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <title>Projects | Stephen Thibault</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://stevethibault.com/#person",
+        "name": "Stephen Thibault",
+        "alternateName": ["Steve Thibault", "Steven Thibault"],
+        "url": "https://stevethibault.com/",
+        "jobTitle": "Operations & Automation Specialist",
+        "sameAs": [
+          "https://linkedin.com/in/stephenthibault"
+        ]
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": "https://stevethibault.com/projects.html#page",
+        "url": "https://stevethibault.com/projects.html",
+        "name": "Projects | Stephen Thibault",
+        "description": "Selected projects and operational improvement work by Stephen Thibault, including automation, healthcare workflows, ecommerce operations, analytics, software, and local business websites.",
+        "isPartOf": { "@id": "https://stevethibault.com/#website" },
+        "about": { "@id": "https://stevethibault.com/#person" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "filepackR",
+        "url": "https://filepackr.com/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Windows",
+        "description": "PDF splitter, merger, and document-processing software that uses OCR-powered classification and customizable rules to organize and route files.",
+        "creator": { "@id": "https://stevethibault.com/#person" }
+      },
+      {
+        "@type": "WebSite",
+        "name": "Tran's Market",
+        "url": "https://local-maine.github.io/transmarket/",
+        "description": "A responsive website for a local produce and Asian grocery market, with departments, photography, store information, directions, and customer contact actions.",
+        "creator": { "@id": "https://stevethibault.com/#person" }
+      },
+      {
+        "@type": "WebSite",
+        "name": "The Jewel of India",
+        "url": "https://local-maine.github.io/jewel-of-india/",
+        "description": "A responsive restaurant website with menu browsing, food photography, catering information, and location details for two Maine restaurants.",
+        "creator": { "@id": "https://stevethibault.com/#person" }
+      },
+      {
+        "@type": "WebSite",
+        "name": "Arundel House of Pizza",
+        "url": "https://local-maine.github.io/ahop/",
+        "description": "A responsive restaurant website with online ordering, searchable menu content, reviews, business information, hours, directions, and mobile-friendly customer actions.",
+        "creator": { "@id": "https://stevethibault.com/#person" }
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* .project-card is a 2-column grid (.9fr visual / 1.1fr copy) that
+       only collapses to a single column via the site's own
+       @media (max-width: 930px) rule in styles.css. That query checks
+       viewport width, not this card's actual rendered width, so when
+       two cards share a row they can end up narrower than the
+       breakpoint accounts for. Force the same single-column layout
+       styles.css already uses on mobile, applied here regardless of
+       viewport width, and stack the two cards in a single column. */
+    .case-study-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 28px;
+    }
+    .case-study-grid .project-card {
+      grid-template-columns: 1fr;
+    }
+    .case-study-grid .project-visual {
+      min-height: 240px;
+    }
+    .case-study-grid .project-copy {
+      padding: 0 28px 28px;
+    }
+
+    /* Clickable screenshot thumbnail inside the filepackR .project-visual
+       panel, plus the lightbox overlay it opens into. */
+    .shot-frame {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #0c1729;
+      cursor: pointer;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+    }
+    .shot-frame-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 11px;
+    }
+    .shot-frame-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .shot-frame-dot:nth-child(1) { background: #f59e0b; }
+    .shot-frame-dot:nth-child(2) { background: #22c55e; }
+    .shot-frame-dot:nth-child(3) { background: #60a5fa; }
+    .shot-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .shot-frame picture {
+      display: block;
+    }
+    .shot-caption {
+      display: block;
+      margin-top: 12px;
+      color: #c7d3e6;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .img-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 16, 28, 0.88);
+      padding: 24px;
+      backdrop-filter: blur(4px);
+    }
+    .img-lightbox.is-open {
+      display: flex;
+    }
+    .img-lightbox img {
+      max-width: min(94vw, 1200px);
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    }
+    .img-lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+
+    /* Ecommerce migration case study with configurator proof image. */
+    .case-study-grid .project-card.ecommerce-case {
+      grid-template-columns: minmax(0, 0.98fr) minmax(360px, 1.02fr);
+      align-items: stretch;
+      overflow: hidden;
+    }
+    .case-study-grid .project-card.ecommerce-case .project-copy {
+      order: 1;
+      padding: 32px;
+    }
+    .case-study-grid .project-card.ecommerce-case .project-visual {
+      order: 2;
+      min-height: 100%;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.22), transparent 36%),
+        linear-gradient(135deg, #12233d 0%, #1d3564 100%);
+    }
+    .ecommerce-case .shot-frame {
+      background: #f8fbff;
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+    .ecommerce-case .shot-frame img {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: left top;
+      background: #ffffff;
+    }
+    .ecommerce-case .shot-caption {
+      color: #d7e4f7;
+    }
+    .ecommerce-case .visual-note {
+      margin-top: 12px;
+      color: #b9c8de;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    /* Spreadsheet automation icon beside reporting/reconciliation case-study bullets. */
+    .case-study-copy-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 620px) minmax(180px, 1fr);
+      gap: 32px;
+      align-items: center;
+      margin-top: 18px;
+    }
+    .case-study-copy-grid .project-list {
+      margin: 0;
+    }
+    .case-study-icon {
+      display: grid;
+      place-items: center;
+      min-height: 170px;
+    }
+    .case-study-icon img {
+      display: block;
+      width: min(210px, 100%);
+      height: auto;
+      filter: drop-shadow(0 18px 34px rgba(20, 32, 51, 0.12));
+    }
+    .case-study-icon {
+      position: relative;
+    }
+    .case-study-icon > a:first-child {
+      display: block;
+    }
+    .case-study-icon .text-link {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      margin: 0;
+      white-space: nowrap;
+      text-align: center;
+      transform: translateX(-50%);
+    }
+
+
+    .local-site-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 28px;
+    }
+    .local-site-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #dfe6f0;
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 18px 45px rgba(20, 32, 51, 0.08);
+    }
+    .local-site-preview {
+      position: relative;
+      display: block;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #142033;
+    }
+    .local-site-preview::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 52%, rgba(10, 18, 31, 0.54) 100%);
+      pointer-events: none;
+    }
+    .local-site-preview img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 220ms ease;
+    }
+    .local-site-card:hover .local-site-preview img {
+      transform: scale(1.025);
+    }
+    .local-site-badge {
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      z-index: 1;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #142033;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .local-site-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 26px;
+    }
+    .local-site-location {
+      margin-bottom: 8px;
+      color: #647086;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .local-site-body h3 {
+      margin: 0 0 12px;
+    }
+    .local-site-body p {
+      margin: 0;
+    }
+.local-site-body .text-link {
+      margin-top: auto;
+      padding-top: 22px;
+    }
+
+
+    .project-role {
+      margin: 0 0 14px !important;
+      color: #334155 !important;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .project-role strong {
+      color: #1a2744;
+    }
+    .project-tools {
+      margin: 14px 0 0 !important;
+      color: #64748b !important;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1050px) {
+      .local-site-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .local-site-grid {
+        grid-template-columns: 1fr;
+      }
+      .case-study-copy-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .case-study-icon {
+        place-items: start;
+        min-height: 0;
+      }
+      .case-study-icon img {
+        width: 150px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .case-study-grid .project-card.ecommerce-case {
+        grid-template-columns: 1fr;
+      }
+      .case-study-grid .project-card.ecommerce-case .project-copy,
+      .case-study-grid .project-card.ecommerce-case .project-visual {
+        order: initial;
+      }
+      .case-study-grid .project-card.ecommerce-case .project-copy {
+        padding: 0 28px 28px;
+      }
+      .case-study-grid .project-card.ecommerce-case .project-visual {
+        min-height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/" aria-label="Stephen Thibault homepage">
+        <img class="brand-mark" src="/assets/favicon.svg" alt="" aria-hidden="true" />
+        <span class="brand-copy">
+          <strong>Stephen Thibault</strong>
+          <span>Operations & Automation</span>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="#work">Projects</a>
+        <a href="#capabilities">Expertise</a>
+        <a class="button button-primary" href="mailto:steve@stevethibault.com">Let's talk</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-hero projects-hero">
+      <div class="hero-mouse-glow" aria-hidden="true"></div>
+      <div class="container">
+        <span class="eyebrow">Selected projects & operational work</span>
+        <h1>Building practical systems for <span>real business problems.</span></h1>
+        <p class="hero-copy">
+          My work centers on automation, process improvement, analytics, and operational systems.
+          I focus on reducing repetitive work, improving visibility, and creating tools that fit the
+          way a business actually operates.
+        </p>
+        <div class="proof">
+          <span><i>✓</i> Healthcare</span>
+          <span><i>✓</i> Ecommerce</span>
+          <span><i>✓</i> Wholesale distribution</span>
+          <span><i>✓</i> Marketplace programs</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="work">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Featured project</span>
+          <h2>filepackR: PDF document processing powered by Intelligent File Routing.</h2>
+          <p>A custom software solution designed around a real operational workflow: sorting, reviewing, auditing, and routing document-heavy packets more efficiently.</p>
+        </div>
+
+        <article class="project-card">
+          <div class="project-visual">
+            <div class="shot-frame" onclick="openImgLightbox('assets/filepackr-preview.jpg', 'filepackR interface showing a document packet sorted into 13 output PDFs')" role="button" tabindex="0" aria-label="View full-size screenshot of filepackR" onkeydown="if(event.key==='Enter'){this.click();}">
+              <div class="shot-frame-bar">
+                <span class="shot-frame-dot"></span>
+                <span class="shot-frame-dot"></span>
+                <span class="shot-frame-dot"></span>
+              </div>
+              <picture>
+                <source media="(max-width: 930px)" type="image/webp" srcset="assets/filepackr-preview-420.webp">
+                <img src="assets/filepackr-preview.jpg" width="1000" height="600" alt="filepackR interface showing a document packet sorted into 13 output PDFs" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <span class="shot-caption">Click to view full size</span>
+          </div>
+          <div class="project-copy">
+            <h3>Cleaner document workflows with less repetitive work.</h3>
+            <p class="project-role"><strong>Role:</strong> Product design, workflow architecture, interface design, OCR rules, testing, and implementation</p>
+            <p>
+              FilePackR turns scanned paperwork into organized, workflow-ready PDF files. It uses OCR, customizable rules, and review queues to identify documents, split or combine pages, apply filenames, route outputs, and flag uncertain items for review. <b>Can save organizations hundreds of hours annually by automating repetitive document processing tasks.</b>
+            </p>
+            <ul class="project-list">
+              <li><i>✓</i><span>Split scanned PDF packets into separate documents</span></li>
+              <li><i>✓</i><span>Merge related pages and supporting records</span></li>
+              <li><i>✓</i><span>Apply consistent filenames and routing rules</span></li>
+              <li><i>✓</i><span>Flag review items instead of silently guessing</span></li>
+              <li><i>✓</i><span>Support local-first processing for sensitive files</span></li>
+            </ul>
+            <a class="text-link" href="https://filepackr.com/" target="_blank" rel="noopener noreferrer">Visit filepackR.com <span>→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Case studies</span>
+          <h2>Real-world projects focused on automation, reporting, and workflow improvement.</h2>
+          <p>Examples of reporting, reconciliation, and platform migration work across regulated and ecommerce environments.</p>
+        </div>
+
+        <div class="case-study-grid">
+          <article class="project-card ecommerce-case">
+            <div class="project-visual configurator-visual">
+              <div class="shot-frame" onclick="openImgLightbox('assets/ecommerce-configurator.png', 'Custom Shopify configure-to-order server workflow with component sections, current configuration, price as configured, and add to cart controls')" role="button" tabindex="0" aria-label="View full-size screenshot of the ecommerce configurator" onkeydown="if(event.key==='Enter'){this.click();}">
+                <div class="shot-frame-bar">
+                  <span class="shot-frame-dot"></span>
+                  <span class="shot-frame-dot"></span>
+                  <span class="shot-frame-dot"></span>
+                </div>
+                <picture>
+                  <source media="(max-width: 930px)" type="image/webp" srcset="assets/ecommerce-configurator-420.webp">
+                  <img src="assets/ecommerce-configurator.png" width="1000" height="727" alt="Custom Shopify configure-to-order server workflow with component sections, current configuration, price as configured, and add to cart controls" loading="lazy" decoding="async">
+                </picture>
+              </div>
+              <p class="visual-note">Custom configure-to-order workflow built around component choices, quote items, and a live configuration summary.</p>
+            </div>
+            <div class="project-copy">
+              <h3>Migrating a 20,000-SKU Magento catalog to Shopify while preserving a complex configure-to-order workflow.</h3>
+              <p class="project-role"><strong>Role:</strong> Catalog migration, platform configuration, workflow design, integration support, and launch planning</p>
+              <p>
+                A computer hardware distributor needed to move a 20,000+ SKU catalog from Magento to Shopify without losing the configure-to-order experience customers used to build refurbished servers.
+              </p>
+              <p>
+                The migration combined catalog cleanup, SEO-sensitive URL planning, payment and inventory requirements, and custom configuration logic that kept component selection and quote workflows manageable for staff.
+              </p>
+              <ul class="project-list">
+                <li><i>✓</i><span>Migrated and reorganized a 20,000+ SKU catalog</span></li>
+                <li><i>✓</i><span>Rebuilt the configure-to-order server workflow in Shopify</span></li>
+                <li><i>✓</i><span>Preserved payment, inventory, cart, and SEO requirements</span></li>
+                <li><i>✓</i><span>Reduced dependence on developers for routine storefront changes</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-visual formula-visual">
+              <span>Case study</span>
+              <strong>Compliance Reporting</strong>
+              <span>Reconcile. Report. Attest.</span>
+            </div>
+            <div class="project-copy">
+              <h3>Turning fragmented compliance data into a single audit-ready report.</h3>
+              <p class="project-role"><strong>Role:</strong> Reporting architecture, data reconciliation, formula design, quality control, and implementation</p>
+              <p>
+                A regional home healthcare provider needed to combine EVV data, participant records, operational logs, and financial information into a reliable quarterly compliance report.
+              </p>
+              <p>
+                I built a consolidated workbook with automated calculations, source-data reconciliation, and a structured attestation process that replaced repeated manual cross-checking.
+              </p>
+              <div class="case-study-copy-grid">
+                <ul class="project-list">
+                  <li><i>✓</i><span>Eliminated manual reconciliation across separate data sources</span></li>
+                  <li><i>✓</i><span>Automated compliance calculations across all four quarters</span></li>
+                  <li><i>✓</i><span>Financial summary tied directly to source data</span></li>
+                  <li><i>✓</i><span>Reduced a multi-day manual process to a repeatable system</span></li>
+                </ul>
+
+                <div class="case-study-icon">
+                  <a href="Sample-Project_Work_Summary_for_Management.docx" target="_blank" rel="noopener" aria-label="Open Sample Project Work Summary for Management">
+                    <img src="assets/excel-workflow.png" width="1000" height="1000" alt="Open Sample Project Work Summary for Management" loading="lazy" decoding="async">
+                  </a>
+                  <a class="text-link" href="Sample-Project_Work_Summary_for_Management.docx" target="_blank" rel="noopener">View Project Work Summary <span>→</span></a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-visual formula-visual">
+              <span>Case study</span>
+              <strong>Visit Reconciliation</strong>
+              <span>Territory. Client. Exception.</span>
+            </div>
+            <div class="project-copy">
+              <h3>Reconciling multi-state operational data at the territory and client level.</h3>
+              <p class="project-role"><strong>Role:</strong> Workbook design, data transformation, exception logic, testing, and reusable reporting setup</p>
+              <p>
+                A multi-state home healthcare operation needed clearer weekly visibility into visit activity by territory and client, with discrepancies identified before they became compliance problems.
+              </p>
+              <p>
+                I built a reusable comparison workbook that transforms raw visit data into state-specific views and exception-based reconciliation reports.
+              </p>
+              <div class="case-study-copy-grid">
+                <ul class="project-list">
+                  <li><i>✓</i><span>Weekly rollups by territory and by client from raw visit data</span></li>
+                  <li><i>✓</i><span>State-specific reconciliation views for multi-state operations</span></li>
+                  <li><i>✓</i><span>Exception-based review instead of full manual audits</span></li>
+                </ul>
+
+                <div class="case-study-icon">
+                  <a href="Sample-Project_Work_Summary_for_Management.docx" target="_blank" rel="noopener" aria-label="Open Sample Project Work Summary for Management">
+                    <img src="assets/excel-workflow.png" width="1000" height="1000" alt="Open Sample Project Work Summary for Management" loading="lazy" decoding="async">
+                  </a>
+                  <a class="text-link" href="Sample-Project_Work_Summary_for_Management.docx" target="_blank" rel="noopener">View Project Work Summary <span>→</span></a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section section-alt" id="local-websites">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Local business websites</span>
+          <h2>Websites built around how local customers browse, decide, and take action.</h2>
+          <p>Each site was designed around the business's real customer journey, from understanding what it offers to calling, ordering, finding directions, or planning a visit.</p>
+        </div>
+
+        <div class="local-site-grid">
+          <article class="local-site-card">
+            <a class="local-site-preview" href="https://local-maine.github.io/transmarket/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Tran's Market website">
+              <img src="assets/transmarket-preview.webp" width="1600" height="1000" alt="Fresh produce display inside Tran's Market" loading="lazy" decoding="async">
+              <span class="local-site-badge">Retail website</span>
+            </a>
+            <div class="local-site-body">
+              <span class="local-site-location">Biddeford, Maine</span>
+              <h3>Tran's Market</h3>
+              <p class="project-role"><strong>Role:</strong> Design, content structure, development, mobile optimization, hosting, and launch</p>
+              <p>Built a mobile-friendly site that helps local shoppers quickly understand the market's products, hours, location, and contact options.</p>
+              <p class="project-tools">HTML, CSS, JavaScript, responsive design, GitHub Pages</p>
+              <a class="text-link" href="https://local-maine.github.io/transmarket/" target="_blank" rel="noopener noreferrer">View live website <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="local-site-card">
+            <a class="local-site-preview" href="https://local-maine.github.io/jewel-of-india/" target="_blank" rel="noopener noreferrer" aria-label="Visit The Jewel of India website">
+              <img src="assets/jewel-of-india-preview.webp" width="1600" height="1000" alt="Indian dishes presented in bowls for The Jewel of India website" loading="lazy" decoding="async">
+              <span class="local-site-badge">Restaurant website</span>
+            </a>
+            <div class="local-site-body">
+              <span class="local-site-location">Biddeford and Waterville, Maine</span>
+              <h3>The Jewel of India</h3>
+              <p class="project-role"><strong>Role:</strong> Design, content structure, development, menu experience, mobile optimization, hosting, and launch</p>
+              <p>Built a responsive restaurant site that helps visitors browse the menu, compare two locations, view catering information, and move quickly toward ordering.</p>
+              <p class="project-tools">HTML, CSS, JavaScript, searchable menu, responsive design, GitHub Pages</p>
+              <a class="text-link" href="https://local-maine.github.io/jewel-of-india/" target="_blank" rel="noopener noreferrer">View live website <span>→</span></a>
+            </div>
+          </article>
+
+          <article class="local-site-card">
+            <a class="local-site-preview" href="https://local-maine.github.io/ahop/" target="_blank" rel="noopener noreferrer" aria-label="Visit the Arundel House of Pizza website">
+              <img src="assets/ahop-preview.webp" width="1600" height="1000" alt="Fresh vegetable and sausage pizza featured on the Arundel House of Pizza website" loading="lazy" decoding="async">
+              <span class="local-site-badge">Restaurant website</span>
+            </a>
+            <div class="local-site-body">
+              <span class="local-site-location">Arundel, Maine</span>
+              <h3>Arundel House of Pizza</h3>
+              <p class="project-role"><strong>Role:</strong> Design, content structure, development, ordering integration, mobile optimization, hosting, and launch</p>
+              <p>Built a conversion-focused restaurant site that makes it easy for mobile visitors to browse the menu, call, get directions, read reviews, or begin an online order.</p>
+              <p class="project-tools">HTML, CSS, JavaScript, online ordering integration, responsive design, GitHub Pages</p>
+              <a class="text-link" href="https://local-maine.github.io/ahop/" target="_blank" rel="noopener noreferrer">View live website <span>→</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="capabilities">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Core areas of expertise</span>
+          <h2>How I help organizations improve operations.</h2>
+          <p>The tools vary by business, but the objective stays consistent: reduce manual effort, reduce avoidable errors, and make the workflow clearer.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <span class="card-icon">01</span>
+            <h3>Workflow automation</h3>
+            <p>Focused tools that reduce repetitive tasks and remove unnecessary manual handoffs.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">02</span>
+            <h3>Operational reporting</h3>
+            <p>Clearer analytics, reporting systems, and risk visibility for better day-to-day decisions.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">03</span>
+            <h3>Healthcare workflows</h3>
+            <p>Onboarding, compliance, training, document review, and audit-readiness process improvement.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">04</span>
+            <h3>Ecommerce operations</h3>
+            <p>Marketplace workflows, listing quality, account operations, analytics, and scalable processes.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">05</span>
+            <h3>Wholesale distribution</h3>
+            <p>Inventory, order-flow, reporting, and operational consistency across complex environments.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon">06</span>
+            <h3>Program launches & testing</h3>
+            <p>Support for pilot programs, new initiatives, evolving requirements, and operational implementation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container split-grid">
+        <div>
+          <span class="kicker">Experience that translates</span>
+          <h2>From day-to-day operations to new-program testing.</h2>
+          <p class="section-copy">
+            I have worked across healthcare, ecommerce, and distribution environments, and have supported
+            companies such as eBay with new-program launches and testing. That range helps me understand both
+            the big-picture process and the small operational details that determine whether a system actually works.
+          </p>
+        </div>
+
+        <div class="stack">
+          <div class="stack-item"><span class="check">✓</span><div><strong>Start with the real workflow</strong><p>Understand what staff actually do before designing the solution.</p></div></div>
+          <div class="stack-item"><span class="check">✓</span><div><strong>Reduce repetitive work</strong><p>Automate the parts that consume time without adding unnecessary complexity.</p></div></div>
+          <div class="stack-item"><span class="check">✓</span><div><strong>Improve visibility</strong><p>Surface exceptions, risks, and follow-up work so teams know what needs attention.</p></div></div>
+          <div class="stack-item"><span class="check">✓</span><div><strong>Build for growth</strong><p>Create systems that remain useful as the business expands or requirements change.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container cta-box">
+        <div>
+          <h2>Have a workflow that needs improvement?</h2>
+          <p>Let's discuss automation, reporting, process improvement, or a custom operational tool tailored to your needs.</p>
+        </div>
+        <a class="button button-primary" href="mailto:steve@stevethibault.com">Start a conversation</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Stephen Thibault</span>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="mailto:steve@stevethibault.com">Email</a>
+        <a href="https://linkedin.com/in/stephenthibault" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js" defer></script>
+
+  <div id="imgLightbox" class="img-lightbox" aria-hidden="true">
+    <button type="button" id="closeImgLightbox" class="img-lightbox-close" aria-label="Close image preview">&times;</button>
+    <img id="imgLightboxImg" src="" alt="">
+  </div>
+
+  <script>
+    function openImgLightbox(src, altText) {
+      var lb = document.getElementById("imgLightbox");
+      var img = document.getElementById("imgLightboxImg");
+      img.src = src;
+      img.alt = altText || "";
+      lb.classList.add("is-open");
+      lb.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeImgLightbox() {
+      var lb = document.getElementById("imgLightbox");
+      lb.classList.remove("is-open");
+      lb.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+    document.getElementById("closeImgLightbox").addEventListener("click", closeImgLightbox);
+    document.getElementById("imgLightbox").addEventListener("click", function(event) {
+      if (event.target === this) closeImgLightbox();
+    });
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") closeImgLightbox();
+    });
+  </script>
+
+
+  <script>
+    (function () {
+      const hero = document.querySelector(".hero, .page-hero");
+      const glow = document.querySelector(".hero-mouse-glow");
+      let lastX = null;
+      let lastY = null;
+      let lastShardTime = 0;
+      const activeShards = [];
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function spawnPixelShards(host, x, y, dx, dy, count) {
+        for (let index = 0; index < count; index += 1) {
+          const shard = document.createElement("span");
+          const size = 8 + Math.round(Math.random() * 18);
+          const scatterX = (Math.random() - 0.5) * 88;
+          const scatterY = (Math.random() - 0.5) * 88;
+          const driftX = dx * 0.85 + scatterX;
+          const driftY = dy * 0.85 + scatterY;
+
+          shard.className = "cursor-pixel-shard";
+          shard.style.setProperty("--pixel-x", (x + (Math.random() - 0.5) * 24) + "px");
+          shard.style.setProperty("--pixel-y", (y + (Math.random() - 0.5) * 24) + "px");
+          shard.style.setProperty("--pixel-size", size + "px");
+          shard.style.setProperty("--pixel-mid-x", (driftX * 0.45) + "px");
+          shard.style.setProperty("--pixel-mid-y", (driftY * 0.45) + "px");
+          shard.style.setProperty("--pixel-end-x", driftX + "px");
+          shard.style.setProperty("--pixel-end-y", driftY + "px");
+          shard.style.setProperty("--pixel-fade-x", (driftX * 1.35) + "px");
+          shard.style.setProperty("--pixel-fade-y", (driftY * 1.35) + "px");
+
+          host.appendChild(shard);
+          activeShards.push(shard);
+          if (activeShards.length > 90) {
+            const oldShard = activeShards.shift();
+            if (oldShard) oldShard.remove();
+          }
+          window.setTimeout(function () {
+            shard.remove();
+            const shardIndex = activeShards.indexOf(shard);
+            if (shardIndex > -1) activeShards.splice(shardIndex, 1);
+          }, 620);
+        }
+      }
+
+      if (hero && glow && !reducedMotion) {
+        hero.addEventListener("pointermove", function (event) {
+          const rect = hero.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+          const dx = lastX === null ? 0 : x - lastX;
+          const dy = lastY === null ? 0 : y - lastY;
+
+          hero.style.setProperty("--glow-x", x + "px");
+          hero.style.setProperty("--glow-y", y + "px");
+
+          const now = performance.now();
+          if (now - lastShardTime > 24) {
+            const speed = Math.abs(dx) + Math.abs(dy);
+            spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 5 : 3);
+            lastShardTime = now;
+          }
+
+          lastX = x;
+          lastY = y;
+        }, { passive: true });
+      }
+    })();
+  </script>
+
+</body>
+</html>
   <meta property="og:site_name" content="Stephen Thibault" />
   <meta property="og:image" content="https://stevethibault.com/assets/projects-og-image.png" />
   <meta property="og:image:width" content="1200" />
