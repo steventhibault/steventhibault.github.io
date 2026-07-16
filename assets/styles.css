@@ -1874,7 +1874,7 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 0;
   width: 100%;
   min-height: 170px;
   position: relative;
@@ -1898,7 +1898,7 @@ footer {
   left: auto;
   bottom: auto;
   transform: none;
-  margin: 0;
+  margin: -38px 0 0;
   white-space: nowrap;
   text-align: center;
 }
