@@ -682,7 +682,7 @@
       function spawnPixelShards(host, x, y, dx, dy, count) {
         for (let index = 0; index < count; index += 1) {
           const shard = document.createElement("span");
-          const size = 4 + Math.round(Math.random() * 9);
+          const size = 5 + Math.round(Math.random() * 11);
           const scatterX = (Math.random() - 0.5) * 66;
           const scatterY = (Math.random() - 0.5) * 66;
           const driftX = dx * 0.85 + scatterX;
