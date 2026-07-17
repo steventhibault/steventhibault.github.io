@@ -786,116 +786,7 @@
       let lastY = null;
       let lastShardTime = 0;
       const activeShards = [];
-      const fluidColors = [
-        [37, 99, 235],
-        [20, 184, 198],
-        [217, 70, 239],
-        [249, 115, 22]
-      ];
-      let fluidCanvas = null;
-      let fluidContext = null;
-      let fluidParticles = [];
-      let fluidFrame = null;
-      let fluidWidth = 0;
-      let fluidHeight = 0;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      function resizeFluidCanvas() {
-        if (!fluidCanvas || !fluidContext || !hero) return;
-        const rect = hero.getBoundingClientRect();
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        fluidWidth = Math.max(1, rect.width);
-        fluidHeight = Math.max(1, rect.height);
-        fluidCanvas.width = Math.round(fluidWidth * dpr);
-        fluidCanvas.height = Math.round(fluidHeight * dpr);
-        fluidCanvas.style.width = fluidWidth + "px";
-        fluidCanvas.style.height = fluidHeight + "px";
-        fluidContext.setTransform(dpr, 0, 0, dpr, 0, 0);
-        fluidContext.clearRect(0, 0, fluidWidth, fluidHeight);
-      }
-
-      function setupFluidCanvas(host) {
-        fluidCanvas = document.createElement("canvas");
-        fluidCanvas.className = "cursor-fluid-canvas";
-        fluidContext = fluidCanvas.getContext("2d", { alpha: true });
-        host.insertBefore(fluidCanvas, host.firstChild);
-        resizeFluidCanvas();
-        window.addEventListener("resize", resizeFluidCanvas, { passive: true });
-      }
-
-      function drawFluidTrail() {
-        if (!fluidContext) return;
-
-        fluidContext.globalCompositeOperation = "destination-out";
-        fluidContext.fillStyle = "rgba(0, 0, 0, 0.08)";
-        fluidContext.fillRect(0, 0, fluidWidth, fluidHeight);
-        fluidContext.globalCompositeOperation = "source-over";
-        fluidContext.filter = "blur(8px)";
-
-        fluidParticles = fluidParticles.filter(function (particle) {
-          particle.x += particle.vx;
-          particle.y += particle.vy;
-          particle.radius += particle.growth;
-          particle.life -= particle.decay;
-
-          if (particle.life <= 0) return false;
-
-          const alpha = Math.max(0, particle.life) * particle.alpha;
-          const gradient = fluidContext.createRadialGradient(
-            particle.x,
-            particle.y,
-            0,
-            particle.x,
-            particle.y,
-            particle.radius
-          );
-
-          gradient.addColorStop(0, "rgba(" + particle.color.join(", ") + ", " + alpha + ")");
-          gradient.addColorStop(0.45, "rgba(" + particle.color.join(", ") + ", " + (alpha * 0.42) + ")");
-          gradient.addColorStop(1, "rgba(" + particle.color.join(", ") + ", 0)");
-
-          fluidContext.fillStyle = gradient;
-          fluidContext.beginPath();
-          fluidContext.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-          fluidContext.fill();
-          return true;
-        });
-
-        fluidContext.filter = "none";
-
-        if (fluidParticles.length) {
-          fluidFrame = window.requestAnimationFrame(drawFluidTrail);
-        } else {
-          fluidFrame = null;
-        }
-      }
-
-      function addFluidSmoke(x, y, dx, dy, count) {
-        if (!fluidContext) return;
-        for (let index = 0; index < count; index += 1) {
-          const color = fluidColors[(index + Math.floor(Math.random() * fluidColors.length)) % fluidColors.length];
-          fluidParticles.push({
-            x: x + (Math.random() - 0.5) * 18,
-            y: y + (Math.random() - 0.5) * 18,
-            vx: dx * -0.018 + (Math.random() - 0.5) * 1.6,
-            vy: dy * -0.018 + (Math.random() - 0.5) * 1.6 - 0.25,
-            radius: 18 + Math.random() * 22,
-            growth: 0.85 + Math.random() * 0.85,
-            life: 1,
-            decay: 0.014 + Math.random() * 0.012,
-            alpha: 0.24 + Math.random() * 0.16,
-            color: color
-          });
-        }
-
-        if (fluidParticles.length > 170) {
-          fluidParticles.splice(0, fluidParticles.length - 170);
-        }
-
-        if (!fluidFrame) {
-          fluidFrame = window.requestAnimationFrame(drawFluidTrail);
-        }
-      }
 
       function spawnPixelShards(host, x, y, dx, dy, count) {
         for (let index = 0; index < count; index += 1) {
@@ -932,8 +823,6 @@
       }
 
       if (hero && glow && !reducedMotion) {
-        setupFluidCanvas(hero);
-
         hero.addEventListener("pointermove", function (event) {
           const rect = hero.getBoundingClientRect();
           const x = event.clientX - rect.left;
@@ -947,7 +836,6 @@
           const now = performance.now();
           if (now - lastShardTime > 16) {
             const speed = Math.abs(dx) + Math.abs(dy);
-            addFluidSmoke(x, y, dx, dy, speed > 18 ? 12 : 7);
             spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 10 : 6);
             lastShardTime = now;
           }
