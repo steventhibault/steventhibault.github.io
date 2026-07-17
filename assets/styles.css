@@ -8,6 +8,7 @@
   --teal: #14b8c6;
   --teal-soft: #e6fbfd;
   --fuchsia: #d946ef;
+  --orange: #f97316;
 
   --ink: #24324d;
   --slate: #64748b;
@@ -1569,8 +1570,9 @@ footer {
       from 0deg,
       rgba(29, 78, 216, 0.24) 0 25%,
       rgba(37, 99, 235, 0.20) 0 50%,
-      rgba(217, 70, 239, 0.18) 0 68%,
-      rgba(20, 184, 198, 0.16) 0 86%,
+      rgba(217, 70, 239, 0.18) 0 64%,
+      rgba(249, 115, 22, 0.16) 0 76%,
+      rgba(20, 184, 198, 0.16) 0 88%,
       rgba(255, 255, 255, 0.28) 0 100%
     );
   background-size: 6px 6px, 6px 6px, 12px 12px;
@@ -1615,8 +1617,9 @@ footer {
       90deg,
       rgba(37, 99, 235, 0.2) 0 6px,
       rgba(217, 70, 239, 0.16) 6px 12px,
-      rgba(20, 184, 198, 0.14) 12px 18px,
-      transparent 18px 24px
+      rgba(249, 115, 22, 0.15) 12px 18px,
+      rgba(20, 184, 198, 0.14) 18px 24px,
+      transparent 24px 30px
     );
   opacity: 0.5;
 }
@@ -1635,7 +1638,8 @@ footer {
   box-shadow:
     -6px 0 0 rgba(20, 184, 198, 0.14),
     7px 7px 0 rgba(59, 130, 246, 0.16),
-    0 -7px 0 rgba(217, 70, 239, 0.14);
+    0 -7px 0 rgba(217, 70, 239, 0.14),
+    8px -4px 0 rgba(249, 115, 22, 0.13);
   contain: layout paint;
   image-rendering: pixelated;
   mix-blend-mode: multiply;
@@ -1659,6 +1663,12 @@ footer {
 .cursor-pixel-shard:nth-child(5n) {
   background:
     linear-gradient(135deg, rgba(217, 70, 239, 0.26), rgba(255, 255, 255, 0.62)),
+    rgba(247, 250, 253, 0.7);
+}
+
+.cursor-pixel-shard:nth-child(6n) {
+  background:
+    linear-gradient(135deg, rgba(249, 115, 22, 0.25), rgba(255, 255, 255, 0.62)),
     rgba(247, 250, 253, 0.7);
 }
 
