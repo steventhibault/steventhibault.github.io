@@ -1573,7 +1573,7 @@ footer {
       rgba(20, 184, 198, 0.16) 0 86%,
       rgba(255, 255, 255, 0.28) 0 100%
     );
-  background-size: 12px 12px, 12px 12px, 24px 24px;
+  background-size: 6px 6px, 6px 6px, 12px 12px;
   backdrop-filter: blur(4px) contrast(1.65) saturate(0.72);
   -webkit-backdrop-filter: blur(4px) contrast(1.65) saturate(0.72);
   clip-path: polygon(
@@ -1605,18 +1605,18 @@ footer {
   background:
     linear-gradient(90deg, transparent 0 38%, rgba(255, 255, 255, 0.5) 38% 49%, transparent 49%),
     linear-gradient(0deg, transparent 0 32%, rgba(37, 99, 235, 0.18) 32% 43%, transparent 43%);
-  background-size: 48px 48px;
+  background-size: 24px 24px;
 }
 
 .hero-mouse-glow::after {
-  inset: 24px;
+  inset: 12px;
   background:
     repeating-linear-gradient(
       90deg,
-      rgba(37, 99, 235, 0.2) 0 12px,
-      rgba(217, 70, 239, 0.16) 12px 24px,
-      rgba(20, 184, 198, 0.14) 24px 36px,
-      transparent 36px 48px
+      rgba(37, 99, 235, 0.2) 0 6px,
+      rgba(217, 70, 239, 0.16) 6px 12px,
+      rgba(20, 184, 198, 0.14) 12px 18px,
+      transparent 18px 24px
     );
   opacity: 0.5;
 }
@@ -1633,9 +1633,9 @@ footer {
     linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(37, 99, 235, 0.22)),
     rgba(247, 250, 253, 0.7);
   box-shadow:
-    -12px 0 0 rgba(20, 184, 198, 0.14),
-    14px 14px 0 rgba(59, 130, 246, 0.16),
-    0 -14px 0 rgba(217, 70, 239, 0.14);
+    -6px 0 0 rgba(20, 184, 198, 0.14),
+    7px 7px 0 rgba(59, 130, 246, 0.16),
+    0 -7px 0 rgba(217, 70, 239, 0.14);
   contain: layout paint;
   image-rendering: pixelated;
   mix-blend-mode: multiply;
