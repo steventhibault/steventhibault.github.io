@@ -677,7 +677,38 @@
       let rotation = 0;
       let lastShardTime = 0;
       const activeShards = [];
+      const smokeColors = [
+        "rgba(37, 99, 235, 0.24)",
+        "rgba(20, 184, 198, 0.22)",
+        "rgba(217, 70, 239, 0.2)",
+        "rgba(249, 115, 22, 0.18)"
+      ];
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function spawnSmokePuffs(host, x, y, dx, dy, count) {
+        for (let index = 0; index < count; index += 1) {
+          const puff = document.createElement("span");
+          const size = 28 + Math.round(Math.random() * 34);
+          const driftX = dx * 0.42 + (Math.random() - 0.5) * 42;
+          const driftY = dy * 0.42 + (Math.random() - 0.5) * 42 - 10;
+
+          puff.className = "cursor-smoke-puff";
+          puff.style.setProperty("--smoke-x", (x + (Math.random() - 0.5) * 16) + "px");
+          puff.style.setProperty("--smoke-y", (y + (Math.random() - 0.5) * 16) + "px");
+          puff.style.setProperty("--smoke-size", size + "px");
+          puff.style.setProperty("--smoke-blur", (7 + Math.random() * 7) + "px");
+          puff.style.setProperty("--smoke-color", smokeColors[(index + Math.floor(Math.random() * smokeColors.length)) % smokeColors.length]);
+          puff.style.setProperty("--smoke-drift-x", (driftX * 0.72) + "px");
+          puff.style.setProperty("--smoke-drift-y", (driftY * 0.72) + "px");
+          puff.style.setProperty("--smoke-fade-x", (driftX * 1.55) + "px");
+          puff.style.setProperty("--smoke-fade-y", (driftY * 1.55) + "px");
+
+          host.appendChild(puff);
+          window.setTimeout(function () {
+            puff.remove();
+          }, 980);
+        }
+      }
 
       function spawnPixelShards(host, x, y, dx, dy, count) {
         for (let index = 0; index < count; index += 1) {
@@ -734,6 +765,7 @@
           const now = performance.now();
           if (now - lastShardTime > 16) {
             const speed = Math.abs(dx) + Math.abs(dy);
+            spawnSmokePuffs(hero, x, y, dx, dy, speed > 18 ? 4 : 3);
             spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 10 : 6);
             lastShardTime = now;
           }
