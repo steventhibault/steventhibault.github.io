@@ -661,27 +661,10 @@ h2 {
   transition: 0.22s ease;
 }
 
-.grid .card::after {
-  content: "";
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  top: 0;
-  height: 3px;
-  border-radius: 0 0 999px 999px;
-  background: linear-gradient(90deg, rgba(37, 99, 235, 0.64), rgba(20, 184, 198, 0.52));
-  opacity: 0;
-  transition: opacity 0.22s ease;
-}
-
 .card:hover {
   transform: translateY(-4px);
   border-color: #c2d1e5;
   box-shadow: var(--shadow-soft);
-}
-
-.grid .card:hover::after {
-  opacity: 1;
 }
 
 .card-icon {
