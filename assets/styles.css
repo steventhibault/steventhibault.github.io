@@ -1427,6 +1427,12 @@ footer {
   letter-spacing: -0.08em;
 }
 
+.content-page img.avatar {
+  display: block;
+  object-fit: cover;
+  object-position: center 32%;
+}
+
 .content-page .site-footer {
   padding: 42px 0;
   border-top: 1px solid var(--line);
