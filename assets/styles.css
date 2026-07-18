@@ -363,7 +363,7 @@ a {
   height: 910px;
   pointer-events: none;
   background: url("hero-color-splash.webp") center / contain no-repeat;
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply;
   opacity: 1;
   filter: saturate(0.92) contrast(0.98);
   transform: translate3d(-50%, -50%, 0) rotate(-1deg);
@@ -1568,7 +1568,7 @@ footer {
     linear-gradient(0deg, rgba(247, 250, 253, 0.54) 1px, transparent 1px),
     repeating-conic-gradient(
       from 0deg,
-      rgba(191, 219, 254, 0.14) 0 50%,
+      rgba(96, 165, 250, 0.22) 0 50%,
       rgba(217, 70, 239, 0.18) 0 64%,
       rgba(249, 115, 22, 0.16) 0 76%,
       rgba(20, 184, 198, 0.16) 0 88%,
@@ -1592,7 +1592,7 @@ footer {
     12px 24px
   );
   image-rendering: pixelated;
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply;
   opacity: 0;
   transition: left 45ms steps(2, end), top 45ms steps(2, end);
   z-index: 2;
@@ -1605,7 +1605,7 @@ footer {
   inset: 0;
   background:
     linear-gradient(90deg, transparent 0 38%, rgba(255, 255, 255, 0.5) 38% 49%, transparent 49%),
-    linear-gradient(0deg, transparent 0 32%, rgba(191, 219, 254, 0.12) 32% 43%, transparent 43%);
+    linear-gradient(0deg, transparent 0 32%, rgba(96, 165, 250, 0.20) 32% 43%, transparent 43%);
   background-size: 24px 24px;
 }
 
@@ -1614,7 +1614,7 @@ footer {
   background:
     repeating-linear-gradient(
       90deg,
-      rgba(191, 219, 254, 0.13) 0 6px,
+      rgba(96, 165, 250, 0.22) 0 6px,
       rgba(217, 70, 239, 0.16) 6px 12px,
       rgba(249, 115, 22, 0.15) 12px 18px,
       rgba(20, 184, 198, 0.14) 18px 24px,
@@ -1632,16 +1632,16 @@ footer {
   height: var(--pixel-size);
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(191, 219, 254, 0.16)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.48), rgba(96, 165, 250, 0.38)),
     rgba(247, 250, 253, 0.7);
   box-shadow:
     -6px 0 0 rgba(20, 184, 198, 0.14),
-    7px 7px 0 rgba(219, 234, 254, 0.12),
+    7px 7px 0 rgba(96, 165, 250, 0.24),
     0 -7px 0 rgba(217, 70, 239, 0.14),
     8px -4px 0 rgba(249, 115, 22, 0.13);
   contain: layout paint;
   image-rendering: pixelated;
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply;
   transform: translate3d(-50%, -50%, 0);
   will-change: transform, opacity;
   animation: cursorPixelScatter 540ms steps(6, end) forwards;
@@ -1649,7 +1649,7 @@ footer {
 
 .cursor-pixel-shard:nth-child(3n) {
   background:
-    linear-gradient(135deg, rgba(191, 219, 254, 0.18), rgba(255, 255, 255, 0.68)),
+    linear-gradient(135deg, rgba(96, 165, 250, 0.42), rgba(255, 255, 255, 0.50)),
     rgba(247, 250, 253, 0.7);
 }
 
@@ -1677,7 +1677,7 @@ footer {
     transform: translate3d(-50%, -50%, 0) scale(0.7);
   }
   12% {
-    opacity: 0.58;
+    opacity: 0.72;
   }
   38% {
     transform:
@@ -1689,7 +1689,7 @@ footer {
       scale(1.15);
   }
   72% {
-    opacity: 0.42;
+    opacity: 0.54;
     transform:
       translate3d(
         calc(-50% + var(--pixel-end-x)),
