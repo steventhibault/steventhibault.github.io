@@ -376,6 +376,36 @@ a {
   z-index: 1;
 }
 
+.content-page .page-hero {
+  position: relative;
+  overflow: hidden;
+  --glow-x: 50%;
+  --glow-y: 45%;
+}
+
+.content-page .page-hero::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: min(1120px, 112vw);
+  height: 620px;
+  pointer-events: none;
+  background: url("hero-color-splash.webp") center / contain no-repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.82;
+  filter: saturate(0.95) contrast(0.98);
+  transform: translate3d(-50%, -50%, 0) rotate(-2deg);
+  animation: heroSplashDrift 10s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.content-page .page-hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;

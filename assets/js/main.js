@@ -114,4 +114,78 @@
       closeContactForm();
     }
   });
+
+  const hero = document.querySelector('.hero, .page-hero');
+  const glow = document.querySelector('.hero-mouse-glow');
+  const opsSystem = document.querySelector('.ops-system');
+  let lastX = null;
+  let lastY = null;
+  let rotation = 0;
+  let lastShardTime = 0;
+  const activeShards = [];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function spawnPixelShards(host, x, y, dx, dy, count) {
+    for (let index = 0; index < count; index += 1) {
+      const shard = document.createElement('span');
+      const size = 5 + Math.round(Math.random() * 11);
+      const scatterX = (Math.random() - 0.5) * 66;
+      const scatterY = (Math.random() - 0.5) * 66;
+      const driftX = dx * 0.85 + scatterX;
+      const driftY = dy * 0.85 + scatterY;
+
+      shard.className = 'cursor-pixel-shard';
+      shard.style.setProperty('--pixel-x', (x + (Math.random() - 0.5) * 18) + 'px');
+      shard.style.setProperty('--pixel-y', (y + (Math.random() - 0.5) * 18) + 'px');
+      shard.style.setProperty('--pixel-size', size + 'px');
+      shard.style.setProperty('--pixel-mid-x', (driftX * 0.45) + 'px');
+      shard.style.setProperty('--pixel-mid-y', (driftY * 0.45) + 'px');
+      shard.style.setProperty('--pixel-end-x', driftX + 'px');
+      shard.style.setProperty('--pixel-end-y', driftY + 'px');
+      shard.style.setProperty('--pixel-fade-x', (driftX * 1.35) + 'px');
+      shard.style.setProperty('--pixel-fade-y', (driftY * 1.35) + 'px');
+
+      host.appendChild(shard);
+      activeShards.push(shard);
+      if (activeShards.length > 180) {
+        const oldShard = activeShards.shift();
+        if (oldShard) oldShard.remove();
+      }
+      window.setTimeout(function () {
+        shard.remove();
+        const shardIndex = activeShards.indexOf(shard);
+        if (shardIndex > -1) activeShards.splice(shardIndex, 1);
+      }, 620);
+    }
+  }
+
+  if (hero && glow && !reducedMotion) {
+    hero.addEventListener('pointermove', function (event) {
+      const rect = hero.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const dx = lastX === null ? 0 : x - lastX;
+      const dy = lastY === null ? 0 : y - lastY;
+
+      hero.style.setProperty('--glow-x', x + 'px');
+      hero.style.setProperty('--glow-y', y + 'px');
+
+      if (opsSystem) {
+        if (lastX !== null) {
+          rotation += dx * 0.22;
+        }
+        opsSystem.style.setProperty('--ops-rotation', rotation + 'deg');
+      }
+
+      const now = performance.now();
+      if (now - lastShardTime > 16) {
+        const speed = Math.abs(dx) + Math.abs(dy);
+        spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 7 : 4);
+        lastShardTime = now;
+      }
+
+      lastX = x;
+      lastY = y;
+    }, { passive: true });
+  }
 }());
