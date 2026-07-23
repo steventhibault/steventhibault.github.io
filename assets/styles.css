@@ -6,8 +6,8 @@
   --blue: #2563eb;
   --blue-dark: #1d4ed8;
   --blue-soft: #eaf1ff;
-  --teal: #14b8c6;
-  --teal-soft: #e6fbfd;
+  --teal: #0f766e;
+  --teal-soft: #e4f6f3;
   --fuchsia: #d946ef;
   --orange: #f97316;
 
@@ -39,7 +39,7 @@ body {
   color: var(--navy);
   background:
     radial-gradient(circle at 92% 4%, rgba(37, 99, 235, 0.12), transparent 28rem),
-    radial-gradient(circle at 6% 44%, rgba(20, 184, 198, 0.08), transparent 25rem),
+    radial-gradient(circle at 6% 44%, rgba(15, 118, 110, 0.08), transparent 25rem),
     var(--bg);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.55;
@@ -81,7 +81,7 @@ a {
   right: 0;
   bottom: -1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.45), rgba(20, 184, 198, 0.36), transparent);
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.45), rgba(15, 118, 110, 0.36), transparent);
 }
 
 .nav-inner {
@@ -432,7 +432,7 @@ a {
   height: 8px;
   border-radius: 50%;
   background: var(--teal);
-  box-shadow: 0 0 0 0 rgba(20, 184, 198, 0.28);
+  box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.28);
   animation: accentPulse 2.8s ease-out infinite;
 }
 
@@ -1596,7 +1596,7 @@ footer {
       rgba(96, 165, 250, 0.22) 0 50%,
       rgba(217, 70, 239, 0.18) 0 64%,
       rgba(249, 115, 22, 0.16) 0 76%,
-      rgba(20, 184, 198, 0.16) 0 88%,
+      rgba(15, 118, 110, 0.16) 0 88%,
       rgba(255, 255, 255, 0.28) 0 100%
     );
   background-size: 6px 6px, 6px 6px, 12px 12px;
@@ -1642,7 +1642,7 @@ footer {
       rgba(96, 165, 250, 0.22) 0 6px,
       rgba(217, 70, 239, 0.16) 6px 12px,
       rgba(249, 115, 22, 0.15) 12px 18px,
-      rgba(20, 184, 198, 0.14) 18px 24px,
+      rgba(15, 118, 110, 0.14) 18px 24px,
       transparent 24px 30px
     );
   opacity: 0.5;
@@ -1660,7 +1660,7 @@ footer {
     linear-gradient(135deg, rgba(255, 255, 255, 0.48), rgba(96, 165, 250, 0.38)),
     rgba(247, 250, 253, 0.7);
   box-shadow:
-    -6px 0 0 rgba(20, 184, 198, 0.14),
+    -6px 0 0 rgba(15, 118, 110, 0.14),
     7px 7px 0 rgba(96, 165, 250, 0.24),
     0 -7px 0 rgba(217, 70, 239, 0.14),
     8px -4px 0 rgba(249, 115, 22, 0.13);
@@ -1680,7 +1680,7 @@ footer {
 
 .cursor-pixel-shard:nth-child(4n) {
   background:
-    linear-gradient(135deg, rgba(20, 184, 198, 0.24), rgba(255, 255, 255, 0.62)),
+    linear-gradient(135deg, rgba(15, 118, 110, 0.24), rgba(255, 255, 255, 0.62)),
     rgba(247, 250, 253, 0.7);
 }
 
@@ -1759,13 +1759,13 @@ footer {
 
 @keyframes accentPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(20, 184, 198, 0.30);
+    box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.30);
   }
   70% {
-    box-shadow: 0 0 0 8px rgba(20, 184, 198, 0);
+    box-shadow: 0 0 0 8px rgba(15, 118, 110, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(20, 184, 198, 0);
+    box-shadow: 0 0 0 0 rgba(15, 118, 110, 0);
   }
 }
 
@@ -1842,7 +1842,7 @@ footer {
 }
 
 .ops-flow-lines path:nth-child(even) {
-  stroke: rgba(20, 184, 198, 0.22);
+  stroke: rgba(15, 118, 110, 0.22);
 }
 
 .flow-node {
@@ -1858,10 +1858,10 @@ footer {
 }
 
 .flow-node:nth-of-type(even) {
-  border-color: rgba(20, 184, 198, 0.80);
+  border-color: rgba(15, 118, 110, 0.80);
   box-shadow:
-    0 0 0 5px rgba(20, 184, 198, 0.035),
-    0 0 14px rgba(20, 184, 198, 0.12);
+    0 0 0 5px rgba(15, 118, 110, 0.035),
+    0 0 14px rgba(15, 118, 110, 0.12);
 }
 
 .flow-node-1 { left: 71px;  top: 203px; }
@@ -1886,8 +1886,8 @@ footer {
 }
 
 .flow-pulse-2 {
-  background: rgba(20, 184, 198, 0.92);
-  box-shadow: 0 0 12px rgba(20, 184, 198, 0.30);
+  background: rgba(15, 118, 110, 0.92);
+  box-shadow: 0 0 12px rgba(15, 118, 110, 0.30);
   offset-path: path("M78 210 C150 246, 222 278, 334 238");
   animation: flowPulseTwo 6.2s linear infinite;
 }
