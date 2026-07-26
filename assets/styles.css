@@ -1668,11 +1668,11 @@ footer {
   }
   
   .ecommerce-case .shot-frame img {
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  object-position: left top;
-  background: #ffffff;
-}
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: left top;
+    background: #ffffff;
+  }
 }
 
 /* Mouse effects: pixelated cursor distortion */
