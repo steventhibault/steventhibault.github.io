@@ -805,22 +805,103 @@ h2 {
     linear-gradient(145deg, #14233f, var(--navy));
 }
 
-.formula-visual::before {
+.formula-visual {
+  isolation: isolate;
+}
+
+.excel-formula-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  contain: strict;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.excel-formula-field::before {
   content: "";
   position: absolute;
-  top: 20px;
-  right: 24px;
-  bottom: 20px;
-  width: min(520px, 50%);
-  border-radius: 12px;
-  background: url("excel-formulas.png") center / contain no-repeat;
-  opacity: 0.46;
-  pointer-events: none;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(134, 239, 172, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(134, 239, 172, 0.045) 1px, transparent 1px);
+  background-size: 38px 28px;
+  opacity: 0.6;
+  -webkit-mask-image: linear-gradient(90deg, transparent 5%, #000 44%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 5%, #000 44%, #000 100%);
+}
+
+.formula-visual .excel-formula {
+  position: absolute;
+  left: var(--formula-left);
+  top: var(--formula-top);
+  max-width: none;
+  color: rgba(167, 243, 208, 0.5);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: var(--formula-size);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-transform: none;
+  white-space: nowrap;
+  opacity: 0;
+  text-shadow: 0 0 18px rgba(52, 211, 153, 0.12);
+  animation: excelFormulaDrift var(--formula-duration) ease-in-out var(--formula-delay) infinite;
+}
+
+.excel-formula:nth-child(1)  { --formula-left: 48%; --formula-top: 8%;  --formula-size: 14px; --formula-duration: 11s; --formula-delay: -2s; }
+.excel-formula:nth-child(2)  { --formula-left: 64%; --formula-top: 20%; --formula-size: 13px; --formula-duration: 13s; --formula-delay: -8s; }
+.excel-formula:nth-child(3)  { --formula-left: 43%; --formula-top: 34%; --formula-size: 12px; --formula-duration: 10s; --formula-delay: -5s; }
+.excel-formula:nth-child(4)  { --formula-left: 72%; --formula-top: 47%; --formula-size: 15px; --formula-duration: 12s; --formula-delay: -1s; }
+.excel-formula:nth-child(5)  { --formula-left: 51%; --formula-top: 58%; --formula-size: 13px; --formula-duration: 14s; --formula-delay: -10s; }
+.excel-formula:nth-child(6)  { --formula-left: 61%; --formula-top: 73%; --formula-size: 12px; --formula-duration: 10s; --formula-delay: -7s; }
+.excel-formula:nth-child(7)  { --formula-left: 82%; --formula-top: 10%; --formula-size: 12px; --formula-duration: 9s;  --formula-delay: -4s; }
+.excel-formula:nth-child(8)  { --formula-left: 84%; --formula-top: 38%; --formula-size: 13px; --formula-duration: 13s; --formula-delay: -6s; }
+.excel-formula:nth-child(9)  { --formula-left: 79%; --formula-top: 65%; --formula-size: 14px; --formula-duration: 11s; --formula-delay: -9s; }
+.excel-formula:nth-child(10) { --formula-left: 45%; --formula-top: 88%; --formula-size: 12px; --formula-duration: 12s; --formula-delay: -3s; }
+
+@keyframes excelFormulaDrift {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate3d(-7px, 9px, 0) scale(0.985);
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  34%,
+  68% {
+    opacity: 0.34;
+  }
+
+  52% {
+    opacity: 0.26;
+    transform: translate3d(8px, -5px, 0) scale(1);
+  }
+
+  84% {
+    opacity: 0;
+  }
 }
 
 .formula-visual > * {
   position: relative;
   z-index: 1;
+}
+
+.formula-visual > .excel-formula-field {
+  position: absolute;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formula-visual .excel-formula {
+    animation: none;
+    opacity: 0.2;
+    transform: none;
+  }
 }
 
 .project-visual strong {

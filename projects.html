@@ -646,6 +646,18 @@
 
           <article class="project-card">
             <div class="project-visual formula-visual">
+              <div class="excel-formula-field" aria-hidden="true">
+                <span class="excel-formula">=XLOOKUP(A2,Clients[ID],Clients[Status],"Review")</span>
+                <span class="excel-formula">=SUMIFS(Visits[Hours],Visits[Client],A2,Visits[Week],B$1)</span>
+                <span class="excel-formula">=IFERROR(INDEX(Status,MATCH(A2,IDs,0)),"Missing")</span>
+                <span class="excel-formula">=COUNTIFS(Status,"Exception",Territory,$B2)</span>
+                <span class="excel-formula">=FILTER(Records,Records[Variance]&lt;&gt;0)</span>
+                <span class="excel-formula">=LET(clean,FILTER(Data,Data[Valid]=TRUE),ROWS(clean))</span>
+                <span class="excel-formula">=UNIQUE(FILTER(Client,Quarter="Q4"))</span>
+                <span class="excel-formula">=ROUND(SUM(Q1:Q4),2)</span>
+                <span class="excel-formula">=IF(ABS(B2-C2)&lt;=0.01,"Matched","Review")</span>
+                <span class="excel-formula">=TEXTJOIN(", ",TRUE,FILTER(Issues,Open=TRUE))</span>
+              </div>
               <span>Case study</span>
               <strong>Compliance Reporting</strong>
               <span>Reconcile. Report. Attest.</span>
@@ -679,6 +691,18 @@
 
           <article class="project-card">
             <div class="project-visual formula-visual">
+              <div class="excel-formula-field" aria-hidden="true">
+                <span class="excel-formula">=XLOOKUP(A2,Clients[ID],Clients[Status],"Review")</span>
+                <span class="excel-formula">=SUMIFS(Visits[Hours],Visits[Client],A2,Visits[Week],B$1)</span>
+                <span class="excel-formula">=IFERROR(INDEX(Status,MATCH(A2,IDs,0)),"Missing")</span>
+                <span class="excel-formula">=COUNTIFS(Status,"Exception",Territory,$B2)</span>
+                <span class="excel-formula">=FILTER(Records,Records[Variance]&lt;&gt;0)</span>
+                <span class="excel-formula">=LET(clean,FILTER(Data,Data[Valid]=TRUE),ROWS(clean))</span>
+                <span class="excel-formula">=UNIQUE(FILTER(Client,Quarter="Q4"))</span>
+                <span class="excel-formula">=ROUND(SUM(Q1:Q4),2)</span>
+                <span class="excel-formula">=IF(ABS(B2-C2)&lt;=0.01,"Matched","Review")</span>
+                <span class="excel-formula">=TEXTJOIN(", ",TRUE,FILTER(Issues,Open=TRUE))</span>
+              </div>
               <span>Case study</span>
               <strong>Visit Reconciliation</strong>
               <span>Territory. Client. Exception.</span>
