@@ -1767,16 +1767,16 @@ footer {
   height: var(--pixel-size);
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.64), rgba(125, 211, 252, 0.44)),
-    rgba(255, 255, 255, 0.76);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.48), rgba(96, 165, 250, 0.38)),
+    rgba(247, 250, 253, 0.7);
   box-shadow:
-    -6px 0 0 rgba(52, 211, 153, 0.18),
-    7px 7px 0 rgba(125, 211, 252, 0.28),
-    0 -7px 0 rgba(232, 121, 249, 0.17),
-    8px -4px 0 rgba(251, 146, 60, 0.16);
+    -6px 0 0 rgba(15, 118, 110, 0.14),
+    7px 7px 0 rgba(96, 165, 250, 0.24),
+    0 -7px 0 rgba(217, 70, 239, 0.14),
+    8px -4px 0 rgba(249, 115, 22, 0.13);
   contain: layout paint;
   image-rendering: pixelated;
-  mix-blend-mode: normal;
+  mix-blend-mode: multiply;
   transform: translate3d(-50%, -50%, 0);
   will-change: transform, opacity;
   animation: cursorPixelScatter 540ms steps(6, end) forwards;
@@ -1784,26 +1784,26 @@ footer {
 
 .cursor-pixel-shard:nth-child(3n) {
   background:
-    linear-gradient(135deg, rgba(125, 211, 252, 0.48), rgba(255, 255, 255, 0.64)),
-    rgba(255, 255, 255, 0.76);
+    linear-gradient(135deg, rgba(96, 165, 250, 0.42), rgba(255, 255, 255, 0.50)),
+    rgba(247, 250, 253, 0.7);
 }
 
 .cursor-pixel-shard:nth-child(4n) {
   background:
-    linear-gradient(135deg, rgba(52, 211, 153, 0.28), rgba(255, 255, 255, 0.68)),
-    rgba(255, 255, 255, 0.76);
+    linear-gradient(135deg, rgba(15, 118, 110, 0.24), rgba(255, 255, 255, 0.62)),
+    rgba(247, 250, 253, 0.7);
 }
 
 .cursor-pixel-shard:nth-child(5n) {
   background:
-    linear-gradient(135deg, rgba(232, 121, 249, 0.30), rgba(255, 255, 255, 0.68)),
-    rgba(255, 255, 255, 0.76);
+    linear-gradient(135deg, rgba(217, 70, 239, 0.26), rgba(255, 255, 255, 0.62)),
+    rgba(247, 250, 253, 0.7);
 }
 
 .cursor-pixel-shard:nth-child(6n) {
   background:
-    linear-gradient(135deg, rgba(251, 146, 60, 0.29), rgba(255, 255, 255, 0.68)),
-    rgba(255, 255, 255, 0.76);
+    linear-gradient(135deg, rgba(249, 115, 22, 0.25), rgba(255, 255, 255, 0.62)),
+    rgba(247, 250, 253, 0.7);
 }
 
 @keyframes cursorPixelScatter {
@@ -1812,7 +1812,7 @@ footer {
     transform: translate3d(-50%, -50%, 0) scale(0.7);
   }
   12% {
-    opacity: 0.78;
+    opacity: 0.72;
   }
   38% {
     transform:
