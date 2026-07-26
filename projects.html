@@ -347,6 +347,23 @@
       line-height: 1.45;
       text-align: center;
     }
+    .sku-migration-visual .excel-formula-field {
+      inset: 64% 0 0;
+    }
+    .sku-migration-visual .excel-formula-field::before {
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 100%);
+    }
+    .sku-migration-visual .excel-formula:nth-child(1)  { --formula-left: 6%;  --formula-top: 8%;  --formula-size: 13px; }
+    .sku-migration-visual .excel-formula:nth-child(2)  { --formula-left: 46%; --formula-top: 18%; --formula-size: 12px; }
+    .sku-migration-visual .excel-formula:nth-child(3)  { --formula-left: 12%; --formula-top: 30%; --formula-size: 13px; }
+    .sku-migration-visual .excel-formula:nth-child(4)  { --formula-left: 54%; --formula-top: 41%; --formula-size: 13px; }
+    .sku-migration-visual .excel-formula:nth-child(5)  { --formula-left: 8%;  --formula-top: 52%; --formula-size: 14px; }
+    .sku-migration-visual .excel-formula:nth-child(6)  { --formula-left: 43%; --formula-top: 63%; --formula-size: 13px; }
+    .sku-migration-visual .excel-formula:nth-child(7)  { --formula-left: 16%; --formula-top: 73%; --formula-size: 12px; }
+    .sku-migration-visual .excel-formula:nth-child(8)  { --formula-left: 60%; --formula-top: 82%; --formula-size: 13px; }
+    .sku-migration-visual .excel-formula:nth-child(9)  { --formula-left: 4%;  --formula-top: 90%; --formula-size: 13px; }
+    .sku-migration-visual .excel-formula:nth-child(10) { --formula-left: 38%; --formula-top: 96%; --formula-size: 12px; }
 
     /* Spreadsheet automation icon beside reporting/reconciliation case-study bullets. */
     .case-study-copy-grid {
@@ -612,7 +629,7 @@
 
         <div class="case-study-grid">
           <article class="project-card ecommerce-case">
-            <div class="project-visual configurator-visual">
+            <div class="project-visual configurator-visual formula-visual sku-migration-visual">
               <div class="shot-frame" onclick="openImgLightbox('assets/ecommerce-configurator.png', 'Custom Shopify configure-to-order server workflow with component sections, current configuration, price as configured, and add to cart controls')" role="button" tabindex="0" aria-label="View full-size screenshot of the ecommerce configurator" onkeydown="if(event.key==='Enter'){this.click();}">
                 <div class="shot-frame-bar">
                   <span class="shot-frame-dot"></span>
@@ -625,6 +642,18 @@
                 </picture>
               </div>
               <p class="visual-note">Custom configure-to-order workflow built around component choices, quote items, and a live configuration summary.</p>
+              <div class="excel-formula-field" aria-hidden="true">
+                <span class="excel-formula" data-snippet="code">=XLOOKUP(source_sku,product_data[sku],product_data[handle],"REVIEW")</span>
+                <span class="excel-formula" data-snippet="code">SELECT source_sku, target_sku FROM sku_map WHERE platform IN ('Magento','Amazon');</span>
+                <span class="excel-formula" data-snippet="code">sku_map = product_data.merge(inventory_qty, on="sku", how="left")</span>
+                <span class="excel-formula" data-snippet="code">=IF(COUNTIF(TargetSKU,A2)=0,"MIGRATE","DUPLICATE")</span>
+                <span class="excel-formula" data-snippet="output">Magento + WooCommerce → Shopify | 20,146 SKUs staged</span>
+                <span class="excel-formula" data-snippet="output">inventory_qty: 19,982 matched | 164 review</span>
+                <span class="excel-formula" data-snippet="output">redirects_validated: 4,218 | errors: 0</span>
+                <span class="excel-formula" data-snippet="reference">platform_sku_map.csv</span>
+                <span class="excel-formula" data-snippet="reference">Shopify_Import.xlsx!Products</span>
+                <span class="excel-formula" data-snippet="workflow">extract → normalize → map → validate → import</span>
+              </div>
             </div>
             <div class="project-copy">
               <h3>Migrating a 20,000-SKU Magento catalog to Shopify while preserving a complex configure-to-order workflow.</h3>
