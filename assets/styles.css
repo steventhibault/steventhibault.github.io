@@ -1,4 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap");
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("fonts/roboto-latin-400-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  font-style: normal;
+  font-weight: 500 600;
+  font-display: swap;
+  src: url("fonts/roboto-mono-latin-500-600.woff2") format("woff2");
+}
 
 :root {
   --navy: #1a2744;
@@ -369,6 +383,10 @@ a {
   height: 910px;
   pointer-events: none;
   background: url("hero-color-splash.webp") center / contain no-repeat;
+  background-image: image-set(
+    url("hero-color-splash.avif") type("image/avif"),
+    url("hero-color-splash.webp") type("image/webp")
+  );
   mix-blend-mode: multiply;
   opacity: 1;
   filter: saturate(0.92) contrast(0.98);
@@ -399,6 +417,10 @@ a {
   height: 620px;
   pointer-events: none;
   background: url("hero-color-splash.webp") center / contain no-repeat;
+  background-image: image-set(
+    url("hero-color-splash.avif") type("image/avif"),
+    url("hero-color-splash.webp") type("image/webp")
+  );
   mix-blend-mode: multiply;
   opacity: 0.82;
   filter: saturate(0.95) contrast(0.98);
@@ -1050,6 +1072,10 @@ footer {
   z-index: 0;
   pointer-events: none;
   background: url("hero-color-splash.webp") center / contain no-repeat;
+  background-image: image-set(
+    url("hero-color-splash.avif") type("image/avif"),
+    url("hero-color-splash.webp") type("image/webp")
+  );
   mix-blend-mode: normal;
   filter: saturate(1.02) contrast(1);
 }
