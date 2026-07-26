@@ -1078,6 +1078,8 @@ footer {
   );
   mix-blend-mode: normal;
   filter: saturate(1.02) contrast(1);
+  animation: heroSplashDrift 10s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .projects-hero::before {
@@ -1908,6 +1910,7 @@ footer {
   }
 
   .hero-grid::after,
+  .projects-hero::before,
   .eyebrow::before,
   .hero-card,
   .workflow-row,
