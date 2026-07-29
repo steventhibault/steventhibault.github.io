@@ -128,15 +128,15 @@
   function spawnPixelShards(host, x, y, dx, dy, count) {
     for (let index = 0; index < count; index += 1) {
       const shard = document.createElement('span');
-      const size = 5 + Math.round(Math.random() * 11);
-      const scatterX = (Math.random() - 0.5) * 66;
-      const scatterY = (Math.random() - 0.5) * 66;
-      const driftX = dx * 0.85 + scatterX;
-      const driftY = dy * 0.85 + scatterY;
+      const size = 4 + Math.round(Math.random() * 6);
+      const scatterX = (Math.random() - 0.5) * 46;
+      const scatterY = (Math.random() - 0.5) * 46;
+      const driftX = dx * 0.62 + scatterX;
+      const driftY = dy * 0.62 + scatterY;
 
       shard.className = 'cursor-pixel-shard';
-      shard.style.setProperty('--pixel-x', (x + (Math.random() - 0.5) * 18) + 'px');
-      shard.style.setProperty('--pixel-y', (y + (Math.random() - 0.5) * 18) + 'px');
+      shard.style.setProperty('--pixel-x', (x + (Math.random() - 0.5) * 12) + 'px');
+      shard.style.setProperty('--pixel-y', (y + (Math.random() - 0.5) * 12) + 'px');
       shard.style.setProperty('--pixel-size', size + 'px');
       shard.style.setProperty('--pixel-mid-x', (driftX * 0.45) + 'px');
       shard.style.setProperty('--pixel-mid-y', (driftY * 0.45) + 'px');
@@ -147,7 +147,7 @@
 
       host.appendChild(shard);
       activeShards.push(shard);
-      if (activeShards.length > 180) {
+      if (activeShards.length > 72) {
         const oldShard = activeShards.shift();
         if (oldShard) oldShard.remove();
       }
@@ -155,7 +155,7 @@
         shard.remove();
         const shardIndex = activeShards.indexOf(shard);
         if (shardIndex > -1) activeShards.splice(shardIndex, 1);
-      }, 620);
+      }, 420);
     }
   }
 
@@ -178,9 +178,9 @@
       }
 
       const now = performance.now();
-      if (now - lastShardTime > 16) {
+      if (now - lastShardTime > 34) {
         const speed = Math.abs(dx) + Math.abs(dy);
-        spawnPixelShards(hero, x, y, dx, dy, speed > 18 ? 7 : 4);
+        spawnPixelShards(hero, x, y, dx, dy, speed > 22 ? 3 : 2);
         lastShardTime = now;
       }
 
