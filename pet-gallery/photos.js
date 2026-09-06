@@ -1638,9 +1638,14 @@ const featuredPetPhotos = [
 ];
 
 const featuredPetPhotoSet = new Set(featuredPetPhotos);
+const deferredPetPhotos = ["photos/full/pet-006.jpg"];
+const deferredPetPhotoSet = new Set(deferredPetPhotos);
 const photosBySource = new Map(window.PET_PHOTOS.map((photo) => [photo.src, photo]));
 
 window.PET_PHOTOS = [
   ...featuredPetPhotos.map((src) => photosBySource.get(src)),
-  ...window.PET_PHOTOS.filter((photo) => !featuredPetPhotoSet.has(photo.src))
+  ...window.PET_PHOTOS.filter(
+    (photo) => !featuredPetPhotoSet.has(photo.src) && !deferredPetPhotoSet.has(photo.src)
+  ),
+  ...deferredPetPhotos.map((src) => photosBySource.get(src))
 ];
