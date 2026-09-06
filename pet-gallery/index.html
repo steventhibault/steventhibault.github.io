@@ -53,6 +53,22 @@
       margin-bottom: 28px;
     }
 
+    .gallery-hero {
+      width: min(100%, 960px);
+      margin: 2px 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow: 0 22px 56px var(--shadow);
+    }
+
+    .gallery-hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     .eyebrow {
       width: fit-content;
       padding: 8px 12px;
@@ -299,6 +315,9 @@
     <header class="gallery-header">
       <div class="eyebrow">Private gallery</div>
       <h1>Pet Photography</h1>
+      <figure class="gallery-hero">
+        <img src="assets/gallery-header-beach.jpg" width="960" height="540" alt="Dogs and children playing together on a beach">
+      </figure>
       <div class="gallery-meta">
         <span id="photoCount">42 photos</span>
         <span>Tap a photo to view it larger</span>
