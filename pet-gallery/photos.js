@@ -1611,3 +1611,36 @@ window.PET_PHOTOS = [
     "alt": "Pet photo 179"
   }
 ];
+
+// Lead with the strongest images: crisp focal detail, controlled exposure,
+// pleasing light, clear composition, and a varied set of pets and settings.
+const featuredPetPhotos = [
+  "photos/full/20251018_171400~2_result.webp",
+  "photos/full/20241226_130925~2_result.webp",
+  "photos/full/20241229_155029~2_result.webp",
+  "photos/full/pet-037.jpg",
+  "photos/full/pet-026.jpg",
+  "photos/full/pet-003.jpg",
+  "photos/full/pet-016.jpg",
+  "photos/full/pet-023.jpg",
+  "photos/full/pet-013.jpg",
+  "photos/full/pet-030.jpg",
+  "photos/full/pet-038.jpg",
+  "photos/full/pet-004.jpg",
+  "photos/full/pet-005.jpg",
+  "photos/full/pet-011.jpg",
+  "photos/full/pet-031.jpg",
+  "photos/full/20250613_090744~2_result.webp",
+  "photos/full/20250614_184757~2_result.webp",
+  "photos/full/20250619_112346~2_result.webp",
+  "photos/full/20250613_132803~2_result.webp",
+  "photos/full/20240302_131956_result.webp"
+];
+
+const featuredPetPhotoSet = new Set(featuredPetPhotos);
+const photosBySource = new Map(window.PET_PHOTOS.map((photo) => [photo.src, photo]));
+
+window.PET_PHOTOS = [
+  ...featuredPetPhotos.map((src) => photosBySource.get(src)),
+  ...window.PET_PHOTOS.filter((photo) => !featuredPetPhotoSet.has(photo.src))
+];
