@@ -1474,5 +1474,140 @@ window.PET_PHOTOS = [
     "thumbWidth": 720,
     "thumbHeight": 480,
     "alt": "Pet photo 164"
+  },
+  {
+    "src": "photos/full/20231125_102823_result.webp",
+    "thumb": "photos/full/20231125_102823_result.webp",
+    "width": 2252,
+    "height": 4000,
+    "thumbWidth": 2252,
+    "thumbHeight": 4000,
+    "alt": "Pet photo 165"
+  },
+  {
+    "src": "photos/full/20260529_215800~2_result.webp",
+    "thumb": "photos/full/20260529_215800~2_result.webp",
+    "width": 2252,
+    "height": 4000,
+    "thumbWidth": 2252,
+    "thumbHeight": 4000,
+    "alt": "Pet photo 166"
+  },
+  {
+    "src": "photos/full/20260316_110616_result.webp",
+    "thumb": "photos/full/20260316_110616_result.webp",
+    "width": 4000,
+    "height": 1848,
+    "thumbWidth": 4000,
+    "thumbHeight": 1848,
+    "alt": "Pet photo 167"
+  },
+  {
+    "src": "photos/full/20251228_141922~2_result.webp",
+    "thumb": "photos/full/20251228_141922~2_result.webp",
+    "width": 2931,
+    "height": 1848,
+    "thumbWidth": 2931,
+    "thumbHeight": 1848,
+    "alt": "Pet photo 168"
+  },
+  {
+    "src": "photos/full/20260316_110358_result.webp",
+    "thumb": "photos/full/20260316_110358_result.webp",
+    "width": 4000,
+    "height": 1848,
+    "thumbWidth": 4000,
+    "thumbHeight": 1848,
+    "alt": "Pet photo 169"
+  },
+  {
+    "src": "photos/full/20251217_135118~2_result.webp",
+    "thumb": "photos/full/20251217_135118~2_result.webp",
+    "width": 2266,
+    "height": 3425,
+    "thumbWidth": 2266,
+    "thumbHeight": 3425,
+    "alt": "Pet photo 170"
+  },
+  {
+    "src": "photos/full/20251217_134608_result.webp",
+    "thumb": "photos/full/20251217_134608_result.webp",
+    "width": 3000,
+    "height": 4000,
+    "thumbWidth": 3000,
+    "thumbHeight": 4000,
+    "alt": "Pet photo 171"
+  },
+  {
+    "src": "photos/full/20251216_132848~2_result.webp",
+    "thumb": "photos/full/20251216_132848~2_result.webp",
+    "width": 2227,
+    "height": 3270,
+    "thumbWidth": 2227,
+    "thumbHeight": 3270,
+    "alt": "Pet photo 172"
+  },
+  {
+    "src": "photos/full/20251214_152529_result.webp",
+    "thumb": "photos/full/20251214_152529_result.webp",
+    "width": 3000,
+    "height": 4000,
+    "thumbWidth": 3000,
+    "thumbHeight": 4000,
+    "alt": "Pet photo 173"
+  },
+  {
+    "src": "photos/full/20251214_152528_result.webp",
+    "thumb": "photos/full/20251214_152528_result.webp",
+    "width": 3000,
+    "height": 4000,
+    "thumbWidth": 3000,
+    "thumbHeight": 4000,
+    "alt": "Pet photo 174"
+  },
+  {
+    "src": "photos/full/20251214_152445~2_result.webp",
+    "thumb": "photos/full/20251214_152445~2_result.webp",
+    "width": 3000,
+    "height": 4000,
+    "thumbWidth": 3000,
+    "thumbHeight": 4000,
+    "alt": "Pet photo 175"
+  },
+  {
+    "src": "photos/full/20251108_135639~3_result.webp",
+    "thumb": "photos/full/20251108_135639~3_result.webp",
+    "width": 2381,
+    "height": 3767,
+    "thumbWidth": 2381,
+    "thumbHeight": 3767,
+    "alt": "Pet photo 176"
+  },
+  {
+    "src": "photos/full/20240303_102654~2_result.webp",
+    "thumb": "photos/full/20240303_102654~2_result.webp",
+    "width": 1882,
+    "height": 2807,
+    "thumbWidth": 1882,
+    "thumbHeight": 2807,
+    "alt": "Pet photo 177"
+  },
+  {
+    "src": "photos/full/20251018_171400~2_result.webp",
+    "thumb": "photos/full/20251018_171400~2_result.webp",
+    "width": 2252,
+    "height": 4000,
+    "thumbWidth": 2252,
+    "thumbHeight": 4000,
+    "alt": "Pet photo 178"
+  },
+  {
+    "src": "photos/full/20240302_131956_result.webp",
+    "thumb": "photos/full/20240302_131956_result.webp",
+    "width": 2938,
+    "height": 3942,
+    "thumbWidth": 2938,
+    "thumbHeight": 3942,
+    "alt": "Pet photo 179"
   }
 ];
