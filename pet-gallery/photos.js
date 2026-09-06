@@ -216,8 +216,8 @@ window.PET_PHOTOS = [
     "alt": "Pet photo 24"
   },
   {
-    "src": "photos/full/pet-025.jpg",
-    "thumb": "photos/thumbs/pet-025.webp",
+    "src": "photos/full/pet-025-bright.jpg",
+    "thumb": "photos/thumbs/pet-025-bright.jpg",
     "width": 1536,
     "height": 1458,
     "thumbWidth": 720,
@@ -1626,6 +1626,7 @@ const featuredPetPhotos = [
   "photos/full/20230820_164643~2_result.webp",
   "photos/full/pet-032.jpg",
   "photos/full/pet-030.jpg",
+  "photos/full/pet-025-bright.jpg",
   "photos/full/20251018_171400~2_result.webp",
   "photos/full/20241226_130925~2_result.webp",
   "photos/full/20241229_155029~2_result.webp",
